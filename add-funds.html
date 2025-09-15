@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Funds - NiveshPe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+          /* Color System */
+          --color-bg-primary: #F5F7FA;
+          --color-bg-secondary: #FFFFFF;
+          --color-card: #FFFFFF;
+          --color-surface: #F8F9FA;
+          --color-border: #E5E7EB;
+          
+          /* Brand Colors */
+          --color-blue: #2563EB;
+          --color-blue-dark: #1D4ED8;
+          --color-blue-light: #3B82F6;
+          --color-green: #10B981;
+          --color-green-light: #34D399;
+          --color-green-dark: #059669;
+          --color-orange: #F59E0B;
+          
+          /* Text Colors */
+          --color-text-primary: #1F2937;
+          --color-text-secondary: #6B7280;
+          --color-text-muted: #9CA3AF;
+          --color-text-white: #FFFFFF;
+          
+          /* Enhanced Gradients */
+          --gradient-hero: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
+          --gradient-header: linear-gradient(180deg, rgba(37, 99, 235, 0.05) 0%, rgba(16, 185, 129, 0.03) 100%);
+          --gradient-nav: linear-gradient(0deg, rgba(37, 99, 235, 0.05) 0%, rgba(16, 185, 129, 0.03) 100%);
+          --gradient-success: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+          --gradient-footer: linear-gradient(180deg, rgba(245, 247, 250, 0) 0%, rgba(225, 231, 239, 0.3) 100%);
+          
+          /* Typography */
+          --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          
+          /* Shadows */
+          --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+          --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+          --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+          --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+          
+          /* Border Radius */
+          --radius-sm: 8px;
+          --radius-md: 12px;
+          --radius-lg: 16px;
+          --radius-xl: 20px;
+          --radius-2xl: 24px;
+          --radius-full: 9999px;
+
+          /* Fine-tuned Spacing System */
+          --space-xs: 8px;
+          --space-sm: 12px;
+          --space-md: 16px;
+          --space-lg: 20px;
+          --space-xl: 24px;
+          --space-2xl: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px 20px 40px;
+            overflow-x: auto;
+        }
+
+        /* iPhone Frame - Remove visual styling but keep dimensions */
+        .iphone-frame {
+            width: 380px;
+            height: 820px;
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+            position: relative;
+            margin: 0 auto;
+            flex-shrink: 0;
+        }
+
+        .iphone-frame::before {
+            display: none;
+        }
+
+        .iphone-frame::after {
+            display: none;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-primary);
+            border-radius: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .mobile-container {
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-primary);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mobile-content {
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: none;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Enhanced Status Bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: #F5F7FA;
+            font-size: 15px;
+            font-weight: 600;
+            height: 44px;
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        /* Enhanced Header with Back Button */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: #F5F7FA;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            height: 70px;
+            box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.12);
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .back-btn:active {
+            background: var(--color-blue);
+            color: white;
+            transform: scale(0.95);
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .header-spacer {
+            width: 40px;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: var(--space-lg);
+            padding-bottom: var(--space-lg);
+        }
+
+        /* Investment Type Tabs - More Compact */
+        .investment-tabs {
+            display: flex;
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            padding: 4px;
+            margin-bottom: var(--space-lg);
+            border: 1px solid var(--color-border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--color-blue);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* SIP Frequency - Compact Pills */
+        .frequency-section {
+            margin-bottom: var(--space-md);
+        }
+
+        .frequency-tabs {
+            display: flex;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-md);
+        }
+
+        .frequency-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--color-border);
+            background: var(--color-card);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .frequency-btn.active {
+            border-color: var(--color-blue);
+            color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.1);
+            transform: scale(1.02);
+        }
+
+        /* Timing Display */
+        .timing-display {
+            margin-top: var(--space-sm);
+            animation: slideInUp 0.3s ease-out;
+        }
+
+        .timing-display-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: 8px 12px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: auto;
+            margin: 0 auto;
+        }
+
+        .timing-display-btn:active {
+            transform: scale(0.98);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .timing-display-label {
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .timing-display-value {
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        /* Timing Selection Modal */
+        .timing-modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: flex-end;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+            border-radius: 40px;
+            overflow: hidden;
+        }
+
+        .timing-modal.show {
+            display: flex;
+        }
+
+        .timing-modal-content {
+            background: var(--color-card);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            padding: var(--space-md);
+            padding-bottom: calc(var(--space-lg) + 20px);
+            width: 100%;
+            max-height: 50vh;
+            animation: slideUpModal 0.3s ease-out;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .modal-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: var(--radius-sm);
+        }
+
+        .timing-options {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .timing-options.date-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: var(--space-xs);
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        .timing-btn {
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-border);
+            background: var(--color-card);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timing-btn.active {
+            border-color: var(--color-blue);
+            color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.1);
+            transform: scale(1.02);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUpModal {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        /* Amount Input Section */
+        .amount-section {
+            margin-bottom: var(--space-lg);
+        }
+
+        .amount-input-container {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .amount-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-lg);
+            padding: var(--space-sm) 0;
+            position: relative;
+        }
+
+        .currency-symbol {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            position: absolute;
+            left: calc(50% - 120px);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .amount-input-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .amount-input {
+            font-size: 36px;
+            font-weight: 800;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--color-text-primary);
+            width: 200px;
+            text-align: center;
+            padding-bottom: var(--space-md);
+            border-bottom: 3px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .amount-input:focus {
+            border-bottom-color: var(--color-blue);
+        }
+
+        .amount-input.focused {
+            transform: scale(1.02);
+        }
+
+        .amount-input::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        /* Quick Amount Buttons */
+        .quick-amounts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-xs);
+        }
+
+        .amount-btn {
+            padding: 14px 10px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border);
+            background: var(--color-card);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .amount-btn.popular {
+            border-color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.05);
+            color: var(--color-blue);
+            position: relative;
+        }
+
+        .amount-btn.popular::after {
+            content: 'Popular';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-blue);
+            color: white;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 1px 6px;
+            border-radius: 3px;
+            opacity: 1;
+        }
+
+        .amount-btn:active {
+            transform: scale(0.96);
+            border-color: var(--color-blue);
+        }
+
+        /* Pot Selection */
+        .pot-section {
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .section-label.small {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .pot-selection {
+            display: flex;
+            gap: var(--space-sm);
+            overflow-x: auto;
+            padding-bottom: var(--space-xs);
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            margin-bottom: var(--space-sm);
+        }
+
+        .pot-selection::-webkit-scrollbar {
+            display: none;
+        }
+
+        .pot-btn {
+            padding: 10px 16px;
+            border-radius: var(--radius-full);
+            border: 2px solid var(--color-border);
+            background: var(--color-card);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .pot-btn.selected {
+            border-color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--color-blue);
+        }
+
+        .add-pot-btn {
+            padding: 10px 16px;
+            border-radius: var(--radius-full);
+            border: 2px dashed var(--color-border);
+            background: var(--color-surface);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .add-pot-btn:active {
+            border-color: var(--color-green);
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--color-green);
+        }
+
+        .pot-scroll-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .pot-scroll-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .pot-scroll-dot.active {
+            background: var(--color-green);
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        /* Fund Selection */
+        .fund-section {
+            margin-bottom: var(--space-lg);
+        }
+
+        .fund-card {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .fund-card:active {
+            transform: scale(0.98);
+            border-color: var(--color-blue);
+            box-shadow: var(--shadow-md);
+        }
+
+        .fund-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-sm);
+        }
+
+        .fund-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-blue);
+            flex: 1;
+        }
+
+        .change-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--color-blue);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* CTA Button */
+        .cta-section {
+            margin-bottom: var(--space-md);
+        }
+
+        .cta-btn {
+            width: 100%;
+            padding: 18px 24px;
+            border-radius: var(--radius-lg);
+            border: none;
+            background: var(--gradient-success);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .cta-btn:active {
+            transform: scale(0.96);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Projection Card */
+        .projection-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.03) 0%, rgba(52, 211, 153, 0.02) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.15);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Compact version */
+        .projection-card.compact {
+            padding: var(--space-sm) var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .projection-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-success);
+        }
+
+        .projection-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-sm);
+        }
+
+        .projection-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .time-selector {
+            display: flex;
+            gap: 4px;
+        }
+
+        .time-btn {
+            padding: 3px 7px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            background: var(--color-card);
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+
+        .time-btn.active {
+            border-color: var(--color-green);
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--color-green);
+            opacity: 1;
+            font-weight: 600;
+        }
+
+        .projection-main {
+            text-align: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .projection-period {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .projection-amount {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--color-green);
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+
+        .projection-growth {
+            font-size: 12px;
+            color: var(--color-green);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        /* Compact styles for projection card */
+        .projection-main.compact {
+            margin: var(--space-xs) 0 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .projection-card.compact .projection-amount {
+            font-size: 22px;
+            margin-bottom: 0;
+        }
+
+        .projection-card.compact .projection-growth {
+            font-size: 11px;
+            justify-content: flex-end;
+        }
+
+        .projection-card.compact .projection-header {
+            margin-bottom: var(--space-xs);
+        }
+
+        .projection-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-sm);
+            margin-top: var(--space-sm);
+            padding-top: var(--space-sm);
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .detail-item {
+            text-align: center;
+        }
+
+        .detail-label {
+            font-size: 10px;
+            color: var(--color-text-muted);
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .detail-value.green {
+            color: var(--color-green);
+        }
+
+        /* Simple Keyboard Focus - No Screen Movement */
+        .keyboard-active .amount-display.focused {
+            border-bottom-color: var(--color-blue);
+            transform: scale(1.02);
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .investment-tabs, .amount-section, .pot-section, .fund-section {
+            animation: slideInUp 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="iphone-frame">
+        <div class="iphone-screen">
+            <div class="mobile-container">
+                <div class="mobile-content">
+                    <!-- Status Bar -->
+                    <div class="status-bar">
+                        <div>9:41</div>
+                        <div class="status-icons">
+                            <span>•••</span>
+                            <span>📶</span>
+                            <span>🔋</span>
+                        </div>
+                    </div>
+
+                    <!-- Header with Back Button -->
+                    <div class="header">
+                        <button class="back-btn" onclick="window.location.href='index.html'">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/>
+                            </svg>
+                        </button>
+                        <div class="header-title">Add Funds</div>
+                        <div class="header-spacer"></div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="main-content">
+                        <!-- Investment Type Tabs -->
+                        <div class="investment-tabs">
+                            <button class="tab-btn active" data-type="sip">SIP</button>
+                            <button class="tab-btn" data-type="onetime">One-Time</button>
+                        </div>
+
+                        <!-- SIP Frequency -->
+                        <div class="frequency-section" id="sipFrequency">
+                            <div class="frequency-tabs">
+                                <button class="frequency-btn active" data-frequency="daily">Daily</button>
+                                <button class="frequency-btn" data-frequency="weekly">Weekly</button>
+                                <button class="frequency-btn" data-frequency="monthly">Monthly</button>
+                            </div>
+                            
+                            <!-- Timing Display -->
+                            <div class="timing-display" id="timingDisplay" style="display: none;">
+                                <button class="timing-display-btn" id="timingDisplayBtn">
+                                    <span class="timing-display-label">SIP on</span>
+                                    <span class="timing-display-value" id="timingValue">Monday</span>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.5">
+                                        <path d="M7 10l5 5 5-5z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Amount Input -->
+                        <div class="amount-section">
+                            <div class="amount-input-container" id="amountContainer">
+                                <div class="amount-display">
+                                    <span class="currency-symbol">₹</span>
+                                    <div class="amount-input-wrapper">
+                                        <input type="tel" class="amount-input" id="amountInput" placeholder="100" value="100" max="1000000">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Compact Expected Returns Card -->
+                        <div class="projection-card compact">
+                            <div class="projection-header">
+                                <div class="projection-title">
+                                    Expected Returns
+                                </div>
+                                <div class="time-selector">
+                                    <button class="time-btn" data-years="1">1Y</button>
+                                    <button class="time-btn" data-years="3">3Y</button>
+                                    <button class="time-btn active" data-years="5">5Y</button>
+                                </div>
+                            </div>
+                            
+                            <div class="projection-main compact">
+                                <div class="projection-amount" id="projectionAmount">₹ 1,56,067</div>
+                                <div class="projection-growth" id="projectionGrowth">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                                    </svg>
+                                    +₹31,067 (24.9%)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pot Selection -->
+                        <div class="pot-section">
+                            <div class="section-label">
+                                Pot:
+                            </div>
+                            <div class="pot-selection" id="potScroll">
+                                <button class="pot-btn selected">Emergency Funds</button>
+                                <button class="pot-btn">Bike Funds</button>
+                                <button class="pot-btn">Home Fund</button>
+                                <button class="pot-btn">Vacation Fund</button>
+                                <button class="add-pot-btn">
+                                    + Add Pot
+                                </button>
+                            </div>
+                            <div class="pot-scroll-indicators">
+                                <div class="pot-scroll-dot active"></div>
+                                <div class="pot-scroll-dot"></div>
+                                <div class="pot-scroll-dot"></div>
+                            </div>
+                        </div>
+
+                        <!-- Fund Selection -->
+                        <div class="fund-section">
+                            <div class="section-label small">Your money will be invested in:</div>
+                            <div class="fund-card" onclick="changeFund()">
+                                <div class="fund-content">
+                                    <div class="fund-title">SBI Hybrid Mutual Funds</div>
+                                    <div class="change-indicator">
+                                        Change
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <div class="cta-section">
+                            <button class="cta-btn" id="ctaBtn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                </svg>
+                                Setup Daily SIP
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Timing Selection Modal -->
+            <div class="timing-modal" id="timingModal">
+                <div class="timing-modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title" id="modalTitle">Select Day</div>
+                        <button class="modal-close" onclick="closeTimingModal()">✕</button>
+                    </div>
+                    
+                    <!-- Day Selection -->
+                    <div class="day-selection" id="daySelection" style="display: none;">
+                        <div class="timing-options">
+                            <button class="timing-btn active" data-day="monday">Monday</button>
+                            <button class="timing-btn" data-day="tuesday">Tuesday</button>
+                            <button class="timing-btn" data-day="wednesday">Wednesday</button>
+                            <button class="timing-btn" data-day="thursday">Thursday</button>
+                            <button class="timing-btn" data-day="friday">Friday</button>
+                            <button class="timing-btn" data-day="saturday">Saturday</button>
+                            <button class="timing-btn" data-day="sunday">Sunday</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Date Selection -->
+                    <div class="date-selection" id="dateSelection" style="display: none;">
+                        <div class="timing-options date-grid">
+                            <button class="timing-btn" data-date="1">1</button>
+                            <button class="timing-btn" data-date="2">2</button>
+                            <button class="timing-btn" data-date="3">3</button>
+                            <button class="timing-btn" data-date="4">4</button>
+                            <button class="timing-btn active" data-date="5">5</button>
+                            <button class="timing-btn" data-date="6">6</button>
+                            <button class="timing-btn" data-date="7">7</button>
+                            <button class="timing-btn" data-date="8">8</button>
+                            <button class="timing-btn" data-date="9">9</button>
+                            <button class="timing-btn" data-date="10">10</button>
+                            <button class="timing-btn" data-date="11">11</button>
+                            <button class="timing-btn" data-date="12">12</button>
+                            <button class="timing-btn" data-date="13">13</button>
+                            <button class="timing-btn" data-date="14">14</button>
+                            <button class="timing-btn" data-date="15">15</button>
+                            <button class="timing-btn" data-date="16">16</button>
+                            <button class="timing-btn" data-date="17">17</button>
+                            <button class="timing-btn" data-date="18">18</button>
+                            <button class="timing-btn" data-date="19">19</button>
+                            <button class="timing-btn" data-date="20">20</button>
+                            <button class="timing-btn" data-date="21">21</button>
+                            <button class="timing-btn" data-date="22">22</button>
+                            <button class="timing-btn" data-date="23">23</button>
+                            <button class="timing-btn" data-date="24">24</button>
+                            <button class="timing-btn" data-date="25">25</button>
+                            <button class="timing-btn" data-date="26">26</button>
+                            <button class="timing-btn" data-date="27">27</button>
+                            <button class="timing-btn" data-date="28">28</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const amountInput = document.getElementById('amountInput');
+            const ctaBtn = document.getElementById('ctaBtn');
+            const projectionAmount = document.getElementById('projectionAmount');
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const frequencyBtns = document.querySelectorAll('.frequency-btn');
+            const amountBtns = document.querySelectorAll('.amount-btn');
+            const potBtns = document.querySelectorAll('.pot-btn');
+            const sipFrequency = document.getElementById('sipFrequency');
+            
+            let currentType = 'sip';
+            let currentFrequency = 'daily';
+            let currentAmount = 100;
+            let currentDay = 'monday';
+            let currentDate = 5;
+            let currentPot = 'Emergency Funds';
+
+            // Time period selection
+            let currentYears = 5;
+            const timeBtns = document.querySelectorAll('.time-btn');
+            const projectionGrowth = document.getElementById('projectionGrowth');
+
+            timeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    timeBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentYears = parseInt(this.dataset.years);
+                    updateProjection();
+                });
+            });
+
+            // Simple keyboard focus handling
+            amountInput.addEventListener('focus', function() {
+                this.classList.add('focused');
+            });
+
+            amountInput.addEventListener('blur', function() {
+                setTimeout(() => {
+                    this.classList.remove('focused');
+                }, 300);
+            });
+
+            // Investment type tabs
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    currentType = this.dataset.type;
+                    
+                    // Set default amount based on type
+                    if (currentType === 'sip') {
+                        currentAmount = 100;
+                        sipFrequency.style.display = 'block';
+                        updateTimingDisplay();
+                        updateCTA();
+                    } else {
+                        currentAmount = 5000;
+                        sipFrequency.style.display = 'none';
+                        ctaBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg> Invest Now';
+                    }
+                    
+                    // Update amount input field
+                    amountInput.value = currentAmount;
+                    
+                    // Quick amount buttons removed for cleaner UI
+                    // updateQuickAmounts();
+                    
+                    updateProjection();
+                });
+            });
+
+            // Frequency buttons
+            frequencyBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const newFrequency = this.dataset.frequency;
+                    
+                    // Switch frequency
+                    frequencyBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    currentFrequency = newFrequency;
+                    
+                    // Update default amounts based on frequency
+                    if (currentFrequency === 'daily') {
+                        currentAmount = 100;
+                    } else if (currentFrequency === 'weekly') {
+                        currentAmount = 500;
+                    } else if (currentFrequency === 'monthly') {
+                        currentAmount = 5000;
+                    }
+                    
+                    // Update amount input field
+                    amountInput.value = currentAmount;
+                    
+                    updateTimingDisplay();
+                    // updateQuickAmounts(); // Removed for cleaner UI
+                    updateCTA();
+                    updateProjection();
+                });
+            });
+
+            // Timing display button
+            const timingDisplayBtn = document.getElementById('timingDisplayBtn');
+            if (timingDisplayBtn) {
+                timingDisplayBtn.addEventListener('click', function() {
+                    openTimingModal(currentFrequency);
+                });
+            }
+
+            // Day selection buttons (weekly)
+            document.addEventListener('click', function(e) {
+                if (e.target.matches('[data-day]')) {
+                    document.querySelectorAll('[data-day]').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentDay = e.target.dataset.day;
+                    updateTimingDisplay();
+                    setTimeout(() => closeTimingModal(), 300);
+                }
+            });
+
+            // Date selection buttons (monthly)
+            document.addEventListener('click', function(e) {
+                if (e.target.matches('[data-date]')) {
+                    document.querySelectorAll('[data-date]').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentDate = parseInt(e.target.dataset.date);
+                    updateTimingDisplay();
+                    setTimeout(() => closeTimingModal(), 300);
+                }
+            });
+
+            // Amount input changes with 10 lac limit
+            amountInput.addEventListener('input', function() {
+                let value = parseInt(this.value) || 0;
+                
+                // Enforce 10 lac maximum limit
+                if (value > 1000000) {
+                    value = 1000000;
+                    this.value = value;
+                }
+                
+                currentAmount = value;
+                updateProjection();
+            });
+
+            // Pot selection with scroll indicators
+            const potScroll = document.getElementById('potScroll');
+            const potScrollDots = document.querySelectorAll('.pot-scroll-dot');
+            
+            // Add click functionality to pot scroll dots
+            potScrollDots.forEach((dot, index) => {
+                dot.addEventListener('click', function() {
+                    const scrollAmount = (potScroll.scrollWidth - potScroll.clientWidth) * (index / (potScrollDots.length - 1));
+                    potScroll.scrollTo({
+                        left: scrollAmount,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Update active dot based on scroll position
+            potScroll.addEventListener('scroll', function() {
+                const scrollLeft = this.scrollLeft;
+                const maxScrollLeft = this.scrollWidth - this.clientWidth;
+                
+                if (maxScrollLeft > 0) {
+                    const scrollPercentage = scrollLeft / maxScrollLeft;
+                    
+                    potScrollDots.forEach((dot) => {
+                        dot.classList.remove('active');
+                    });
+                    
+                    // Calculate which section we're in (0, 1, or 2)
+                    const activeIndex = Math.min(Math.round(scrollPercentage * (potScrollDots.length - 1)), potScrollDots.length - 1);
+                    
+                    if (potScrollDots[activeIndex]) {
+                        potScrollDots[activeIndex].classList.add('active');
+                    }
+                }
+            });
+
+            // Pot selection
+            potBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('add-pot-btn')) return; // Don't select add button
+                    potBtns.forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    currentPot = this.textContent.trim();
+                });
+            });
+
+            // Update quick amount buttons based on investment type and frequency
+            function updateQuickAmounts() {
+                const quickAmountsContainer = document.getElementById('quickAmounts');
+                let amountConfig;
+                
+                if (currentType === 'sip') {
+                    if (currentFrequency === 'daily') {
+                        amountConfig = [
+                            { amount: 50, popular: false },
+                            { amount: 100, popular: true },
+                            { amount: 200, popular: false },
+                            { amount: 500, popular: false }
+                        ];
+                    } else if (currentFrequency === 'weekly') {
+                        amountConfig = [
+                            { amount: 300, popular: false },
+                            { amount: 500, popular: true },
+                            { amount: 1000, popular: false },
+                            { amount: 2000, popular: false }
+                        ];
+                    } else if (currentFrequency === 'monthly') {
+                        amountConfig = [
+                            { amount: 2000, popular: false },
+                            { amount: 5000, popular: true },
+                            { amount: 7000, popular: false },
+                            { amount: 10000, popular: false }
+                        ];
+                    }
+                } else {
+                    amountConfig = [
+                        { amount: 2000, popular: false },
+                        { amount: 5000, popular: true },
+                        { amount: 7000, popular: false },
+                        { amount: 10000, popular: false }
+                    ];
+                }
+                
+                quickAmountsContainer.innerHTML = amountConfig.map(config => 
+                    `<button class="amount-btn ${config.popular ? 'popular' : ''}" data-amount="${config.amount}">${config.amount}</button>`
+                ).join('');
+                
+                // Reattach event listeners to new buttons
+                const newAmountBtns = document.querySelectorAll('.amount-btn');
+                newAmountBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        let amount = parseInt(this.dataset.amount);
+                        
+                        // Enforce 10 lac maximum limit
+                        if (amount > 1000000) {
+                            amount = 1000000;
+                        }
+                        
+                        currentAmount = amount;
+                        amountInput.value = amount;
+                        updateProjection();
+                        
+                        // Update button states
+                        newAmountBtns.forEach(b => b.classList.remove('selected'));
+                        this.classList.add('selected');
+                    });
+                    
+                    // Mobile touch interaction
+                    btn.addEventListener('touchstart', function(e) {
+                        this.style.transition = 'transform 0.1s ease';
+                        this.style.transform = 'scale(0.95)';
+                    });
+                    
+                    btn.addEventListener('touchend', function(e) {
+                        this.style.transform = '';
+                    });
+                });
+            }
+
+            // Open timing selection modal
+            function openTimingModal(type) {
+                const modal = document.getElementById('timingModal');
+                const modalTitle = document.getElementById('modalTitle');
+                const daySelection = document.getElementById('daySelection');
+                const dateSelection = document.getElementById('dateSelection');
+                
+                if (type === 'weekly') {
+                    modalTitle.textContent = 'Select Day of Week';
+                    daySelection.style.display = 'block';
+                    dateSelection.style.display = 'none';
+                } else if (type === 'monthly') {
+                    modalTitle.textContent = 'Select Date of Month';
+                    daySelection.style.display = 'none';
+                    dateSelection.style.display = 'block';
+                }
+                
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+
+            // Close timing selection modal
+            function closeTimingModal() {
+                const modal = document.getElementById('timingModal');
+                modal.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+
+            // Make modal functions globally accessible
+            window.closeTimingModal = closeTimingModal;
+            window.openTimingModal = openTimingModal;
+            window.currentFrequency = currentFrequency;
+
+            // Update timing display
+            function updateTimingDisplay() {
+                const timingDisplay = document.getElementById('timingDisplay');
+                const timingValue = document.getElementById('timingValue');
+                const timingLabel = document.querySelector('.timing-display-label');
+                
+                if (currentFrequency === 'daily') {
+                    timingDisplay.style.display = 'none';
+                } else if (currentFrequency === 'weekly') {
+                    timingDisplay.style.display = 'block';
+                    const dayNames = {
+                        'monday': 'Monday',
+                        'tuesday': 'Tuesday', 
+                        'wednesday': 'Wednesday',
+                        'thursday': 'Thursday',
+                        'friday': 'Friday',
+                        'saturday': 'Saturday',
+                        'sunday': 'Sunday'
+                    };
+                    timingLabel.textContent = 'SIP every';
+                    timingValue.textContent = dayNames[currentDay];
+                } else if (currentFrequency === 'monthly') {
+                    timingDisplay.style.display = 'block';
+                    const suffix = currentDate === 1 || currentDate === 21 ? 'st' :
+                                  currentDate === 2 || currentDate === 22 ? 'nd' :
+                                  currentDate === 3 || currentDate === 23 ? 'rd' : 'th';
+                    timingLabel.textContent = 'SIP on';
+                    timingValue.textContent = currentDate + suffix + ' of every month';
+                }
+            }
+
+            // Update CTA button text
+            function updateCTA() {
+                const icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>';
+                if (currentType === 'sip') {
+                    const frequency = currentFrequency.charAt(0).toUpperCase() + currentFrequency.slice(1);
+                    ctaBtn.innerHTML = `${icon} Setup ${frequency} SIP`;
+                } else {
+                    ctaBtn.innerHTML = `${icon} Invest Now`;
+                }
+            }
+
+            // Update projection with enhanced calculations
+            function updateProjection() {
+                if (currentAmount <= 0) return;
+                
+                const annualReturn = 0.15; // 15% annual return
+                let totalInvestment, futureValue;
+                
+                if (currentType === 'sip') {
+                    let investmentsPerYear;
+                    if (currentFrequency === 'daily') {
+                        investmentsPerYear = 365;
+                    } else if (currentFrequency === 'weekly') {
+                        investmentsPerYear = 52;
+                    } else {
+                        investmentsPerYear = 12;
+                    }
+                    
+                    totalInvestment = currentAmount * investmentsPerYear * currentYears;
+                    
+                    // SIP future value calculation with 15% return
+                    const periodicRate = Math.pow(1 + annualReturn, 1/investmentsPerYear) - 1;
+                    const totalPeriods = investmentsPerYear * currentYears;
+                    futureValue = currentAmount * (((Math.pow(1 + periodicRate, totalPeriods)) - 1) / periodicRate) * (1 + periodicRate);
+                } else {
+                    // One-time investment
+                    totalInvestment = currentAmount;
+                    futureValue = currentAmount * Math.pow(1 + annualReturn, currentYears);
+                }
+                
+                const growth = futureValue - totalInvestment;
+                const growthPercentage = ((growth / totalInvestment) * 100);
+                
+                // Update display for compact card
+                // projectionPeriod removed - no longer showing "After X years..."
+                projectionAmount.textContent = `₹ ${Math.round(futureValue).toLocaleString('en-IN')}`;
+                projectionGrowth.innerHTML = `
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                    </svg>
+                    +₹${Math.round(growth).toLocaleString('en-IN')} (${growthPercentage.toFixed(1)}%)
+                `;
+                // totalInvested removed - no longer showing total invested in compact view
+            }
+
+            // Fund selection action
+            window.changeFund = function() {
+                alert('Navigate to fund selection page');
+                // Add your navigation logic here
+            };
+
+            // CTA button action
+            ctaBtn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                    // Navigate to UPI autopay setup for SIP, direct investment for one-time
+                    if (currentType === 'sip') {
+                        // Pass amount, frequency, type, and pot as URL parameters
+                        const params = new URLSearchParams({
+                            amount: currentAmount,
+                            frequency: currentFrequency,
+                            type: currentType,
+                            pot: currentPot
+                        });
+                        window.location.href = 'upi-autopay.html?' + params.toString();
+                    } else {
+                        alert(`One-time Investment - Amount: ₹${currentAmount}`);
+                        // In real app: window.location.href = 'payment-gateway.html';
+                    }
+                }, 150);
+            });
+
+            // Mobile touch interactions
+            document.querySelectorAll('.pot-btn, .frequency-btn, .tab-btn, .timing-btn').forEach(btn => {
+                btn.addEventListener('touchstart', function(e) {
+                    this.style.transition = 'transform 0.1s ease';
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                btn.addEventListener('touchend', function(e) {
+                    setTimeout(() => {
+                        this.style.transform = '';
+                        this.style.transition = 'all 0.2s ease';
+                    }, 100);
+                });
+            });
+
+            // Modal background click to close
+            document.getElementById('timingModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeTimingModal();
+                }
+            });
+
+            // Initialize amount input
+            amountInput.value = currentAmount;
+            // updateQuickAmounts(); // Removed for cleaner UI
+            updateTimingDisplay();
+            
+            // Initialize projection
+            updateProjection();
+        });
+    </script>
+</body>
+</html>
