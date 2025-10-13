@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Details - NiveshPe</title>
+    <!-- Cache busting version -->
+
+    <!-- Meta Tags for Social Sharing -->
+    <meta name="description" content="View detailed transaction information including NAV, units, processing status and more on NiveshPe">
+    <meta name="keywords" content="transaction details, NAV, mutual funds, SIP, investment, NiveshPe">
+    <meta name="author" content="NiveshPe">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/my-funds.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="iphone-frame">
+            <div class="iphone-screen">
+                <div class="mobile-container">
+                    <!-- Status Bar -->
+                    <div class="status-bar">
+                        <div class="status-left">
+                            <span class="time">9:41</span>
+                        </div>
+                        <div class="status-right">
+                            <span class="battery">87%</span>
+                            <div class="signal-bars">
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Header -->
+                    <div class="header">
+                        <button class="back-btn" onclick="window.history.back()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/>
+                            </svg>
+                        </button>
+                        <div class="header-title">Transaction Details</div>
+                        <div class="header-actions">
+                            <button class="icon-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 6L12 10.5 8.5 8 12 5.5 15.5 8zM12 13.5l3.5 2.5L12 18.5 8.5 16l3.5-2.5z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Scrollable Content -->
+                    <div class="scroll-content">
+                        <div class="transaction-detail-page">
+                            <!-- Transaction Status Header -->
+                            <div class="transaction-status-card">
+                                <div class="status-icon success">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                </div>
+                                <div class="status-content">
+                                    <div class="status-title" id="transactionTitle">Monthly SIP: HDFC Liquid Fund</div>
+                                    <div class="status-amount" id="transactionAmount">₹1,500</div>
+                                    <div class="status-badge success" id="transactionStatus">Completed</div>
+                                </div>
+                            </div>
+
+                            <!-- Transaction Summary -->
+                            <div class="detail-section">
+                                <div class="section-title">Transaction Summary</div>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Transaction ID</span>
+                                        <span class="detail-value" id="transactionId">TXN240708001</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Date & Time</span>
+                                        <span class="detail-value" id="transactionDateTime">Nov 8, 2024 • 09:30 AM</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Transaction Type</span>
+                                        <span class="detail-value" id="transactionType">SIP Investment</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Payment Method</span>
+                                        <span class="detail-value" id="paymentMethod">UPI AutoPay</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Folio Number</span>
+                                        <span class="detail-value" id="folioNumber">HDFC12345678</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fund Details -->
+                            <div class="detail-section">
+                                <div class="section-title">Fund Information</div>
+                                <div class="fund-info-card">
+                                    <div class="fund-logo">
+                                        <div class="fund-icon">HDFC</div>
+                                    </div>
+                                    <div class="fund-details">
+                                        <div class="fund-name" id="fundName">HDFC Liquid Fund - Direct Growth</div>
+                                        <div class="fund-category">Debt • Liquid</div>
+                                        <div class="fund-rating">
+                                            <span>★★★★☆</span>
+                                            <span class="rating-text">4.2/5</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Investment Breakdown -->
+                            <div class="detail-section">
+                                <div class="section-title" id="breakdownTitle">Investment Breakdown</div>
+                                <div class="breakdown-card">
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-label">Investment Amount</div>
+                                        <div class="breakdown-value" id="investmentAmount">₹1,500.00</div>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-label">NAV (Net Asset Value)</div>
+                                        <div class="breakdown-value" id="navValue">₹3,245.67</div>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-label" id="unitsLabel">Units Allocated</div>
+                                        <div class="breakdown-value highlight" id="unitsAllocated">0.4621 units</div>
+                                    </div>
+                                    <div class="breakdown-divider"></div>
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-label">Processing Fee</div>
+                                        <div class="breakdown-value">₹0.00</div>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-label">GST</div>
+                                        <div class="breakdown-value">₹0.00</div>
+                                    </div>
+                                    <div class="breakdown-item total">
+                                        <div class="breakdown-label" id="totalLabel">Total Amount</div>
+                                        <div class="breakdown-value" id="totalAmount">₹1,500.00</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Status Timeline -->
+                            <div class="detail-section">
+                                <div class="section-title">Transaction Timeline</div>
+                                <div class="timeline">
+                                    <div class="timeline-item completed">
+                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-content">
+                                            <div class="timeline-title">Payment Initiated</div>
+                                            <div class="timeline-time">Nov 8, 2024 • 09:30 AM</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item completed">
+                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-content">
+                                            <div class="timeline-title">Payment Successful</div>
+                                            <div class="timeline-time">Nov 8, 2024 • 09:31 AM</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item completed">
+                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-content">
+                                            <div class="timeline-title" id="timelineUnitsTitle">Units Allocated</div>
+                                            <div class="timeline-time">Nov 8, 2024 • 09:45 AM</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item completed">
+                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-content">
+                                            <div class="timeline-title">Transaction Complete</div>
+                                            <div class="timeline-time">Nov 8, 2024 • 09:45 AM</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SIP Information (shown for SIP transactions) -->
+                            <div class="detail-section" id="sipInfo">
+                                <div class="section-title">SIP Details</div>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">SIP Amount</span>
+                                        <span class="detail-value">₹1,500</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Frequency</span>
+                                        <span class="detail-value">Monthly</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Next SIP Date</span>
+                                        <span class="detail-value">Dec 8, 2024</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Total SIPs</span>
+                                        <span class="detail-value">12 of 60</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tax Information -->
+                            <div class="detail-section">
+                                <div class="section-title">Tax Information</div>
+                                <div class="tax-info-card">
+                                    <div class="tax-item">
+                                        <span class="tax-label">Holding Period</span>
+                                        <span class="tax-value">Short Term (< 3 years)</span>
+                                    </div>
+                                    <div class="tax-item">
+                                        <span class="tax-label">Tax Implication</span>
+                                        <span class="tax-value">As per your income tax slab</span>
+                                    </div>
+                                    <div class="tax-note">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                                        </svg>
+                                        Tax implications are calculated at the time of redemption
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Documents -->
+                            <div class="detail-section">
+                                <div class="section-title">Documents</div>
+                                <div class="documents-list">
+                                    <div class="document-item">
+                                        <div class="document-icon">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="document-details">
+                                            <div class="document-name" id="transactionDocumentName">Transaction Statement</div>
+                                            <div class="document-size">PDF • 124 KB</div>
+                                        </div>
+                                        <button class="document-download">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="document-item">
+                                        <div class="document-icon">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="document-details">
+                                            <div class="document-name" id="unitsDocumentName">Units Allocation Statement</div>
+                                            <div class="document-size">PDF • 87 KB</div>
+                                        </div>
+                                        <button class="document-download">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Support Section -->
+                            <div class="detail-section">
+                                <div class="support-card">
+                                    <div class="support-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.19 0 2.34-.21 3.41-.6.3-.11.49-.4.49-.72v-2.81c0-.45-.54-.67-.85-.35-.59.6-1.41.97-2.05.97-1.66 0-3-1.34-3-3s1.34-3 3-3c.64 0 1.46.37 2.05.97.31.32.85.09.85-.36V5.32c0-.31-.19-.61-.49-.72C14.34 2.21 13.19 2 12 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="support-content">
+                                        <div class="support-title">Need Help?</div>
+                                        <div class="support-subtitle">Contact our support team for any queries</div>
+                                    </div>
+                                    <button class="support-button">Contact</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enhanced Bottom Navigation -->
+                    <nav class="bottom-nav">
+                        <a href="index.html" class="nav-item">
+                            <div class="nav-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                                </svg>
+                            </div>
+                            <span class="nav-label">Home</span>
+                        </a>
+                        <a href="my-funds.html" class="nav-item">
+                            <div class="nav-icon">
+                                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21.0273 13.375C21.3789 13.375 21.6602 13.6914 21.5898 14.0078C21.3438 15.9766 20.3945 17.6992 19.0234 18.9648C18.8125 19.1758 18.4609 19.1758 18.25 18.9648L12.6953 13.375H21.0273ZM20.4648 11.125C20.5 11.4414 20.2188 11.6875 19.9023 11.6875H12.0625V3.84766C12.0625 3.53125 12.3086 3.25 12.625 3.28516C16.8438 3.56641 20.1836 6.90625 20.4648 11.125ZM10.375 13.375L15.8242 18.8594C16.0703 19.1055 16.0703 19.5273 15.7891 19.7031C14.4531 20.6875 12.8008 21.25 11.043 21.25C6.50781 21.3203 2.64062 17.6289 2.5 13.1289C2.32422 8.73438 5.52344 5.07812 9.74219 4.48047C10.0586 4.44531 10.375 4.72656 10.375 5.04297V13.375Z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <span class="nav-label">My Funds</span>
+                        </a>
+                        <a href="#" class="nav-item">
+                            <div class="nav-icon">
+                                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.5 20V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M18.5 20V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M6.5 20V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span class="nav-label">Mutual Funds</span>
+                        </a>
+                        <a href="transaction-history.html" class="nav-item">
+                            <div class="nav-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z"/>
+                                </svg>
+                            </div>
+                            <span class="nav-label">History</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get transaction data from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const txnType = urlParams.get('type') || 'sip';
+            const txnAmount = urlParams.get('amount') || '1500';
+            const txnTitle = urlParams.get('title') || 'Monthly SIP: HDFC Liquid Fund';
+            const txnDate = urlParams.get('date') || 'Nov 8, 2024 • 09:30 AM';
+
+
+            // Update page content based on transaction type
+            updateTransactionDetails(txnType, txnAmount, txnTitle, txnDate);
+
+            // Mobile touch interactions
+            document.querySelectorAll('.document-item, .support-card, .status-card').forEach(item => {
+                item.addEventListener('touchstart', function(e) {
+                    this.style.transition = 'transform 0.1s ease';
+                    this.style.transform = 'scale(0.95)';
+                });
+
+                item.addEventListener('touchend', function(e) {
+                    setTimeout(() => {
+                        this.style.transform = '';
+                        this.style.transition = 'all 0.2s ease';
+                    }, 100);
+                });
+            });
+        });
+
+        function updateTransactionDetails(type, amount, title, date) {
+            // Update basic transaction info
+            document.getElementById('transactionTitle').textContent = title;
+            document.getElementById('transactionDateTime').textContent = date;
+
+            // Update transaction type specific content
+            const typeMap = {
+                'sip': 'SIP Investment',
+                'lumpsum': 'One Time Investment',
+                'dividend': 'Dividend Credit'
+            };
+
+            document.getElementById('transactionType').textContent = typeMap[type] || 'Investment';
+
+            // Update transaction ID
+            const txnId = 'TXN' + Date.now().toString().slice(-8);
+            document.getElementById('transactionId').textContent = txnId;
+
+            // Show/hide SIP specific information
+            const sipInfo = document.getElementById('sipInfo');
+            if (type === 'sip') {
+                sipInfo.style.display = 'block';
+            } else {
+                sipInfo.style.display = 'none';
+            }
+
+            // Update investment details (only for non-withdrawal transactions)
+            updateInvestmentDetails(type, amount);
+        }
+
+        function updateInvestmentDetails(type, amount) {
+            // For investments (SIP, lumpsum, dividend)
+            document.getElementById('transactionAmount').textContent = `₹${amount}`;
+            document.getElementById('transactionStatus').textContent = 'Completed';
+            document.getElementById('paymentMethod').textContent = 'UPI AutoPay';
+
+            // Generate folio number
+            const folioNumber = 'HDFC' + Math.floor(Math.random() * 90000000 + 10000000);
+            document.getElementById('folioNumber').textContent = folioNumber;
+
+            // Update investment breakdown
+            document.getElementById('investmentAmount').textContent = `₹${amount}.00`;
+            document.getElementById('totalAmount').textContent = `₹${amount}.00`;
+
+            // Calculate units (simplified calculation)
+            const nav = 3245.67;
+            const units = (parseFloat(amount) / nav).toFixed(4);
+            document.getElementById('unitsAllocated').textContent = `${units} units`;
+            document.getElementById('navValue').textContent = `₹${nav.toFixed(2)}`;
+        }
+
+
+
+        function resetInvestmentTimeline() {
+            const timeline = document.querySelector('.timeline');
+            timeline.innerHTML = `
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Payment Initiated</div>
+                        <div class="timeline-time">Nov 8, 2024 • 09:30 AM</div>
+                    </div>
+                </div>
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Payment Successful</div>
+                        <div class="timeline-time">Nov 8, 2024 • 09:31 AM</div>
+                    </div>
+                </div>
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title" id="timelineUnitsTitle">Units Allocated</div>
+                        <div class="timeline-time">Nov 8, 2024 • 09:45 AM</div>
+                    </div>
+                </div>
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Transaction Complete</div>
+                        <div class="timeline-time">Nov 8, 2024 • 09:45 AM</div>
+                    </div>
+                </div>
+            `;
+        }
+
+    </script>
+</body>
+</html>

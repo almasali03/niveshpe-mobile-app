@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NiveshPe - Mutual Funds</title>
+    
+    <!-- Meta Tags for Social Sharing -->
+    <meta name="description" content="Explore personalized mutual fund investment plans with NiveshPe.">
+    <meta name="keywords" content="fintech, investment, SIP, UPI payments, mobile app, prototype, mutual funds">
+    <meta name="author" content="NiveshPe">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Color System */
+            --color-bg-primary: #F5F7FA;
+            --color-bg-secondary: #FFFFFF;
+            --color-card: #FFFFFF;
+            --color-surface: #F8F9FA;
+            --color-border: #E5E7EB;
+
+            /* Brand Colors */
+            --color-blue: #2563EB;
+            --color-blue-dark: #1D4ED8;
+            --color-blue-light: #3B82F6;
+            --color-green: #10B981;
+            --color-green-light: #86EFAC;
+            --color-green-dark: #34D399;
+            --color-orange: #F59E0B;
+            --color-red: #EF4444;
+            --color-purple: #8B5CF6;
+
+            /* Text Colors */
+            --color-text-primary: #1F2937;
+            --color-text-secondary: #6B7280;
+            --color-text-muted: #9CA3AF;
+            --color-text-white: #FFFFFF;
+
+            /* Typography */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-2xl: 24px;
+            --radius-full: 9999px;
+
+            /* Spacing System */
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px 20px 40px;
+            overflow-x: auto;
+        }
+
+        /* iPhone Frame */
+        .iphone-frame {
+            width: 380px;
+            height: 820px;
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+            position: relative;
+            margin: 0 auto;
+            flex-shrink: 0;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-primary);
+            border-radius: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .mobile-container {
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-primary);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: white;
+            font-size: 15px;
+            font-weight: 600;
+            height: 44px;
+            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        /* Tab Content Container */
+        .tab-content-container {
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: none;
+            background: var(--color-bg-primary);
+            position: relative;
+        }
+
+        .tab-content-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            border-top: 1px solid rgba(37, 99, 235, 0.1);
+            padding: 8px 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            flex-shrink: 0;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: var(--color-text-muted);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            flex: 1;
+            min-width: 85px;
+        }
+
+        .nav-item.active {
+            color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* Button Base Styles */
+        .btn {
+            padding: 12px 20px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-invest {
+            background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-invest:active {
+            transform: scale(0.96);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-withdraw {
+            background: white;
+            color: var(--color-blue);
+            border: 2px solid var(--color-blue);
+        }
+
+        .btn-withdraw:active {
+            background: rgba(37, 99, 235, 0.05);
+            transform: scale(0.96);
+        }
+
+        /* Page-specific styles for mutual funds tabs */
+        .header {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0;
+            background: rgba(245, 247, 250, 0.9);
+            backdrop-filter: blur(10px);
+            height: 70px;
+            box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.12);
+        }
+
+        .tabs-nav-container {
+            width: 100%;
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom: none;
+            z-index: 10;
+        }
+
+        .tabs-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 0 var(--space-lg);
+            position: relative;
+        }
+
+        .tabs-nav .tab-btn {
+            flex: 1;
+            padding: var(--space-md) 0;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .tabs-nav .tab-btn.active {
+            color: var(--color-blue);
+        }
+
+        .tab-indicator {
+            position: absolute;
+            bottom: 0;
+            height: 3px;
+            background: var(--color-blue);
+            border-radius: 3px 3px 0 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Main Content Area */
+        .main-content {
+            padding: var(--space-lg);
+        }
+
+        /* Section Spacing */
+        .section-spacing {
+            margin-bottom: var(--space-xl);
+        }
+
+        /* Page Header Styles */
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Recommended Fund Card - Blue */
+        .recommended-fund-card-blue {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            color: white;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .fund-card-header {
+            margin-bottom: var(--space-md);
+        }
+
+        .fund-bucket-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin: 0 0 var(--space-xs) 0;
+        }
+
+        .fund-actual-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0 0 var(--space-sm) 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .fund-stats-template {
+            margin-bottom: var(--space-sm);
+        }
+
+        .fund-stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .stat-value {
+            color: white;
+            font-weight: 600;
+        }
+
+        .fund-description {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+        }
+
+        /* Accordion Styles */
+        .accordion {
+            margin-top: var(--space-md);
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm) 0;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .accordion-header svg {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active svg {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .fund-highlights {
+            list-style: none;
+            padding: 0;
+            margin: var(--space-sm) 0;
+        }
+
+        .fund-highlights li {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-xs);
+            line-height: 1.5;
+        }
+
+        .micro-nudge {
+            font-size: 12px;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: var(--space-sm);
+        }
+
+        /* Portfolio Actions in Fund Cards */
+        .recommended-fund-card-blue .portfolio-actions {
+            margin-top: var(--space-md);
+            margin-bottom: 0;
+            padding: 0;
+            z-index: auto;
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .recommended-fund-card-blue .btn {
+            flex: 1;
+            min-height: auto;
+            padding: 12px 16px;
+        }
+
+        .recommended-fund-card-blue .btn-invest {
+            background: white;
+            color: var(--color-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .recommended-fund-card-blue .btn-withdraw {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Fund Card Pot - Green */
+        .fund-card-pot-green {
+            background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            color: white;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .fund-card-pot-green .fund-bucket-title {
+            color: white;
+        }
+
+        .fund-card-pot-green .fund-actual-name {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .fund-card-pot-green .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .fund-card-pot-green .stat-value {
+            color: white;
+        }
+
+        /* Fund Card Pot - Orange */
+        .fund-card-pot-orange {
+            background: linear-gradient(135deg, #F59E0B 0%, #F97316 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            color: white;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .fund-card-pot-orange .fund-bucket-title {
+            color: white;
+        }
+
+        .fund-card-pot-orange .fund-actual-name {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .fund-card-pot-orange .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .fund-card-pot-orange .stat-value {
+            color: white;
+        }
+
+        /* Show Details Button */
+        .show-details-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: var(--space-sm);
+            transition: all 0.2s ease;
+        }
+
+        .show-details-btn:active {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Accordion Trigger */
+        .accordion-trigger {
+            display: block;
+            width: 100%;
+        }
+
+        .fund-card-pot-green .fund-description,
+        .fund-card-pot-orange .fund-description {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .fund-card-pot-green .accordion-content,
+        .fund-card-pot-orange .accordion-content {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Secondary Button */
+        .btn-secondary {
+            background: white;
+            color: var(--color-blue);
+            border: 2px solid var(--color-blue);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:active {
+            background: rgba(37, 99, 235, 0.05);
+            transform: scale(0.98);
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: var(--space-xs);
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 4px;
+        }
+
+        .filter-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-tab {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-full);
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .filter-tab.active {
+            background: var(--color-blue);
+            border-color: var(--color-blue);
+            color: white;
+        }
+
+        .filter-tab:active {
+            transform: scale(0.95);
+        }
+
+        /* Fund Category Section */
+        .fund-category-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        /* Fund Card (for All Funds tab) */
+        .fund-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            border: 1px solid var(--color-border);
+            margin-bottom: var(--space-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .fund-card:active {
+            background: var(--color-surface);
+            transform: scale(0.98);
+        }
+
+        .fund-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .fund-details {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="iphone-frame">
+        <div class="iphone-screen">
+
+            <div class="mobile-container">
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <div>9:41</div>
+                    <div class="status-icons">
+                        <span>•••</span>
+                        <span>📶</span>
+                        <span>🔋</span>
+                    </div>
+                </div>
+
+                <!-- Header with Tabs -->
+                <div class="header">
+                    <!-- Tabs Navigation -->
+                    <div class="tabs-nav-container">
+                        <div class="tabs-nav">
+                            <button class="tab-btn active" data-tab="recommended">Recommended</button>
+                            <button class="tab-btn" data-tab="all-funds">All Funds</button>
+                        </div>
+                        <div class="tab-indicator"></div>
+                    </div>
+                </div>
+
+                <!-- Tab Content Container -->
+                <div class="tab-content-container">
+                    <!-- Recommended Tab Content -->
+                    <div id="recommended-tab-content" class="tab-content active">
+                        <div class="main-content">
+                            <!-- Section 1: Personalized Header -->
+                            <div id="page-header" class="section-spacing">
+                                <h1 class="section-title" style="font-size: 24px; font-weight: 800; text-align: left; margin-bottom: var(--space-xs);">Hi Almas, Here's Your Plan.</h1>
+                                <p class="section-subtitle" style="text-align: left; margin-bottom: var(--space-lg);">We've picked the "Balanced Returns Fund" for you. It's a great starting point. <a href="#" style="font-size: 12px; color: var(--color-text-secondary); text-decoration: underline;">Change Preferences</a></p>
+                            </div>
+
+                            <!-- SECTION 1 — Recommended Fund (Primary Card) -->
+                            <div class="recommended-fund-card-blue section-spacing">
+                                <div class="fund-card-header">
+                                    <h2 class="fund-bucket-title">Balanced Returns Fund</h2>
+                                    <p class="fund-actual-name">HDFC Balanced Advantage Fund</p>
+                                    <span class="badge">Recommended</span>
+                                </div>
+                                <div class="fund-stats-template">
+                                    <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">10-13% p.a.</span></p>
+                                    <p class="fund-stat-item"><span class="stat-label">Holding Period:</span> <span class="stat-value">8+ months</span></p>
+                                </div>
+                                <p class="fund-description" style="margin-top: var(--space-sm);">A perfect balance of growth and safety.</p>
+                                <div class="accordion">
+                                    <div class="accordion-header">
+                                        <span>Show Details</span>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <p class="fund-description">This plan gives you a perfect balance of growth and safety. It invests in both equity (for growth) and debt (for stability), so your money grows smoothly with fewer ups and downs.</p>
+                                        <ul class="fund-highlights">
+                                            <li>✅ Balanced growth with moderate risk</li>
+                                            <li>📉 Less volatility, suitable for first-time investors</li>
+                                            <li>💸 Withdraw anytime after 8 months</li>
+                                            <li>🧩 Ideal for short-to-medium goals (festivals, emergency funds, new purchases)</li>
+                                        </ul>
+                                        <p class="micro-nudge">“Perfect for beginners who want steady progress without worrying about market swings.”</p>
+                                    </div>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <button class="btn btn-invest">Start SIP</button>
+                                    <button class="btn btn-withdraw">One Time</button>
+                                </div>
+                            </div>
+
+                            <!-- Section 2: Other Recommended Funds -->
+                            <div class="section-spacing">
+                                <div class="fund-card-pot-green section-spacing" style="position: relative;">
+                                    <h2 class="fund-bucket-title">Instant Withdrawal</h2>
+                                    <p class="fund-actual-name">HDFC Liquid Fund</p>
+                            <div class="fund-stats-template">
+                                <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">6-7% p.a.</span></p>
+                                <p class="fund-stat-item"><span class="stat-label">Holding Period:</span> <span class="stat-value">Withdraw Anytime</span></p>
+                            </div>
+                            <button class="show-details-btn accordion-trigger">Show Details</button>
+                            <div class="accordion-content">
+                                <p class="fund-description">"Lowest risk with small but steady returns, usually slightly better than a savings account or FD. Best if you just want to park money safely and can take it out anytime."</p>
+                            </div>
+                        </div>
+                        <div class="fund-card-pot-orange section-spacing" style="position: relative;">
+                            <h2 class="fund-bucket-title">Highest Returns</h2>
+                            <p class="fund-actual-name">HDFC Flexi Cap Fund</p>
+                            <div class="fund-stats-template">
+                                <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">18%-24% p.a.</span></p>
+                                <p class="fund-stat-item"><span class="stat-label">Holding Period:</span> <span class="stat-value">18+ months</span></p>
+                            </div>
+                            <button class="show-details-btn accordion-trigger">Show Details</button>
+                            <div class="accordion-content">
+                                <p class="fund-description">"Choose this if you want the chance of very high returns and don’t mind ups and downs in the short term. Works best if you can leave your money for at least 18 months or more."</p>
+                            </div>
+                        </div>
+
+                            <!-- Section 3: Explore More Funds -->
+                            <div id="explore-funds" class="section-spacing" style="text-align: center;">
+                                <a href="#" class="btn btn-secondary">Explore other funds</a>
+                            </div>
+
+                            <!-- Section 4: Explore More Mutual Funds -->
+                            <div id="explore-funds-2" class="section-spacing" style="margin-top: var(--space-2xl);">
+                                <h2 class="section-title" style="text-align: left; margin-bottom: var(--space-sm);">Explore More Mutual Funds</h2>
+                                <div class="filter-tabs" style="margin-bottom: var(--space-lg);">
+                                    <button class="filter-tab active">High Growth</button>
+                                    <button class="filter-tab">Balanced</button>
+                                    <button class="filter-tab">Tax Saving</button>
+                                    <button class="filter-tab">Safe & Steady</button>
+                                </div>
+                                <!-- Fund cards will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- All Funds Tab Content -->
+                    <div id="all-funds-tab-content" class="tab-content">
+                        <div class="filter-tabs" style="margin-bottom: var(--space-lg); padding: var(--space-lg);">
+                            <button class="filter-tab active" data-category="all">All</button>
+                            <button class="filter-tab" data-category="equity">Equity</button>
+                            <button class="filter-tab" data-category="debt">Debt</button>
+                            <button class="filter-tab" data-category="solution">Solution Oriented</button>
+                            <button class="filter-tab" data-category="hybrid">Hybrid</button>
+                            <button class="filter-tab" data-category="others">Others</button>
+                        </div>
+
+                        <!-- Fund List for All Funds Tab -->
+                        <div id="all-funds-list" style="padding: 0 var(--space-lg) var(--space-lg);">
+                            <!-- Equity Funds -->
+                            <div class="fund-category-section" data-category="equity">
+                                <h3 class="section-title" style="text-align: left; margin-bottom: var(--space-md);">Equity Funds</h3>
+                                <div class="fund-card">
+                                    <h4 class="fund-title">SBI Bluechip Fund</h4>
+                                    <p class="fund-details">Returns: 15% p.a.</p>
+                                    <p class="fund-details">Min. SIP: ₹500</p>
+                                </div>
+                                <div class="fund-card">
+                                    <h4 class="fund-title">Parag Parikh Flexi Cap Fund</h4>
+                                    <p class="fund-details">Returns: 17% p.a.</p>
+                                    <p class="fund-details">Min. SIP: ₹1000</p>
+                                </div>
+                            </div>
+
+                            <!-- Debt Funds -->
+                            <div class="fund-category-section" data-category="debt">
+                                <h3 class="section-title" style="text-align: left; margin-bottom: var(--space-md);">Debt Funds</h3>
+                                <div class="fund-card">
+                                    <h4 class="fund-title">HDFC Liquid Fund</h4>
+                                    <p class="fund-details">Returns: 6% p.a.</p>
+                                    <p class="fund-details">Min. Inv: ₹100</p>
+                                </div>
+                                <div class="fund-card">
+                                    <h4 class="fund-title">ICICI Prudential Savings Fund</h4>
+                                    <p class="fund-details">Returns: 7% p.a.</p>
+                                    <p class="fund-details">Min. Inv: ₹500</p>
+                                </div>
+                            </div>
+
+                            <!-- Solution Oriented Funds -->
+                            <div class="fund-category-section" data-category="solution">
+                                <h3 class="section-title" style="text-align: left; margin-bottom: var(--space-md);">Solution Oriented Funds</h3>
+                                <div class="fund-card">
+                                    <h4 class="fund-title">Axis Retirement Fund</h4>
+                                    <p class="fund-details">Returns: 12% p.a.</p>
+                                    <p class="fund-details">Min. SIP: ₹1000</p>
+                                </div>
+                            </div>
+
+                            <!-- Hybrid Funds -->
+                            <div class="fund-category-section" data-category="hybrid">
+                                <h3 class="section-title" style="text-align: left; margin-bottom: var(--space-md);">Hybrid Funds</h3>
+                                <div class="fund-card">
+                                    <h4 class="fund-title">SBI Equity Hybrid Fund</h4>
+                                    <p class="fund-details">Returns: 14% p.a.</p>
+                                    <p class="fund-details">Min. SIP: ₹500</p>
+                                </div>
+                            </div>
+
+                            <!-- Others -->
+                            <div class="fund-category-section" data-category="others">
+                                <h3 class="section-title" style="text-align: left; margin-bottom: var(--space-md);">Other Funds</h3>
+                                <div class="fund-card">
+                                    <h4 class="fund-title">Motilal Oswal S&P 500 Index Fund</h4>
+                                    <p class="fund-details">Returns: 16% p.a.</p>
+                                    <p class="fund-details">Min. SIP: ₹500</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Bottom Navigation -->
+            <nav class="bottom-nav">
+                    <a href="index.html" class="nav-item">
+                        <div class="nav-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                        </div>
+                        <span class="nav-label">Home</span>
+                    </a>
+                    <a href="my-funds.html" class="nav-item">
+                        <div class="nav-icon">
+                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.0273 13.375C21.3789 13.375 21.6602 13.6914 21.5898 14.0078C21.3438 15.9766 20.3945 17.6992 19.0234 18.9648C18.8125 19.1758 18.4609 19.1758 18.25 18.9648L12.6953 13.375H21.0273ZM20.4648 11.125C20.5 11.4414 20.2188 11.6875 19.9023 11.6875H12.0625V3.84766C12.0625 3.53125 12.3086 3.25 12.625 3.28516C16.8438 3.56641 20.1836 6.90625 20.4648 11.125ZM10.375 13.375L15.8242 18.8594C16.0703 19.1055 16.0703 19.5273 15.7891 19.7031C14.4531 20.6875 12.8008 21.25 11.043 21.25C6.50781 21.3203 2.64062 17.6289 2.5 13.1289C2.32422 8.73438 5.52344 5.07812 9.74219 4.48047C10.0586 4.44531 10.375 4.72656 10.375 5.04297V13.375Z" fill="currentColor"/></svg>
+                        </div>
+                        <span class="nav-label">My Funds</span>
+                    </a>
+                    <a href="mutual-funds.html" class="nav-item active">
+                        <div class="nav-icon">
+                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 20V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 20V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 20V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <span class="nav-label">Mutual Funds</span>
+                    </a>
+                    <a href="transaction-history.html" class="nav-item">
+                        <div class="nav-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z"/></svg>
+                        </div>
+                        <span class="nav-label">History</span>
+                    </a>
+                </nav>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const accordionTriggers = document.querySelectorAll('.accordion-trigger, .accordion-header');
+
+                    accordionTriggers.forEach(trigger => {
+                        trigger.addEventListener('click', () => {
+                            const accordionContent = trigger.nextElementSibling; // This will work for both cases
+                            if (accordionContent && accordionContent.classList.contains('accordion-content')) {
+                                if (accordionContent.style.maxHeight) {
+                                    accordionContent.style.maxHeight = null;
+                                } else {
+                                    accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
+                                } 
+                            }
+                        });
+                    });
+
+                    const tabButtons = document.querySelectorAll('.tabs-nav .tab-btn');
+                    const tabContents = document.querySelectorAll('.tab-content-container .tab-content');
+                    const tabIndicator = document.querySelector('.tab-indicator');
+
+                    function updateTabIndicator(activeTab) {
+                        const activeTabRect = activeTab.getBoundingClientRect();
+                        const tabsNavRect = document.querySelector('.tabs-nav').getBoundingClientRect();
+                        tabIndicator.style.width = `${activeTabRect.width}px`;
+                        tabIndicator.style.left = `${activeTabRect.left - tabsNavRect.left}px`;
+                    }
+
+                    tabButtons.forEach(button => {
+                        button.addEventListener('click', () => {
+                            tabButtons.forEach(btn => btn.classList.remove('active'));
+                            button.classList.add('active');
+
+                            tabContents.forEach(content => content.classList.remove('active'));
+                            document.getElementById(`${button.dataset.tab}-tab-content`).classList.add('active');
+                            updateTabIndicator(button);
+                        });
+                    });
+
+                    // Initialize tab indicator position
+                    const initialActiveTab = document.querySelector('.tabs-nav .tab-btn.active');
+                    if (initialActiveTab) {
+                        updateTabIndicator(initialActiveTab);
+                    }
+                });
+            </script>
+
+        </div>
+    </div>
+</body>
+</html>
