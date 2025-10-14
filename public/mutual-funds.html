@@ -295,10 +295,12 @@
         .tab-content {
             display: none;
             animation: fadeIn 0.3s ease;
+            width: 100%;
         }
 
         .tab-content.active {
             display: block;
+            width: 100%;
         }
 
         @keyframes fadeIn {
@@ -472,88 +474,128 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        /* Fund Card Pot - Green */
+        /* Fund Card Pot - Green (Compact neutral white) */
         .fund-card-pot-green {
-            background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+            background: white;
             border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            color: white;
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+            padding: var(--space-md);
+            color: var(--color-text-primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--color-border);
         }
 
         .fund-card-pot-green .fund-bucket-title {
-            color: white;
+            color: var(--color-text-primary);
+            font-size: 16px;
+            margin-bottom: 4px;
         }
 
         .fund-card-pot-green .fund-actual-name {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            margin-bottom: var(--space-sm);
         }
 
         .fund-card-pot-green .stat-label {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--color-text-secondary);
+            font-size: 11px;
         }
 
         .fund-card-pot-green .stat-value {
-            color: white;
+            color: var(--color-text-primary);
+            font-size: 12px;
         }
 
-        /* Fund Card Pot - Orange */
+        .fund-card-pot-green .fund-stats-template {
+            margin-bottom: 0;
+        }
+
+        .fund-card-pot-green .fund-stat-item {
+            margin-bottom: 4px;
+            font-size: 12px;
+        }
+
+        /* Fund Card Pot - Orange (Compact neutral white) */
         .fund-card-pot-orange {
-            background: linear-gradient(135deg, #F59E0B 0%, #F97316 100%);
+            background: white;
             border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            color: white;
-            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+            padding: var(--space-md);
+            color: var(--color-text-primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--color-border);
         }
 
         .fund-card-pot-orange .fund-bucket-title {
-            color: white;
+            color: var(--color-text-primary);
+            font-size: 16px;
+            margin-bottom: 4px;
         }
 
         .fund-card-pot-orange .fund-actual-name {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            margin-bottom: var(--space-sm);
         }
 
         .fund-card-pot-orange .stat-label {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--color-text-secondary);
+            font-size: 11px;
         }
 
         .fund-card-pot-orange .stat-value {
-            color: white;
+            color: var(--color-text-primary);
+            font-size: 12px;
         }
 
-        /* Show Details Button */
-        .show-details-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 8px 16px;
-            border-radius: var(--radius-sm);
+        .fund-card-pot-orange .fund-stats-template {
+            margin-bottom: 0;
+        }
+
+        .fund-card-pot-orange .fund-stat-item {
+            margin-bottom: 4px;
             font-size: 12px;
+        }
+
+        /* Show Details Button - Floating outside card */
+        .show-details-btn {
+            position: absolute;
+            bottom: -12px;
+            right: 12px;
+            background: var(--color-blue);
+            border: 1px solid var(--color-blue);
+            color: white;
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
-            margin-top: var(--space-sm);
             transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+            z-index: 10;
         }
 
         .show-details-btn:active {
-            background: rgba(255, 255, 255, 0.25);
+            background: var(--color-blue-dark);
+            transform: scale(0.95);
         }
 
         /* Accordion Trigger */
         .accordion-trigger {
-            display: block;
-            width: 100%;
+            display: inline-block;
         }
 
         .fund-card-pot-green .fund-description,
         .fund-card-pot-orange .fund-description {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            line-height: 1.4;
         }
 
         .fund-card-pot-green .accordion-content,
         .fund-card-pot-orange .accordion-content {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            padding-top: var(--space-sm);
         }
 
         /* Secondary Button */
@@ -617,6 +659,7 @@
         /* Fund Category Section */
         .fund-category-section {
             margin-bottom: var(--space-xl);
+            display: block;
         }
 
         /* Fund Card (for All Funds tab) */
@@ -769,78 +812,82 @@
 
                     <!-- All Funds Tab Content -->
                     <div id="all-funds-tab-content" class="tab-content">
-                        <div class="filter-tabs" style="margin-bottom: var(--space-lg); padding: var(--space-lg);">
-                            <button class="filter-tab active" data-category="all">All</button>
-                            <button class="filter-tab" data-category="equity">Equity</button>
-                            <button class="filter-tab" data-category="debt">Debt</button>
-                            <button class="filter-tab" data-category="solution">Solution Oriented</button>
-                            <button class="filter-tab" data-category="hybrid">Hybrid</button>
-                            <button class="filter-tab" data-category="others">Others</button>
+                        <div style="padding: 20px; width: 100%;">
+                <!-- Filter Tabs -->
+                <div style="display: flex; gap: 8px; overflow-x: auto; margin-bottom: 20px; padding-bottom: 4px;">
+                    <button class="all-funds-filter" data-category="all" style="background: #2563EB; border: 1px solid #2563EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: white; white-space: nowrap; cursor: pointer; flex-shrink: 0;">All</button>
+                    <button class="all-funds-filter" data-category="equity" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; white-space: nowrap; cursor: pointer; flex-shrink: 0;">Equity</button>
+                    <button class="all-funds-filter" data-category="debt" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; white-space: nowrap; cursor: pointer; flex-shrink: 0;">Debt</button>
+                    <button class="all-funds-filter" data-category="solution" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; white-space: nowrap; cursor: pointer; flex-shrink: 0;">Solution Oriented</button>
+                    <button class="all-funds-filter" data-category="hybrid" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; white-space: nowrap; cursor: pointer; flex-shrink: 0;">Hybrid</button>
+                    <button class="all-funds-filter" data-category="others" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; white-space: nowrap; cursor: pointer; flex-shrink: 0;">Others</button>
+                </div>
+
+                <!-- Fund List Container -->
+                <div id="all-funds-list" style="width: 100%;">
+                    <!-- Equity Funds -->
+                    <div class="fund-category" data-category="equity" style="margin-bottom: 24px; width: 100%; display: block;">
+                        <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; text-align: left; margin-bottom: 16px;">Equity Funds</h3>
+                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
+                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">SBI Bluechip Fund</h4>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 15% p.a.</p>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. SIP: ₹500</p>
                         </div>
-
-                        <!-- Fund List for All Funds Tab -->
-                        <div id="all-funds-list" style="padding: 0 var(--space-lg) var(--space-lg);">
-                            <!-- Equity Funds -->
-                            <div class="fund-category-section" data-category="equity">
-                                <h3 class="section-title" style="text-align: left; margin-bottom: var(--space-md);">Equity Funds</h3>
-                                <div class="fund-card">
-                                    <h4 class="fund-title">SBI Bluechip Fund</h4>
-                                    <p class="fund-details">Returns: 15% p.a.</p>
-                                    <p class="fund-details">Min. SIP: ₹500</p>
-                                </div>
-                                <div class="fund-card">
-                                    <h4 class="fund-title">Parag Parikh Flexi Cap Fund</h4>
-                                    <p class="fund-details">Returns: 17% p.a.</p>
-                                    <p class="fund-details">Min. SIP: ₹1000</p>
-                                </div>
-                            </div>
-
-                            <!-- Debt Funds -->
-                            <div class="fund-category-section" data-category="debt">
-                                <h3 class="section-title" style="text-align: left; margin-bottom: var(--space-md);">Debt Funds</h3>
-                                <div class="fund-card">
-                                    <h4 class="fund-title">HDFC Liquid Fund</h4>
-                                    <p class="fund-details">Returns: 6% p.a.</p>
-                                    <p class="fund-details">Min. Inv: ₹100</p>
-                                </div>
-                                <div class="fund-card">
-                                    <h4 class="fund-title">ICICI Prudential Savings Fund</h4>
-                                    <p class="fund-details">Returns: 7% p.a.</p>
-                                    <p class="fund-details">Min. Inv: ₹500</p>
-                                </div>
-                            </div>
-
-                            <!-- Solution Oriented Funds -->
-                            <div class="fund-category-section" data-category="solution">
-                                <h3 class="section-title" style="text-align: left; margin-bottom: var(--space-md);">Solution Oriented Funds</h3>
-                                <div class="fund-card">
-                                    <h4 class="fund-title">Axis Retirement Fund</h4>
-                                    <p class="fund-details">Returns: 12% p.a.</p>
-                                    <p class="fund-details">Min. SIP: ₹1000</p>
-                                </div>
-                            </div>
-
-                            <!-- Hybrid Funds -->
-                            <div class="fund-category-section" data-category="hybrid">
-                                <h3 class="section-title" style="text-align: left; margin-bottom: var(--space-md);">Hybrid Funds</h3>
-                                <div class="fund-card">
-                                    <h4 class="fund-title">SBI Equity Hybrid Fund</h4>
-                                    <p class="fund-details">Returns: 14% p.a.</p>
-                                    <p class="fund-details">Min. SIP: ₹500</p>
-                                </div>
-                            </div>
-
-                            <!-- Others -->
-                            <div class="fund-category-section" data-category="others">
-                                <h3 class="section-title" style="text-align: left; margin-bottom: var(--space-md);">Other Funds</h3>
-                                <div class="fund-card">
-                                    <h4 class="fund-title">Motilal Oswal S&P 500 Index Fund</h4>
-                                    <p class="fund-details">Returns: 16% p.a.</p>
-                                    <p class="fund-details">Min. SIP: ₹500</p>
-                                </div>
-                            </div>
+                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
+                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">Parag Parikh Flexi Cap Fund</h4>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 17% p.a.</p>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. SIP: ₹1000</p>
                         </div>
                     </div>
+
+                    <!-- Debt Funds -->
+                    <div class="fund-category" data-category="debt" style="margin-bottom: 24px; width: 100%; display: block;">
+                        <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; text-align: left; margin-bottom: 16px;">Debt Funds</h3>
+                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
+                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">HDFC Liquid Fund</h4>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 6% p.a.</p>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. Inv: ₹100</p>
+                        </div>
+                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
+                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">ICICI Prudential Savings Fund</h4>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 7% p.a.</p>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. Inv: ₹500</p>
+                        </div>
+                    </div>
+
+                    <!-- Solution Oriented Funds -->
+                    <div class="fund-category" data-category="solution" style="margin-bottom: 24px; width: 100%; display: block;">
+                        <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; text-align: left; margin-bottom: 16px;">Solution Oriented Funds</h3>
+                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
+                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">Axis Retirement Fund</h4>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 12% p.a.</p>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. SIP: ₹1000</p>
+                        </div>
+                    </div>
+
+                    <!-- Hybrid Funds -->
+                    <div class="fund-category" data-category="hybrid" style="margin-bottom: 24px; width: 100%; display: block;">
+                        <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; text-align: left; margin-bottom: 16px;">Hybrid Funds</h3>
+                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
+                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">SBI Equity Hybrid Fund</h4>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 14% p.a.</p>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. SIP: ₹500</p>
+                        </div>
+                    </div>
+
+                    <!-- Other Funds -->
+                    <div class="fund-category" data-category="others" style="margin-bottom: 24px; width: 100%; display: block;">
+                        <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; text-align: left; margin-bottom: 16px;">Other Funds</h3>
+                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
+                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">Motilal Oswal S&P 500 Index Fund</h4>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 16% p.a.</p>
+                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. SIP: ₹500</p>
+                        </div>
+                    </div>
+                </div>
+                        </div>
+            </div>
+
                 </div>
             </div>
 
@@ -916,6 +963,60 @@
                     if (initialActiveTab) {
                         updateTabIndicator(initialActiveTab);
                     }
+
+                    // Filter tabs functionality for All Funds tab
+                    const filterTabs = document.querySelectorAll('.filter-tab');
+                    const fundSections = document.querySelectorAll('.fund-category-section');
+
+                    filterTabs.forEach(tab => {
+                        tab.addEventListener('click', () => {
+                            // Update active state
+                            filterTabs.forEach(t => t.classList.remove('active'));
+                            tab.classList.add('active');
+
+                            const category = tab.dataset.category;
+
+                            // Show/hide sections based on category
+                            fundSections.forEach(section => {
+                                if (category === 'all' || section.dataset.category === category) {
+                                    section.style.display = 'block';
+                                } else {
+                                    section.style.display = 'none';
+                                }
+                            });
+                        });
+                    });
+
+                    // Filter tabs functionality for All Funds tab
+                    const allFundsFilters = document.querySelectorAll('.all-funds-filter');
+                    const allFundsSections = document.querySelectorAll('.fund-category');
+
+                    allFundsFilters.forEach(tab => {
+                        tab.addEventListener('click', () => {
+                            // Update active state - remove active from all
+                            allFundsFilters.forEach(t => {
+                                t.style.background = '#F8F9FA';
+                                t.style.borderColor = '#E5E7EB';
+                                t.style.color = '#6B7280';
+                            });
+
+                            // Add active to clicked tab
+                            tab.style.background = '#2563EB';
+                            tab.style.borderColor = '#2563EB';
+                            tab.style.color = 'white';
+
+                            const category = tab.dataset.category;
+
+                            // Show/hide sections based on category
+                            allFundsSections.forEach(section => {
+                                if (category === 'all' || section.dataset.category === category) {
+                                    section.style.display = 'block';
+                                } else {
+                                    section.style.display = 'none';
+                                }
+                            });
+                        });
+                    });
                 });
             </script>
 
