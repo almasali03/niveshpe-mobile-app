@@ -245,7 +245,7 @@
             flex-direction: column;
             justify-content: flex-end;
             padding: 0;
-            background: rgba(245, 247, 250, 0.9);
+            background: white;
             backdrop-filter: blur(10px);
             height: 70px;
             box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.12);
@@ -333,11 +333,14 @@
 
         /* Recommended Fund Card - Blue */
         .recommended-fund-card-blue {
-            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
             border-radius: var(--radius-lg);
             padding: var(--space-lg);
             color: white;
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 8px 20px rgba(96, 165, 250, 0.3);
+            position: relative;
+            z-index: 2;
+            margin-top: 20px;
         }
 
         .fund-card-header {
@@ -367,6 +370,33 @@
             font-weight: 600;
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Recommended Fund Container with Badge */
+        .recommended-fund-container {
+            position: relative;
+            margin-bottom: var(--space-xl);
+            padding-top: 16px;
+        }
+
+        .recommended-badge-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            width: 100%;
+            height: 56px;
+            background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.4);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            padding-top: 12px;
+            padding-left: 20px;
         }
 
         .fund-stats-template {
@@ -622,14 +652,8 @@
         .filter-tabs {
             display: flex;
             gap: var(--space-xs);
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+            flex-wrap: wrap;
             padding-bottom: 4px;
-        }
-
-        .filter-tabs::-webkit-scrollbar {
-            display: none;
         }
 
         .filter-tab {
@@ -643,7 +667,6 @@
             white-space: nowrap;
             cursor: pointer;
             transition: all 0.2s ease;
-            flex-shrink: 0;
         }
 
         .filter-tab.active {
@@ -731,12 +754,13 @@
                             </div>
 
                             <!-- SECTION 1 — Recommended Fund (Primary Card) -->
-                            <div class="recommended-fund-card-blue section-spacing">
-                                <div class="fund-card-header">
-                                    <h2 class="fund-bucket-title">Balanced Returns Fund</h2>
-                                    <p class="fund-actual-name">HDFC Balanced Advantage Fund</p>
-                                    <span class="badge">Recommended</span>
-                                </div>
+                            <div class="recommended-fund-container">
+                                <span class="recommended-badge-top">Recommended by NiveshPe</span>
+                                <div class="recommended-fund-card-blue">
+                                    <div class="fund-card-header">
+                                        <h2 class="fund-bucket-title">Balanced Returns Fund</h2>
+                                        <p class="fund-actual-name">HDFC Balanced Advantage Fund</p>
+                                    </div>
                                 <div class="fund-stats-template">
                                     <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">10-13% p.a.</span></p>
                                     <p class="fund-stat-item"><span class="stat-label">Holding Period:</span> <span class="stat-value">8+ months</span></p>
@@ -761,6 +785,7 @@
                                 <div class="portfolio-actions">
                                     <button class="btn btn-invest">Start SIP</button>
                                     <button class="btn btn-withdraw">One Time</button>
+                                </div>
                                 </div>
                             </div>
 
