@@ -331,16 +331,15 @@
             line-height: 1.5;
         }
 
-        /* Recommended Fund Card - Blue */
+        /* Recommended Fund Card - Blue with Integrated Badge */
         .recommended-fund-card-blue {
             background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
             border-radius: var(--radius-lg);
-            padding: var(--space-lg);
+            padding: 0;
             color: white;
             box-shadow: 0 8px 20px rgba(96, 165, 250, 0.3);
             position: relative;
-            z-index: 2;
-            margin-top: 20px;
+            overflow: hidden;
         }
 
         .fund-card-header {
@@ -372,31 +371,26 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        /* Recommended Fund Container with Badge */
-        .recommended-fund-container {
-            position: relative;
-            margin-bottom: var(--space-xl);
-            padding-top: 16px;
-        }
-
-        .recommended-badge-top {
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            width: 100%;
-            height: 56px;
+        /* Integrated Recommended Badge (Inside Card) */
+        .recommended-badge-integrated {
             background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            padding: 12px 20px;
             font-size: 12px;
             font-weight: 700;
             color: white;
-            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.4);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            padding-top: 12px;
-            padding-left: 20px;
+            text-align: left;
+        }
+
+        /* Separator Line Below Badge */
+        .badge-separator {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0;
+        }
+
+        /* Card Content Section (Below Badge) */
+        .card-content {
+            padding: var(--space-lg);
         }
 
         .fund-stats-template {
@@ -477,28 +471,27 @@
         }
 
         /* Portfolio Actions in Fund Cards */
-        .recommended-fund-card-blue .portfolio-actions {
+        .card-content .portfolio-actions {
             margin-top: var(--space-md);
             margin-bottom: 0;
             padding: 0;
-            z-index: auto;
             display: flex;
             gap: var(--space-sm);
         }
 
-        .recommended-fund-card-blue .btn {
+        .card-content .btn {
             flex: 1;
             min-height: auto;
             padding: 12px 16px;
         }
 
-        .recommended-fund-card-blue .btn-invest {
+        .card-content .btn-invest {
             background: white;
             color: var(--color-blue);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .recommended-fund-card-blue .btn-withdraw {
+        .card-content .btn-withdraw {
             background: rgba(255, 255, 255, 0.15);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -754,38 +747,42 @@
                             </div>
 
                             <!-- SECTION 1 — Recommended Fund (Primary Card) -->
-                            <div class="recommended-fund-container">
-                                <span class="recommended-badge-top">Recommended by NiveshPe</span>
-                                <div class="recommended-fund-card-blue">
+                            <div class="recommended-fund-card-blue section-spacing">
+                                <!-- Integrated Badge at Top -->
+                                <div class="recommended-badge-integrated">Recommended by NiveshPe</div>
+                                <div class="badge-separator"></div>
+
+                                <!-- Card Content -->
+                                <div class="card-content">
                                     <div class="fund-card-header">
                                         <h2 class="fund-bucket-title">Balanced Returns Fund</h2>
                                         <p class="fund-actual-name">HDFC Balanced Advantage Fund</p>
                                     </div>
-                                <div class="fund-stats-template">
-                                    <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">10-13% p.a.</span></p>
-                                    <p class="fund-stat-item"><span class="stat-label">Holding Period:</span> <span class="stat-value">8+ months</span></p>
-                                </div>
-                                <p class="fund-description" style="margin-top: var(--space-sm);">A perfect balance of growth and safety.</p>
-                                <div class="accordion">
-                                    <div class="accordion-header">
-                                        <span>Show Details</span>
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                                    <div class="fund-stats-template">
+                                        <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">10-13% p.a.</span></p>
+                                        <p class="fund-stat-item"><span class="stat-label">Holding Period:</span> <span class="stat-value">8+ months</span></p>
                                     </div>
-                                    <div class="accordion-content">
-                                        <p class="fund-description">This plan gives you a perfect balance of growth and safety. It invests in both equity (for growth) and debt (for stability), so your money grows smoothly with fewer ups and downs.</p>
-                                        <ul class="fund-highlights">
-                                            <li>✅ Balanced growth with moderate risk</li>
-                                            <li>📉 Less volatility, suitable for first-time investors</li>
-                                            <li>💸 Withdraw anytime after 8 months</li>
-                                            <li>🧩 Ideal for short-to-medium goals (festivals, emergency funds, new purchases)</li>
-                                        </ul>
-                                        <p class="micro-nudge">“Perfect for beginners who want steady progress without worrying about market swings.”</p>
+                                    <p class="fund-description" style="margin-top: var(--space-sm);">A perfect balance of growth and safety.</p>
+                                    <div class="accordion">
+                                        <div class="accordion-header">
+                                            <span>Show Details</span>
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                                        </div>
+                                        <div class="accordion-content">
+                                            <p class="fund-description">This plan gives you a perfect balance of growth and safety. It invests in both equity (for growth) and debt (for stability), so your money grows smoothly with fewer ups and downs.</p>
+                                            <ul class="fund-highlights">
+                                                <li>✅ Balanced growth with moderate risk</li>
+                                                <li>📉 Less volatility, suitable for first-time investors</li>
+                                                <li>💸 Withdraw anytime after 8 months</li>
+                                                <li>🧩 Ideal for short-to-medium goals (festivals, emergency funds, new purchases)</li>
+                                            </ul>
+                                            <p class="micro-nudge">"Perfect for beginners who want steady progress without worrying about market swings."</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="portfolio-actions">
-                                    <button class="btn btn-invest">Start SIP</button>
-                                    <button class="btn btn-withdraw">One Time</button>
-                                </div>
+                                    <div class="portfolio-actions">
+                                        <button class="btn btn-invest">Start SIP</button>
+                                        <button class="btn btn-withdraw">One Time</button>
+                                    </div>
                                 </div>
                             </div>
 
