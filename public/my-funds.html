@@ -526,26 +526,54 @@
                     <!-- Loading Screen -->
                     <div id="loadingScreen" class="loading-screen hidden" onclick="event.stopPropagation()">
                         <div class="loading-content">
-                            <!-- Floating Rupee Coins Animation -->
-                            <div class="floating-coins">
-                                <div class="coin">₹</div>
-                                <div class="coin">₹</div>
-                                <div class="coin">₹</div>
-                                <div class="coin">₹</div>
-                                <div class="coin">₹</div>
-                                <div class="star">✨</div>
-                                <div class="star">⭐</div>
-                                <div class="star">✨</div>
-                            </div>
-
-                            <!-- Typewriter Text -->
-                            <div class="typewriter-container">
-                                <h3 class="typewriter-text" id="typewriterText"></h3>
+                            <!-- Progress Text -->
+                            <div class="progress-text-container">
+                                <h3 class="progress-text" id="progressText">
+                                    Finding your ideal plan<span class="loading-dots"><span>•</span><span>•</span><span>•</span></span>
+                                </h3>
                             </div>
 
                             <!-- Ready Text (Hidden initially) -->
                             <div class="ready-text" id="readyText" style="display: none;">
                                 <h3>Ready! ✨</h3>
+                            </div>
+
+                            <!-- Skeleton Loader Structure -->
+                            <div class="skeleton-container">
+                                <!-- Fund Header Skeleton -->
+                                <div class="skeleton-header">
+                                    <div class="skeleton-circle"></div>
+                                    <div class="skeleton-text-group">
+                                        <div class="skeleton-bar skeleton-title"></div>
+                                        <div class="skeleton-bar skeleton-subtitle"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Stats Skeleton -->
+                                <div class="skeleton-stats">
+                                    <div class="skeleton-stat-box"></div>
+                                    <div class="skeleton-stat-box"></div>
+                                </div>
+
+                                <!-- Features Skeleton -->
+                                <div class="skeleton-features">
+                                    <div class="skeleton-feature-row">
+                                        <div class="skeleton-feature-circle"></div>
+                                        <div class="skeleton-feature-bar"></div>
+                                    </div>
+                                    <div class="skeleton-feature-row">
+                                        <div class="skeleton-feature-circle"></div>
+                                        <div class="skeleton-feature-bar"></div>
+                                    </div>
+                                    <div class="skeleton-feature-row">
+                                        <div class="skeleton-feature-circle"></div>
+                                        <div class="skeleton-feature-bar"></div>
+                                    </div>
+                                    <div class="skeleton-feature-row">
+                                        <div class="skeleton-feature-circle"></div>
+                                        <div class="skeleton-feature-bar"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -823,30 +851,26 @@
         }
 
         function startTypewriterAnimation() {
-            const typewriterText = document.getElementById('typewriterText');
+            const progressText = document.getElementById('progressText');
             const readyText = document.getElementById('readyText');
-            const text = "Finding your ideal plan…";
 
-            // Reset elements
-            typewriterText.textContent = '';
-            typewriterText.style.display = 'block';
-            readyText.style.display = 'none';
+            // Reset elements - show progress text initially
+            if (progressText) {
+                progressText.style.display = 'block';
+            }
+            if (readyText) {
+                readyText.style.display = 'none';
+            }
 
-            // Typewriter effect - 2.5 seconds
-            let i = 0;
-            const typeInterval = setInterval(() => {
-                typewriterText.textContent += text.charAt(i);
-                i++;
-                if (i >= text.length) {
-                    clearInterval(typeInterval);
-
-                    // Show "Ready! ✨" after 0.5 second pause
-                    setTimeout(() => {
-                        typewriterText.style.display = 'none';
-                        readyText.style.display = 'block';
-                    }, 500);
+            // After 3 seconds, transition to "Ready! ✨"
+            setTimeout(() => {
+                if (progressText) {
+                    progressText.style.display = 'none';
                 }
-            }, 100); // 100ms per character
+                if (readyText) {
+                    readyText.style.display = 'block';
+                }
+            }, 3000);
         }
 
         function showRecommendedFunds() {

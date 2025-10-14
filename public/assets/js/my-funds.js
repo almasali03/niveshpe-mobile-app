@@ -67,6 +67,35 @@ class TabManager {
     init() {
         this.setupTabIndicator();
         this.attachEventListeners();
+        this.handleInitialHash();
+    }
+
+    handleInitialHash() {
+        // Check if there's a hash in the URL on page load
+        const hash = window.location.hash;
+        if (hash) {
+            const tabName = hash.replace('#', '').replace('-tab', '');
+            const tabIndex = this.tabNames.indexOf(tabName);
+            if (tabIndex !== -1) {
+                // Ensure page scroll is at top FIRST
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+
+                // Switch to the correct tab
+                this.switchTab(tabIndex);
+
+                // Reset scroll position of the scrollable content area
+                if (DOM.scrollContent) {
+                    DOM.scrollContent.scrollTop = 0;
+                    // Also force it after a brief delay to handle any browser auto-scrolling
+                    setTimeout(() => {
+                        DOM.scrollContent.scrollTop = 0;
+                        window.scrollTo(0, 0);
+                    }, 50);
+                }
+            }
+        }
     }
 
     setupTabIndicator() {
@@ -638,6 +667,19 @@ class PerformanceMonitor {
 
         return result;
     }
+}
+
+// Immediately disable scroll restoration and reset scroll position BEFORE any rendering
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
+// Force scroll to top immediately if coming from another page with hash
+if (window.location.hash && document.readyState === 'loading') {
+    // Use multiple strategies to ensure scroll reset happens
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
 }
 
 // Initialize everything

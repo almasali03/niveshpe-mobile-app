@@ -289,6 +289,7 @@
             height: 150px;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             border-radius: 50%;
+            pointer-events: none;
         }
 
         .hero-header {
@@ -672,7 +673,7 @@
             gap: 4px;
         }
 
-        /* My Pots Section - Fixed Scrolling (No Card Container) */
+        /* My Goals Section - Fixed Scrolling (No Card Container) */
         .pots-container {
             margin-bottom: 24px;
         }
@@ -1105,10 +1106,10 @@
         <div class="main-content">
             <!-- Hero Card -->
             <div class="hero-card section-spacing">
-                <div class="hero-header">
-                    <div class="hero-label">TOTAL SAVINGS</div>
+                <div class="hero-header" onclick="window.location.href='my-funds.html'" style="cursor: pointer;">
+                    <div class="hero-label">TOTAL VALUE</div>
                     <div class="hero-arrow">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="pointer-events: none;">
                             <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
                         </svg>
                     </div>
@@ -1143,11 +1144,11 @@
                 </div>
             </div>
 
-            <!-- My Pots Section with Fixed Scrolling (Direct after Hero) -->
+            <!-- My Goals Section with Fixed Scrolling (Direct after Hero) -->
             <div class="pots-container section-spacing">
                 <div class="section-header">
-                    <h2 class="section-title">My Pots</h2>
-                    <a href="#" class="view-all">
+                    <h2 class="section-title">My Goals</h2>
+                    <a href="my-funds.html#goals-tab" class="view-all">
                         View All
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
@@ -1261,7 +1262,7 @@
             <div class="transactions-container section-spacing-sm">
                 <div class="section-header">
                     <h2 class="section-title">Recent Transactions</h2>
-                    <a href="#" class="view-all">
+                    <a href="transaction-history.html" class="view-all">
                         View All
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
