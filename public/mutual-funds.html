@@ -4,60 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NiveshPe - Mutual Funds</title>
-    
-    <!-- Meta Tags for Social Sharing -->
-    <meta name="description" content="Explore personalized mutual fund investment plans with NiveshPe.">
-    <meta name="keywords" content="fintech, investment, SIP, UPI payments, mobile app, prototype, mutual funds">
-    <meta name="author" content="NiveshPe">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* Color System */
             --color-bg-primary: #F5F7FA;
-            --color-bg-secondary: #FFFFFF;
-            --color-card: #FFFFFF;
-            --color-surface: #F8F9FA;
-            --color-border: #E5E7EB;
-
-            /* Brand Colors */
             --color-blue: #2563EB;
             --color-blue-dark: #1D4ED8;
-            --color-blue-light: #3B82F6;
             --color-green: #10B981;
-            --color-green-light: #86EFAC;
-            --color-green-dark: #34D399;
-            --color-orange: #F59E0B;
-            --color-red: #EF4444;
-            --color-purple: #8B5CF6;
-
-            /* Text Colors */
             --color-text-primary: #1F2937;
             --color-text-secondary: #6B7280;
             --color-text-muted: #9CA3AF;
-            --color-text-white: #FFFFFF;
-
-            /* Typography */
-            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-
-            /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
-
-            /* Border Radius */
-            --radius-sm: 8px;
+            --color-border: #E5E7EB;
+            --color-surface: #F8F9FA;
             --radius-md: 12px;
             --radius-lg: 16px;
-            --radius-xl: 20px;
-            --radius-2xl: 24px;
             --radius-full: 9999px;
-
-            /* Spacing System */
             --space-xs: 8px;
             --space-sm: 12px;
             --space-md: 16px;
@@ -73,52 +38,40 @@
         }
 
         body {
-            font-family: var(--font-family);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: var(--color-text-primary);
             line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
             min-height: 100vh;
             display: flex;
             align-items: flex-start;
             justify-content: center;
-            padding: 20px 20px 40px;
-            overflow-x: auto;
+            padding: 20px;
         }
 
-        /* iPhone Frame */
         .iphone-frame {
             width: 380px;
             height: 820px;
             background: transparent;
-            border-radius: 0;
-            padding: 0;
-            box-shadow: none;
-            position: relative;
             margin: 0 auto;
-            flex-shrink: 0;
         }
 
         .iphone-screen {
             width: 100%;
             height: 100%;
             background: var(--color-bg-primary);
-            border-radius: 0;
             overflow: hidden;
-            position: relative;
         }
 
         .mobile-container {
             width: 100%;
             height: 100%;
-            background: var(--color-bg-primary);
-            position: relative;
             display: flex;
             flex-direction: column;
         }
 
-        /* Status Bar */
         .status-bar {
             display: flex;
             justify-content: space-between;
@@ -128,135 +81,22 @@
             font-size: 15px;
             font-weight: 600;
             height: 44px;
-            z-index: 10;
             flex-shrink: 0;
         }
 
         .status-icons {
             display: flex;
             gap: 6px;
-            align-items: center;
         }
 
-        /* Tab Content Container */
-        .tab-content-container {
-            flex: 1;
-            overflow-y: auto;
-            scrollbar-width: none;
-            background: var(--color-bg-primary);
-            position: relative;
-        }
-
-        .tab-content-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Bottom Navigation */
-        .bottom-nav {
-            position: relative;
-            background: rgba(255, 255, 255, 0.95);
-            border-top: 1px solid rgba(37, 99, 235, 0.1);
-            padding: 8px 8px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(20px);
-            z-index: 100;
-            flex-shrink: 0;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            padding: 8px 12px;
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            color: var(--color-text-muted);
-            transition: all 0.2s ease;
-            cursor: pointer;
-            flex: 1;
-            min-width: 85px;
-        }
-
-        .nav-item.active {
-            color: var(--color-blue);
-            background: rgba(37, 99, 235, 0.1);
-        }
-
-        .nav-icon {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .nav-label {
-            font-size: 10px;
-            font-weight: 600;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        /* Button Base Styles */
-        .btn {
-            padding: 12px 20px;
-            border-radius: var(--radius-md);
-            font-size: 14px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-invest {
-            background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-        }
-
-        .btn-invest:active {
-            transform: scale(0.96);
-            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
-        }
-
-        .btn-withdraw {
-            background: white;
-            color: var(--color-blue);
-            border: 2px solid var(--color-blue);
-        }
-
-        .btn-withdraw:active {
-            background: rgba(37, 99, 235, 0.05);
-            transform: scale(0.96);
-        }
-
-        /* Page-specific styles for mutual funds tabs */
         .header {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 0;
             background: white;
-            backdrop-filter: blur(10px);
             height: 70px;
             box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.12);
-        }
-
-        .tabs-nav-container {
-            width: 100%;
-            background: transparent;
-            backdrop-filter: none;
-            border-bottom: none;
-            z-index: 10;
+            flex-shrink: 0;
         }
 
         .tabs-nav {
@@ -266,7 +106,7 @@
             position: relative;
         }
 
-        .tabs-nav .tab-btn {
+        .tab-btn {
             flex: 1;
             padding: var(--space-md) 0;
             background: none;
@@ -275,11 +115,10 @@
             font-weight: 600;
             color: var(--color-text-muted);
             cursor: pointer;
-            position: relative;
             transition: all 0.2s ease;
         }
 
-        .tabs-nav .tab-btn.active {
+        .tab-btn.active {
             color: var(--color-blue);
         }
 
@@ -292,33 +131,25 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .tab-content {
+        .tab-content-container {
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: none;
+            background: var(--color-bg-primary);
+        }
+
+        .tab-content-container::-webkit-scrollbar {
             display: none;
-            animation: fadeIn 0.3s ease;
-            width: 100%;
         }
 
-        .tab-content.active {
-            display: block;
-            width: 100%;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Main Content Area */
         .main-content {
             padding: var(--space-lg);
         }
 
-        /* Section Spacing */
         .section-spacing {
             margin-bottom: var(--space-xl);
         }
 
-        /* Page Header Styles */
         .section-title {
             font-size: 18px;
             font-weight: 700;
@@ -331,19 +162,30 @@
             line-height: 1.5;
         }
 
-        /* Recommended Fund Card - Blue with Integrated Badge */
         .recommended-fund-card-blue {
             background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
             border-radius: var(--radius-lg);
             padding: 0;
             color: white;
             box-shadow: 0 8px 20px rgba(96, 165, 250, 0.3);
-            position: relative;
             overflow: hidden;
         }
 
-        .fund-card-header {
-            margin-bottom: var(--space-md);
+        .recommended-badge-integrated {
+            background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+            padding: 12px 20px;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .badge-separator {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .card-content {
+            padding: var(--space-lg);
         }
 
         .fund-bucket-title {
@@ -360,37 +202,8 @@
             margin: 0 0 var(--space-sm) 0;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: var(--radius-full);
-            font-size: 11px;
-            font-weight: 600;
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        /* Integrated Recommended Badge (Inside Card) */
-        .recommended-badge-integrated {
-            background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
-            padding: 12px 20px;
-            font-size: 12px;
-            font-weight: 700;
-            color: white;
-            text-align: left;
-        }
-
-        /* Separator Line Below Badge */
-        .badge-separator {
-            height: 1px;
-            background: rgba(255, 255, 255, 0.2);
-            margin: 0;
-        }
-
-        /* Card Content Section (Below Badge) */
-        .card-content {
-            padding: var(--space-lg);
+        .fund-card-header {
+            margin-bottom: var(--space-md);
         }
 
         .fund-stats-template {
@@ -420,7 +233,6 @@
             line-height: 1.5;
         }
 
-        /* Accordion Styles */
         .accordion {
             margin-top: var(--space-md);
         }
@@ -434,14 +246,6 @@
             font-size: 13px;
             font-weight: 600;
             color: white;
-        }
-
-        .accordion-header svg {
-            transition: transform 0.3s ease;
-        }
-
-        .accordion-header.active svg {
-            transform: rotate(180deg);
         }
 
         .accordion-content {
@@ -470,116 +274,82 @@
             margin-top: var(--space-sm);
         }
 
-        /* Portfolio Actions in Fund Cards */
-        .card-content .portfolio-actions {
+        .portfolio-actions {
             margin-top: var(--space-md);
-            margin-bottom: 0;
-            padding: 0;
             display: flex;
             gap: var(--space-sm);
         }
 
-        .card-content .btn {
+        .btn {
+            padding: 12px 20px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
             flex: 1;
-            min-height: auto;
-            padding: 12px 16px;
         }
 
-        .card-content .btn-invest {
+        .btn-invest {
             background: white;
             color: var(--color-blue);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .card-content .btn-withdraw {
+        .btn-withdraw {
             background: rgba(255, 255, 255, 0.15);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        /* Fund Card Pot - Green (Compact neutral white) */
-        .fund-card-pot-green {
+        .fund-card-pot-green, .fund-card-pot-orange {
             background: white;
             border-radius: var(--radius-lg);
             padding: var(--space-md);
-            color: var(--color-text-primary);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             border: 1px solid var(--color-border);
+            position: relative;
         }
 
-        .fund-card-pot-green .fund-bucket-title {
-            color: var(--color-text-primary);
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-
-        .fund-card-pot-green .fund-actual-name {
-            color: var(--color-text-secondary);
-            font-size: 12px;
-            margin-bottom: var(--space-sm);
-        }
-
-        .fund-card-pot-green .stat-label {
-            color: var(--color-text-secondary);
-            font-size: 11px;
-        }
-
-        .fund-card-pot-green .stat-value {
-            color: var(--color-text-primary);
-            font-size: 12px;
-        }
-
-        .fund-card-pot-green .fund-stats-template {
-            margin-bottom: 0;
-        }
-
-        .fund-card-pot-green .fund-stat-item {
-            margin-bottom: 4px;
-            font-size: 12px;
-        }
-
-        /* Fund Card Pot - Orange (Compact neutral white) */
-        .fund-card-pot-orange {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: var(--space-md);
-            color: var(--color-text-primary);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--color-border);
-        }
-
+        .fund-card-pot-green .fund-bucket-title,
         .fund-card-pot-orange .fund-bucket-title {
             color: var(--color-text-primary);
             font-size: 16px;
             margin-bottom: 4px;
         }
 
+        .fund-card-pot-green .fund-actual-name,
         .fund-card-pot-orange .fund-actual-name {
             color: var(--color-text-secondary);
             font-size: 12px;
             margin-bottom: var(--space-sm);
         }
 
+        .fund-card-pot-green .stat-label,
         .fund-card-pot-orange .stat-label {
             color: var(--color-text-secondary);
             font-size: 11px;
         }
 
+        .fund-card-pot-green .stat-value,
         .fund-card-pot-orange .stat-value {
             color: var(--color-text-primary);
             font-size: 12px;
         }
 
-        .fund-card-pot-orange .fund-stats-template {
-            margin-bottom: 0;
-        }
-
+        .fund-card-pot-green .fund-stat-item,
         .fund-card-pot-orange .fund-stat-item {
             margin-bottom: 4px;
             font-size: 12px;
         }
 
-        /* Show Details Button - Floating outside card */
+        .fund-card-pot-green .fund-description,
+        .fund-card-pot-orange .fund-description {
+            color: var(--color-text-secondary);
+            font-size: 12px;
+        }
+
         .show-details-btn {
             position: absolute;
             bottom: -12px;
@@ -592,36 +362,10 @@
             font-size: 11px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
             box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
             z-index: 10;
         }
 
-        .show-details-btn:active {
-            background: var(--color-blue-dark);
-            transform: scale(0.95);
-        }
-
-        /* Accordion Trigger */
-        .accordion-trigger {
-            display: inline-block;
-        }
-
-        .fund-card-pot-green .fund-description,
-        .fund-card-pot-orange .fund-description {
-            color: var(--color-text-secondary);
-            font-size: 12px;
-            line-height: 1.4;
-        }
-
-        .fund-card-pot-green .accordion-content,
-        .fund-card-pot-orange .accordion-content {
-            color: var(--color-text-secondary);
-            font-size: 12px;
-            padding-top: var(--space-sm);
-        }
-
-        /* Secondary Button */
         .btn-secondary {
             background: white;
             color: var(--color-blue);
@@ -631,17 +375,10 @@
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
             text-decoration: none;
             display: inline-block;
         }
 
-        .btn-secondary:active {
-            background: rgba(37, 99, 235, 0.05);
-            transform: scale(0.98);
-        }
-
-        /* Filter Tabs */
         .filter-tabs {
             display: flex;
             gap: var(--space-xs);
@@ -659,7 +396,6 @@
             color: var(--color-text-secondary);
             white-space: nowrap;
             cursor: pointer;
-            transition: all 0.2s ease;
         }
 
         .filter-tab.active {
@@ -668,50 +404,51 @@
             color: white;
         }
 
-        .filter-tab:active {
-            transform: scale(0.95);
+        .bottom-nav {
+            background: rgba(255, 255, 255, 0.95);
+            border-top: 1px solid rgba(37, 99, 235, 0.1);
+            padding: 8px 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            flex-shrink: 0;
         }
 
-        /* Fund Category Section */
-        .fund-category-section {
-            margin-bottom: var(--space-xl);
-            display: block;
-        }
-
-        /* Fund Card (for All Funds tab) */
-        .fund-card {
-            background: white;
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
             border-radius: var(--radius-md);
-            padding: var(--space-md);
-            border: 1px solid var(--color-border);
-            margin-bottom: var(--space-sm);
-            cursor: pointer;
-            transition: all 0.2s ease;
+            text-decoration: none;
+            color: var(--color-text-muted);
+            flex: 1;
         }
 
-        .fund-card:active {
-            background: var(--color-surface);
-            transform: scale(0.98);
+        .nav-item.active {
+            color: var(--color-blue);
+            background: rgba(37, 99, 235, 0.1);
         }
 
-        .fund-title {
-            font-size: 14px;
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-label {
+            font-size: 10px;
             font-weight: 600;
-            color: var(--color-text-primary);
-            margin-bottom: 4px;
-        }
-
-        .fund-details {
-            font-size: 12px;
-            color: var(--color-text-secondary);
-            margin-bottom: 2px;
         }
     </style>
 </head>
 <body>
     <div class="iphone-frame">
         <div class="iphone-screen">
-
             <div class="mobile-container">
                 <!-- Status Bar -->
                 <div class="status-bar">
@@ -725,34 +462,26 @@
 
                 <!-- Header with Tabs -->
                 <div class="header">
-                    <!-- Tabs Navigation -->
-                    <div class="tabs-nav-container">
-                        <div class="tabs-nav">
-                            <button class="tab-btn active" data-tab="recommended">Recommended</button>
-                            <button class="tab-btn" data-tab="all-funds">All Funds</button>
-                        </div>
-                        <div class="tab-indicator"></div>
+                    <div class="tabs-nav">
+                        <button class="tab-btn active" onclick="showTab('recommended')">Recommended</button>
+                        <button class="tab-btn" onclick="showTab('all-funds')">All Funds</button>
                     </div>
+                    <div class="tab-indicator" id="tabIndicator"></div>
                 </div>
 
                 <!-- Tab Content Container -->
                 <div class="tab-content-container">
-                    <!-- Recommended Tab Content -->
-                    <div id="recommended-tab-content" class="tab-content active">
+                    <!-- Recommended Tab -->
+                    <div id="recommended-tab" style="display: block;">
                         <div class="main-content">
-                            <!-- Section 1: Personalized Header -->
-                            <div id="page-header" class="section-spacing">
-                                <h1 class="section-title" style="font-size: 24px; font-weight: 800; text-align: left; margin-bottom: var(--space-xs);">Hi Almas, Here's Your Plan.</h1>
-                                <p class="section-subtitle" style="text-align: left; margin-bottom: var(--space-lg);">We've picked the "Balanced Returns Fund" for you. It's a great starting point. <a href="#" style="font-size: 12px; color: var(--color-text-secondary); text-decoration: underline;">Change Preferences</a></p>
+                            <div class="section-spacing">
+                                <h1 class="section-title" style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">Hi Almas, Here's Your Plan.</h1>
+                                <p class="section-subtitle">We've picked the "Balanced Returns Fund" for you. It's a great starting point. <a href="#" style="font-size: 12px; color: var(--color-text-secondary); text-decoration: underline;">Change Preferences</a></p>
                             </div>
 
-                            <!-- SECTION 1 — Recommended Fund (Primary Card) -->
                             <div class="recommended-fund-card-blue section-spacing">
-                                <!-- Integrated Badge at Top -->
                                 <div class="recommended-badge-integrated">Recommended by NiveshPe</div>
                                 <div class="badge-separator"></div>
-
-                                <!-- Card Content -->
                                 <div class="card-content">
                                     <div class="fund-card-header">
                                         <h2 class="fund-bucket-title">Balanced Returns Fund</h2>
@@ -762,9 +491,9 @@
                                         <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">10-13% p.a.</span></p>
                                         <p class="fund-stat-item"><span class="stat-label">Holding Period:</span> <span class="stat-value">8+ months</span></p>
                                     </div>
-                                    <p class="fund-description" style="margin-top: var(--space-sm);">A perfect balance of growth and safety.</p>
+                                    <p class="fund-description" style="margin-top: 16px;">A perfect balance of growth and safety.</p>
                                     <div class="accordion">
-                                        <div class="accordion-header">
+                                        <div class="accordion-header" onclick="toggleAccordion(this)">
                                             <span>Show Details</span>
                                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
                                         </div>
@@ -786,135 +515,125 @@
                                 </div>
                             </div>
 
-                            <!-- Section 2: Other Recommended Funds -->
                             <div class="section-spacing">
-                                <div class="fund-card-pot-green section-spacing" style="position: relative;">
+                                <div class="fund-card-pot-green section-spacing">
                                     <h2 class="fund-bucket-title">Instant Withdrawal</h2>
                                     <p class="fund-actual-name">HDFC Liquid Fund</p>
-                            <div class="fund-stats-template">
-                                <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">6-7% p.a.</span></p>
-                                <p class="fund-stat-item"><span class="stat-label">Holding Period:</span> <span class="stat-value">Withdraw Anytime</span></p>
-                            </div>
-                            <button class="show-details-btn accordion-trigger">Show Details</button>
-                            <div class="accordion-content">
-                                <p class="fund-description">"Lowest risk with small but steady returns, usually slightly better than a savings account or FD. Best if you just want to park money safely and can take it out anytime."</p>
-                            </div>
-                        </div>
-                        <div class="fund-card-pot-orange section-spacing" style="position: relative;">
-                            <h2 class="fund-bucket-title">Highest Returns</h2>
-                            <p class="fund-actual-name">HDFC Flexi Cap Fund</p>
-                            <div class="fund-stats-template">
-                                <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">18%-24% p.a.</span></p>
-                                <p class="fund-stat-item"><span class="stat-label">Holding Period:</span> <span class="stat-value">18+ months</span></p>
-                            </div>
-                            <button class="show-details-btn accordion-trigger">Show Details</button>
-                            <div class="accordion-content">
-                                <p class="fund-description">"Choose this if you want the chance of very high returns and don’t mind ups and downs in the short term. Works best if you can leave your money for at least 18 months or more."</p>
-                            </div>
-                        </div>
-
-                            <!-- Section 3: Explore More Funds -->
-                            <div id="explore-funds" class="section-spacing" style="text-align: center;">
-                                <a href="#" class="btn btn-secondary">Explore other funds</a>
-                            </div>
-
-                            <!-- Section 4: Explore More Mutual Funds -->
-                            <div id="explore-funds-2" class="section-spacing" style="margin-top: var(--space-2xl);">
-                                <h2 class="section-title" style="text-align: left; margin-bottom: var(--space-sm);">Explore More Mutual Funds</h2>
-                                <div class="filter-tabs" style="margin-bottom: var(--space-lg);">
-                                    <button class="filter-tab active">High Growth</button>
-                                    <button class="filter-tab">Balanced</button>
-                                    <button class="filter-tab">Tax Saving</button>
-                                    <button class="filter-tab">Safe & Steady</button>
+                                    <div class="fund-stats-template">
+                                        <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">6-7% p.a.</span></p>
+                                        <p class="fund-stat-item"><span class="stat-label">Holding Period:</span> <span class="stat-value">Withdraw Anytime</span></p>
+                                    </div>
+                                    <button class="show-details-btn" onclick="toggleAccordion(this)">Show Details</button>
+                                    <div class="accordion-content">
+                                        <p class="fund-description">"Lowest risk with small but steady returns, usually slightly better than a savings account or FD. Best if you just want to park money safely and can take it out anytime."</p>
+                                    </div>
                                 </div>
-                                <!-- Fund cards will be dynamically inserted here -->
+
+                                <div class="fund-card-pot-orange section-spacing">
+                                    <h2 class="fund-bucket-title">Highest Returns</h2>
+                                    <p class="fund-actual-name">HDFC Flexi Cap Fund</p>
+                                    <div class="fund-stats-template">
+                                        <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">18%-24% p.a.</span></p>
+                                        <p class="fund-stat-item"><span class="stat-label">Holding Period:</span> <span class="stat-value">18+ months</span></p>
+                                    </div>
+                                    <button class="show-details-btn" onclick="toggleAccordion(this)">Show Details</button>
+                                    <div class="accordion-content">
+                                        <p class="fund-description">"Choose this if you want the chance of very high returns and don't mind ups and downs in the short term. Works best if you can leave your money for at least 18 months or more."</p>
+                                    </div>
+                                </div>
+
+                                <div class="section-spacing" style="text-align: center;">
+                                    <a href="#" class="btn-secondary">Explore other funds</a>
+                                </div>
+
+                                <div class="section-spacing" style="margin-top: 32px;">
+                                    <h2 class="section-title" style="margin-bottom: 12px;">Explore More Mutual Funds</h2>
+                                    <div class="filter-tabs" style="margin-bottom: 24px;">
+                                        <button class="filter-tab active">High Growth</button>
+                                        <button class="filter-tab">Balanced</button>
+                                        <button class="filter-tab">Tax Saving</button>
+                                        <button class="filter-tab">Safe & Steady</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- All Funds Tab Content -->
-                    <div id="all-funds-tab-content" class="tab-content">
-                        <div style="padding: 20px; width: 100%;">
-                <!-- Filter Tabs -->
-                <div style="display: flex; gap: 8px; overflow-x: auto; margin-bottom: 20px; padding-bottom: 4px;">
-                    <button class="all-funds-filter" data-category="all" style="background: #2563EB; border: 1px solid #2563EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: white; white-space: nowrap; cursor: pointer; flex-shrink: 0;">All</button>
-                    <button class="all-funds-filter" data-category="equity" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; white-space: nowrap; cursor: pointer; flex-shrink: 0;">Equity</button>
-                    <button class="all-funds-filter" data-category="debt" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; white-space: nowrap; cursor: pointer; flex-shrink: 0;">Debt</button>
-                    <button class="all-funds-filter" data-category="solution" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; white-space: nowrap; cursor: pointer; flex-shrink: 0;">Solution Oriented</button>
-                    <button class="all-funds-filter" data-category="hybrid" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; white-space: nowrap; cursor: pointer; flex-shrink: 0;">Hybrid</button>
-                    <button class="all-funds-filter" data-category="others" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; white-space: nowrap; cursor: pointer; flex-shrink: 0;">Others</button>
-                </div>
+                    <!-- All Funds Tab -->
+                    <div id="all-funds-tab" style="display: none; padding: 20px;">
+                        <div style="display: flex; gap: 8px; overflow-x: auto; margin-bottom: 20px;">
+                            <button class="fund-filter-btn active" onclick="filterFunds('all')" style="background: #2563EB; border: 1px solid #2563EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: white; cursor: pointer;">All</button>
+                            <button class="fund-filter-btn" onclick="filterFunds('equity')" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; cursor: pointer;">Equity</button>
+                            <button class="fund-filter-btn" onclick="filterFunds('debt')" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; cursor: pointer;">Debt</button>
+                            <button class="fund-filter-btn" onclick="filterFunds('solution')" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; cursor: pointer;">Solution Oriented</button>
+                            <button class="fund-filter-btn" onclick="filterFunds('hybrid')" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; cursor: pointer;">Hybrid</button>
+                            <button class="fund-filter-btn" onclick="filterFunds('others')" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; cursor: pointer;">Others</button>
+                        </div>
 
-                <!-- Fund List Container -->
-                <div id="all-funds-list" style="width: 100%;">
-                    <!-- Equity Funds -->
-                    <div class="fund-category" data-category="equity" style="margin-bottom: 24px; width: 100%; display: block;">
-                        <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; text-align: left; margin-bottom: 16px;">Equity Funds</h3>
-                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
-                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">SBI Bluechip Fund</h4>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 15% p.a.</p>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. SIP: ₹500</p>
+                        <!-- Equity Funds -->
+                        <div data-category="equity" style="margin-bottom: 24px;">
+                            <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Equity Funds</h3>
+                            <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px;">
+                                <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">SBI Bluechip Fund</h4>
+                                <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 15% p.a.</p>
+                                <p style="font-size: 12px; color: #6B7280;">Min. SIP: ₹500</p>
+                            </div>
+                            <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px;">
+                                <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">Parag Parikh Flexi Cap Fund</h4>
+                                <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 17% p.a.</p>
+                                <p style="font-size: 12px; color: #6B7280;">Min. SIP: ₹1000</p>
+                            </div>
                         </div>
-                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
-                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">Parag Parikh Flexi Cap Fund</h4>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 17% p.a.</p>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. SIP: ₹1000</p>
-                        </div>
-                    </div>
 
-                    <!-- Debt Funds -->
-                    <div class="fund-category" data-category="debt" style="margin-bottom: 24px; width: 100%; display: block;">
-                        <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; text-align: left; margin-bottom: 16px;">Debt Funds</h3>
-                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
-                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">HDFC Liquid Fund</h4>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 6% p.a.</p>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. Inv: ₹100</p>
+                        <!-- Debt Funds -->
+                        <div data-category="debt" style="margin-bottom: 24px;">
+                            <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Debt Funds</h3>
+                            <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px;">
+                                <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">HDFC Liquid Fund</h4>
+                                <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 6% p.a.</p>
+                                <p style="font-size: 12px; color: #6B7280;">Min. Inv: ₹100</p>
+                            </div>
+                            <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px;">
+                                <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">ICICI Prudential Savings Fund</h4>
+                                <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 7% p.a.</p>
+                                <p style="font-size: 12px; color: #6B7280;">Min. Inv: ₹500</p>
+                            </div>
                         </div>
-                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
-                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">ICICI Prudential Savings Fund</h4>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 7% p.a.</p>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. Inv: ₹500</p>
-                        </div>
-                    </div>
 
-                    <!-- Solution Oriented Funds -->
-                    <div class="fund-category" data-category="solution" style="margin-bottom: 24px; width: 100%; display: block;">
-                        <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; text-align: left; margin-bottom: 16px;">Solution Oriented Funds</h3>
-                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
-                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">Axis Retirement Fund</h4>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 12% p.a.</p>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. SIP: ₹1000</p>
+                        <!-- Solution Oriented Funds -->
+                        <div data-category="solution" style="margin-bottom: 24px;">
+                            <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Solution Oriented Funds</h3>
+                            <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px;">
+                                <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">Axis Retirement Fund</h4>
+                                <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 12% p.a.</p>
+                                <p style="font-size: 12px; color: #6B7280;">Min. SIP: ₹1000</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Hybrid Funds -->
-                    <div class="fund-category" data-category="hybrid" style="margin-bottom: 24px; width: 100%; display: block;">
-                        <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; text-align: left; margin-bottom: 16px;">Hybrid Funds</h3>
-                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
-                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">SBI Equity Hybrid Fund</h4>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 14% p.a.</p>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. SIP: ₹500</p>
+                        <!-- Hybrid Funds -->
+                        <div data-category="hybrid" style="margin-bottom: 24px;">
+                            <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Hybrid Funds</h3>
+                            <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px;">
+                                <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">SBI Equity Hybrid Fund</h4>
+                                <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 14% p.a.</p>
+                                <p style="font-size: 12px; color: #6B7280;">Min. SIP: ₹500</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Other Funds -->
-                    <div class="fund-category" data-category="others" style="margin-bottom: 24px; width: 100%; display: block;">
-                        <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; text-align: left; margin-bottom: 16px;">Other Funds</h3>
-                        <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px; width: 100%; box-sizing: border-box;">
-                            <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">Motilal Oswal S&P 500 Index Fund</h4>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 16% p.a.</p>
-                            <p style="font-size: 12px; color: #6B7280; margin-bottom: 0;">Min. SIP: ₹500</p>
+                        <!-- Other Funds -->
+                        <div data-category="others" style="margin-bottom: 24px;">
+                            <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Other Funds</h3>
+                            <div style="background: white; border-radius: 12px; padding: 16px; border: 1px solid #E5E7EB; margin-bottom: 12px;">
+                                <h4 style="font-size: 14px; font-weight: 600; color: #1F2937; margin-bottom: 4px;">Motilal Oswal S&P 500 Index Fund</h4>
+                                <p style="font-size: 12px; color: #6B7280; margin-bottom: 2px;">Returns: 16% p.a.</p>
+                                <p style="font-size: 12px; color: #6B7280;">Min. SIP: ₹500</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                        </div>
-            </div>
 
-                </div>
-            </div>
-
-            <!-- Enhanced Bottom Navigation -->
-            <nav class="bottom-nav">
+                <!-- Bottom Navigation -->
+                <nav class="bottom-nav">
                     <a href="index.html" class="nav-item">
                         <div class="nav-icon">
                             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
@@ -927,7 +646,7 @@
                         </div>
                         <span class="nav-label">My Funds</span>
                     </a>
-                    <a href="mutual-funds.html" class="nav-item active">
+                    <a href="mutual-funds-v2.html" class="nav-item active">
                         <div class="nav-icon">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 20V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 20V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 20V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
@@ -940,109 +659,68 @@
                         <span class="nav-label">History</span>
                     </a>
                 </nav>
-
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const accordionTriggers = document.querySelectorAll('.accordion-trigger, .accordion-header');
-
-                    accordionTriggers.forEach(trigger => {
-                        trigger.addEventListener('click', () => {
-                            const accordionContent = trigger.nextElementSibling; // This will work for both cases
-                            if (accordionContent && accordionContent.classList.contains('accordion-content')) {
-                                if (accordionContent.style.maxHeight) {
-                                    accordionContent.style.maxHeight = null;
-                                } else {
-                                    accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
-                                } 
-                            }
-                        });
-                    });
-
-                    const tabButtons = document.querySelectorAll('.tabs-nav .tab-btn');
-                    const tabContents = document.querySelectorAll('.tab-content-container .tab-content');
-                    const tabIndicator = document.querySelector('.tab-indicator');
-
-                    function updateTabIndicator(activeTab) {
-                        const activeTabRect = activeTab.getBoundingClientRect();
-                        const tabsNavRect = document.querySelector('.tabs-nav').getBoundingClientRect();
-                        tabIndicator.style.width = `${activeTabRect.width}px`;
-                        tabIndicator.style.left = `${activeTabRect.left - tabsNavRect.left}px`;
-                    }
-
-                    tabButtons.forEach(button => {
-                        button.addEventListener('click', () => {
-                            tabButtons.forEach(btn => btn.classList.remove('active'));
-                            button.classList.add('active');
-
-                            tabContents.forEach(content => content.classList.remove('active'));
-                            document.getElementById(`${button.dataset.tab}-tab-content`).classList.add('active');
-                            updateTabIndicator(button);
-                        });
-                    });
-
-                    // Initialize tab indicator position
-                    const initialActiveTab = document.querySelector('.tabs-nav .tab-btn.active');
-                    if (initialActiveTab) {
-                        updateTabIndicator(initialActiveTab);
-                    }
-
-                    // Filter tabs functionality for All Funds tab
-                    const filterTabs = document.querySelectorAll('.filter-tab');
-                    const fundSections = document.querySelectorAll('.fund-category-section');
-
-                    filterTabs.forEach(tab => {
-                        tab.addEventListener('click', () => {
-                            // Update active state
-                            filterTabs.forEach(t => t.classList.remove('active'));
-                            tab.classList.add('active');
-
-                            const category = tab.dataset.category;
-
-                            // Show/hide sections based on category
-                            fundSections.forEach(section => {
-                                if (category === 'all' || section.dataset.category === category) {
-                                    section.style.display = 'block';
-                                } else {
-                                    section.style.display = 'none';
-                                }
-                            });
-                        });
-                    });
-
-                    // Filter tabs functionality for All Funds tab
-                    const allFundsFilters = document.querySelectorAll('.all-funds-filter');
-                    const allFundsSections = document.querySelectorAll('.fund-category');
-
-                    allFundsFilters.forEach(tab => {
-                        tab.addEventListener('click', () => {
-                            // Update active state - remove active from all
-                            allFundsFilters.forEach(t => {
-                                t.style.background = '#F8F9FA';
-                                t.style.borderColor = '#E5E7EB';
-                                t.style.color = '#6B7280';
-                            });
-
-                            // Add active to clicked tab
-                            tab.style.background = '#2563EB';
-                            tab.style.borderColor = '#2563EB';
-                            tab.style.color = 'white';
-
-                            const category = tab.dataset.category;
-
-                            // Show/hide sections based on category
-                            allFundsSections.forEach(section => {
-                                if (category === 'all' || section.dataset.category === category) {
-                                    section.style.display = 'block';
-                                } else {
-                                    section.style.display = 'none';
-                                }
-                            });
-                        });
-                    });
-                });
-            </script>
-
+            </div>
         </div>
     </div>
+
+    <script>
+        // Ultra-simple tab switching - just 5 lines!
+        function showTab(tabName) {
+            document.getElementById('recommended-tab').style.display = tabName === 'recommended' ? 'block' : 'none';
+            document.getElementById('all-funds-tab').style.display = tabName === 'all-funds' ? 'block' : 'none';
+
+            // Update button states
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons[0].className = tabName === 'recommended' ? 'tab-btn active' : 'tab-btn';
+            buttons[1].className = tabName === 'all-funds' ? 'tab-btn active' : 'tab-btn';
+        }
+
+        // Filter funds by category
+        function filterFunds(category) {
+            // Get all fund sections
+            const fundSections = document.querySelectorAll('[data-category]');
+
+            // Show/hide sections based on category
+            fundSections.forEach(section => {
+                if (category === 'all') {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = section.getAttribute('data-category') === category ? 'block' : 'none';
+                }
+            });
+
+            // Update button active states
+            const filterButtons = document.querySelectorAll('.fund-filter-btn');
+            filterButtons.forEach(btn => {
+                const isActive =
+                    (category === 'all' && btn.textContent === 'All') ||
+                    (category === 'equity' && btn.textContent === 'Equity') ||
+                    (category === 'debt' && btn.textContent === 'Debt') ||
+                    (category === 'solution' && btn.textContent === 'Solution Oriented') ||
+                    (category === 'hybrid' && btn.textContent === 'Hybrid') ||
+                    (category === 'others' && btn.textContent === 'Others');
+
+                if (isActive) {
+                    btn.style.background = '#2563EB';
+                    btn.style.borderColor = '#2563EB';
+                    btn.style.color = 'white';
+                    btn.className = 'fund-filter-btn active';
+                } else {
+                    btn.style.background = '#F8F9FA';
+                    btn.style.borderColor = '#E5E7EB';
+                    btn.style.color = '#6B7280';
+                    btn.className = 'fund-filter-btn';
+                }
+            });
+        }
+
+        // Accordion toggle
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            if (content && content.className === 'accordion-content') {
+                content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + 'px';
+            }
+        }
+    </script>
 </body>
 </html>
