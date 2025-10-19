@@ -91,44 +91,104 @@
 
         .header {
             display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            flex-direction: row;
+            align-items: center;
             background: white;
-            height: 70px;
-            box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.12);
+            height: 58px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+            padding: 0 8px;
+        }
+
+        .header-spacer {
+            width: 36px;
             flex-shrink: 0;
         }
 
         .tabs-nav {
             display: flex;
-            justify-content: space-around;
-            padding: 0 var(--space-lg);
-            position: relative;
+            gap: 8px;
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            padding: 4px;
+            margin: 8px 0;
+            border: 1px solid var(--color-border);
+            flex: 1;
         }
 
         .tab-btn {
             flex: 1;
-            padding: var(--space-md) 0;
-            background: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 16px;
+            background: transparent;
             border: none;
+            border-radius: var(--radius-md);
             font-size: 14px;
             font-weight: 600;
-            color: var(--color-text-muted);
+            color: var(--color-text-secondary);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 40px;
         }
 
         .tab-btn.active {
-            color: var(--color-blue);
+            background: var(--color-blue);
+            color: white;
         }
 
-        .tab-indicator {
-            position: absolute;
-            bottom: 0;
-            height: 3px;
+        .tab-btn:active {
+            transform: scale(0.98);
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-full);
+            background: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: 8px;
+            flex-shrink: 0;
+            color: var(--color-text-secondary);
+        }
+
+        .icon-btn:active {
+            background: var(--color-surface);
+            transform: scale(0.95);
+        }
+
+        .tab-icon {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .utility-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .utility-btn:active {
             background: var(--color-blue);
-            border-radius: 3px 3px 0 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: white;
+            transform: scale(0.95);
         }
 
         .tab-content-container {
@@ -144,6 +204,149 @@
 
         .main-content {
             padding: var(--space-lg);
+        }
+
+        /* Search Section */
+        .search-section {
+            padding: 0 0 16px 0;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            transition: all 0.2s ease;
+            flex: 1;
+        }
+
+        .search-input-wrapper:focus-within {
+            border-color: var(--color-blue);
+            background: white;
+        }
+
+        .search-input-wrapper.expanded {
+            flex: 1 1 100%;
+        }
+
+        .saved-filter-btn {
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border);
+            background: white;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            opacity: 1;
+            width: auto;
+            overflow: hidden;
+        }
+
+        .saved-filter-btn.hidden {
+            opacity: 0;
+            width: 0;
+            padding: 12px 0;
+            border-color: transparent;
+        }
+
+        .saved-filter-btn.active {
+            background: var(--color-blue);
+            color: white;
+            border-color: var(--color-blue);
+        }
+
+        .saved-filter-btn:not(.active):active {
+            transform: scale(0.95);
+        }
+
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--color-text-muted);
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 15px;
+            color: var(--color-text-primary);
+            font-family: var(--font-family);
+        }
+
+        .search-input::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        .clear-search-btn {
+            background: none;
+            border: none;
+            color: var(--color-text-muted);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .clear-search-btn:active {
+            background: var(--color-border);
+            transform: scale(0.9);
+        }
+
+        /* Save Fund Button */
+        .fund-card-tappable {
+            position: relative;
+        }
+
+        .save-fund-btn {
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+            padding: 0;
+        }
+
+        .save-fund-btn:active {
+            transform: scale(0.9);
+        }
+
+        .save-fund-btn .heart-icon {
+            color: var(--color-text-muted);
+            opacity: 0.5;
+            transition: all 0.2s ease;
+            stroke-width: 2;
+        }
+
+        .save-fund-btn.saved .heart-icon {
+            fill: #EF4444;
+            color: #EF4444;
+            opacity: 1;
         }
 
         .section-spacing {
@@ -481,11 +684,20 @@
 
                 <!-- Header with Tabs -->
                 <div class="header">
+                    <div class="header-spacer"></div>
                     <div class="tabs-nav">
-                        <button class="tab-btn active" onclick="showTab('recommended')">Recommended</button>
-                        <button class="tab-btn" onclick="showTab('all-funds')">All Funds</button>
+                        <button class="tab-btn active" onclick="showTab('recommended')">
+                            For You
+                        </button>
+                        <button class="tab-btn" onclick="showTab('all-funds')">
+                            All Funds
+                        </button>
                     </div>
-                    <div class="tab-indicator" id="tabIndicator"></div>
+                    <button class="icon-btn" onclick="openMenu()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                        </svg>
+                    </button>
                 </div>
 
                 <!-- Tab Content Container -->
@@ -580,6 +792,23 @@
 
                     <!-- All Funds Tab -->
                     <div id="all-funds-tab" style="display: none; padding: 20px;">
+                        <!-- Search Section -->
+                        <div class="search-section">
+                            <div class="search-input-wrapper">
+                                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <input type="text" class="search-input" placeholder="Search funds..." id="fundSearchInput">
+                                <button class="clear-search-btn" id="clearSearchBtn" style="display: none;">✕</button>
+                            </div>
+                            <button class="saved-filter-btn" id="savedFilterBtn" data-filter="all-view">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Saved
+                            </button>
+                        </div>
+
                         <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
                             <button class="fund-filter-btn active" onclick="filterFunds('all')" style="background: #2563EB; border: 1px solid #2563EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: white; cursor: pointer;">All</button>
                             <button class="fund-filter-btn" onclick="filterFunds('equity')" style="background: #F8F9FA; border: 1px solid #E5E7EB; border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6B7280; cursor: pointer;">Equity</button>
@@ -594,7 +823,12 @@
                             <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Equity Funds</h3>
 
                             <!-- HDFC Large Cap Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-large-cap')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-large-cap" onclick="viewFundDetails('hdfc-large-cap')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-large-cap')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Large Cap Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -616,7 +850,12 @@
                             </div>
 
                             <!-- HDFC Mid Cap Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-mid-cap')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-mid-cap" onclick="viewFundDetails('hdfc-mid-cap')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-mid-cap')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Mid Cap Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -638,7 +877,12 @@
                             </div>
 
                             <!-- HDFC Small Cap Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-small-cap')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-small-cap" onclick="viewFundDetails('hdfc-small-cap')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-small-cap')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Small Cap Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -660,7 +904,12 @@
                             </div>
 
                             <!-- HDFC Flexi Cap Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-flexi-cap')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-flexi-cap" onclick="viewFundDetails('hdfc-flexi-cap')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-flexi-cap')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Flexi Cap Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -682,7 +931,12 @@
                             </div>
 
                             <!-- HDFC Multi Cap Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-multi-cap')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-multi-cap" onclick="viewFundDetails('hdfc-multi-cap')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-multi-cap')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Multi Cap Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -704,7 +958,12 @@
                             </div>
 
                             <!-- HDFC Focused 30 Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-focused-30')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-focused-30" onclick="viewFundDetails('hdfc-focused-30')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-focused-30')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Focused 30 Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -726,7 +985,12 @@
                             </div>
 
                             <!-- HDFC ELSS Tax Saver -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-elss-tax-saver')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-elss-tax-saver" onclick="viewFundDetails('hdfc-elss-tax-saver')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #2563EB; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-elss-tax-saver')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC ELSS Tax Saver</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -754,7 +1018,12 @@
                             <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Debt Funds</h3>
 
                             <!-- HDFC Liquid Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-liquid-fund')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-liquid-fund" onclick="viewFundDetails('hdfc-liquid-fund')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-liquid-fund')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Liquid Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -776,7 +1045,12 @@
                             </div>
 
                             <!-- HDFC Ultra Short Term Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-ultra-short-term')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-ultra-short-term" onclick="viewFundDetails('hdfc-ultra-short-term')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-ultra-short-term')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Ultra Short Term Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -798,7 +1072,12 @@
                             </div>
 
                             <!-- HDFC Short Term Debt Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-short-term-debt')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-short-term-debt" onclick="viewFundDetails('hdfc-short-term-debt')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-short-term-debt')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Short Term Debt Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -820,7 +1099,12 @@
                             </div>
 
                             <!-- HDFC Floating Rate Debt Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-floating-rate-debt')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-floating-rate-debt" onclick="viewFundDetails('hdfc-floating-rate-debt')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-floating-rate-debt')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Floating Rate Debt Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -842,7 +1126,12 @@
                             </div>
 
                             <!-- HDFC Corporate Bond Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-corporate-bond')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-corporate-bond" onclick="viewFundDetails('hdfc-corporate-bond')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-corporate-bond')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Corporate Bond Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -864,7 +1153,12 @@
                             </div>
 
                             <!-- HDFC Banking & PSU Debt Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-banking-psu-debt')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-banking-psu-debt" onclick="viewFundDetails('hdfc-banking-psu-debt')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-banking-psu-debt')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Banking & PSU Debt Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -886,7 +1180,12 @@
                             </div>
 
                             <!-- HDFC Gilt Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-gilt-fund')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-gilt-fund" onclick="viewFundDetails('hdfc-gilt-fund')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #10B981; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-gilt-fund')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Gilt Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -914,7 +1213,12 @@
                             <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Solution Oriented Funds</h3>
 
                             <!-- HDFC Children's Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-childrens-fund')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #F97316; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-childrens-fund" onclick="viewFundDetails('hdfc-childrens-fund')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #F97316; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-childrens-fund')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Children's Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -937,7 +1241,12 @@
                             </div>
 
                             <!-- HDFC Retirement Savings Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-retirement-savings-equity')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #F97316; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-retirement-savings-equity" onclick="viewFundDetails('hdfc-retirement-savings-equity')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #F97316; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-retirement-savings-equity')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Retirement Savings Fund - Equity</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -965,7 +1274,12 @@
                             <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Hybrid Funds</h3>
 
                             <!-- HDFC Balanced Advantage Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-balanced-advantage')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #8B5CF6; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-balanced-advantage" onclick="viewFundDetails('hdfc-balanced-advantage')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #8B5CF6; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-balanced-advantage')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC Balanced Advantage Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -993,7 +1307,12 @@
                             <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 16px;">Other Funds</h3>
 
                             <!-- HDFC NIFTY50 Equal Weight Index Fund -->
-                            <div class="fund-card-tappable" onclick="viewFundDetails('hdfc-nifty50-equal-weight')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #6B7280; margin-bottom: 10px; position: relative;">
+                            <div class="fund-card-tappable" data-fund-id="hdfc-nifty50-equal-weight" onclick="viewFundDetails('hdfc-nifty50-equal-weight')" style="background: white; border-radius: 12px; padding: 14px; border: 1px solid #E5E7EB; border-left: 4px solid #6B7280; margin-bottom: 10px; position: relative;">
+                                <button class="save-fund-btn" onclick="toggleSaveFund(event, 'hdfc-nifty50-equal-weight')">
+                                    <svg class="heart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
                                 <span class="chevron-icon">›</span>
                                 <h4 style="font-size: 14px; font-weight: 700; color: #1F2937; margin-bottom: 10px;">HDFC NIFTY50 Equal Weight Index Fund</h4>
                                 <div style="background: #ECFDF5; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
@@ -1112,6 +1431,152 @@
         function viewFundDetails(fundSlug) {
             // Navigate to dynamic fund detail page with fund slug parameter
             window.location.href = 'fund-detail.html?fund=' + fundSlug;
+        }
+
+        // ========== SEARCH & SAVED FUNDS FUNCTIONALITY ==========
+
+        // Saved funds storage (localStorage)
+        let savedFunds = JSON.parse(localStorage.getItem('savedFunds') || '[]');
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initSearchFunctionality();
+            initFilterChips();
+            initSavedFunds();
+        });
+
+        // Search functionality
+        function initSearchFunctionality() {
+            const fundSearchInput = document.getElementById('fundSearchInput');
+            const clearSearchBtn = document.getElementById('clearSearchBtn');
+            const searchWrapper = fundSearchInput?.closest('.search-input-wrapper');
+            const savedFilterBtn = document.getElementById('savedFilterBtn');
+
+            if (!fundSearchInput) return;
+
+            // Expand search bar on focus
+            fundSearchInput.addEventListener('focus', function() {
+                if (searchWrapper) searchWrapper.classList.add('expanded');
+                if (savedFilterBtn) savedFilterBtn.classList.add('hidden');
+            });
+
+            // Collapse search bar on blur (when clicking outside)
+            fundSearchInput.addEventListener('blur', function() {
+                if (searchWrapper) searchWrapper.classList.remove('expanded');
+                if (savedFilterBtn) savedFilterBtn.classList.remove('hidden');
+            });
+
+            fundSearchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+
+                // Show/hide clear button
+                clearSearchBtn.style.display = query ? 'block' : 'none';
+
+                // Filter fund cards
+                document.querySelectorAll('.fund-card-tappable').forEach(card => {
+                    const fundName = card.querySelector('h4').textContent.toLowerCase();
+                    if (fundName.includes(query)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            clearSearchBtn.addEventListener('click', function() {
+                fundSearchInput.value = '';
+                fundSearchInput.dispatchEvent(new Event('input'));
+                fundSearchInput.focus();
+            });
+        }
+
+        // Saved filter functionality
+        function initFilterChips() {
+            const savedFilterBtn = document.getElementById('savedFilterBtn');
+            if (!savedFilterBtn) return;
+
+            savedFilterBtn.addEventListener('click', function() {
+                const isActive = this.classList.contains('active');
+                const fundSearchInput = document.getElementById('fundSearchInput');
+                const clearSearchBtn = document.getElementById('clearSearchBtn');
+
+                if (isActive) {
+                    // Deactivate - show all funds
+                    this.classList.remove('active');
+                    this.dataset.filter = 'all-view';
+
+                    document.querySelectorAll('.fund-card-tappable').forEach(card => {
+                        card.style.display = 'block';
+                    });
+                } else {
+                    // Activate - show only saved funds
+                    this.classList.add('active');
+                    this.dataset.filter = 'saved-view';
+
+                    document.querySelectorAll('.fund-card-tappable').forEach(card => {
+                        const fundId = card.dataset.fundId;
+                        card.style.display = savedFunds.includes(fundId) ? 'block' : 'none';
+                    });
+                }
+
+                // Clear search when switching filters
+                if (fundSearchInput) {
+                    fundSearchInput.value = '';
+                    clearSearchBtn.style.display = 'none';
+                }
+            });
+        }
+
+        // Toggle save fund
+        function toggleSaveFund(event, fundId) {
+            event.stopPropagation(); // Prevent card click
+
+            const button = event.currentTarget;
+            const isSaved = savedFunds.includes(fundId);
+
+            if (isSaved) {
+                // Unsave
+                savedFunds = savedFunds.filter(id => id !== fundId);
+                button.classList.remove('saved');
+            } else {
+                // Save
+                savedFunds.push(fundId);
+                button.classList.add('saved');
+            }
+
+            // Persist to localStorage
+            localStorage.setItem('savedFunds', JSON.stringify(savedFunds));
+
+            // Add haptic feedback (optional)
+            if (navigator.vibrate) {
+                navigator.vibrate(10);
+            }
+        }
+
+        // Initialize saved states on page load
+        function initSavedFunds() {
+            savedFunds.forEach(fundId => {
+                const card = document.querySelector(`[data-fund-id="${fundId}"]`);
+                if (card) {
+                    const btn = card.querySelector('.save-fund-btn');
+                    if (btn) btn.classList.add('saved');
+                }
+            });
+        }
+
+        // Check for hash on page load and switch to appropriate tab
+        window.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash;
+            if (hash === '#all-funds') {
+                showTab('all-funds');
+            }
+        });
+
+        // Menu button handler
+        function openMenu() {
+            // Placeholder for menu functionality
+            console.log('Menu button clicked');
+            // You can add menu modal/dropdown here later
         }
     </script>
 </body>

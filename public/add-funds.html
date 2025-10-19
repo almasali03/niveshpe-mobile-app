@@ -7,7 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <script src="funds-data.js"></script>
+
     <style>
         :root {
           /* Color System */
@@ -1080,6 +1081,24 @@
             let currentDay = 'monday';
             let currentDate = 5;
             let currentPot = 'Emergency Funds';
+
+            // Load fund from URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const fundSlug = urlParams.get('fund');
+            let selectedFund = null;
+
+            // Get fund data if slug is provided
+            if (fundSlug && typeof getFundData === 'function') {
+                selectedFund = getFundData(fundSlug);
+            }
+
+            // Update fund display if fund is selected
+            if (selectedFund) {
+                const fundTitle = document.querySelector('.fund-title');
+                if (fundTitle) {
+                    fundTitle.textContent = selectedFund.name;
+                }
+            }
 
             // Time period selection
             let currentYears = 5;

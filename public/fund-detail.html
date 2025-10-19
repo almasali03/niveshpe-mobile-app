@@ -80,17 +80,23 @@
         }
 
         .back-btn {
-            width: 32px;
-            height: 32px;
-            border: none;
-            background: var(--color-surface);
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(37, 99, 235, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 18px;
-            color: var(--color-text-primary);
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .back-btn:active {
+            background: var(--color-blue);
+            color: white;
+            transform: scale(0.95);
         }
 
         .header-title {
@@ -576,7 +582,11 @@
         <div class="iphone-screen">
             <!-- Header -->
             <div class="header">
-                <button class="back-btn" onclick="history.back()">←</button>
+                <button class="back-btn" onclick="window.location.href='mutual-funds.html#all-funds'">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/>
+                    </svg>
+                </button>
                 <div class="header-title">HDFC Large Cap Fund</div>
             </div>
 
@@ -973,7 +983,9 @@
 
         // Show investment options (SIP or One-time)
         function showInvestmentOptions() {
-            alert('Investment options:\n1. Start SIP\n2. Invest Once\n\nThis will be replaced with a proper modal/page.');
+            // Navigate to add funds page with current fund slug
+            const fundSlug = getFundSlug();
+            window.location.href = 'add-funds.html?fund=' + fundSlug;
         }
 
         // Select period and update returns display
