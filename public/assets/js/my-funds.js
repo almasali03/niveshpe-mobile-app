@@ -252,7 +252,9 @@ class TabManager {
                 <div class="sip-summary-header">
                     <h3 class="sip-summary-title">SIP Overview</h3>
                 </div>
-                <div class="sip-summary-grid">
+
+                <!-- Row 1: Frequency Amounts -->
+                <div class="sip-summary-grid-amounts">
                     <div class="sip-summary-item">
                         <div class="sip-value">₹33,000</div>
                         <div class="sip-label">Monthly</div>
@@ -265,6 +267,10 @@ class TabManager {
                         <div class="sip-value">₹150</div>
                         <div class="sip-label">Daily</div>
                     </div>
+                </div>
+
+                <!-- Row 2: Counts -->
+                <div class="sip-summary-grid-counts">
                     <div class="sip-summary-item">
                         <div class="sip-value">5</div>
                         <div class="sip-label">Active SIPs</div>

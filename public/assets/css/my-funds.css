@@ -728,12 +728,21 @@ body {
   margin: 0;
 }
 
-/* Dynamic grid - auto-fits columns based on content */
-.sip-summary-grid {
+/* Row 1: Frequency amounts (1-3 columns, adapts) */
+.sip-summary-grid-amounts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-  gap: 12px;
-  padding: 8px 0;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 16px;
+  padding: 8px 0 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Row 2: Counts (always 2 columns) */
+.sip-summary-grid-counts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 12px 0 4px 0;
 }
 
 .sip-summary-item {
