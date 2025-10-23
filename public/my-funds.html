@@ -7,11 +7,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="assets/css/my-funds.css">
 
-    <style>
-        /* Page-specific customization only - Core styles in my-funds.css */
-    </style>
+    <!-- Chart.js for donut chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
     <div class="iphone-frame">
@@ -44,7 +44,7 @@
                 <div class="sticky-header" id="stickyHeader">
                     <div class="sticky-value">
                         <span class="sticky-label">Current Value</span>
-                        <span class="sticky-amount">₹1,65,065</span>
+                        <span class="sticky-amount">₹2,37,500</span>
                     </div>
                 </div>
 
@@ -56,14 +56,14 @@
                             <div class="portfolio-summary">
                                 <div class="portfolio-value">
                                     <div class="value-label">Current Value</div>
-                                    <div class="value-amount">₹1,65,065</div>
+                                    <div class="value-amount">₹2,37,500</div>
                                     <div class="value-returns">
-                                        <span class="returns-amount">+₹40,050</span>
+                                        <span class="returns-amount">+₹52,700</span>
                                         <span class="returns-percentage">
                                             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                                                 <path d="M7 14l5-5 5 5z"/>
                                             </svg>
-                                            35.91%
+                                            28.5%
                                         </span>
                                     </div>
                                 </div>
@@ -71,11 +71,11 @@
                                 <div class="portfolio-metrics">
                                     <div class="metric-card">
                                         <span class="metric-label">Invested:</span>
-                                        <span class="metric-value">₹1,25,015</span>
+                                        <span class="metric-value">₹1,84,800</span>
                                     </div>
                                     <div class="metric-card">
                                         <span class="metric-label">XIRR:</span>
-                                        <span class="metric-value">24.8%</span>
+                                        <span class="metric-value">27.8%</span>
                                     </div>
                                 </div>
                             </div>
@@ -114,107 +114,142 @@
 
                     <!-- Tab Content -->
                     <div id="holdings-tab" class="tab-content active">
-                        <div class="holdings-list">
-                            <!-- Fund 1 -->
-                            <div class="holdings-card">
-                                <div class="holdings-header">
-                                    <div class="holdings-name">HDFC Liquid Fund</div>
-                                    <div class="holdings-amount">₹45,200</div>
+                        <!-- NEW: Asset Allocation Overview (Inside Holdings Tab) -->
+                        <div id="asset-allocation-section" class="asset-allocation-section">
+                            <div class="allocation-header">
+                                <h3 class="allocation-title">Asset Allocation</h3>
+                                <a href="portfolio-allocation.html" class="view-all-link">View ›</a>
+                            </div>
+
+                            <!-- 4-Column Grid View -->
+                            <div class="asset-allocation-grid">
+                                <div class="asset-item">
+                                    <div class="asset-percentage equity-color">80%</div>
+                                    <div class="asset-label">Equity</div>
                                 </div>
-                                <div class="holdings-details">
-                                    <div class="holdings-info">Debt • Liquid • No lock-in</div>
-                                    <div class="holdings-returns">
-                                        <svg viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M7 14l5-5 5 5z"/>
-                                        </svg>
-                                        <span>+12.3%</span>
-                                    </div>
+                                <div class="asset-item">
+                                    <div class="asset-percentage debt-color">15%</div>
+                                    <div class="asset-label">Debt</div>
                                 </div>
-                                <div class="holdings-allocation">
-                                    <div class="holdings-allocation-header">
-                                        <span class="holdings-allocation-label">Portfolio allocation</span>
-                                        <span class="holdings-allocation-value">15.8%</span>
+                                <div class="asset-item">
+                                    <div class="asset-percentage commodity-color">0%</div>
+                                    <div class="asset-label">Commodity</div>
+                                </div>
+                                <div class="asset-item">
+                                    <div class="asset-percentage others-color">5%</div>
+                                    <div class="asset-label">Others</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Asset Allocation Skeleton (shown during load) -->
+                        <div id="asset-allocation-skeleton" class="asset-allocation-skeleton" style="display: none;">
+                            <div class="asset-allocation-skeleton-header skeleton"></div>
+                            <div class="asset-allocation-skeleton-grid">
+                                <div class="asset-skeleton-item">
+                                    <div class="asset-skeleton-percentage skeleton"></div>
+                                    <div class="asset-skeleton-label skeleton"></div>
+                                </div>
+                                <div class="asset-skeleton-item">
+                                    <div class="asset-skeleton-percentage skeleton"></div>
+                                    <div class="asset-skeleton-label skeleton"></div>
+                                </div>
+                                <div class="asset-skeleton-item">
+                                    <div class="asset-skeleton-percentage skeleton"></div>
+                                    <div class="asset-skeleton-label skeleton"></div>
+                                </div>
+                                <div class="asset-skeleton-item">
+                                    <div class="asset-skeleton-percentage skeleton"></div>
+                                    <div class="asset-skeleton-label skeleton"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Sort & Filter Controls (Inside Holdings Tab) -->
+                        <div class="sort-filter-section">
+                            <div class="sort-control">
+                                <label for="sortSelect">Sort by:</label>
+                                <select id="sortSelect" class="sort-dropdown" onchange="sortHoldings(this.value)">
+                                    <option value="current-value">Current Value</option>
+                                    <option value="returns">Returns %</option>
+                                    <option value="invested">Invested Amount</option>
+                                    <option value="alphabetical">Alphabetical</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Holdings List -->
+                        <div class="holdings-list" id="holdingsList">
+                            <!-- Holdings cards will be generated by JavaScript -->
+                        </div>
+
+                        <!-- Holdings Skeletons (shown during load) -->
+                        <div id="holdings-skeleton-container" style="display: none;">
+                            <!-- Skeleton Card 1 -->
+                            <div class="holdings-skeleton-card">
+                                <div class="holdings-skeleton-header">
+                                    <div class="holdings-skeleton-name skeleton"></div>
+                                    <div class="holdings-skeleton-arrow skeleton"></div>
+                                </div>
+                                <div class="holdings-skeleton-type skeleton"></div>
+                                <div class="holdings-skeleton-row">
+                                    <div class="holdings-skeleton-item">
+                                        <div class="holdings-skeleton-label skeleton"></div>
+                                        <div class="holdings-skeleton-value skeleton"></div>
                                     </div>
-                                    <div class="holdings-progress-bar">
-                                        <div class="holdings-progress-fill" style="width: 15.8%;"></div>
+                                    <div class="holdings-skeleton-item">
+                                        <div class="holdings-skeleton-label skeleton"></div>
+                                        <div class="holdings-skeleton-value skeleton"></div>
+                                    </div>
+                                    <div class="holdings-skeleton-item">
+                                        <div class="holdings-skeleton-label skeleton"></div>
+                                        <div class="holdings-skeleton-value skeleton"></div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Fund 2 -->
-                            <div class="holdings-card">
-                                <div class="holdings-header">
-                                    <div class="holdings-name">Axis Midcap Fund</div>
-                                    <div class="holdings-amount">₹1,20,000</div>
+                            <!-- Skeleton Card 2 -->
+                            <div class="holdings-skeleton-card">
+                                <div class="holdings-skeleton-header">
+                                    <div class="holdings-skeleton-name skeleton"></div>
+                                    <div class="holdings-skeleton-arrow skeleton"></div>
                                 </div>
-                                <div class="holdings-details">
-                                    <div class="holdings-info">Equity • Mid Cap • No lock-in</div>
-                                    <div class="holdings-returns">
-                                        <svg viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M7 14l5-5 5 5z"/>
-                                        </svg>
-                                        <span>+42.1%</span>
+                                <div class="holdings-skeleton-type skeleton"></div>
+                                <div class="holdings-skeleton-row">
+                                    <div class="holdings-skeleton-item">
+                                        <div class="holdings-skeleton-label skeleton"></div>
+                                        <div class="holdings-skeleton-value skeleton"></div>
                                     </div>
-                                </div>
-                                <div class="holdings-allocation">
-                                    <div class="holdings-allocation-header">
-                                        <span class="holdings-allocation-label">Portfolio allocation</span>
-                                        <span class="holdings-allocation-value">42.1%</span>
+                                    <div class="holdings-skeleton-item">
+                                        <div class="holdings-skeleton-label skeleton"></div>
+                                        <div class="holdings-skeleton-value skeleton"></div>
                                     </div>
-                                    <div class="holdings-progress-bar">
-                                        <div class="holdings-progress-fill" style="width: 42.1%;"></div>
+                                    <div class="holdings-skeleton-item">
+                                        <div class="holdings-skeleton-label skeleton"></div>
+                                        <div class="holdings-skeleton-value skeleton"></div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Fund 3 -->
-                            <div class="holdings-card">
-                                <div class="holdings-header">
-                                    <div class="holdings-name">SBI Small Cap Fund</div>
-                                    <div class="holdings-amount">₹75,680</div>
+                            <!-- Skeleton Card 3 -->
+                            <div class="holdings-skeleton-card">
+                                <div class="holdings-skeleton-header">
+                                    <div class="holdings-skeleton-name skeleton"></div>
+                                    <div class="holdings-skeleton-arrow skeleton"></div>
                                 </div>
-                                <div class="holdings-details">
-                                    <div class="holdings-info">Equity • Small Cap • No lock-in</div>
-                                    <div class="holdings-returns">
-                                        <svg viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M7 14l5-5 5 5z"/>
-                                        </svg>
-                                        <span>+38.5%</span>
+                                <div class="holdings-skeleton-type skeleton"></div>
+                                <div class="holdings-skeleton-row">
+                                    <div class="holdings-skeleton-item">
+                                        <div class="holdings-skeleton-label skeleton"></div>
+                                        <div class="holdings-skeleton-value skeleton"></div>
                                     </div>
-                                </div>
-                                <div class="holdings-allocation">
-                                    <div class="holdings-allocation-header">
-                                        <span class="holdings-allocation-label">Portfolio allocation</span>
-                                        <span class="holdings-allocation-value">26.5%</span>
+                                    <div class="holdings-skeleton-item">
+                                        <div class="holdings-skeleton-label skeleton"></div>
+                                        <div class="holdings-skeleton-value skeleton"></div>
                                     </div>
-                                    <div class="holdings-progress-bar">
-                                        <div class="holdings-progress-fill" style="width: 26.5%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Fund 4 -->
-                            <div class="holdings-card">
-                                <div class="holdings-header">
-                                    <div class="holdings-name">ICICI Prudential ELSS</div>
-                                    <div class="holdings-amount">₹44,540</div>
-                                </div>
-                                <div class="holdings-details">
-                                    <div class="holdings-info">Equity • Tax Saver • Locked till Mar 2025</div>
-                                    <div class="holdings-returns">
-                                        <svg viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M7 14l5-5 5 5z"/>
-                                        </svg>
-                                        <span>+28.7%</span>
-                                    </div>
-                                </div>
-                                <div class="holdings-allocation">
-                                    <div class="holdings-allocation-header">
-                                        <span class="holdings-allocation-label">Portfolio allocation</span>
-                                        <span class="holdings-allocation-value">15.6%</span>
-                                    </div>
-                                    <div class="holdings-progress-bar">
-                                        <div class="holdings-progress-fill" style="width: 15.6%;"></div>
+                                    <div class="holdings-skeleton-item">
+                                        <div class="holdings-skeleton-label skeleton"></div>
+                                        <div class="holdings-skeleton-value skeleton"></div>
                                     </div>
                                 </div>
                             </div>
@@ -232,7 +267,7 @@
                                     <svg viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
                                     </svg>
-                                    Next debit on 25th Sep
+                                    Next debit on 25th Nov
                                 </div>
                                 <div class="sip-funds">
                                     Investing in 3 funds: Axis Midcap, SBI Small Cap, HDFC Liquid
@@ -616,7 +651,6 @@
         </div>
     </div>
 
-    <script src="assets/js/my-funds.js" defer></script>
     <script>
         // Investor Profile Overlay System
         let profileData = {
@@ -1027,5 +1061,7 @@
         }
 
     </script>
+    <script src="funds-data.js"></script>
+    <script src="assets/js/my-funds.js"></script>
 </body>
 </html>

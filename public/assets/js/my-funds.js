@@ -142,7 +142,13 @@ class TabManager {
         const content = document.getElementById(`${tabName}-tab`);
         if (!content) return;
 
-        // Show skeleton loaders initially
+        // V2: Skip loading for holdings tab (already initialized by initializeHoldingsV2)
+        if (tabName === 'holdings') {
+            content.dataset.loaded = 'true';
+            return;
+        }
+
+        // Show skeleton loaders initially for other tabs
         if (!content.dataset.loaded) {
             this.showSkeletonLoader(content, tabName);
 
@@ -669,6 +675,258 @@ class PerformanceMonitor {
     }
 }
 
+// ===== V2 ENHANCEMENTS =====
+
+// Holdings data and sorting
+let holdingsData = [];
+let currentSort = 'current-value';  // Default sort
+
+// Initialize holdings from fundsDataV2
+// Skeleton loader utilities
+function showSkeletons() {
+    const assetSkeleton = document.getElementById('asset-allocation-skeleton');
+    const holdingsSkeleton = document.getElementById('holdings-skeleton-container');
+    const assetSection = document.getElementById('asset-allocation-section');
+    const sortSection = document.querySelector('.sort-filter-section');
+
+    if (assetSkeleton) assetSkeleton.style.display = 'block';
+    if (holdingsSkeleton) holdingsSkeleton.style.display = 'block';
+    if (assetSection) assetSection.style.display = 'none';
+    if (sortSection) sortSection.style.display = 'none';
+}
+
+function hideSkeletons() {
+    const assetSkeleton = document.getElementById('asset-allocation-skeleton');
+    const holdingsSkeleton = document.getElementById('holdings-skeleton-container');
+    const assetSection = document.getElementById('asset-allocation-section');
+    const sortSection = document.querySelector('.sort-filter-section');
+
+    if (assetSkeleton) assetSkeleton.style.display = 'none';
+    if (holdingsSkeleton) holdingsSkeleton.style.display = 'none';
+    if (assetSection) assetSection.style.display = 'block';
+    if (sortSection) sortSection.style.display = 'block';
+}
+
+function initializeHoldingsV2() {
+    if (typeof fundsDataV2 === 'undefined') {
+        console.error('fundsDataV2 not loaded');
+        return;
+    }
+
+    // Show skeletons first
+    showSkeletons();
+
+    // Simulate data loading (800ms delay)
+    setTimeout(() => {
+        // Convert fundsDataV2 object to array
+        holdingsData = Object.keys(fundsDataV2).map(key => {
+            const fund = fundsDataV2[key];
+            return {
+                id: key,
+                name: fund.name,
+                fundType: fund.fundType,
+                lockIn: fund.lockIn,
+                isLocked: fund.isLocked || false,
+                lockInDate: fund.lockInDate || null,
+                currentValue: fund.holdings.currentValue,
+                investedAmount: fund.holdings.investedAmount,
+                absoluteGain: fund.holdings.absoluteGain,
+                percentageGain: fund.holdings.percentageGain
+            };
+        });
+
+        // Sort by default (Current Value - High to Low)
+        sortHoldings(currentSort);
+
+        // Hide skeletons and show actual content
+        hideSkeletons();
+
+        // Mark holdings tab as loaded to prevent regeneration
+        const holdingsTab = document.getElementById('holdings-tab');
+        if (holdingsTab) {
+            holdingsTab.dataset.loaded = 'true';
+        }
+    }, 800);
+}
+
+// Generate holdings card HTML
+function generateHoldingsCard(fund) {
+    const isPositive = fund.absoluteGain >= 0;
+    const gainClass = isPositive ? 'positive' : 'negative';
+    const arrowPath = isPositive ? 'M7 14l5-5 5 5z' : 'M7 10l5 5 5-5z';
+    const signSymbol = isPositive ? '+' : '';
+
+    return `
+        <div class="holdings-card" onclick="navigateToFundDetail('${fund.id}')">
+            <button class="actions-menu-btn" onclick="toggleActionsMenu('${fund.id}', event)" aria-label="Quick actions">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="5" r="2"/>
+                    <circle cx="12" cy="12" r="2"/>
+                    <circle cx="12" cy="19" r="2"/>
+                </svg>
+            </button>
+            <div class="actions-dropdown" id="actions-menu-${fund.id}" style="display: none;">
+                <div class="actions-menu-item" onclick="handleBuyMore('${fund.id}', event)">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+                    </svg>
+                    <span>Buy More</span>
+                </div>
+                <div class="actions-menu-item" onclick="handleRedeem('${fund.id}', event)">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/>
+                    </svg>
+                    <span>Redeem</span>
+                </div>
+            </div>
+            <div class="holdings-header">
+                <div class="holdings-name">${fund.name}</div>
+                <svg class="holdings-arrow" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="holdings-type">
+                ${fund.fundType} • ${fund.lockIn}
+            </div>
+
+            <div class="holdings-investment-row">
+                <div class="investment-item">
+                    <span class="investment-label">Current</span>
+                    <span class="investment-value">₹${fund.currentValue.toLocaleString('en-IN')}</span>
+                </div>
+                <div class="investment-item">
+                    <span class="investment-label">Invested</span>
+                    <span class="investment-value">₹${fund.investedAmount.toLocaleString('en-IN')}</span>
+                </div>
+                <div class="investment-item">
+                    <span class="investment-label">Returns</span>
+                    <span class="investment-value ${gainClass}">${signSymbol}${fund.percentageGain}%</span>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Render holdings list
+function renderHoldings() {
+    const holdingsList = document.getElementById('holdingsList');
+    if (!holdingsList) return;
+
+    holdingsList.innerHTML = holdingsData.map(fund => generateHoldingsCard(fund)).join('');
+}
+
+// Sort holdings
+function sortHoldings(sortBy) {
+    currentSort = sortBy;
+
+    switch(sortBy) {
+        case 'current-value':
+            holdingsData.sort((a, b) => b.currentValue - a.currentValue);
+            break;
+        case 'returns':
+            holdingsData.sort((a, b) => b.percentageGain - a.percentageGain);
+            break;
+        case 'invested':
+            holdingsData.sort((a, b) => b.investedAmount - a.investedAmount);
+            break;
+        case 'alphabetical':
+            holdingsData.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+        default:
+            holdingsData.sort((a, b) => b.currentValue - a.currentValue);
+    }
+
+    renderHoldings();
+}
+
+// Navigate to fund detail page
+function navigateToFundDetail(fundId) {
+    // Haptic feedback
+    if (navigator.vibrate) {
+        navigator.vibrate(5);
+    }
+
+    // Navigate to fund-detail.html with fund parameter
+    window.location.href = `fund-detail.html?fund=${fundId}`;
+}
+
+// Quick Actions Menu Functions
+function toggleActionsMenu(fundId, event) {
+    event.stopPropagation(); // Prevent card click
+
+    const menu = document.getElementById(`actions-menu-${fundId}`);
+    const allMenus = document.querySelectorAll('.actions-dropdown');
+
+    // Close all other menus
+    allMenus.forEach(m => {
+        if (m.id !== `actions-menu-${fundId}`) {
+            m.style.display = 'none';
+        }
+    });
+
+    // Toggle current menu
+    if (menu) {
+        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// Close menus when clicking outside
+document.addEventListener('click', (event) => {
+    if (!event.target.closest('.actions-menu-btn') && !event.target.closest('.actions-dropdown')) {
+        const allMenus = document.querySelectorAll('.actions-dropdown');
+        allMenus.forEach(menu => menu.style.display = 'none');
+    }
+});
+
+// Action handlers
+function handleBuyMore(fundId, event) {
+    event.stopPropagation(); // Prevent card click
+
+    // Close menu
+    const menu = document.getElementById(`actions-menu-${fundId}`);
+    if (menu) menu.style.display = 'none';
+
+    // Haptic feedback
+    if (navigator.vibrate) {
+        navigator.vibrate(10);
+    }
+
+    // TODO: Implement Buy More functionality
+    console.log(`Buy More action for fund: ${fundId}`);
+    alert(`Buy More: ${fundId}\n\nThis would open the investment screen.`);
+}
+
+function handleRedeem(fundId, event) {
+    event.stopPropagation(); // Prevent card click
+
+    // Close menu
+    const menu = document.getElementById(`actions-menu-${fundId}`);
+    if (menu) menu.style.display = 'none';
+
+    // Haptic feedback
+    if (navigator.vibrate) {
+        navigator.vibrate(10);
+    }
+
+    // TODO: Implement Redeem functionality
+    console.log(`Redeem action for fund: ${fundId}`);
+    alert(`Redeem: ${fundId}\n\nThis would open the redemption screen.`);
+}
+
+function handleViewDetails(fundId, event) {
+    event.stopPropagation(); // Prevent card click
+
+    // Close menu
+    const menu = document.getElementById(`actions-menu-${fundId}`);
+    if (menu) menu.style.display = 'none';
+
+    // Navigate to fund detail
+    navigateToFundDetail(fundId);
+}
+
+// Chart functionality removed - now handled in portfolio-allocation.html
+
 // Immediately disable scroll restoration and reset scroll position BEFORE any rendering
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
@@ -701,6 +959,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.touchFeedback.init();
     window.performanceMonitor.init();
 
+    // Initialize V2 features
+    initializeHoldingsV2();
+
     // Add animation styles
     const style = document.createElement('style');
     style.textContent = `
@@ -718,5 +979,5 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
-    console.log('My Funds page initialized with optimizations');
+    console.log('My Funds v2 page initialized with optimizations');
 });

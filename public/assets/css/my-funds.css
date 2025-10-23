@@ -88,7 +88,7 @@ body {
   height: 100%;
   background: var(--color-bg-primary);
   border-radius: 0;
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
 }
 
@@ -3020,4 +3020,539 @@ body {
 
 .touchable:active {
   transform: scale(0.95);
+}
+
+/* ===== V2 ENHANCEMENTS ===== */
+
+/* Asset Allocation Section */
+.asset-allocation-section {
+  background: white;
+  padding: 12px;
+  margin-bottom: var(--space-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.allocation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.allocation-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.view-all-link {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-muted, #9CA3AF);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  transition: opacity 0.15s ease;
+}
+
+.view-all-link:active {
+  opacity: 0.6;
+}
+
+.expand-btn {
+  background: var(--color-surface);
+  border: none;
+  border-radius: var(--radius-full);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.expand-btn:active {
+  background: var(--color-border);
+}
+
+/* 4-Column Asset Allocation Grid */
+.asset-allocation-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-bottom: 12px;
+  padding: 8px 0;
+}
+
+.asset-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.asset-item:not(:last-child) {
+  border-right: 1px solid #E5E7EB;
+}
+
+.asset-percentage {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.asset-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Asset Color Classes - Single Blue Theme */
+.equity-color {
+  color: #2563EB;
+}
+
+.debt-color {
+  color: #2563EB;
+}
+
+.commodity-color {
+  color: #2563EB;
+}
+
+.others-color {
+  color: #2563EB;
+}
+
+/* Chart.js Container */
+.allocation-chart-container {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.allocation-chart-container.hidden {
+  display: none;
+}
+
+#donutChart {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+/* Sort & Filter Section */
+.sort-filter-section {
+  background: transparent;
+  padding: var(--space-sm) var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.sort-control label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.sort-dropdown {
+  min-width: 150px;
+  width: fit-content;
+  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.sort-dropdown:focus {
+  outline: none;
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Enhanced Holdings Card - V2 (Override existing styles) */
+#holdings-tab .holdings-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  position: relative;
+  margin-bottom: var(--space-md);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+#holdings-tab .holdings-card:active {
+  background: var(--color-surface, #F9FAFB);
+}
+
+#holdings-tab .holdings-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: var(--space-xs);
+  gap: 6px;
+}
+
+#holdings-tab .holdings-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  flex: 0 1 auto;
+}
+
+.holdings-arrow {
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.holdings-type {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-md);
+}
+
+/* Investment Summary Row */
+.holdings-investment-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm) 0;
+}
+
+.investment-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: center;
+}
+
+.investment-item:not(:last-child) {
+  border-right: 1px solid #E5E7EB;
+}
+
+.investment-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.investment-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.investment-value.positive {
+  color: var(--color-green, #10B981);
+}
+
+.investment-value.negative {
+  color: var(--color-red, #EF4444);
+}
+
+/* Gain/Loss Display */
+.holdings-gain {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: var(--radius-sm);
+  width: fit-content;
+}
+
+.holdings-gain.negative {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.gain-amount {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-green);
+}
+
+.holdings-gain.negative .gain-amount {
+  color: var(--color-red);
+}
+
+.gain-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--color-green);
+}
+
+.holdings-gain.negative .gain-icon {
+  color: var(--color-red);
+  transform: rotate(180deg);
+}
+
+/* Hide old allocation styles in v2 */
+#holdings-tab .holdings-allocation {
+  display: none !important;
+}
+
+#holdings-tab .holdings-allocation-header {
+  display: none !important;
+}
+
+#holdings-tab .holdings-progress-bar {
+  display: none !important;
+}
+
+/* ===== SKELETON LOADERS ===== */
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 0%,
+    #f8f8f8 50%,
+    #f0f0f0 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: var(--radius-sm, 8px);
+}
+
+/* Asset Allocation Skeleton */
+.asset-allocation-skeleton {
+  background: white;
+  padding: 12px;
+  margin-bottom: var(--space-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.asset-allocation-skeleton-header {
+  height: 20px;
+  width: 140px;
+  margin-bottom: 12px;
+}
+
+.asset-allocation-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  padding: 8px 0;
+}
+
+.asset-skeleton-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.asset-skeleton-item:not(:last-child) {
+  border-right: 1px solid #E5E7EB;
+}
+
+.asset-skeleton-percentage {
+  height: 24px;
+  width: 50px;
+}
+
+.asset-skeleton-label {
+  height: 12px;
+  width: 60px;
+}
+
+/* Holdings Card Skeleton */
+.holdings-skeleton-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  margin-bottom: var(--space-md);
+}
+
+.holdings-skeleton-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
+.holdings-skeleton-name {
+  height: 18px;
+  width: 180px;
+}
+
+.holdings-skeleton-arrow {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+}
+
+.holdings-skeleton-type {
+  height: 14px;
+  width: 140px;
+  margin-bottom: var(--space-md);
+}
+
+.holdings-skeleton-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  padding: var(--space-sm) 0;
+}
+
+.holdings-skeleton-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.holdings-skeleton-item:not(:last-child) {
+  border-right: 1px solid #E5E7EB;
+}
+
+.holdings-skeleton-label {
+  height: 12px;
+  width: 50px;
+}
+
+.holdings-skeleton-value {
+  height: 18px;
+  width: 70px;
+}
+
+/* ===== QUICK ACTIONS MENU ===== */
+
+/* Three-dot menu button - Positioned in top-right corner of card */
+.actions-menu-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.15s ease;
+  z-index: 2;
+}
+
+.actions-menu-btn svg {
+  width: 20px;
+  height: 20px;
+  color: var(--color-text-muted, #9CA3AF);
+}
+
+.actions-menu-btn:active {
+  background: var(--color-surface, #F3F4F6);
+}
+
+/* Actions dropdown menu */
+.actions-dropdown {
+  position: absolute;
+  top: 44px;
+  right: 8px;
+  background: white;
+  border-radius: var(--radius-md, 12px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  z-index: 1000;
+  animation: slideIn 0.2s ease;
+  border: 1px solid var(--color-border, #E5E7EB);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Menu items */
+.actions-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-bottom: 1px solid var(--color-surface, #F3F4F6);
+}
+
+.actions-menu-item:last-child {
+  border-bottom: none;
+}
+
+.actions-menu-item:active {
+  background: var(--color-surface, #F3F4F6);
+}
+
+.actions-menu-item svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-secondary, #6B7280);
+  flex-shrink: 0;
+}
+
+.actions-menu-item span {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary, #111827);
+}
+
+/* Lock indicator */
+.holdings-lock {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-orange);
+  margin-left: var(--space-xs);
+}
+
+.holdings-lock svg {
+  width: 12px;
+  height: 12px;
 }
