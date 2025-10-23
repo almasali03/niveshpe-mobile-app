@@ -754,8 +754,8 @@ body {
 
 .sip-value {
   font-size: 18px;
-  font-weight: 700;
-  color: var(--color-primary);
+  font-weight: 800;
+  color: var(--color-green);
 }
 
 .sip-label {
