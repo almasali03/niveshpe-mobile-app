@@ -1213,33 +1213,17 @@ function closeCancelSIPModal() {
 function confirmCancelSIP() {
     if (!currentSIPId) return;
 
-    // Remove SIP from array
-    const sipIndex = sipsData.findIndex(s => s.id === currentSIPId);
-    if (sipIndex !== -1) {
-        sipsData.splice(sipIndex, 1);
-
-        // Re-render SIP cards
-        const sipsTab = document.getElementById('sips-tab');
-        if (sipsTab) {
-            const tabContent = window.tabManager.tabs.find(t => t.id === 'sips').content;
-            sipsTab.innerHTML = tabContent.getSIPsHTML();
-
-            // Re-initialize filter chips
-            setTimeout(() => {
-                const filterChips = document.querySelectorAll('.filter-chip');
-                filterChips.forEach(chip => {
-                    chip.addEventListener('click', () => {
-                        filterSIPs(chip.dataset.filter);
-                    });
-                });
-            }, 100);
-        }
-
-        // Show success toast
-        showToast('SIP stopped successfully');
-    }
-
+    // Close cancel modal
     closeCancelSIPModal();
+
+    // Store pending action and show OTP
+    pendingAction = {
+        type: 'stop',
+        sipId: currentSIPId,
+        data: {}
+    };
+
+    showOTPModal('stop');
 }
 
 // View SIP Details Modal
@@ -1319,6 +1303,8 @@ function showOTPModal(actionType) {
         subtitle.textContent = 'Confirm SIP changes with the 4-digit code sent to your registered mobile';
     } else if (actionType === 'skip') {
         subtitle.textContent = 'Confirm skipping installment with the 4-digit code sent to your registered mobile';
+    } else if (actionType === 'stop') {
+        subtitle.textContent = 'Confirm stopping SIP with the 4-digit code sent to your registered mobile';
     }
 
     // Show OTP modal
@@ -1402,6 +1388,18 @@ function verifyOTP() {
 
             // Show success toast
             showToast('SIP installment skipped successfully');
+        }
+    } else if (pendingAction.type === 'stop') {
+        // Remove SIP from array
+        const sipIndex = sipsData.findIndex(s => s.id === pendingAction.sipId);
+        if (sipIndex !== -1) {
+            sipsData.splice(sipIndex, 1);
+
+            // Re-render
+            refreshSIPList();
+
+            // Show success toast
+            showToast('SIP stopped successfully');
         }
     }
 
