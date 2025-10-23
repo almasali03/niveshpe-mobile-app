@@ -494,19 +494,22 @@
                         legend: {
                             position: 'bottom',
                             labels: {
-                                padding: 16,
+                                padding: 12,
                                 font: {
                                     family: 'Inter',
-                                    size: 12,
+                                    size: 11,
                                     weight: '600'
                                 },
                                 usePointStyle: true,
                                 pointStyle: 'circle',
+                                boxWidth: 10,
+                                boxHeight: 10,
                                 filter: function(legendItem, chartData) {
                                     // Show all labels including 0% values
                                     return true;
                                 }
-                            }
+                            },
+                            maxWidth: 350
                         },
                         tooltip: {
                             backgroundColor: 'rgba(0, 0, 0, 0.8)',
