@@ -765,6 +765,67 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* SIP Filter Section */
+.sip-filter-section {
+  display: flex;
+  gap: 8px;
+  padding: 0 0 var(--space-md) 0;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.sip-filter-section::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.filter-chip {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border);
+  background: white;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-chip:hover {
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+}
+
+.filter-chip.active {
+  background: var(--color-blue);
+  border-color: var(--color-blue);
+  color: white;
+}
+
+.filter-chip:active {
+  transform: scale(0.95);
+}
+
+/* Fund Chips (Pill-style) */
+.sip-fund-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: var(--space-sm);
+}
+
+.fund-chip {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--color-surface);
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
 /* SIP Cards List */
 .sip-list {
   display: flex;
@@ -868,6 +929,73 @@ body {
 .sip-action-btn:active {
   background: var(--color-border);
   transform: scale(0.95);
+}
+
+/* Three-Dot Menu */
+.sip-menu-btn {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 32px;
+  height: 32px;
+  background: var(--color-surface);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 20px;
+  line-height: 1;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.sip-menu-btn:hover {
+  background: var(--color-border);
+}
+
+.sip-menu-btn:active {
+  transform: scale(0.9);
+}
+
+.sip-menu-popup {
+  position: absolute;
+  top: 48px;
+  right: var(--space-md);
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 4px 0;
+  min-width: 140px;
+  z-index: 10;
+  display: none;
+}
+
+.sip-menu-popup.show {
+  display: block;
+}
+
+.sip-menu-item {
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+}
+
+.sip-menu-item:hover {
+  background: var(--color-surface);
+}
+
+.sip-menu-item.danger {
+  color: var(--color-red);
 }
 
 /* Holdings-specific styles */

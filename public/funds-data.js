@@ -169,6 +169,109 @@ const portfolioSummaryV2 = {
     }
 };
 
+// SIPs Data - For Active SIPs Tab
+const sipsData = [
+    {
+        id: 'sip-1',
+        amount: 10000,
+        frequency: 'monthly',
+        nextDebit: '25th Nov',
+        nextDebitFull: 'Next debit on 25th Nov',
+        status: 'active',
+        funds: [
+            { id: 'hdfc-mid-cap', name: 'HDFC Mid Cap Fund' },
+            { id: 'hdfc-small-cap', name: 'HDFC Small Cap Fund' },
+            { id: 'hdfc-liquid-fund', name: 'HDFC Liquid Fund' }
+        ]
+    },
+    {
+        id: 'sip-2',
+        amount: 5000,
+        frequency: 'weekly',
+        nextDebit: 'Monday',
+        nextDebitFull: 'Every Monday',
+        status: 'active',
+        funds: [
+            { id: 'hdfc-liquid-fund', name: 'HDFC Liquid Fund' }
+        ]
+    },
+    {
+        id: 'sip-3',
+        amount: 150,
+        frequency: 'daily',
+        nextDebit: 'Daily',
+        nextDebitFull: 'Daily',
+        status: 'active',
+        funds: [
+            { id: 'hdfc-liquid-fund', name: 'HDFC Liquid Fund' }
+        ]
+    },
+    {
+        id: 'sip-4',
+        amount: 8000,
+        frequency: 'monthly',
+        nextDebit: '5th Dec',
+        nextDebitFull: 'Next debit on 5th Dec',
+        status: 'active',
+        funds: [
+            { id: 'hdfc-balanced-advantage', name: 'HDFC Balanced Advantage Fund' },
+            { id: 'hdfc-flexi-cap', name: 'HDFC Flexi Cap Fund' }
+        ]
+    },
+    {
+        id: 'sip-5',
+        amount: 15000,
+        frequency: 'monthly',
+        nextDebit: '1st Dec',
+        nextDebitFull: 'Next debit on 1st Dec',
+        status: 'active',
+        funds: [
+            { id: 'hdfc-mid-cap', name: 'HDFC Mid Cap Fund' },
+            { id: 'hdfc-small-cap', name: 'HDFC Small Cap Fund' },
+            { id: 'hdfc-large-cap', name: 'HDFC Large Cap Fund' },
+            { id: 'hdfc-focused-30', name: 'HDFC Focused 30 Fund' }
+        ]
+    },
+    {
+        id: 'sip-6',
+        amount: 3000,
+        frequency: 'monthly',
+        nextDebit: '15th Nov',
+        nextDebitFull: 'Was scheduled for 15th Nov',
+        status: 'paused',
+        funds: [
+            { id: 'hdfc-mid-cap', name: 'HDFC Mid Cap Fund' }
+        ]
+    }
+];
+
+// Calculate SIP Summary
+function calculateSIPSummary() {
+    const summary = {
+        monthly: 0,
+        weekly: 0,
+        daily: 0,
+        active: 0,
+        totalFunds: new Set()
+    };
+
+    sipsData.forEach(sip => {
+        if (sip.status === 'active') {
+            summary.active++;
+            if (sip.frequency === 'monthly') summary.monthly += sip.amount;
+            if (sip.frequency === 'weekly') summary.weekly += sip.amount;
+            if (sip.frequency === 'daily') summary.daily += sip.amount;
+
+            sip.funds.forEach(fund => summary.totalFunds.add(fund.id));
+        }
+    });
+
+    return {
+        ...summary,
+        totalFunds: summary.totalFunds.size
+    };
+}
+
 // Helper function to get fund data by slug (for add-funds.html)
 function getFundData(slug) {
     // Return fund data if exists, otherwise return default fund
@@ -177,5 +280,5 @@ function getFundData(slug) {
 
 // Export for use in my-funds-v2.html
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { fundsDataV2, portfolioSummaryV2, getFundData };
+    module.exports = { fundsDataV2, portfolioSummaryV2, getFundData, sipsData, calculateSIPSummary };
 }
