@@ -246,129 +246,46 @@ class TabManager {
     }
 
     getSIPsHTML() {
-        // Calculate summary from data
-        const summary = calculateSIPSummary();
-
-        // Format amounts with Indian number formatting
-        const formatAmount = (num) => {
-            return '₹' + num.toLocaleString('en-IN');
-        };
-
-        // Render SIP summary section
-        const summaryHTML = `
-            <div class="sip-summary-section">
-                <div class="sip-summary-header">
-                    <h3 class="sip-summary-title">SIP Overview</h3>
-                </div>
-
-                <!-- Row 1: Frequency Amounts -->
-                <div class="sip-summary-grid-amounts">
-                    ${summary.monthly > 0 ? `
-                    <div class="sip-summary-item">
-                        <div class="sip-value">${formatAmount(summary.monthly)}</div>
-                        <div class="sip-label">Monthly</div>
-                    </div>
-                    ` : ''}
-                    ${summary.weekly > 0 ? `
-                    <div class="sip-summary-item">
-                        <div class="sip-value">${formatAmount(summary.weekly)}</div>
-                        <div class="sip-label">Weekly</div>
-                    </div>
-                    ` : ''}
-                    ${summary.daily > 0 ? `
-                    <div class="sip-summary-item">
-                        <div class="sip-value">${formatAmount(summary.daily)}</div>
-                        <div class="sip-label">Daily</div>
-                    </div>
-                    ` : ''}
-                </div>
-
-                <!-- Row 2: Counts -->
-                <div class="sip-summary-grid-counts">
-                    <div class="sip-summary-item">
-                        <div class="sip-value">${summary.active}</div>
-                        <div class="sip-label">Active SIPs</div>
-                    </div>
-                    <div class="sip-summary-item">
-                        <div class="sip-value">${summary.totalFunds}</div>
-                        <div class="sip-label">Funds</div>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        // Render filter chips
-        const filterHTML = `
-            <div class="sip-filter-section">
-                <button class="filter-chip active" data-filter="all">All</button>
-                <button class="filter-chip" data-filter="monthly">Monthly</button>
-                <button class="filter-chip" data-filter="weekly">Weekly</button>
-                <button class="filter-chip" data-filter="daily">Daily</button>
-                <button class="filter-chip" data-filter="paused">Paused</button>
-            </div>
-        `;
-
-        // Render SIP cards
-        const cardsHTML = sipsData.map(sip => {
-            const isPaused = sip.status === 'paused';
-            const statusText = isPaused ? 'Paused' : '';
-
-            // Render fund chips
-            const fundChipsHTML = sip.funds.map(fund =>
-                `<span class="fund-chip">${fund.name}</span>`
-            ).join('');
-
-            // Menu actions based on status
-            const menuActions = isPaused ? `
-                <button class="sip-menu-item" onclick="resumeSIP('${sip.id}')">Resume</button>
-                <button class="sip-menu-item" onclick="viewSIPDetails('${sip.id}')">View Details</button>
-                <button class="sip-menu-item" onclick="editSIP('${sip.id}')">Edit</button>
-                <button class="sip-menu-item danger" onclick="stopSIP('${sip.id}')">Stop</button>
-            ` : `
-                <button class="sip-menu-item" onclick="viewSIPDetails('${sip.id}')">View Details</button>
-                <button class="sip-menu-item" onclick="editSIP('${sip.id}')">Edit</button>
-                <button class="sip-menu-item" onclick="pauseSIP('${sip.id}')">Pause</button>
-                <button class="sip-menu-item danger" onclick="stopSIP('${sip.id}')">Stop</button>
-            `;
-
-            return `
-                <div class="sip-card ${isPaused ? 'paused' : ''}" data-frequency="${sip.frequency}" data-status="${sip.status}">
-                    <div class="sip-header-actions">
-                        <button class="sip-menu-icon" onclick="toggleSIPMenu(event, '${sip.id}')">⋮</button>
-                        <div class="sip-status"></div>
-                    </div>
-                    <div class="sip-menu-popup" id="menu-${sip.id}">
-                        ${menuActions}
-                    </div>
-
-                    <div class="sip-amount">${formatAmount(sip.amount)}</div>
-                    <div class="sip-frequency">${sip.frequency.charAt(0).toUpperCase() + sip.frequency.slice(1)} SIP${statusText ? ' • ' + statusText : ''}</div>
+        return `
+            <div class="sip-list">
+                <div class="sip-card">
+                    <div class="sip-status"></div>
+                    <div class="sip-amount">₹10,000</div>
+                    <div class="sip-frequency">Monthly SIP</div>
                     <div class="sip-next">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
                         </svg>
-                        ${sip.nextDebitFull}
+                        Next debit on 25th Sep
                     </div>
-                    <div class="sip-fund-chips">
-                        ${fundChipsHTML}
+                    <div class="sip-funds">
+                        Investing in 3 funds: Axis Midcap, SBI Small Cap, HDFC Liquid
                     </div>
-                    ${isPaused ? `
-                    <button class="sip-resume-btn" onclick="resumeSIP('${sip.id}')">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-                            <path d="M8 5v14l11-7z"/>
-                        </svg>
-                        Resume SIP
-                    </button>
-                    ` : ''}
+                    <div class="sip-actions">
+                        <button class="sip-action-btn">Edit</button>
+                        <button class="sip-action-btn">Pause</button>
+                        <button class="sip-action-btn">Stop</button>
+                    </div>
                 </div>
-            `;
-        }).join('');
-
-        return `
-            ${summaryHTML}
-            ${filterHTML}
-            <div class="sip-list">
-                ${cardsHTML}
+                <div class="sip-card">
+                    <div class="sip-status"></div>
+                    <div class="sip-amount">₹5,000</div>
+                    <div class="sip-frequency">Weekly SIP</div>
+                    <div class="sip-next">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                        </svg>
+                        Every Monday
+                    </div>
+                    <div class="sip-funds">
+                        Investing in HDFC Liquid Fund
+                    </div>
+                    <div class="sip-actions">
+                        <button class="sip-action-btn">Edit</button>
+                        <button class="sip-action-btn">Pause</button>
+                        <button class="sip-action-btn">Stop</button>
+                    </div>
+                </div>
             </div>
         `;
     }
@@ -1023,395 +940,6 @@ if (window.location.hash && document.readyState === 'loading') {
     document.body.scrollTop = 0;
 }
 
-// Global SIP Functions
-
-// Filter SIPs
-function filterSIPs(filterType) {
-    const sipCards = document.querySelectorAll('.sip-card');
-    const filterChips = document.querySelectorAll('.filter-chip');
-
-    // Update active filter chip
-    filterChips.forEach(chip => {
-        if (chip.dataset.filter === filterType) {
-            chip.classList.add('active');
-        } else {
-            chip.classList.remove('active');
-        }
-    });
-
-    // Show/hide cards based on filter
-    sipCards.forEach(card => {
-        const cardFrequency = card.dataset.frequency;
-        const cardStatus = card.dataset.status;
-
-        if (filterType === 'all') {
-            card.style.display = 'block';
-        } else if (filterType === 'paused') {
-            card.style.display = cardStatus === 'paused' ? 'block' : 'none';
-        } else {
-            card.style.display = (cardFrequency === filterType && cardStatus === 'active') ? 'block' : 'none';
-        }
-    });
-}
-
-// Toggle SIP menu
-function toggleSIPMenu(event, sipId) {
-    event.stopPropagation();
-    const menu = document.getElementById(`menu-${sipId}`);
-    const allMenus = document.querySelectorAll('.sip-menu-popup');
-
-    // Close all other menus
-    allMenus.forEach(m => {
-        if (m.id !== `menu-${sipId}`) {
-            m.classList.remove('show');
-        }
-    });
-
-    // Toggle current menu
-    menu.classList.toggle('show');
-}
-
-// Close menus when clicking outside
-document.addEventListener('click', () => {
-    document.querySelectorAll('.sip-menu-popup').forEach(menu => {
-        menu.classList.remove('show');
-    });
-});
-
-// SIP Actions
-function editSIP(sipId) {
-    console.log('Edit SIP:', sipId);
-    alert(`Edit SIP ${sipId} - Feature coming soon!`);
-}
-
-function pauseSIP(sipId) {
-    console.log('Pause SIP:', sipId);
-    alert(`Pause SIP ${sipId} - Feature coming soon!`);
-}
-
-function resumeSIP(sipId) {
-    console.log('Resume SIP:', sipId);
-    alert(`Resume SIP ${sipId} - Feature coming soon!`);
-}
-
-function stopSIP(sipId) {
-    console.log('Stop SIP:', sipId);
-    if (confirm(`Are you sure you want to stop SIP ${sipId}?`)) {
-        alert('SIP stopped - Feature coming soon!');
-    }
-}
-
-// ======================================
-// SIP Modal Functions
-// ======================================
-
-let currentSIPId = null;
-
-// Edit SIP Modal
-function editSIP(sipId) {
-    currentSIPId = sipId;
-    const sip = sipsData.find(s => s.id === sipId);
-    if (!sip) return;
-
-    // Populate form with current SIP data
-    document.getElementById('sipAmount').value = sip.amount;
-    document.getElementById('sipFrequency').value = sip.frequency;
-    document.getElementById('sipDate').value = sip.nextDebit;
-
-    // Show modal
-    const modal = document.getElementById('editSIPModal');
-    modal.classList.add('show');
-
-    // Close menu
-    document.getElementById(`menu-${sipId}`).classList.remove('show');
-}
-
-function closeEditSIPModal() {
-    const modal = document.getElementById('editSIPModal');
-    modal.classList.remove('show');
-    currentSIPId = null;
-}
-
-function saveEditSIP() {
-    if (!currentSIPId) return;
-
-    // Get form values
-    const amount = parseInt(document.getElementById('sipAmount').value);
-    const frequency = document.getElementById('sipFrequency').value;
-    const date = document.getElementById('sipDate').value;
-
-    // Find and update SIP
-    const sipIndex = sipsData.findIndex(s => s.id === currentSIPId);
-    if (sipIndex !== -1) {
-        sipsData[sipIndex].amount = amount;
-        sipsData[sipIndex].frequency = frequency;
-        sipsData[sipIndex].nextDebit = date;
-
-        // Re-render SIP cards
-        const sipsTab = document.getElementById('sips-tab');
-        if (sipsTab) {
-            const tabContent = window.tabManager.tabs.find(t => t.id === 'sips').content;
-            sipsTab.innerHTML = tabContent.getSIPsHTML();
-
-            // Re-initialize filter chips
-            setTimeout(() => {
-                const filterChips = document.querySelectorAll('.filter-chip');
-                filterChips.forEach(chip => {
-                    chip.addEventListener('click', () => {
-                        filterSIPs(chip.dataset.filter);
-                    });
-                });
-            }, 100);
-        }
-
-        // Show success toast
-        showToast('SIP updated successfully');
-    }
-
-    closeEditSIPModal();
-}
-
-// Pause SIP Modal
-function pauseSIP(sipId) {
-    currentSIPId = sipId;
-
-    // Show confirmation modal
-    const modal = document.getElementById('pauseSIPModal');
-    modal.classList.add('show');
-
-    // Close menu
-    document.getElementById(`menu-${sipId}`).classList.remove('show');
-}
-
-function closePauseSIPModal() {
-    const modal = document.getElementById('pauseSIPModal');
-    modal.classList.remove('show');
-    currentSIPId = null;
-}
-
-function confirmPauseSIP() {
-    if (!currentSIPId) return;
-
-    // Find and update SIP status
-    const sipIndex = sipsData.findIndex(s => s.id === currentSIPId);
-    if (sipIndex !== -1) {
-        sipsData[sipIndex].status = 'paused';
-
-        // Re-render SIP cards
-        const sipsTab = document.getElementById('sips-tab');
-        if (sipsTab) {
-            const tabContent = window.tabManager.tabs.find(t => t.id === 'sips').content;
-            sipsTab.innerHTML = tabContent.getSIPsHTML();
-
-            // Re-initialize filter chips
-            setTimeout(() => {
-                const filterChips = document.querySelectorAll('.filter-chip');
-                filterChips.forEach(chip => {
-                    chip.addEventListener('click', () => {
-                        filterSIPs(chip.dataset.filter);
-                    });
-                });
-            }, 100);
-        }
-
-        // Show success toast
-        showToast('SIP paused successfully');
-    }
-
-    closePauseSIPModal();
-}
-
-// Resume SIP (No confirmation needed)
-function resumeSIP(sipId) {
-    // Find and update SIP status
-    const sipIndex = sipsData.findIndex(s => s.id === sipId);
-    if (sipIndex !== -1) {
-        sipsData[sipIndex].status = 'active';
-
-        // Re-render SIP cards
-        const sipsTab = document.getElementById('sips-tab');
-        if (sipsTab) {
-            const tabContent = window.tabManager.tabs.find(t => t.id === 'sips').content;
-            sipsTab.innerHTML = tabContent.getSIPsHTML();
-
-            // Re-initialize filter chips
-            setTimeout(() => {
-                const filterChips = document.querySelectorAll('.filter-chip');
-                filterChips.forEach(chip => {
-                    chip.addEventListener('click', () => {
-                        filterSIPs(chip.dataset.filter);
-                    });
-                });
-            }, 100);
-        }
-
-        // Show success toast
-        showToast('SIP resumed successfully');
-    }
-
-    // Close menu if open
-    const menu = document.getElementById(`menu-${sipId}`);
-    if (menu) menu.classList.remove('show');
-}
-
-// Cancel/Stop SIP Modal
-function stopSIP(sipId) {
-    currentSIPId = sipId;
-
-    // Show confirmation modal
-    const modal = document.getElementById('cancelSIPModal');
-    modal.classList.add('show');
-
-    // Close menu
-    document.getElementById(`menu-${sipId}`).classList.remove('show');
-}
-
-function closeCancelSIPModal() {
-    const modal = document.getElementById('cancelSIPModal');
-    modal.classList.remove('show');
-    currentSIPId = null;
-}
-
-function confirmCancelSIP() {
-    if (!currentSIPId) return;
-
-    // Remove SIP from array
-    const sipIndex = sipsData.findIndex(s => s.id === currentSIPId);
-    if (sipIndex !== -1) {
-        sipsData.splice(sipIndex, 1);
-
-        // Re-render SIP cards
-        const sipsTab = document.getElementById('sips-tab');
-        if (sipsTab) {
-            const tabContent = window.tabManager.tabs.find(t => t.id === 'sips').content;
-            sipsTab.innerHTML = tabContent.getSIPsHTML();
-
-            // Re-initialize filter chips
-            setTimeout(() => {
-                const filterChips = document.querySelectorAll('.filter-chip');
-                filterChips.forEach(chip => {
-                    chip.addEventListener('click', () => {
-                        filterSIPs(chip.dataset.filter);
-                    });
-                });
-            }, 100);
-        }
-
-        // Show success toast
-        showToast('SIP stopped successfully');
-    }
-
-    closeCancelSIPModal();
-}
-
-// View SIP Details Modal
-function viewSIPDetails(sipId) {
-    const sip = sipsData.find(s => s.id === sipId);
-    if (!sip) return;
-
-    // Build details HTML
-    const detailsHTML = `
-        <div style="margin-bottom: 20px;">
-            <div style="font-size: 28px; font-weight: 700; color: #111827; margin-bottom: 4px;">
-                ₹${sip.amount.toLocaleString('en-IN')}
-            </div>
-            <div style="font-size: 14px; color: #6B7280;">
-                ${sip.frequency.charAt(0).toUpperCase() + sip.frequency.slice(1)} SIP
-            </div>
-        </div>
-
-        <div style="background: #F9FAFB; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
-            <div style="font-size: 13px; font-weight: 600; color: #111827; margin-bottom: 12px;">SIP Information</div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                <span style="color: #6B7280; font-size: 14px;">Status</span>
-                <span style="color: ${sip.status === 'active' ? '#10B981' : '#F59E0B'}; font-weight: 600; font-size: 14px;">
-                    ${sip.status === 'active' ? 'Active' : 'Paused'}
-                </span>
-            </div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                <span style="color: #6B7280; font-size: 14px;">Frequency</span>
-                <span style="color: #111827; font-weight: 500; font-size: 14px;">
-                    ${sip.frequency.charAt(0).toUpperCase() + sip.frequency.slice(1)}
-                </span>
-            </div>
-            <div style="display: flex; justify-content: space-between;">
-                <span style="color: #6B7280; font-size: 14px;">Next Debit</span>
-                <span style="color: #111827; font-weight: 500; font-size: 14px;">${sip.nextDebit}</span>
-            </div>
-        </div>
-
-        <div style="margin-bottom: 12px;">
-            <div style="font-size: 13px; font-weight: 600; color: #111827; margin-bottom: 8px;">Funds (${sip.funds.length})</div>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                ${sip.funds.map(fund => `
-                    <div style="padding: 12px; background: white; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px; color: #111827;">
-                        ${fund.name}
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
-
-    // Populate modal
-    document.getElementById('sipDetailsContent').innerHTML = detailsHTML;
-
-    // Show modal
-    const modal = document.getElementById('viewDetailsModal');
-    modal.classList.add('show');
-
-    // Close menu
-    document.getElementById(`menu-${sipId}`).classList.remove('show');
-}
-
-function closeViewDetailsModal() {
-    const modal = document.getElementById('viewDetailsModal');
-    modal.classList.remove('show');
-}
-
-// Toast notification
-function showToast(message) {
-    // Remove existing toast if any
-    const existingToast = document.querySelector('.toast-notification');
-    if (existingToast) existingToast.remove();
-
-    // Create toast
-    const toast = document.createElement('div');
-    toast.className = 'toast-notification';
-    toast.textContent = message;
-    toast.style.cssText = `
-        position: fixed;
-        bottom: 80px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #111827;
-        color: white;
-        padding: 12px 20px;
-        border-radius: 8px;
-        font-size: 14px;
-        font-weight: 500;
-        z-index: 2000;
-        animation: toastSlideUp 0.3s ease;
-    `;
-
-    document.body.appendChild(toast);
-
-    // Remove after 3 seconds
-    setTimeout(() => {
-        toast.style.animation = 'toastSlideDown 0.3s ease';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
-
-// Close modal when clicking outside
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('modal-overlay')) {
-        closeEditSIPModal();
-        closePauseSIPModal();
-        closeCancelSIPModal();
-        closeViewDetailsModal();
-    }
-});
-
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize DOM cache
@@ -1433,16 +961,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize V2 features
     initializeHoldingsV2();
-
-    // Initialize SIP filter chips
-    setTimeout(() => {
-        const filterChips = document.querySelectorAll('.filter-chip');
-        filterChips.forEach(chip => {
-            chip.addEventListener('click', () => {
-                filterSIPs(chip.dataset.filter);
-            });
-        });
-    }, 100);
 
     // Add animation styles
     const style = document.createElement('style');

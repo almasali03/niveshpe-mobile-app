@@ -88,7 +88,7 @@ body {
   height: 100%;
   background: var(--color-bg-primary);
   border-radius: 0;
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
 }
 
@@ -707,126 +707,6 @@ body {
 }
 
 /* SIPs Tab */
-
-/* SIP Summary Section */
-.sip-summary-section {
-  background: white;
-  padding: 12px;
-  margin-bottom: var(--space-md);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-}
-
-.sip-summary-header {
-  margin-bottom: 12px;
-}
-
-.sip-summary-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  margin: 0;
-}
-
-/* Row 1: Frequency amounts (1-3 columns, adapts) */
-.sip-summary-grid-amounts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  gap: 16px;
-  padding: 8px 0 12px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-/* Row 2: Counts (always 2 columns) */
-.sip-summary-grid-counts {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  padding: 12px 0 4px 0;
-}
-
-.sip-summary-item {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.sip-value {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--color-green);
-}
-
-.sip-label {
-  font-size: 11px;
-  color: var(--color-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* SIP Filter Section */
-.sip-filter-section {
-  display: flex;
-  gap: 8px;
-  padding: 0 0 var(--space-md) 0;
-  overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
-}
-
-.sip-filter-section::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
-}
-
-.filter-chip {
-  flex-shrink: 0;
-  padding: 8px 16px;
-  border-radius: var(--radius-full);
-  border: 1.5px solid var(--color-border);
-  background: white;
-  color: var(--color-text-secondary);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.filter-chip:hover {
-  border-color: var(--color-blue);
-  color: var(--color-blue);
-}
-
-.filter-chip.active {
-  background: var(--color-blue);
-  border-color: var(--color-blue);
-  color: white;
-}
-
-.filter-chip:active {
-  transform: scale(0.95);
-}
-
-/* Fund Chips (Pill-style) */
-.sip-fund-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding-top: var(--space-sm);
-}
-
-.fund-chip {
-  display: inline-block;
-  padding: 4px 10px;
-  background: var(--color-surface);
-  border-radius: var(--radius-full);
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-border);
-}
-
-/* SIP Cards List */
 .sip-list {
   display: flex;
   flex-direction: column;
@@ -864,16 +744,6 @@ body {
   }
 }
 
-/* Paused SIP State */
-.sip-card.paused {
-  opacity: 0.6;
-}
-
-.sip-card.paused .sip-status {
-  background: var(--color-orange);
-  animation: none;
-}
-
 .sip-amount {
   font-size: 20px;
   font-weight: 700;
@@ -905,376 +775,6 @@ body {
   padding-top: var(--space-sm);
   font-size: 12px;
   color: var(--color-text-secondary);
-}
-
-.sip-actions {
-  display: flex;
-  gap: var(--space-xs);
-  margin-top: var(--space-sm);
-}
-
-.sip-action-btn {
-  flex: 1;
-  padding: 8px 12px;
-  background: var(--color-surface);
-  border: none;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.sip-action-btn:active {
-  background: var(--color-border);
-  transform: scale(0.95);
-}
-
-/* SIP Card Header Actions (Menu Icon + Status Dot) */
-.sip-header-actions {
-  position: absolute;
-  top: var(--space-md);
-  right: var(--space-md);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  z-index: 1;
-}
-
-/* Compact Menu Icon */
-.sip-menu-icon {
-  width: 20px;
-  height: 20px;
-  background: transparent;
-  border: none;
-  font-size: 16px;
-  line-height: 1;
-  color: var(--color-text-muted);
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s ease;
-  border-radius: 4px;
-}
-
-.sip-menu-icon:hover {
-  color: var(--color-text-primary);
-  background: rgba(0, 0, 0, 0.04);
-}
-
-.sip-menu-icon:active {
-  transform: scale(0.9);
-}
-
-/* Status Dot - now positioned within header-actions */
-.sip-header-actions .sip-status {
-  position: relative;
-  top: 0;
-  right: 0;
-}
-
-/* Menu Popup - now appears below the icon */
-.sip-menu-popup {
-  position: absolute;
-  top: 36px;
-  right: 0;
-  background: white;
-  border-radius: var(--radius-md);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  padding: 4px 0;
-  min-width: 140px;
-  z-index: 10;
-  display: none;
-}
-
-.sip-menu-popup.show {
-  display: block;
-}
-
-.sip-menu-item {
-  padding: 10px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text-primary);
-  cursor: pointer;
-  transition: background 0.2s ease;
-  display: block;
-  width: 100%;
-  text-align: left;
-  border: none;
-  background: none;
-}
-
-.sip-menu-item:hover {
-  background: var(--color-surface);
-}
-
-.sip-menu-item.danger {
-  color: var(--color-red);
-}
-
-/* Resume SIP Button - Prominent action for paused SIPs */
-.sip-resume-btn {
-  width: 100%;
-  margin-top: var(--space-md);
-  padding: 12px;
-  background: var(--color-green);
-  border: none;
-  border-radius: var(--radius-md);
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.2s ease;
-}
-
-.sip-resume-btn:hover {
-  background: #0ea572;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
-}
-
-.sip-resume-btn:active {
-  transform: translateY(0);
-}
-
-.sip-resume-btn svg {
-  flex-shrink: 0;
-}
-
-/* Modal System Styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: none;
-  align-items: flex-end;
-  justify-content: center;
-  z-index: 1000;
-  animation: fadeIn 0.2s ease;
-}
-
-.modal-overlay.show {
-  display: flex;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
-
-.modal-container {
-  background: white;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  width: 100%;
-  max-width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  animation: slideUp 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-container.modal-sm {
-  max-height: auto;
-}
-
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-lg);
-  border-bottom: 1px solid var(--color-border);
-  position: sticky;
-  top: 0;
-  background: white;
-  z-index: 1;
-}
-
-.modal-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  margin: 0;
-}
-
-.modal-close {
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: transparent;
-  color: var(--color-text-muted);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-sm);
-  transition: all 0.2s ease;
-}
-
-.modal-close:hover {
-  background: var(--color-surface);
-  color: var(--color-text-primary);
-}
-
-.modal-content {
-  padding: var(--space-lg);
-  flex: 1;
-}
-
-.modal-message {
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--color-text-secondary);
-  margin: 0;
-  text-align: center;
-}
-
-.modal-message.modal-warning {
-  color: var(--color-text-primary);
-}
-
-.modal-footer {
-  display: flex;
-  gap: var(--space-sm);
-  padding: var(--space-lg);
-  border-top: 1px solid var(--color-border);
-  position: sticky;
-  bottom: 0;
-  background: white;
-}
-
-.modal-btn-primary,
-.modal-btn-secondary,
-.modal-btn-warning,
-.modal-btn-danger {
-  flex: 1;
-  padding: 14px;
-  border-radius: var(--radius-md);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: none;
-}
-
-.modal-btn-primary {
-  background: var(--color-blue);
-  color: white;
-}
-
-.modal-btn-primary:hover {
-  background: #2563eb;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
-}
-
-.modal-btn-secondary {
-  background: white;
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-border);
-}
-
-.modal-btn-secondary:hover {
-  background: var(--color-surface);
-}
-
-.modal-btn-warning {
-  background: #F59E0B;
-  color: white;
-}
-
-.modal-btn-warning:hover {
-  background: #D97706;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
-}
-
-.modal-btn-danger {
-  background: var(--color-red);
-  color: white;
-}
-
-.modal-btn-danger:hover {
-  background: #DC2626;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
-}
-
-/* Form Styles */
-.form-group {
-  margin-bottom: var(--space-lg);
-}
-
-.form-group:last-child {
-  margin-bottom: 0;
-}
-
-.form-label {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-text-primary);
-  margin-bottom: var(--space-xs);
-}
-
-.form-input {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  font-size: 15px;
-  color: var(--color-text-primary);
-  transition: all 0.2s ease;
-  font-family: 'Inter', sans-serif;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: var(--color-blue);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.form-input::placeholder {
-  color: var(--color-text-muted);
-}
-
-/* Toast Notification Animations */
-@keyframes toastSlideUp {
-  from {
-    transform: translate(-50%, 20px);
-    opacity: 0;
-  }
-  to {
-    transform: translate(-50%, 0);
-    opacity: 1;
-  }
-}
-
-@keyframes toastSlideDown {
-  from {
-    transform: translate(-50%, 0);
-    opacity: 1;
-  }
-  to {
-    transform: translate(-50%, 20px);
-    opacity: 0;
-  }
 }
 
 /* Holdings-specific styles */
@@ -1710,8 +1210,7 @@ body {
 
 /* Enhanced Bottom Navigation - Fixed Transparency */
 .bottom-nav {
-    position: sticky;
-    bottom: 0;
+    position: relative;
     background: rgba(255, 255, 255, 0.95);
     border-top: 1px solid rgba(37, 99, 235, 0.1);
     padding: 8px 8px 20px;
@@ -1723,7 +1222,6 @@ body {
     z-index: 100;
     width: 100%;
     flex-shrink: 0;
-    margin-top: auto;
 }
 
 .nav-item {
@@ -3671,17 +3169,16 @@ body {
 }
 
 .sort-dropdown {
-  min-width: 150px;
-  width: fit-content;
-  padding: 6px 12px;
+  flex: 1;
+  padding: var(--space-xs) var(--space-sm);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  background: transparent;
+  background: var(--color-background, #F8F9FA);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-text-primary);
   cursor: pointer;
-  transition: border-color 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .sort-dropdown:focus {

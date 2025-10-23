@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Funds - NiveshPe</title>
+    <title>My Funds v2 - NiveshPe</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/css/my-funds.css">
+    <!-- V2 CSS -->
+    <link rel="stylesheet" href="assets/css/my-funds-v2.css">
 
     <!-- Chart.js for donut chart -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -257,41 +258,6 @@
                     </div>
 
                     <div id="sips-tab" class="tab-content">
-                        <!-- SIP Summary Card -->
-                        <div class="sip-summary-section">
-                            <div class="sip-summary-header">
-                                <h3 class="sip-summary-title">SIP Overview</h3>
-                            </div>
-
-                            <!-- Row 1: Frequency Amounts -->
-                            <div class="sip-summary-grid-amounts">
-                                <div class="sip-summary-item">
-                                    <div class="sip-value">₹33,000</div>
-                                    <div class="sip-label">Monthly</div>
-                                </div>
-                                <div class="sip-summary-item">
-                                    <div class="sip-value">₹5,000</div>
-                                    <div class="sip-label">Weekly</div>
-                                </div>
-                                <div class="sip-summary-item">
-                                    <div class="sip-value">₹150</div>
-                                    <div class="sip-label">Daily</div>
-                                </div>
-                            </div>
-
-                            <!-- Row 2: Counts -->
-                            <div class="sip-summary-grid-counts">
-                                <div class="sip-summary-item">
-                                    <div class="sip-value">5</div>
-                                    <div class="sip-label">Active SIPs</div>
-                                </div>
-                                <div class="sip-summary-item">
-                                    <div class="sip-value">10</div>
-                                    <div class="sip-label">Funds</div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="sip-list">
                             <!-- SIP 1 -->
                             <div class="sip-card">
@@ -331,90 +297,6 @@
                                 <div class="sip-actions">
                                     <button class="sip-action-btn">Edit</button>
                                     <button class="sip-action-btn">Pause</button>
-                                    <button class="sip-action-btn">Stop</button>
-                                </div>
-                            </div>
-
-                            <!-- SIP 3 -->
-                            <div class="sip-card">
-                                <div class="sip-status"></div>
-                                <div class="sip-amount">₹150</div>
-                                <div class="sip-frequency">Daily SIP</div>
-                                <div class="sip-next">
-                                    <svg viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
-                                    </svg>
-                                    Daily
-                                </div>
-                                <div class="sip-funds">
-                                    Investing in HDFC Liquid Fund
-                                </div>
-                                <div class="sip-actions">
-                                    <button class="sip-action-btn">Edit</button>
-                                    <button class="sip-action-btn">Pause</button>
-                                    <button class="sip-action-btn">Stop</button>
-                                </div>
-                            </div>
-
-                            <!-- SIP 4 -->
-                            <div class="sip-card">
-                                <div class="sip-status"></div>
-                                <div class="sip-amount">₹8,000</div>
-                                <div class="sip-frequency">Monthly SIP</div>
-                                <div class="sip-next">
-                                    <svg viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
-                                    </svg>
-                                    Next debit on 5th Dec
-                                </div>
-                                <div class="sip-funds">
-                                    Investing in 2 funds: HDFC Balanced Advantage, Parag Parikh Flexi Cap
-                                </div>
-                                <div class="sip-actions">
-                                    <button class="sip-action-btn">Edit</button>
-                                    <button class="sip-action-btn">Pause</button>
-                                    <button class="sip-action-btn">Stop</button>
-                                </div>
-                            </div>
-
-                            <!-- SIP 5 -->
-                            <div class="sip-card">
-                                <div class="sip-status"></div>
-                                <div class="sip-amount">₹15,000</div>
-                                <div class="sip-frequency">Monthly SIP</div>
-                                <div class="sip-next">
-                                    <svg viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
-                                    </svg>
-                                    Next debit on 1st Dec
-                                </div>
-                                <div class="sip-funds">
-                                    Investing in 4 funds: HDFC Mid Cap, SBI Small Cap, ICICI Bluechip, Nippon India Large Cap
-                                </div>
-                                <div class="sip-actions">
-                                    <button class="sip-action-btn">Edit</button>
-                                    <button class="sip-action-btn">Pause</button>
-                                    <button class="sip-action-btn">Stop</button>
-                                </div>
-                            </div>
-
-                            <!-- SIP 6 (Paused) -->
-                            <div class="sip-card paused">
-                                <div class="sip-status"></div>
-                                <div class="sip-amount">₹3,000</div>
-                                <div class="sip-frequency">Monthly SIP • Paused</div>
-                                <div class="sip-next">
-                                    <svg viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
-                                    </svg>
-                                    Was scheduled for 15th Nov
-                                </div>
-                                <div class="sip-funds">
-                                    Investing in HDFC Mid Cap Fund
-                                </div>
-                                <div class="sip-actions">
-                                    <button class="sip-action-btn">Resume</button>
-                                    <button class="sip-action-btn">Edit</button>
                                     <button class="sip-action-btn">Stop</button>
                                 </div>
                             </div>
@@ -765,101 +647,6 @@
                             </button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Edit SIP Modal -->
-        <div id="editSIPModal" class="modal-overlay">
-            <div class="modal-container">
-                <div class="modal-header">
-                    <h3 class="modal-title">Edit SIP</h3>
-                    <button class="modal-close" onclick="closeEditSIPModal()">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="modal-content">
-                    <form id="editSIPForm">
-                        <div class="form-group">
-                            <label class="form-label">Amount</label>
-                            <input type="number" id="sipAmount" class="form-input" placeholder="Enter amount" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Frequency</label>
-                            <select id="sipFrequency" class="form-input" required>
-                                <option value="monthly">Monthly</option>
-                                <option value="weekly">Weekly</option>
-                                <option value="daily">Daily</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Date</label>
-                            <input type="text" id="sipDate" class="form-input" placeholder="Select date" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="modal-btn-secondary" onclick="closeEditSIPModal()">Cancel</button>
-                    <button class="modal-btn-primary" onclick="saveEditSIP()">Save Changes</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pause SIP Confirmation Modal -->
-        <div id="pauseSIPModal" class="modal-overlay">
-            <div class="modal-container modal-sm">
-                <div class="modal-header">
-                    <h3 class="modal-title">Pause SIP</h3>
-                </div>
-                <div class="modal-content">
-                    <p class="modal-message">Are you sure you want to pause this SIP? No debits will be made until you resume.</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="modal-btn-secondary" onclick="closePauseSIPModal()">Cancel</button>
-                    <button class="modal-btn-warning" onclick="confirmPauseSIP()">Pause SIP</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Cancel SIP Confirmation Modal -->
-        <div id="cancelSIPModal" class="modal-overlay">
-            <div class="modal-container modal-sm">
-                <div class="modal-header">
-                    <h3 class="modal-title">Stop SIP</h3>
-                </div>
-                <div class="modal-content">
-                    <p class="modal-message modal-warning">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="#F59E0B" style="margin: 0 auto 16px; display: block;">
-                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-                        </svg>
-                        Are you sure you want to stop this SIP? This action cannot be undone and you'll need to create a new SIP to continue.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button class="modal-btn-secondary" onclick="closeCancelSIPModal()">Cancel</button>
-                    <button class="modal-btn-danger" onclick="confirmCancelSIP()">Stop SIP</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- View Details Modal -->
-        <div id="viewDetailsModal" class="modal-overlay">
-            <div class="modal-container">
-                <div class="modal-header">
-                    <h3 class="modal-title">SIP Details</h3>
-                    <button class="modal-close" onclick="closeViewDetailsModal()">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="modal-content" id="sipDetailsContent">
-                    <!-- Content will be populated dynamically -->
-                </div>
-                <div class="modal-footer">
-                    <button class="modal-btn-primary" onclick="closeViewDetailsModal()">Close</button>
                 </div>
             </div>
         </div>
@@ -1275,7 +1062,9 @@
         }
 
     </script>
-    <script src="funds-data.js"></script>
-    <script src="assets/js/my-funds.js"></script>
+    <!-- Load funds data v2 -->
+    <script src="funds-data-v2.js"></script>
+    <!-- Load v2 JavaScript -->
+    <script src="assets/js/my-funds-v2.js"></script>
 </body>
 </html>
