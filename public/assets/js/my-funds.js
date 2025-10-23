@@ -333,11 +333,6 @@ class TabManager {
                 <div class="sip-card ${isPaused ? 'paused' : ''}" data-frequency="${sip.frequency}" data-status="${sip.status}">
                     <div class="sip-status"></div>
 
-                    <button class="sip-menu-btn" onclick="toggleSIPMenu(event, '${sip.id}')">⋮</button>
-                    <div class="sip-menu-popup" id="menu-${sip.id}">
-                        ${menuActions}
-                    </div>
-
                     <div class="sip-amount">${formatAmount(sip.amount)}</div>
                     <div class="sip-frequency">${sip.frequency.charAt(0).toUpperCase() + sip.frequency.slice(1)} SIP${statusText ? ' • ' + statusText : ''}</div>
                     <div class="sip-next">
@@ -348,6 +343,18 @@ class TabManager {
                     </div>
                     <div class="sip-fund-chips">
                         ${fundChipsHTML}
+                    </div>
+
+                    <div class="sip-card-footer">
+                        <button class="sip-manage-btn" onclick="toggleSIPMenu(event, '${sip.id}')">
+                            Manage
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="sip-menu-popup" id="menu-${sip.id}">
+                            ${menuActions}
+                        </div>
                     </div>
                 </div>
             `;
