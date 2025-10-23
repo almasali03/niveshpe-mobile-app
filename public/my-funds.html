@@ -257,6 +257,35 @@
                     </div>
 
                     <div id="sips-tab" class="tab-content">
+                        <!-- SIP Summary Card -->
+                        <div class="sip-summary-section">
+                            <div class="sip-summary-header">
+                                <h3 class="sip-summary-title">SIP Overview</h3>
+                            </div>
+                            <div class="sip-summary-grid">
+                                <div class="sip-summary-item">
+                                    <div class="sip-value">₹33,000</div>
+                                    <div class="sip-label">Monthly</div>
+                                </div>
+                                <div class="sip-summary-item">
+                                    <div class="sip-value">₹5,000</div>
+                                    <div class="sip-label">Weekly</div>
+                                </div>
+                                <div class="sip-summary-item">
+                                    <div class="sip-value">₹150</div>
+                                    <div class="sip-label">Daily</div>
+                                </div>
+                                <div class="sip-summary-item">
+                                    <div class="sip-value">5</div>
+                                    <div class="sip-label">Active SIPs</div>
+                                </div>
+                                <div class="sip-summary-item">
+                                    <div class="sip-value">10</div>
+                                    <div class="sip-label">Funds</div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="sip-list">
                             <!-- SIP 1 -->
                             <div class="sip-card">
@@ -296,6 +325,90 @@
                                 <div class="sip-actions">
                                     <button class="sip-action-btn">Edit</button>
                                     <button class="sip-action-btn">Pause</button>
+                                    <button class="sip-action-btn">Stop</button>
+                                </div>
+                            </div>
+
+                            <!-- SIP 3 -->
+                            <div class="sip-card">
+                                <div class="sip-status"></div>
+                                <div class="sip-amount">₹150</div>
+                                <div class="sip-frequency">Daily SIP</div>
+                                <div class="sip-next">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                                    </svg>
+                                    Daily
+                                </div>
+                                <div class="sip-funds">
+                                    Investing in HDFC Liquid Fund
+                                </div>
+                                <div class="sip-actions">
+                                    <button class="sip-action-btn">Edit</button>
+                                    <button class="sip-action-btn">Pause</button>
+                                    <button class="sip-action-btn">Stop</button>
+                                </div>
+                            </div>
+
+                            <!-- SIP 4 -->
+                            <div class="sip-card">
+                                <div class="sip-status"></div>
+                                <div class="sip-amount">₹8,000</div>
+                                <div class="sip-frequency">Monthly SIP</div>
+                                <div class="sip-next">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                                    </svg>
+                                    Next debit on 5th Dec
+                                </div>
+                                <div class="sip-funds">
+                                    Investing in 2 funds: HDFC Balanced Advantage, Parag Parikh Flexi Cap
+                                </div>
+                                <div class="sip-actions">
+                                    <button class="sip-action-btn">Edit</button>
+                                    <button class="sip-action-btn">Pause</button>
+                                    <button class="sip-action-btn">Stop</button>
+                                </div>
+                            </div>
+
+                            <!-- SIP 5 -->
+                            <div class="sip-card">
+                                <div class="sip-status"></div>
+                                <div class="sip-amount">₹15,000</div>
+                                <div class="sip-frequency">Monthly SIP</div>
+                                <div class="sip-next">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                                    </svg>
+                                    Next debit on 1st Dec
+                                </div>
+                                <div class="sip-funds">
+                                    Investing in 4 funds: HDFC Mid Cap, SBI Small Cap, ICICI Bluechip, Nippon India Large Cap
+                                </div>
+                                <div class="sip-actions">
+                                    <button class="sip-action-btn">Edit</button>
+                                    <button class="sip-action-btn">Pause</button>
+                                    <button class="sip-action-btn">Stop</button>
+                                </div>
+                            </div>
+
+                            <!-- SIP 6 (Paused) -->
+                            <div class="sip-card paused">
+                                <div class="sip-status"></div>
+                                <div class="sip-amount">₹3,000</div>
+                                <div class="sip-frequency">Monthly SIP • Paused</div>
+                                <div class="sip-next">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                                    </svg>
+                                    Was scheduled for 15th Nov
+                                </div>
+                                <div class="sip-funds">
+                                    Investing in HDFC Mid Cap Fund
+                                </div>
+                                <div class="sip-actions">
+                                    <button class="sip-action-btn">Resume</button>
+                                    <button class="sip-action-btn">Edit</button>
                                     <button class="sip-action-btn">Stop</button>
                                 </div>
                             </div>
