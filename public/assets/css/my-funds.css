@@ -706,448 +706,77 @@ body {
   height: 100%;
 }
 
-/* ==================== SIPs Tab (Enhanced V2) ==================== */
-
-/* SIP Summary Card */
-.sip-summary-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: var(--radius-lg);
-  padding: var(--space-md);
-  margin-bottom: var(--space-md);
-  color: white;
-}
-
-.sip-summary-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-md);
-}
-
-.sip-summary-header h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0;
-  color: white;
-}
-
-.sip-count-badge {
-  background: rgba(255, 255, 255, 0.25);
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
-  backdrop-filter: blur(10px);
-}
-
-.sip-summary-metrics {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-md);
-}
-
-.sip-metric-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.sip-metric-label {
-  font-size: 12px;
-  opacity: 0.9;
-  font-weight: 500;
-}
-
-.sip-metric-value {
-  font-size: 16px;
-  font-weight: 700;
-  color: white;
-}
-
-.sip-metric-value.positive {
-  color: #A7F3D0;
-}
-
-/* SIP Summary Skeleton */
-.sip-summary-skeleton {
-  background: white;
-  border-radius: var(--radius-lg);
-  padding: var(--space-md);
-  margin-bottom: var(--space-md);
-  border: 1px solid var(--color-border);
-}
-
-.sip-summary-skeleton-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-md);
-}
-
-.sip-summary-skeleton-metrics {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-md);
-}
-
-.sip-metric-skeleton-item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-/* Sort & Filter Section */
-.sip-sort-filter-section {
-  display: flex;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-md);
-  align-items: center;
-}
-
-.sip-sort-control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-}
-
-.sip-sort-control label {
-  font-size: 13px;
-  color: var(--color-text-secondary);
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.sip-filter-control {
-  flex-shrink: 0;
-}
-
-/* SIP Cards List */
+/* SIPs Tab */
 .sip-list {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
 }
 
-/* Enhanced SIP Card */
 .sip-card {
   background: white;
   border-radius: var(--radius-lg);
   padding: var(--space-md);
   border: 1px solid var(--color-border);
   position: relative;
-  transition: all 0.2s ease;
 }
 
-.sip-card:active {
-  background: rgba(37, 99, 235, 0.02);
-  transform: scale(0.99);
+.sip-status {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 8px;
+  height: 8px;
+  background: var(--color-green);
+  border-radius: var(--radius-full);
+  animation: pulse 2s infinite;
 }
 
-.sip-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: var(--space-xs);
-}
-
-.sip-card-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
 }
 
 .sip-amount {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
 }
 
-.sip-status-badge {
-  padding: 3px 8px;
-  border-radius: 10px;
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.sip-status-badge.active {
-  background: #E8F5E8;
-  color: #2E7D32;
-}
-
-.sip-status-badge.paused {
-  background: #FFF3E0;
-  color: #F57C00;
-}
-
-.sip-status-badge.failed {
-  background: #FFEBEE;
-  color: #C62828;
-}
-
-/* Three-dot menu button */
-.sip-menu-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-sm);
-  background: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--color-text-muted);
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-}
-
-.sip-menu-btn:hover {
-  background: var(--color-surface);
-}
-
-.sip-menu-btn:active {
-  background: var(--color-border);
-  transform: scale(0.95);
-}
-
-.sip-menu-btn svg {
-  width: 20px;
-  height: 20px;
-}
-
-/* SIP Frequency */
 .sip-frequency {
   font-size: 12px;
   color: var(--color-text-muted);
   margin-bottom: var(--space-sm);
-  display: flex;
-  align-items: center;
-  gap: 4px;
 }
 
-.sip-frequency-icon {
+.sip-next {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.sip-next svg {
   width: 14px;
   height: 14px;
-  color: var(--color-text-muted);
 }
 
-/* Performance Metrics Row */
-.sip-performance-metrics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-sm);
-  padding: var(--space-sm) 0;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-  margin: var(--space-sm) 0;
-}
-
-.sip-performance-item {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.sip-performance-label {
-  font-size: 11px;
-  color: var(--color-text-muted);
-  font-weight: 500;
-}
-
-.sip-performance-value {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-}
-
-.sip-performance-value.positive {
-  color: var(--color-green);
-}
-
-.sip-performance-value.negative {
-  color: var(--color-red);
-}
-
-/* Installment Progress */
-.sip-installment-progress {
-  margin-bottom: var(--space-sm);
-}
-
-.sip-installment-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-.sip-installment-label {
-  font-size: 11px;
-  color: var(--color-text-muted);
-  font-weight: 500;
-}
-
-.sip-installment-count {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--color-text-secondary);
-}
-
-.sip-installment-bar {
-  background: #f0f0f0;
-  height: 4px;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.sip-installment-fill {
-  background: linear-gradient(90deg, #667eea, #764ba2);
-  height: 100%;
-  border-radius: 2px;
-  transition: width 0.3s ease;
-}
-
-/* Next Debit Info */
-.sip-next-debit {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  background: rgba(37, 99, 235, 0.05);
-  border-radius: var(--radius-sm);
-  margin-bottom: var(--space-sm);
-}
-
-.sip-next-debit svg {
-  width: 16px;
-  height: 16px;
-  color: var(--color-blue);
-  flex-shrink: 0;
-}
-
-.sip-next-debit-text {
+.sip-funds {
+  padding-top: var(--space-sm);
   font-size: 12px;
-  color: var(--color-text-primary);
-  font-weight: 500;
-}
-
-/* Fund Allocation List */
-.sip-funds-list {
-  margin-bottom: var(--space-sm);
-}
-
-.sip-fund-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 0;
-  font-size: 12px;
-}
-
-.sip-fund-name {
   color: var(--color-text-secondary);
-  flex: 1;
 }
 
-.sip-fund-amount {
-  font-weight: 600;
-  color: var(--color-text-primary);
-}
-
-.sip-fund-allocation {
-  margin-left: 8px;
-  padding: 2px 6px;
-  background: var(--color-surface);
-  border-radius: 4px;
-  font-size: 10px;
-  color: var(--color-text-muted);
-}
-
-/* SIP Skeleton Cards */
-.sip-skeleton-card {
-  background: white;
-  border-radius: var(--radius-lg);
-  padding: var(--space-md);
-  border: 1px solid var(--color-border);
-  margin-bottom: var(--space-sm);
-}
-
-.sip-skeleton-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-xs);
-}
-
-.sip-skeleton-metrics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-sm);
-  padding: var(--space-sm) 0;
-}
-
-.sip-skeleton-metric {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-/* Empty State */
-.sip-empty-state {
-  text-align: center;
-  padding: var(--space-xl) var(--space-md);
-}
-
-.empty-state-icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto var(--space-md);
-  color: var(--color-text-muted);
-  opacity: 0.5;
-}
-
-.empty-state-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  margin: 0 0 var(--space-xs);
-}
-
-.empty-state-description {
-  font-size: 14px;
-  color: var(--color-text-secondary);
-  margin: 0 0 var(--space-md);
-  line-height: 1.5;
-}
-
-.empty-state-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 12px 24px;
-  background: var(--color-blue);
-  color: white;
-  border: none;
-  border-radius: var(--radius-md);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.empty-state-cta:active {
-  transform: scale(0.98);
-  background: #1d4ed8;
-}
-
-.empty-state-cta svg {
-  width: 16px;
-  height: 16px;
-}
-
-/* Legacy button styles (keep for backward compatibility) */
 .sip-actions {
   display: flex;
   gap: var(--space-xs);
@@ -1170,18 +799,6 @@ body {
 .sip-action-btn:active {
   background: var(--color-border);
   transform: scale(0.95);
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-  }
 }
 
 /* Holdings-specific styles */
