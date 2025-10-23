@@ -1379,7 +1379,7 @@ function showToast(message) {
     toast.className = 'toast-notification';
     toast.textContent = message;
     toast.style.cssText = `
-        position: fixed;
+        position: absolute;
         bottom: 80px;
         left: 50%;
         transform: translateX(-50%);
@@ -1393,7 +1393,9 @@ function showToast(message) {
         animation: toastSlideUp 0.3s ease;
     `;
 
-    document.body.appendChild(toast);
+    // Append to mobile-container or iphone-screen
+    const container = document.querySelector('.iphone-screen') || document.body;
+    container.appendChild(toast);
 
     // Remove after 3 seconds
     setTimeout(() => {
