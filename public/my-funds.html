@@ -806,18 +806,18 @@
             </div>
         </div>
 
-        <!-- Pause SIP Confirmation Modal -->
-        <div id="pauseSIPModal" class="modal-overlay">
+        <!-- Skip Next SIP Confirmation Modal -->
+        <div id="skipSIPModal" class="modal-overlay">
             <div class="modal-container modal-sm">
                 <div class="modal-header">
-                    <h3 class="modal-title">Pause SIP</h3>
+                    <h3 class="modal-title">Skip Next Installment</h3>
                 </div>
                 <div class="modal-content">
-                    <p class="modal-message">Are you sure you want to pause this SIP? No debits will be made until you resume.</p>
+                    <p class="modal-message">Skip the SIP installment scheduled for <strong id="skipDateDisplay"></strong>? Your SIP will automatically resume with the following installment.</p>
                 </div>
                 <div class="modal-footer">
-                    <button class="modal-btn-secondary" onclick="closePauseSIPModal()">Cancel</button>
-                    <button class="modal-btn-warning" onclick="confirmPauseSIP()">Pause SIP</button>
+                    <button class="modal-btn-secondary" onclick="closeSkipSIPModal()">Cancel</button>
+                    <button class="modal-btn-warning" onclick="confirmSkipSIP()">Skip</button>
                 </div>
             </div>
         </div>
@@ -859,6 +859,52 @@
                 </div>
                 <div class="modal-footer">
                     <button class="modal-btn-primary" onclick="closeViewDetailsModal()">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- OTP Verification Modal -->
+        <div class="otp-overlay" id="otpOverlay">
+            <!-- Backdrop -->
+            <div class="otp-overlay-backdrop" onclick="closeOTPModal()"></div>
+
+            <!-- Modal -->
+            <div class="otp-overlay-modal">
+                <!-- Drag Handle -->
+                <div class="otp-drag-handle">
+                    <div class="otp-drag-bar"></div>
+                </div>
+
+                <!-- Modal Header -->
+                <div class="otp-modal-header">
+                    <h2 class="otp-modal-title">Verify with OTP</h2>
+                    <p class="otp-modal-subtitle" id="otpSubtitle">Enter the 4-digit code sent to your registered mobile</p>
+                </div>
+
+                <!-- Content -->
+                <div class="otp-content">
+                    <div class="otp-input-section">
+                        <div class="otp-input-container">
+                            <input type="text" class="otp-input" maxlength="1" id="otp1" inputmode="numeric">
+                            <input type="text" class="otp-input" maxlength="1" id="otp2" inputmode="numeric">
+                            <input type="text" class="otp-input" maxlength="1" id="otp3" inputmode="numeric">
+                            <input type="text" class="otp-input" maxlength="1" id="otp4" inputmode="numeric">
+                        </div>
+
+                        <div class="otp-timer">
+                            Didn't receive code? <button class="otp-resend-link" onclick="resendOTP()">Resend OTP</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Continue Button -->
+                <div class="otp-continue-section">
+                    <button class="otp-continue-btn" id="verifyOtpBtn" onclick="verifyOTP()">
+                        <span>Verify & Continue</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>

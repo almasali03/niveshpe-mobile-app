@@ -237,8 +237,9 @@ const sipsData = [
         amount: 3000,
         frequency: 'monthly',
         nextDebit: '15th Nov',
-        nextDebitFull: 'Was scheduled for 15th Nov',
-        status: 'paused',
+        nextDebitFull: 'Skipped: 15th Nov',
+        skippedDate: '15th Nov',
+        status: 'skipped',
         funds: [
             { id: 'hdfc-mid-cap', name: 'HDFC Mid Cap Fund' }
         ]

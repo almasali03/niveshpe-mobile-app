@@ -304,14 +304,14 @@ class TabManager {
                 <button class="filter-chip" data-filter="monthly">Monthly</button>
                 <button class="filter-chip" data-filter="weekly">Weekly</button>
                 <button class="filter-chip" data-filter="daily">Daily</button>
-                <button class="filter-chip" data-filter="paused">Paused</button>
+                <button class="filter-chip" data-filter="skipped">Skipped</button>
             </div>
         `;
 
         // Render SIP cards
         const cardsHTML = sipsData.map(sip => {
-            const isPaused = sip.status === 'paused';
-            const statusText = isPaused ? 'Paused' : '';
+            const isSkipped = sip.status === 'skipped';
+            const statusText = isSkipped ? 'Skipped' : '';
 
             // Render fund chips
             const fundChipsHTML = sip.funds.map(fund =>
@@ -319,20 +319,19 @@ class TabManager {
             ).join('');
 
             // Menu actions based on status
-            const menuActions = isPaused ? `
-                <button class="sip-menu-item" onclick="resumeSIP('${sip.id}')">Resume</button>
+            const menuActions = isSkipped ? `
                 <button class="sip-menu-item" onclick="viewSIPDetails('${sip.id}')">View Details</button>
                 <button class="sip-menu-item" onclick="editSIP('${sip.id}')">Edit</button>
                 <button class="sip-menu-item danger" onclick="stopSIP('${sip.id}')">Stop</button>
             ` : `
                 <button class="sip-menu-item" onclick="viewSIPDetails('${sip.id}')">View Details</button>
                 <button class="sip-menu-item" onclick="editSIP('${sip.id}')">Edit</button>
-                <button class="sip-menu-item" onclick="pauseSIP('${sip.id}')">Pause</button>
+                <button class="sip-menu-item" onclick="skipNextSIP('${sip.id}')">Skip Next</button>
                 <button class="sip-menu-item danger" onclick="stopSIP('${sip.id}')">Stop</button>
             `;
 
             return `
-                <div class="sip-card ${isPaused ? 'paused' : ''}" data-frequency="${sip.frequency}" data-status="${sip.status}">
+                <div class="sip-card ${isSkipped ? 'skipped' : ''}" data-frequency="${sip.frequency}" data-status="${sip.status}">
                     <div class="sip-header-actions">
                         <button class="sip-menu-icon" onclick="toggleSIPMenu(event, '${sip.id}')">⋮</button>
                         <div class="sip-status"></div>
@@ -352,14 +351,6 @@ class TabManager {
                     <div class="sip-fund-chips">
                         ${fundChipsHTML}
                     </div>
-                    ${isPaused ? `
-                    <button class="sip-resume-btn" onclick="resumeSIP('${sip.id}')">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-                            <path d="M8 5v14l11-7z"/>
-                        </svg>
-                        Resume SIP
-                    </button>
-                    ` : ''}
                 </div>
             `;
         }).join('');
@@ -1046,8 +1037,8 @@ function filterSIPs(filterType) {
 
         if (filterType === 'all') {
             card.style.display = 'block';
-        } else if (filterType === 'paused') {
-            card.style.display = cardStatus === 'paused' ? 'block' : 'none';
+        } else if (filterType === 'skipped') {
+            card.style.display = cardStatus === 'skipped' ? 'block' : 'none';
         } else {
             card.style.display = (cardFrequency === filterType && cardStatus === 'active') ? 'block' : 'none';
         }
@@ -1140,118 +1131,65 @@ function saveEditSIP() {
     const frequency = document.getElementById('sipFrequency').value;
     const date = document.getElementById('sipDate').value;
 
-    // Find and update SIP
-    const sipIndex = sipsData.findIndex(s => s.id === currentSIPId);
-    if (sipIndex !== -1) {
-        sipsData[sipIndex].amount = amount;
-        sipsData[sipIndex].frequency = frequency;
-        sipsData[sipIndex].nextDebit = date;
-
-        // Re-render SIP cards
-        const sipsTab = document.getElementById('sips-tab');
-        if (sipsTab) {
-            const tabContent = window.tabManager.tabs.find(t => t.id === 'sips').content;
-            sipsTab.innerHTML = tabContent.getSIPsHTML();
-
-            // Re-initialize filter chips
-            setTimeout(() => {
-                const filterChips = document.querySelectorAll('.filter-chip');
-                filterChips.forEach(chip => {
-                    chip.addEventListener('click', () => {
-                        filterSIPs(chip.dataset.filter);
-                    });
-                });
-            }, 100);
-        }
-
-        // Show success toast
-        showToast('SIP updated successfully');
-    }
-
+    // Close edit modal
     closeEditSIPModal();
+
+    // Store pending action and show OTP
+    pendingAction = {
+        type: 'edit',
+        sipId: currentSIPId,
+        data: {
+            amount,
+            frequency,
+            date
+        }
+    };
+
+    showOTPModal('edit');
 }
 
-// Pause SIP Modal
-function pauseSIP(sipId) {
+// Skip Next SIP Modal
+function skipNextSIP(sipId) {
     currentSIPId = sipId;
+    const sip = sipsData.find(s => s.id === sipId);
+    if (!sip) return;
+
+    // Set skip date display
+    document.getElementById('skipDateDisplay').textContent = sip.nextDebit;
 
     // Show confirmation modal
-    const modal = document.getElementById('pauseSIPModal');
+    const modal = document.getElementById('skipSIPModal');
     modal.classList.add('show');
 
     // Close menu
     document.getElementById(`menu-${sipId}`).classList.remove('show');
 }
 
-function closePauseSIPModal() {
-    const modal = document.getElementById('pauseSIPModal');
+function closeSkipSIPModal() {
+    const modal = document.getElementById('skipSIPModal');
     modal.classList.remove('show');
     currentSIPId = null;
 }
 
-function confirmPauseSIP() {
+function confirmSkipSIP() {
     if (!currentSIPId) return;
 
-    // Find and update SIP status
-    const sipIndex = sipsData.findIndex(s => s.id === currentSIPId);
-    if (sipIndex !== -1) {
-        sipsData[sipIndex].status = 'paused';
+    const sip = sipsData.find(s => s.id === currentSIPId);
+    if (!sip) return;
 
-        // Re-render SIP cards
-        const sipsTab = document.getElementById('sips-tab');
-        if (sipsTab) {
-            const tabContent = window.tabManager.tabs.find(t => t.id === 'sips').content;
-            sipsTab.innerHTML = tabContent.getSIPsHTML();
+    // Close skip modal
+    closeSkipSIPModal();
 
-            // Re-initialize filter chips
-            setTimeout(() => {
-                const filterChips = document.querySelectorAll('.filter-chip');
-                filterChips.forEach(chip => {
-                    chip.addEventListener('click', () => {
-                        filterSIPs(chip.dataset.filter);
-                    });
-                });
-            }, 100);
+    // Store pending action and show OTP
+    pendingAction = {
+        type: 'skip',
+        sipId: currentSIPId,
+        data: {
+            skipDate: sip.nextDebit
         }
+    };
 
-        // Show success toast
-        showToast('SIP paused successfully');
-    }
-
-    closePauseSIPModal();
-}
-
-// Resume SIP (No confirmation needed)
-function resumeSIP(sipId) {
-    // Find and update SIP status
-    const sipIndex = sipsData.findIndex(s => s.id === sipId);
-    if (sipIndex !== -1) {
-        sipsData[sipIndex].status = 'active';
-
-        // Re-render SIP cards
-        const sipsTab = document.getElementById('sips-tab');
-        if (sipsTab) {
-            const tabContent = window.tabManager.tabs.find(t => t.id === 'sips').content;
-            sipsTab.innerHTML = tabContent.getSIPsHTML();
-
-            // Re-initialize filter chips
-            setTimeout(() => {
-                const filterChips = document.querySelectorAll('.filter-chip');
-                filterChips.forEach(chip => {
-                    chip.addEventListener('click', () => {
-                        filterSIPs(chip.dataset.filter);
-                    });
-                });
-            }, 100);
-        }
-
-        // Show success toast
-        showToast('SIP resumed successfully');
-    }
-
-    // Close menu if open
-    const menu = document.getElementById(`menu-${sipId}`);
-    if (menu) menu.classList.remove('show');
+    showOTPModal('skip');
 }
 
 // Cancel/Stop SIP Modal
@@ -1368,6 +1306,145 @@ function closeViewDetailsModal() {
     modal.classList.remove('show');
 }
 
+// ======================================
+// OTP Verification System
+// ======================================
+
+let pendingAction = null;
+
+function showOTPModal(actionType) {
+    // Update subtitle based on action
+    const subtitle = document.getElementById('otpSubtitle');
+    if (actionType === 'edit') {
+        subtitle.textContent = 'Confirm SIP changes with the 4-digit code sent to your registered mobile';
+    } else if (actionType === 'skip') {
+        subtitle.textContent = 'Confirm skipping installment with the 4-digit code sent to your registered mobile';
+    }
+
+    // Show OTP modal
+    const modal = document.getElementById('otpOverlay');
+    modal.classList.add('show');
+
+    // Focus first OTP input
+    setTimeout(() => {
+        document.getElementById('otp1').focus();
+    }, 300);
+}
+
+function closeOTPModal() {
+    const modal = document.getElementById('otpOverlay');
+    const otpModal = document.querySelector('.otp-overlay-modal');
+    const backdrop = document.querySelector('.otp-overlay-backdrop');
+
+    otpModal.style.animation = 'otpSlideDown 0.3s ease-out';
+    backdrop.style.animation = 'otpFadeOut 0.3s ease-out';
+
+    setTimeout(() => {
+        modal.classList.remove('show');
+
+        // Clear all inputs
+        const otpInputs = document.querySelectorAll('.otp-input');
+        otpInputs.forEach(input => {
+            input.value = '';
+            input.classList.remove('filled');
+        });
+
+        // Reset verify button
+        const verifyBtn = document.getElementById('verifyOtpBtn');
+        verifyBtn.classList.remove('enabled');
+
+        // Reset animations
+        otpModal.style.animation = '';
+        backdrop.style.animation = '';
+
+        // Clear pending action
+        pendingAction = null;
+    }, 300);
+}
+
+function verifyOTP() {
+    const otpInputs = document.querySelectorAll('.otp-input');
+    const otpValue = Array.from(otpInputs).map(input => input.value).join('');
+
+    if (otpValue.length !== 4) return;
+
+    // Close OTP modal
+    closeOTPModal();
+
+    // Execute pending action
+    if (!pendingAction) return;
+
+    if (pendingAction.type === 'edit') {
+        // Apply edit changes
+        const sipIndex = sipsData.findIndex(s => s.id === pendingAction.sipId);
+        if (sipIndex !== -1) {
+            sipsData[sipIndex].amount = pendingAction.data.amount;
+            sipsData[sipIndex].frequency = pendingAction.data.frequency;
+            sipsData[sipIndex].nextDebit = pendingAction.data.date;
+            sipsData[sipIndex].nextDebitFull = `Next debit on ${pendingAction.data.date}`;
+
+            // Re-render
+            refreshSIPList();
+
+            // Show success toast
+            showToast('SIP updated successfully');
+        }
+    } else if (pendingAction.type === 'skip') {
+        // Apply skip
+        const sipIndex = sipsData.findIndex(s => s.id === pendingAction.sipId);
+        if (sipIndex !== -1) {
+            sipsData[sipIndex].status = 'skipped';
+            sipsData[sipIndex].skippedDate = pendingAction.data.skipDate;
+            sipsData[sipIndex].nextDebitFull = `Skipped: ${pendingAction.data.skipDate}`;
+
+            // Re-render
+            refreshSIPList();
+
+            // Show success toast
+            showToast('SIP installment skipped successfully');
+        }
+    }
+
+    pendingAction = null;
+}
+
+function resendOTP() {
+    // Clear all inputs
+    const otpInputs = document.querySelectorAll('.otp-input');
+    otpInputs.forEach(input => {
+        input.value = '';
+        input.classList.remove('filled');
+    });
+
+    // Focus first input
+    document.getElementById('otp1').focus();
+
+    // Disable verify button
+    document.getElementById('verifyOtpBtn').classList.remove('enabled');
+
+    // Show feedback
+    showToast('OTP sent successfully');
+}
+
+// Helper function to refresh SIP list
+function refreshSIPList() {
+    const sipsTab = document.getElementById('sips-tab');
+    if (sipsTab) {
+        const tabContent = window.tabManager.tabs.find(t => t.id === 'sips').content;
+        sipsTab.innerHTML = tabContent.getSIPsHTML();
+
+        // Re-initialize filter chips
+        setTimeout(() => {
+            const filterChips = document.querySelectorAll('.filter-chip');
+            filterChips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    filterSIPs(chip.dataset.filter);
+                });
+            });
+        }, 100);
+    }
+}
+
 // Toast notification
 function showToast(message) {
     // Remove existing toast if any
@@ -1408,7 +1485,7 @@ function showToast(message) {
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('modal-overlay')) {
         closeEditSIPModal();
-        closePauseSIPModal();
+        closeSkipSIPModal();
         closeCancelSIPModal();
         closeViewDetailsModal();
     }
@@ -1446,6 +1523,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, 100);
 
+    // Initialize OTP Input Handling
+    const otpInputs = document.querySelectorAll('.otp-input');
+    otpInputs.forEach((input, index) => {
+        input.addEventListener('input', function(e) {
+            const value = e.target.value;
+
+            if (value && /^[0-9]$/.test(value)) {
+                this.classList.add('filled');
+
+                // Move to next input
+                if (index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+
+                // Check if all inputs are filled
+                checkOTPComplete();
+            } else {
+                this.classList.remove('filled');
+                this.value = '';
+            }
+        });
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && !this.value && index > 0) {
+                otpInputs[index - 1].focus();
+                otpInputs[index - 1].classList.remove('filled');
+                otpInputs[index - 1].value = '';
+            }
+        });
+
+        input.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const pastedData = e.clipboardData.getData('text').replace(/\D/g, '');
+
+            if (pastedData.length === 4) {
+                otpInputs.forEach((inp, i) => {
+                    if (pastedData[i]) {
+                        inp.value = pastedData[i];
+                        inp.classList.add('filled');
+                    }
+                });
+                checkOTPComplete();
+            }
+        });
+    });
+
+    function checkOTPComplete() {
+        const filledInputs = document.querySelectorAll('.otp-input.filled');
+        const verifyBtn = document.getElementById('verifyOtpBtn');
+
+        if (filledInputs.length === 4) {
+            verifyBtn.classList.add('enabled');
+        } else {
+            verifyBtn.classList.remove('enabled');
+        }
+    }
+
     // Add animation styles
     const style = document.createElement('style');
     style.textContent = `
@@ -1463,5 +1597,5 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
-    console.log('My Funds v2 page initialized with optimizations');
+    console.log('My Funds v2 page initialized with Skip + OTP functionality');
 });
