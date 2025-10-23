@@ -931,54 +931,55 @@ body {
   transform: scale(0.95);
 }
 
-/* SIP Card Footer & Manage Button */
-.sip-card-footer {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: var(--space-sm);
-  padding-top: var(--space-sm);
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  position: relative;
-}
-
-.sip-manage-btn {
-  padding: 8px 14px;
-  background: white;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-text-primary);
-  cursor: pointer;
+/* SIP Card Header Actions (Menu Icon + Status Dot) */
+.sip-header-actions {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
   display: flex;
   align-items: center;
-  gap: 6px;
-  transition: all 0.2s ease;
+  gap: 8px;
+  z-index: 1;
 }
 
-.sip-manage-btn:hover {
-  background: var(--color-surface);
-  border-color: var(--color-blue);
-  color: var(--color-blue);
+/* Compact Menu Icon */
+.sip-menu-icon {
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  border-radius: 4px;
 }
 
-.sip-manage-btn:active {
-  transform: scale(0.95);
+.sip-menu-icon:hover {
+  color: var(--color-text-primary);
+  background: rgba(0, 0, 0, 0.04);
 }
 
-.sip-manage-btn svg {
-  transition: transform 0.2s ease;
-  stroke-width: 2.5;
+.sip-menu-icon:active {
+  transform: scale(0.9);
 }
 
-.sip-menu-popup.show + .sip-manage-btn svg,
-.sip-manage-btn:active svg {
-  transform: rotate(180deg);
+/* Status Dot - now positioned within header-actions */
+.sip-header-actions .sip-status {
+  position: relative;
+  top: 0;
+  right: 0;
 }
 
+/* Menu Popup - now appears below the icon */
 .sip-menu-popup {
   position: absolute;
-  bottom: 45px;
+  top: 36px;
   right: 0;
   background: white;
   border-radius: var(--radius-md);
