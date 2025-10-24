@@ -331,9 +331,9 @@ class TabManager {
             `;
 
             return `
-                <div class="sip-card ${isSkipped ? 'skipped' : ''}" data-frequency="${sip.frequency}" data-status="${sip.status}">
+                <div class="sip-card ${isSkipped ? 'skipped' : ''}" data-frequency="${sip.frequency}" data-status="${sip.status}" onclick="viewSIPDetails('${sip.id}')">
                     <div class="sip-header-actions">
-                        <button class="sip-menu-icon" onclick="toggleSIPMenu(event, '${sip.id}')">⋮</button>
+                        <button class="sip-menu-icon" onclick="event.stopPropagation(); toggleSIPMenu(event, '${sip.id}')">⋮</button>
                         <div class="sip-status"></div>
                     </div>
                     <div class="sip-menu-popup" id="menu-${sip.id}">
