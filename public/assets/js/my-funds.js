@@ -320,14 +320,14 @@ class TabManager {
 
             // Menu actions based on status
             const menuActions = isSkipped ? `
-                <button class="sip-menu-item" onclick="viewSIPDetails('${sip.id}')">View Details</button>
-                <button class="sip-menu-item" onclick="editSIP('${sip.id}')">Edit</button>
-                <button class="sip-menu-item danger" onclick="stopSIP('${sip.id}')">Stop</button>
+                <button class="sip-menu-item" onclick="event.stopPropagation(); viewSIPDetails('${sip.id}')">View Details</button>
+                <button class="sip-menu-item" onclick="event.stopPropagation(); editSIP('${sip.id}')">Edit</button>
+                <button class="sip-menu-item danger" onclick="event.stopPropagation(); stopSIP('${sip.id}')">Stop</button>
             ` : `
-                <button class="sip-menu-item" onclick="viewSIPDetails('${sip.id}')">View Details</button>
-                <button class="sip-menu-item" onclick="editSIP('${sip.id}')">Edit</button>
-                <button class="sip-menu-item" onclick="skipNextSIP('${sip.id}')">Skip Next</button>
-                <button class="sip-menu-item danger" onclick="stopSIP('${sip.id}')">Stop</button>
+                <button class="sip-menu-item" onclick="event.stopPropagation(); viewSIPDetails('${sip.id}')">View Details</button>
+                <button class="sip-menu-item" onclick="event.stopPropagation(); editSIP('${sip.id}')">Edit</button>
+                <button class="sip-menu-item" onclick="event.stopPropagation(); skipNextSIP('${sip.id}')">Skip Next</button>
+                <button class="sip-menu-item danger" onclick="event.stopPropagation(); stopSIP('${sip.id}')">Stop</button>
             `;
 
             return `
