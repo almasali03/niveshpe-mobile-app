@@ -1070,28 +1070,6 @@ document.addEventListener('click', () => {
 });
 
 // SIP Actions
-function editSIP(sipId) {
-    console.log('Edit SIP:', sipId);
-    alert(`Edit SIP ${sipId} - Feature coming soon!`);
-}
-
-function pauseSIP(sipId) {
-    console.log('Pause SIP:', sipId);
-    alert(`Pause SIP ${sipId} - Feature coming soon!`);
-}
-
-function resumeSIP(sipId) {
-    console.log('Resume SIP:', sipId);
-    alert(`Resume SIP ${sipId} - Feature coming soon!`);
-}
-
-function stopSIP(sipId) {
-    console.log('Stop SIP:', sipId);
-    if (confirm(`Are you sure you want to stop SIP ${sipId}?`)) {
-        alert('SIP stopped - Feature coming soon!');
-    }
-}
-
 // ======================================
 // SIP Modal Functions
 // ======================================
@@ -1106,7 +1084,6 @@ function editSIP(sipId) {
 
     // Populate form with current SIP data
     document.getElementById('sipAmount').value = sip.amount;
-    document.getElementById('sipFrequency').value = sip.frequency;
     document.getElementById('sipDate').value = sip.nextDebit;
 
     // Show modal
@@ -1128,7 +1105,6 @@ function saveEditSIP() {
 
     // Get form values
     const amount = parseInt(document.getElementById('sipAmount').value);
-    const frequency = document.getElementById('sipFrequency').value;
     const date = document.getElementById('sipDate').value;
 
     // Close edit modal
@@ -1140,7 +1116,6 @@ function saveEditSIP() {
         sipId: currentSIPId,
         data: {
             amount,
-            frequency,
             date
         }
     };
@@ -1365,7 +1340,6 @@ function verifyOTP() {
         const sipIndex = sipsData.findIndex(s => s.id === pendingAction.sipId);
         if (sipIndex !== -1) {
             sipsData[sipIndex].amount = pendingAction.data.amount;
-            sipsData[sipIndex].frequency = pendingAction.data.frequency;
             sipsData[sipIndex].nextDebit = pendingAction.data.date;
             sipsData[sipIndex].nextDebitFull = `Next debit on ${pendingAction.data.date}`;
 
