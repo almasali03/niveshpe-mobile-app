@@ -1570,4 +1570,33 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(style);
 
     console.log('My Funds v2 page initialized with Skip + OTP functionality');
+
+    // ======================================
+    // iPhone Frame Toggle Functionality
+    // ======================================
+
+    // Load saved frame mode preference
+    const savedMode = localStorage.getItem('iphone-frame-mode');
+    if (savedMode === 'iphone') {
+        document.querySelector('.iphone-frame').classList.add('iphone-mode');
+        document.getElementById('frameToggleText').textContent = 'Normal View';
+    }
 });
+
+// Global function for frame toggle (called from HTML onclick)
+function toggleFrameMode() {
+    const frame = document.querySelector('.iphone-frame');
+    const toggleText = document.getElementById('frameToggleText');
+
+    if (frame.classList.contains('iphone-mode')) {
+        // Switch to Normal View
+        frame.classList.remove('iphone-mode');
+        toggleText.textContent = 'iPhone View';
+        localStorage.setItem('iphone-frame-mode', 'normal');
+    } else {
+        // Switch to iPhone View
+        frame.classList.add('iphone-mode');
+        toggleText.textContent = 'Normal View';
+        localStorage.setItem('iphone-frame-mode', 'iphone');
+    }
+}

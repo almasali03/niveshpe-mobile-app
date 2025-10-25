@@ -101,6 +101,85 @@ body {
   flex-direction: column;
 }
 
+/* Frame Toggle Button */
+.frame-toggle-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  z-index: 9999;
+}
+
+.frame-toggle-btn:hover {
+  background: var(--color-bg-secondary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.frame-toggle-btn svg {
+  flex-shrink: 0;
+}
+
+/* iPhone Notch (hidden by default) */
+.iphone-notch {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 30px;
+  background: #000;
+  border-radius: 0 0 20px 20px;
+  z-index: 1000;
+}
+
+/* iPhone Home Indicator (hidden by default) */
+.iphone-home-indicator {
+  display: none;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 134px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 100px;
+  z-index: 1000;
+}
+
+/* iPhone Mode Activated */
+.iphone-frame.iphone-mode {
+  border-radius: 40px;
+  background: #000;
+  padding: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+              0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.iphone-frame.iphone-mode .iphone-screen {
+  border-radius: 32px;
+}
+
+.iphone-frame.iphone-mode .iphone-notch {
+  display: block;
+}
+
+.iphone-frame.iphone-mode .iphone-home-indicator {
+  display: block;
+}
+
 /* Status Bar */
 .status-bar {
   display: flex;
