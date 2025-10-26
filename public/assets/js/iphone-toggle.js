@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const frame = document.querySelector('.iphone-frame');
     const toggleText = document.getElementById('frameToggleText');
 
-    if (savedMode === 'iphone' && frame && toggleText) {
+    if (!frame || !toggleText) return;
+
+    // Default to iPhone view unless user explicitly chose normal view
+    if (savedMode !== 'normal') {
         frame.classList.add('iphone-mode');
         toggleText.textContent = 'Normal View';
     }
