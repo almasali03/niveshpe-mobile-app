@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <style>
         :root {
@@ -205,6 +206,7 @@
 
         .main-content {
             padding: var(--space-lg);
+            padding-bottom: 90px; /* Extra padding to clear bottom-nav */
         }
 
         /* Search Section */
@@ -351,7 +353,11 @@
         }
 
         .section-spacing {
-            margin-bottom: var(--space-xl);
+            margin-bottom: 32px;
+        }
+
+        .recommended-fund-card-blue.section-spacing {
+            margin-bottom: 40px;
         }
 
         .section-title {
@@ -371,8 +377,15 @@
             border-radius: var(--radius-lg);
             padding: 0;
             color: white;
-            box-shadow: 0 8px 20px rgba(96, 165, 250, 0.3);
+            box-shadow: none;
             overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        .recommended-fund-card-blue:active {
+            transform: scale(0.98);
         }
 
         .recommended-badge-integrated {
@@ -388,8 +401,230 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
+        /* Fund Tagline */
+        .fund-tagline {
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.75);
+            margin-top: 4px;
+            line-height: 1.3;
+        }
+
+        /* Fund Capsules Container */
+        .fund-capsules-container {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+            scroll-behavior: smooth;
+        }
+
+        .fund-capsules-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Scroll Indicator for Fund Capsules */
+        .capsules-scroll-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .capsule-scroll-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .capsule-scroll-dot.active {
+            background: rgba(255, 255, 255, 0.9);
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        /* Simplified Glassy Fund Capsule */
+        .fund-capsule {
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            padding: 6px 12px;
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* Clickable Capsule */
+        .fund-capsule.clickable {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 10px 14px;
+            cursor: pointer;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .fund-capsule.clickable:active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0.98);
+        }
+
+        .fund-name-text {
+            flex: 1;
+            white-space: nowrap;
+        }
+
+        .capsule-chevron {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            flex-shrink: 0;
+        }
+
+        /* Card Tap Indicator */
+        .card-tap-indicator {
+            position: absolute;
+            top: 5px;
+            right: 20px;
+            font-size: 28px;
+            color: white;
+            font-weight: 400;
+            z-index: 10;
+            line-height: 1;
+        }
+
+        /* Detail Sections */
+        .detail-section {
+            margin-bottom: 12px;
+            padding-bottom: 0;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .detail-icon {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .material-icon {
+            font-family: 'Material Symbols Outlined';
+            font-size: 20px;
+            font-weight: 400;
+            font-style: normal;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .recommended-fund-card-blue .material-icon {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .detail-header-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .detail-heading {
+            font-size: 13px;
+            font-weight: 700;
+            color: white;
+            margin: 0;
+        }
+
+        .detail-text {
+            font-size: 12px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .detail-list {
+            font-size: 12px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .detail-list li {
+            margin-bottom: 6px;
+        }
+
+        .detail-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Risk Badge */
+        .risk-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .risk-badge.moderate {
+            background: rgba(251, 191, 36, 0.25);
+            color: #FCD34D;
+            border: 1px solid rgba(251, 191, 36, 0.4);
+        }
+
+        /* Funds Basket Section */
+        .funds-basket-section {
+            padding-top: 8px;
+        }
+
+        .basket-heading-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .basket-heading {
+            font-size: 13px;
+            font-weight: 700;
+            color: white;
+            margin: 0;
+        }
+
+        .basket-helper-text {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
         .card-content {
             padding: var(--space-lg);
+            position: relative;
+            overflow: visible;
         }
 
         .fund-bucket-title {
@@ -441,15 +676,163 @@
             margin-top: var(--space-md);
         }
 
+        /* OPTION A: Centered Divider Style (Commented for future reference)
         .accordion-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: var(--space-sm) 0;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 0;
             cursor: pointer;
             font-size: 13px;
             font-weight: 600;
-            color: white;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 8px;
+            position: relative;
+        }
+
+        .accordion-header::before,
+        .accordion-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .accordion-header:active {
+            opacity: 0.7;
+        }
+
+        .accordion-text {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .accordion-chevron {
+            transition: transform 0.3s ease;
+            font-size: 16px;
+        }
+
+        .accordion.open .accordion-chevron {
+            transform: rotate(180deg);
+        }
+        */
+
+        /* OPTION B: Bottom Link Style (Commented for future reference)
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 0;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 8px;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+        }
+
+        .accordion-header:active {
+            opacity: 0.6;
+        }
+
+        .accordion-text {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .accordion-chevron {
+            transition: transform 0.3s ease;
+            font-size: 14px;
+        }
+
+        .accordion.open .accordion-chevron {
+            transform: rotate(180deg);
+        }
+        */
+
+        /* OPTION C: Floating Minimal Icon (Commented for future reference)
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 0;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .accordion-icon-button {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .accordion-header:active .accordion-icon-button {
+            transform: scale(0.9);
+            opacity: 0.7;
+        }
+
+        .accordion-chevron {
+            transition: transform 0.3s ease;
+            font-size: 18px;
+        }
+
+        .accordion.open .accordion-chevron {
+            transform: rotate(180deg);
+        }
+        */
+
+        /* OPTION A+C: Combined Divider Lines + Circular Icon (Active) */
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 12px 0;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .accordion-icon-button {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            white-space: nowrap;
+        }
+
+        .accordion-header:active .accordion-icon-button {
+            transform: scale(0.95);
+            opacity: 0.7;
+        }
+
+        .accordion-chevron {
+            transition: transform 0.3s ease;
+            font-size: 16px;
+        }
+
+        .accordion.open .accordion-chevron {
+            transform: rotate(180deg);
         }
 
         .accordion-content {
@@ -725,88 +1108,788 @@
                                 <p class="section-subtitle">We've picked the "Balanced Returns Fund" for you. It's a great starting point. <a href="#" style="font-size: 12px; color: var(--color-text-secondary); text-decoration: underline;">Change Preferences</a></p>
                             </div>
 
-                            <div class="recommended-fund-card-blue section-spacing">
+                            <div class="recommended-fund-card-blue section-spacing" onclick="window.location.href='basket-details.html?id=balanced-returns'">
+                                <div class="card-tap-indicator">›</div>
                                 <div class="recommended-badge-integrated">Recommended by NiveshPe</div>
                                 <div class="badge-separator"></div>
                                 <div class="card-content">
                                     <div class="fund-card-header">
                                         <h2 class="fund-bucket-title">Balanced Returns Fund</h2>
-                                        <p class="fund-actual-name">HDFC Balanced Advantage Fund</p>
+                                        <p class="fund-tagline">A perfect balance of growth and safety</p>
                                     </div>
                                     <div class="fund-stats-template">
-                                        <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">10-13% p.a.</span></p>
-                                        <p class="fund-stat-item"><span class="stat-label">Suggested Duration:</span> <span class="stat-value">8+ months</span></p>
+                                        <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">12.5% p.a.</span></p>
+                                        <p class="fund-stat-item"><span class="stat-label">Suggested Holding:</span> <span class="stat-value">8+ months</span></p>
                                     </div>
-                                    <p class="fund-description" style="margin-top: 16px;">A perfect balance of growth and safety.</p>
+
                                     <div class="accordion">
-                                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                                            <span>Show Details</span>
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                                        <div class="accordion-header" onclick="event.stopPropagation(); toggleAccordion(this)">
+                                            <div class="accordion-icon-button">
+                                                <span>Show Details</span>
+                                                <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M7 10l5 5 5-5z"/></svg>
+                                            </div>
                                         </div>
                                         <div class="accordion-content">
-                                            <p class="fund-description">This plan gives you a perfect balance of growth and safety. It invests in both equity (for growth) and debt (for stability), so your money grows smoothly with fewer ups and downs.</p>
-                                            <ul class="fund-highlights">
-                                                <li>✅ Balanced growth with moderate risk</li>
-                                                <li>📉 Less volatility, suitable for first-time investors</li>
-                                                <li>💸 Withdraw anytime after 8 months</li>
-                                                <li>🧩 Ideal for short-to-medium goals (festivals, emergency funds, new purchases)</li>
-                                            </ul>
-                                            <p class="micro-nudge">"Perfect for beginners who want steady progress without worrying about market swings."</p>
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon">verified</span>
+                                                    <h4 class="detail-heading">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list">
+                                                    <li>Balanced mix reduces big losses</li>
+                                                    <li>Better returns than only debt/FD</li>
+                                                    <li>Withdraw anytime after 8+ months</li>
+                                                    <li>Works well across market cycles</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon">pie_chart</span>
+                                                    <h4 class="basket-heading">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text">Tap to view details</p>
+                                                <div class="fund-capsules-container" id="fundCapsulesScroll">
+                                                    <div class="fund-capsule clickable" onclick="navigateToFund(event, 'hdfc-conservative-hybrid')">
+                                                        <span class="fund-name-text">HDFC Conservative Hybrid</span>
+                                                        <span class="capsule-chevron">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" onclick="navigateToFund(event, 'hdfc-balanced-advantage')">
+                                                        <span class="fund-name-text">HDFC Balanced Advantage Fund</span>
+                                                        <span class="capsule-chevron">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" onclick="navigateToFund(event, 'hdfc-nifty-50-index')">
+                                                        <span class="fund-name-text">HDFC Nifty 50 Index</span>
+                                                        <span class="capsule-chevron">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" onclick="navigateToFund(event, 'hdfc-gold-etf')">
+                                                        <span class="fund-name-text">HDFC Gold ETF Fund</span>
+                                                        <span class="capsule-chevron">›</span>
+                                                    </div>
+                                                </div>
+                                                <div class="capsules-scroll-indicator">
+                                                    <div class="capsule-scroll-dot active"></div>
+                                                    <div class="capsule-scroll-dot"></div>
+                                                    <div class="capsule-scroll-dot"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="portfolio-actions">
+                                    <div class="portfolio-actions" onclick="event.stopPropagation()">
                                         <button class="btn btn-invest">Start SIP</button>
                                         <button class="btn btn-withdraw">One Time</button>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- Other Basket Cards -->
                             <div class="section-spacing">
-                                <div class="fund-card-pot-green section-spacing">
-                                    <h2 class="fund-bucket-title">Instant Withdrawal</h2>
-                                    <p class="fund-actual-name">HDFC Liquid Fund</p>
-                                    <div class="fund-stats-template">
-                                        <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">6-7% p.a.</span></p>
-                                        <p class="fund-stat-item"><span class="stat-label">Suggested Duration:</span> <span class="stat-value">Withdraw Anytime</span></p>
-                                    </div>
-                                    <button class="show-details-btn" onclick="toggleAccordion(this)">Show Details</button>
-                                    <div class="accordion-content">
-                                        <p class="fund-description">"Lowest risk with small but steady returns, usually slightly better than a savings account or FD. Best if you just want to park money safely and can take it out anytime."</p>
+                                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--color-text-primary);">Other Baskets</h3>
+
+                                <!-- Filter Tabs -->
+                                <div class="filter-tabs" style="margin-bottom: 24px;">
+                                    <button class="filter-tab active" onclick="filterBaskets('all', this)">All Baskets</button>
+                                    <button class="filter-tab" onclick="filterBaskets('short-term', this)">Short-term</button>
+                                    <button class="filter-tab" onclick="filterBaskets('mid-term', this)">Mid-term</button>
+                                    <button class="filter-tab" onclick="filterBaskets('long-term', this)">Long-term</button>
+                                    <button class="filter-tab" onclick="filterBaskets('tax-saving', this)">Tax Saving</button>
+                                    <button class="filter-tab" onclick="filterBaskets('safe-stable', this)">Safe & Stable</button>
+                                </div>
+
+                                <!-- Instant Withdrawal Fund -->
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="short-term safe-stable" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(8, 145, 178, 0.03) 100%); border: 2px solid rgba(6, 182, 212, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=instant-withdrawal'">
+                                    <div class="card-tap-indicator" style="color: rgba(6, 182, 212, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Instant Withdrawal</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">Save safely, withdraw anytime instantly</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #0891B2; font-weight: 700;">5.45% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);"><1 month</span></p>
+                                        </div>
+
+                                        <button class="show-details-btn" style="background: #06B6D4; border: 1px solid #06B6D4; box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #06B6D4;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>Instant redemption anytime</li>
+                                                    <li>No lock-in period required</li>
+                                                    <li>Better than savings account</li>
+                                                    <li>Perfect for emergency funds</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #06B6D4;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3);" onclick="navigateToFund(event, 'hdfc-overnight-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Overnight Fund - Growth (100%)</span>
+                                                        <span class="capsule-chevron" style="color: #06B6D4;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="fund-card-pot-orange section-spacing">
-                                    <h2 class="fund-bucket-title">Highest Returns</h2>
-                                    <p class="fund-actual-name">HDFC Flexi Cap Fund</p>
-                                    <div class="fund-stats-template">
-                                        <p class="fund-stat-item"><span class="stat-label">Returns:</span> <span class="stat-value">18%-24% p.a.</span></p>
-                                        <p class="fund-stat-item"><span class="stat-label">Suggested Duration:</span> <span class="stat-value">18+ months</span></p>
-                                    </div>
-                                    <button class="show-details-btn" onclick="toggleAccordion(this)">Show Details</button>
-                                    <div class="accordion-content">
-                                        <p class="fund-description">"Choose this if you want the chance of very high returns and don't mind ups and downs in the short term. Works best if you can leave your money for at least 18 months or more."</p>
+                                <!-- Long-Term Wealth Fund -->
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="long-term" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.05) 0%, rgba(219, 39, 119, 0.03) 100%); border: 2px solid rgba(236, 72, 153, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=long-term-wealth'">
+                                    <div class="card-tap-indicator" style="color: rgba(236, 72, 153, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Long-Term Wealth (3+ yrs)</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">Build long-term wealth. Best for 3+ years of saving</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #EC4899; font-weight: 700;">23.97% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">3+ years</span></p>
+                                        </div>
+
+                                        <button class="show-details-btn" style="background: #EC4899; border: 1px solid #EC4899; box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #EC4899;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>Highest potential returns</li>
+                                                    <li>Invests in top-performing stocks</li>
+                                                    <li>Diversified across growth sectors</li>
+                                                    <li>Best for long-term wealth creation</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #EC4899;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'multi-cap-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Multi Cap Fund (70%)</span>
+                                                        <span class="capsule-chevron" style="color: #EC4899;">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'balanced-advantage-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Balanced Advantage Fund (30%)</span>
+                                                        <span class="capsule-chevron" style="color: #EC4899;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="section-spacing" style="text-align: center;">
-                                    <a href="#" class="btn-secondary">Explore other funds</a>
-                                </div>
+                                <!-- Tax Saver Fund -->
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="long-term tax-saving" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.03) 100%); border: 2px solid rgba(16, 185, 129, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=tax-saver'">
+                                    <div class="card-tap-indicator" style="color: rgba(16, 185, 129, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Tax Saver Fund (ELSS)</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">Invest smartly and save tax under 80C</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #10B981; font-weight: 700;">24.05% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">3+ years</span></p>
+                                        </div>
 
-                                <div class="section-spacing" style="margin-top: 32px;">
-                                    <h2 class="section-title" style="margin-bottom: 12px;">Explore More Mutual Funds</h2>
-                                    <div class="filter-tabs" style="margin-bottom: 24px;">
-                                        <button class="filter-tab active">High Growth</button>
-                                        <button class="filter-tab">Balanced</button>
-                                        <button class="filter-tab">Tax Saving</button>
-                                        <button class="filter-tab">Safe & Steady</button>
+                                        <button class="show-details-btn" style="background: #10B981; border: 1px solid #10B981; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #10B981;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>Save up to ₹46,800 in taxes</li>
+                                                    <li>Shortest lock-in among 80C options</li>
+                                                    <li>Equity-linked high returns</li>
+                                                    <li>Dual benefit of tax saving + wealth creation</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #10B981;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);" onclick="navigateToFund(event, 'hdfc-elss-tax-saver')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC ELSS Tax saver - Growth Plan (100%)</span>
+                                                        <span class="capsule-chevron" style="color: #10B981;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <!-- Islamic Halal & Ethical -->
+                            <div class="section-spacing">
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="long-term" style="background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(13, 148, 136, 0.03) 100%); border: 2px solid rgba(20, 184, 166, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=islamic-halal-ethical'">
+                                    <div class="card-tap-indicator" style="color: rgba(20, 184, 166, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Islamic Halal & Ethical</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">100% Shariah-compliant, ethical & clean investing</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #14B8A6; font-weight: 700;">15.16% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">3+ years</span></p>
+                                        </div>
+
+                                        <button class="show-details-btn" style="background: #14B8A6; border: 1px solid #14B8A6; box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #14B8A6;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>100% Shariah-compliant investments</li>
+                                                    <li>Ethical and socially responsible</li>
+                                                    <li>Diversified across halal sectors</li>
+                                                    <li>Long-term wealth creation with values</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #14B8A6;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(20, 184, 166, 0.1); border: 1px solid rgba(20, 184, 166, 0.3);" onclick="navigateToFund(event, 'tata-ethical-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Tata Ethical Fund - Regular - Growth (100%)</span>
+                                                        <span class="capsule-chevron" style="color: #14B8A6;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Safe & Stable – Better than FD -->
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="mid-term safe-stable" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.03) 100%); border: 2px solid rgba(59, 130, 246, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=safe-stable-fd'">
+                                    <div class="card-tap-indicator" style="color: rgba(59, 130, 246, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Safe & Stable – Better than FD</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">Better than FD — steady growth, zero drama</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #3B82F6; font-weight: 700;">5.99% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">1-3 years</span></p>
+                                        </div>
+
+                                        <button class="show-details-btn" style="background: #3B82F6; border: 1px solid #3B82F6; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #3B82F6;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>Better returns than FD</li>
+                                                    <li>Very low risk profile</li>
+                                                    <li>Tax-efficient compared to FDs</li>
+                                                    <li>High credit quality investments</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #3B82F6;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-banking-psu-debt')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Banking & PSU Debt - Growth (100%)</span>
+                                                        <span class="capsule-chevron" style="color: #3B82F6;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Mid-Term Balanced -->
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="mid-term" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(124, 58, 237, 0.03) 100%); border: 2px solid rgba(139, 92, 246, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=mid-term-balanced'">
+                                    <div class="card-tap-indicator" style="color: rgba(139, 92, 246, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Mid-Term Balanced (>2 yrs)</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">Balanced growth for 2+ year saving goals</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #8B5CF6; font-weight: 700;">19.86% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">2-3 years</span></p>
+                                        </div>
+
+                                        <button class="show-details-btn" style="background: #8B5CF6; border: 1px solid #8B5CF6; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #8B5CF6;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>Ideal for 2-3 year goals</li>
+                                                    <li>Balanced risk-return profile</li>
+                                                    <li>Dynamic asset allocation</li>
+                                                    <li>Works well in various market cycles</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #8B5CF6;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'balanced-advantage-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Balanced Advantage Fund (60%)</span>
+                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'nifty-50-index')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Nifty 50 Index Fund (40%)</span>
+                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Short Holding -->
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="mid-term" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(79, 70, 229, 0.03) 100%); border: 2px solid rgba(99, 102, 241, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=short-holding'">
+                                    <div class="card-tap-indicator" style="color: rgba(99, 102, 241, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Short Holding (1 yr)</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">Ideal for short-term saving (around 1 year)</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #6366F1; font-weight: 700;">20.83% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">1-2 years</span></p>
+                                        </div>
+
+                                        <button class="show-details-btn" style="background: #6366F1; border: 1px solid #6366F1; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #6366F1;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>Suitable for 1-2 year goals</li>
+                                                    <li>Higher allocation to stable funds</li>
+                                                    <li>Flexibility to withdraw early</li>
+                                                    <li>Good risk-adjusted returns</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #6366F1;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'balanced-advantage-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Balanced Advantage Fund (80%)</span>
+                                                        <span class="capsule-chevron" style="color: #6366F1;">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'nifty-50-index')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Nifty 50 Index Fund (20%)</span>
+                                                        <span class="capsule-chevron" style="color: #6366F1;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Low-tenure deposit -->
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="short-term safe-stable" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(8, 145, 178, 0.03) 100%); border: 2px solid rgba(6, 182, 212, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=low-tenure-deposit'">
+                                    <div class="card-tap-indicator" style="color: rgba(6, 182, 212, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Low-tenure deposit (<1 yr)</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">Invest for short duration, Earn better than FD, withdraw anytime you need</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #0891B2; font-weight: 700;">6.47% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">6-12 months</span></p>
+                                        </div>
+
+                                        <button class="show-details-btn" style="background: #0891B2; border: 1px solid #0891B2; box-shadow: 0 2px 8px rgba(8, 145, 178, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #0891B2;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>Perfect for 6-12 month parking</li>
+                                                    <li>Better than savings account</li>
+                                                    <li>Low risk profile</li>
+                                                    <li>Easy withdrawal options</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #0891B2;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3);" onclick="navigateToFund(event, 'overnight-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Overnight Fund (60%)</span>
+                                                        <span class="capsule-chevron" style="color: #0891B2;">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3);" onclick="navigateToFund(event, 'balanced-advantage-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Balanced Advantage Fund (40%)</span>
+                                                        <span class="capsule-chevron" style="color: #0891B2;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Ideal for Students -->
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="long-term" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.05) 0%, rgba(219, 39, 119, 0.03) 100%); border: 2px solid rgba(236, 72, 153, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=ideal-students'">
+                                    <div class="card-tap-indicator" style="color: rgba(236, 72, 153, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Ideal for Students</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">Save pocket money & learn to grow your investments</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #EC4899; font-weight: 700;">22.38% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">3-5 years</span></p>
+                                        </div>
+
+                                        <button class="show-details-btn" style="background: #EC4899; border: 1px solid #EC4899; box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #EC4899;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>Start with small amounts</li>
+                                                    <li>High growth potential</li>
+                                                    <li>Learn investing early</li>
+                                                    <li>Build wealth for future goals</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #EC4899;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'balanced-advantage-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Balanced Advantage Fund (50%)</span>
+                                                        <span class="capsule-chevron" style="color: #EC4899;">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'large-midcap-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Large & MidCap Fund (50%)</span>
+                                                        <span class="capsule-chevron" style="color: #EC4899;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Ideal for Housewives -->
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="mid-term" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(124, 58, 237, 0.03) 100%); border: 2px solid rgba(139, 92, 246, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=ideal-housewives'">
+                                    <div class="card-tap-indicator" style="color: rgba(139, 92, 246, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Ideal for Housewives</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">Easy, flexible savings for household needs</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #8B5CF6; font-weight: 700;">20.37% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">2-3 years</span></p>
+                                        </div>
+
+                                        <button class="show-details-btn" style="background: #8B5CF6; border: 1px solid #8B5CF6; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #8B5CF6;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>Start with small investments</li>
+                                                    <li>Build personal savings</li>
+                                                    <li>Financial independence</li>
+                                                    <li>Medium-term wealth creation</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #8B5CF6;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'balanced-advantage-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Balanced Advantage Fund (70%)</span>
+                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'nifty-50-index')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Nifty 50 Index Fund (30%)</span>
+                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Ideal for Senior Citizens -->
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="mid-term" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(79, 70, 229, 0.03) 100%); border: 2px solid rgba(99, 102, 241, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=ideal-senior-citizens'">
+                                    <div class="card-tap-indicator" style="color: rgba(99, 102, 241, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Ideal for Senior Citizens</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">Safer savings for regular income & peace of mind</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #6366F1; font-weight: 700;">20.83% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">1-2 years</span></p>
+                                        </div>
+
+                                        <button class="show-details-btn" style="background: #6366F1; border: 1px solid #6366F1; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #6366F1;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>Capital protection priority</li>
+                                                    <li>Regular return potential</li>
+                                                    <li>Low to moderate risk</li>
+                                                    <li>Suitable for retirement corpus</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #6366F1;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'balanced-advantage-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Balanced Advantage Fund (80%)</span>
+                                                        <span class="capsule-chevron" style="color: #6366F1;">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3);" onclick="navigateToFund(event, 'nifty-50-index')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Nifty 50 Index Fund (20%)</span>
+                                                        <span class="capsule-chevron" style="color: #6366F1;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Ideal for Salaried People -->
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="long-term" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(217, 119, 6, 0.03) 100%); border: 2px solid rgba(245, 158, 11, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=ideal-salaried-people'">
+                                    <div class="card-tap-indicator" style="color: rgba(245, 158, 11, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Ideal for Salaried People</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">Auto-invest from your salary, build long-term gains</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #F59E0B; font-weight: 700;">21.61% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">3-5 years</span></p>
+                                        </div>
+
+                                        <button class="show-details-btn" style="background: #F59E0B; border: 1px solid #F59E0B; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #F59E0B;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>Auto-invest from monthly salary</li>
+                                                    <li>Balanced risk across asset classes</li>
+                                                    <li>Tax saving through ELSS component</li>
+                                                    <li>Perfect for long-term wealth building</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #F59E0B;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);" onclick="navigateToFund(event, 'hdfc-hybrid-equity')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Hybrid Equity (40%)</span>
+                                                        <span class="capsule-chevron" style="color: #F59E0B;">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'multi-cap-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Multi Cap Fund (30%)</span>
+                                                        <span class="capsule-chevron" style="color: #EC4899;">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);" onclick="navigateToFund(event, 'banking-psu-debt')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Banking & PSU Debt (20%)</span>
+                                                        <span class="capsule-chevron" style="color: #3B82F6;">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);" onclick="navigateToFund(event, 'elss-tax-saver')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">ELSS Tax Saver (10%)</span>
+                                                        <span class="capsule-chevron" style="color: #10B981;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Real Estate Fund -->
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="long-term" style="background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(13, 148, 136, 0.03) 100%); border: 2px solid rgba(20, 184, 166, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=real-estate-fund'">
+                                    <div class="card-tap-indicator" style="color: rgba(20, 184, 166, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Real Estate Fund</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">Invest in real estate without buying property</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #14B8A6; font-weight: 700;">24.92% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">5+ years</span></p>
+                                        </div>
+
+                                        <button class="show-details-btn" style="background: #14B8A6; border: 1px solid #14B8A6; box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #14B8A6;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>Real estate exposure without property hassle</li>
+                                                    <li>High growth potential in infrastructure</li>
+                                                    <li>Lower investment vs buying property</li>
+                                                    <li>Liquid - withdraw anytime after 5 years</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #14B8A6;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(20, 184, 166, 0.1); border: 1px solid rgba(20, 184, 166, 0.3);" onclick="navigateToFund(event, 'hdfc-infrastructure')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Infrastructure (60%)</span>
+                                                        <span class="capsule-chevron" style="color: #14B8A6;">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3);" onclick="navigateToFund(event, 'large-midcap-fund')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Large & MidCap Fund (30%)</span>
+                                                        <span class="capsule-chevron" style="color: #EC4899;">›</span>
+                                                    </div>
+                                                    <div class="fund-capsule clickable" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);" onclick="navigateToFund(event, 'banking-psu-debt')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">Banking & PSU Debt (10%)</span>
+                                                        <span class="capsule-chevron" style="color: #3B82F6;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Family Goals Fund -->
+                                <div class="recommended-fund-card-blue section-spacing basket-card" data-filter="long-term" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(124, 58, 237, 0.03) 100%); border: 2px solid rgba(139, 92, 246, 0.13); overflow: visible;" onclick="window.location.href='basket-details.html?id=family-goals-fund'">
+                                    <div class="card-tap-indicator" style="color: rgba(139, 92, 246, 0.9);">›</div>
+                                    <div class="card-content">
+                                        <div class="fund-card-header">
+                                            <h2 class="fund-bucket-title" style="color: var(--color-text-primary);">Family Goals Fund</h2>
+                                            <p class="fund-tagline" style="color: var(--color-text-secondary);">Save for marriage, education, home & family dreams</p>
+                                        </div>
+                                        <div class="fund-stats-template">
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Returns:</span> <span class="stat-value" style="color: #8B5CF6; font-weight: 700;">21.62% p.a.</span></p>
+                                            <p class="fund-stat-item" style="color: var(--color-text-primary);"><span class="stat-label" style="color: var(--color-text-secondary);">Suggested Holding:</span> <span class="stat-value" style="color: var(--color-text-secondary);">3-5 years</span></p>
+                                        </div>
+
+                                        <button class="show-details-btn" style="background: #8B5CF6; border: 1px solid #8B5CF6; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);" onclick="event.stopPropagation(); toggleAccordion(this)">Show Details</button>
+                                        <div class="accordion-content">
+                                            <div class="detail-section">
+                                                <div class="detail-header-row">
+                                                    <span class="material-icon" style="color: #8B5CF6;">verified</span>
+                                                    <h4 class="detail-heading" style="color: var(--color-text-primary);">Why this basket?</h4>
+                                                </div>
+                                                <ul class="detail-list" style="color: var(--color-text-secondary);">
+                                                    <li>Perfect for major family milestones</li>
+                                                    <li>Balanced risk for goal-based savings</li>
+                                                    <li>Flexible withdrawals when you need</li>
+                                                    <li>Steady growth for 3-5 year goals</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="funds-basket-section">
+                                                <div class="basket-heading-row">
+                                                    <span class="material-icon" style="color: #8B5CF6;">pie_chart</span>
+                                                    <h4 class="basket-heading" style="color: var(--color-text-primary);">Funds in this basket:</h4>
+                                                </div>
+                                                <p class="basket-helper-text" style="color: var(--color-text-secondary);">Tap to view details</p>
+                                                <div class="fund-capsules-container">
+                                                    <div class="fund-capsule clickable" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="navigateToFund(event, 'hdfc-balanced-advantage')">
+                                                        <span class="fund-name-text" style="color: var(--color-text-primary);">HDFC Balanced Advantage (100%)</span>
+                                                        <span class="capsule-chevron" style="color: #8B5CF6;">›</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CTA to All Funds -->
+                            <div class="section-spacing" style="text-align: center; margin-top: 40px; margin-bottom: 40px;">
+                                <button class="btn-secondary" onclick="showTab('all-funds')" style="display: inline-flex; align-items: center; gap: 8px;">
+                                    <span>Explore All Funds</span>
+                                    <span style="font-size: 18px; font-weight: 400;">›</span>
+                                </button>
                             </div>
                         </div>
                     </div>
 
                     <!-- All Funds Tab -->
-                    <div id="all-funds-tab" style="display: none; padding: 20px;">
+                    <div id="all-funds-tab" style="display: none;">
+                        <div class="main-content">
                         <!-- Search Section -->
                         <div class="search-section">
                             <div class="search-input-wrapper">
@@ -1349,6 +2432,7 @@
                                 </div>
                             </div>
                         </div>
+                        </div> <!-- Close main-content -->
                     </div>
                 </div>
 
@@ -1437,12 +2521,94 @@
             });
         }
 
+        // Filter baskets in "Other Baskets" section
+        function filterBaskets(filterType, element) {
+            // Get all basket cards
+            const basketCards = document.querySelectorAll('.basket-card');
+
+            // Show/hide cards based on filter
+            basketCards.forEach(card => {
+                const filters = card.getAttribute('data-filter');
+
+                if (filterType === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    // Check if the card has the selected filter
+                    if (filters && filters.includes(filterType)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+
+            // Update active tab styling
+            const filterTabs = document.querySelectorAll('.filter-tabs .filter-tab');
+            filterTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
         // Accordion toggle
         function toggleAccordion(element) {
+            const accordion = element.parentElement;
             const content = element.nextElementSibling;
+            const textSpan = element.querySelector('.accordion-icon-button span');
+
             if (content && content.className === 'accordion-content') {
-                content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + 'px';
+                const isOpen = content.style.maxHeight;
+
+                // Close all other open accordions first
+                const allAccordions = document.querySelectorAll('.accordion-content');
+                allAccordions.forEach(otherContent => {
+                    if (otherContent !== content && otherContent.style.maxHeight) {
+                        // Close this accordion
+                        otherContent.style.maxHeight = null;
+                        const otherAccordion = otherContent.previousElementSibling.parentElement;
+                        if (otherAccordion) {
+                            otherAccordion.classList.remove('open');
+                        }
+
+                        // Reset button text
+                        const otherButton = otherContent.previousElementSibling;
+                        const otherTextSpan = otherButton.querySelector('.accordion-icon-button span');
+                        if (otherTextSpan) {
+                            otherTextSpan.textContent = 'Show Details';
+                        } else if (otherButton.tagName === 'BUTTON') {
+                            otherButton.textContent = 'Show Details';
+                        }
+                    }
+                });
+
+                // Toggle the clicked accordion
+                content.style.maxHeight = isOpen ? null : content.scrollHeight + 'px';
+
+                // Toggle open class for chevron rotation and update text
+                if (isOpen) {
+                    accordion.classList.remove('open');
+                    // Handle different button structures
+                    if (textSpan) {
+                        textSpan.textContent = 'Show Details';
+                    } else if (element.tagName === 'BUTTON') {
+                        element.textContent = 'Show Details';
+                    }
+                } else {
+                    accordion.classList.add('open');
+                    // Handle different button structures
+                    if (textSpan) {
+                        textSpan.textContent = 'Hide Details';
+                    } else if (element.tagName === 'BUTTON') {
+                        element.textContent = 'Hide Details';
+                    }
+                }
             }
+        }
+
+        // Navigate to fund details from capsule (prevent card click)
+        function navigateToFund(event, fundSlug) {
+            event.stopPropagation(); // Prevent card click from triggering
+            window.location.href = 'fund-detail.html?fund=' + fundSlug;
         }
 
         // View fund details
@@ -1596,6 +2762,39 @@
             console.log('Menu button clicked');
             // You can add menu modal/dropdown here later
         }
+
+        // Fund Capsules Scroll Indicator
+        document.addEventListener('DOMContentLoaded', function() {
+            const fundCapsulesScroll = document.getElementById('fundCapsulesScroll');
+            const scrollDots = document.querySelectorAll('.capsule-scroll-dot');
+
+            if (fundCapsulesScroll && scrollDots.length > 0) {
+                // Add click functionality to dots
+                scrollDots.forEach((dot, index) => {
+                    dot.addEventListener('click', function() {
+                        const scrollAmount = (fundCapsulesScroll.scrollWidth - fundCapsulesScroll.clientWidth) * (index / (scrollDots.length - 1));
+                        fundCapsulesScroll.scrollTo({
+                            left: scrollAmount,
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+
+                // Update active dot based on scroll position
+                fundCapsulesScroll.addEventListener('scroll', function() {
+                    const scrollPercentage = fundCapsulesScroll.scrollLeft / (fundCapsulesScroll.scrollWidth - fundCapsulesScroll.clientWidth);
+                    const activeIndex = Math.round(scrollPercentage * (scrollDots.length - 1));
+
+                    scrollDots.forEach((dot, index) => {
+                        if (index === activeIndex) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    });
+                });
+            }
+        });
     </script>
     <script src="assets/js/iphone-toggle.js"></script>
 </body>
