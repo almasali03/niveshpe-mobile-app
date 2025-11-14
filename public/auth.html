@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to NiveshPe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- iPhone Toggle CSS -->
+    <link rel="stylesheet" href="assets/css/iphone-toggle.css">
+
+    <style>
+        :root {
+            --color-bg-primary: #F5F7FA;
+            --color-blue: #2563EB;
+            --color-blue-dark: #1D4ED8;
+            --color-blue-light: #3B82F6;
+            --color-green: #10B981;
+            --color-green-light: #34D399;
+            --color-purple: #8B5CF6;
+            --color-orange: #F59E0B;
+            --color-red: #EF4444;
+            --color-text-primary: #1F2937;
+            --color-text-secondary: #6B7280;
+            --color-text-muted: #9CA3AF;
+            --color-border: #E5E7EB;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .iphone-frame {
+            width: 380px;
+            height: 820px;
+            background: transparent;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-primary);
+            overflow: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes growBar {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        @keyframes expandRing {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0; }
+        }
+
+        /* ==================== STATUS BAR ==================== */
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: white;
+            font-size: 15px;
+            font-weight: 600;
+            height: 44px;
+            flex-shrink: 0;
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 6px;
+        }
+
+        /* ==================== HEADER ==================== */
+
+        .header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: white;
+            height: 58px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 0 20px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--color-text-primary);
+            cursor: pointer;
+            padding: 8px;
+            margin-left: -8px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-button.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-left: 12px;
+        }
+
+        .skip-button {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: var(--color-blue);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 12px;
+        }
+
+        /* ==================== PROGRESS INDICATOR ==================== */
+
+        .progress-indicator {
+            display: none;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 0;
+            background: white;
+        }
+
+        .progress-indicator.show {
+            display: flex;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: var(--color-blue);
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
+
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .auth-state {
+            display: none;
+            width: 100%;
+            min-height: 100%;
+        }
+
+        .auth-state.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* ==================== WELCOME CAROUSEL ==================== */
+
+        .carousel-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(16, 185, 129, 0.03) 100%);
+        }
+
+        .carousel-slides {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: translateX(100%);
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        .carousel-slide.prev {
+            transform: translateX(-100%);
+        }
+
+        .carousel-illustration {
+            width: 240px;
+            height: 240px;
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        /* Slide 1: Growth Illustration */
+        .illustration-growth {
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .growth-chart {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 120px;
+        }
+
+        .chart-bar {
+            position: absolute;
+            bottom: 0;
+            width: 32px;
+            background: linear-gradient(to top, var(--color-blue), var(--color-blue-light));
+            border-radius: 4px 4px 0 0;
+            animation: growBar 1s ease-out forwards;
+            transform-origin: bottom;
+        }
+
+        .chart-bar:nth-child(1) { left: 0; height: 60px; animation-delay: 0.1s; opacity: 0.7; }
+        .chart-bar:nth-child(2) { left: 40px; height: 80px; animation-delay: 0.2s; opacity: 0.8; }
+        .chart-bar:nth-child(3) { left: 80px; height: 100px; animation-delay: 0.3s; opacity: 0.9; }
+        .chart-bar:nth-child(4) { left: 120px; height: 120px; animation-delay: 0.4s; background: linear-gradient(to top, var(--color-green), var(--color-green-light)); }
+
+        .growth-coin {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-orange), #FCD34D);
+            border-radius: 50%;
+            top: 0;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            animation: bounce 2s ease-in-out infinite;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Slide 2: Auto-SIP Illustration */
+        .illustration-sip {
+            position: relative;
+        }
+
+        .sip-circle {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 8px dashed var(--color-blue);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: spin 20s linear infinite;
+        }
+
+        .sip-center {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--color-blue), var(--color-purple));
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .sip-dot {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: var(--color-green);
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .sip-dot:nth-child(2) { top: 0; left: 50%; transform: translateX(-50%); }
+        .sip-dot:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); }
+        .sip-dot:nth-child(4) { top: 50%; left: 0; transform: translateY(-50%); }
+        .sip-dot:nth-child(5) { top: 50%; right: 0; transform: translateY(-50%); }
+
+        /* Slide 3: Security Illustration */
+        .illustration-security {
+            position: relative;
+        }
+
+        .security-shield {
+            position: absolute;
+            width: 140px;
+            height: 160px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, var(--color-green), var(--color-green-light));
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            box-shadow: 0 16px 40px rgba(16, 185, 129, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .security-ring {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 3px solid var(--color-green);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.3;
+            animation: expandRing 2s ease-out infinite;
+        }
+
+        .carousel-headline {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            text-align: center;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .carousel-subtext {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            text-align: center;
+            line-height: 1.6;
+            max-width: 300px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 24px 0;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .carousel-dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: var(--color-blue);
+        }
+
+        .carousel-button {
+            width: calc(100% - 48px);
+            height: 52px;
+            background: var(--color-blue);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0 24px 24px;
+            transition: all 0.2s ease;
+        }
+
+        .carousel-button:active {
+            transform: scale(0.98);
+            background: var(--color-blue-dark);
+        }
+
+        /* ==================== PHONE & OTP STATES ==================== */
+
+        .phone-container,
+        .otp-container {
+            padding: 32px 20px;
+            background: white;
+            min-height: 100%;
+        }
+
+        .welcome-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .subtitle-text {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .error-message {
+            display: none;
+            padding: 12px 16px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: var(--radius-sm);
+            color: var(--color-red);
+            font-size: 14px;
+            margin-bottom: 16px;
+            animation: shake 0.3s;
+        }
+
+        .error-message.show {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-prefix {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            pointer-events: none;
+        }
+
+        .text-input {
+            width: 100%;
+            height: 52px;
+            padding: 0 16px 0 60px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .text-input.error {
+            border-color: var(--color-red);
+        }
+
+        .text-input::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .trust-badge::after {
+            content: '•';
+            margin-left: 12px;
+            color: var(--color-border);
+        }
+
+        .trust-badge:last-child::after {
+            content: '';
+            margin-left: 0;
+        }
+
+        /* OTP Input */
+        .otp-input-single {
+            width: 100%;
+            height: 64px;
+            padding: 0 16px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 12px;
+            color: var(--color-text-primary);
+            transition: all 0.2s ease;
+            background: white;
+            font-family: 'Courier New', monospace;
+        }
+
+        .otp-input-single:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .otp-input-single.error {
+            border-color: var(--color-red);
+            animation: shake 0.3s;
+        }
+
+        .auto-read-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--color-green);
+        }
+
+        .btn-primary {
+            width: 100%;
+            height: 52px;
+            background: var(--color-blue);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: scale(0.98);
+            background: var(--color-blue-dark);
+        }
+
+        .btn-primary:disabled {
+            background: var(--color-border);
+            color: var(--color-text-muted);
+            cursor: not-allowed;
+        }
+
+        .resend-section {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .timer-text {
+            font-weight: 600;
+            color: var(--color-blue);
+        }
+
+        .btn-text {
+            background: none;
+            border: none;
+            color: var(--color-blue);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 8px;
+        }
+
+        .btn-text:disabled {
+            color: var(--color-text-muted);
+            cursor: not-allowed;
+            text-decoration: none;
+        }
+
+        .change-number {
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .helper-text {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        /* ==================== SUCCESS STATE ==================== */
+
+        .success-container {
+            padding: 80px 20px;
+            text-align: center;
+            background: white;
+            min-height: 100%;
+        }
+
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--color-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            animation: scaleIn 0.5s ease;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .success-checkmark .material-symbols-outlined {
+            font-size: 48px;
+            color: white;
+        }
+
+        .success-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .success-subtext {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- iPhone Toggle Button -->
+    <button class="frame-toggle-btn" onclick="toggleFrameMode()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+        </svg>
+        <span id="frameToggleText">Normal View</span>
+    </button>
+
+    <div class="iphone-frame">
+        <div class="iphone-notch"></div>
+        <div class="iphone-screen">
+            <div class="mobile-container">
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div class="status-icons">
+                        <span>📶</span>
+                        <span>📡</span>
+                        <span>🔋</span>
+                    </div>
+                </div>
+
+                <!-- Header -->
+                <div class="header">
+                    <button class="back-button" id="backButton" onclick="handleBack()">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                    </button>
+                    <h1 class="header-title" id="headerTitle">Welcome</h1>
+                    <button class="skip-button" id="skipButton" onclick="skipCarousel()" style="display: none;">Skip</button>
+                </div>
+
+                <!-- Progress Indicator -->
+                <div class="progress-indicator" id="progressIndicator">
+                    <div class="progress-dot" id="progressDot1"></div>
+                    <div class="progress-dot" id="progressDot2"></div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="main-content">
+                    <!-- State 1: Welcome Carousel -->
+                    <div class="auth-state active" id="carouselState">
+                        <div class="carousel-container">
+                            <div class="carousel-slides">
+                                <!-- Slide 1: Growth -->
+                                <div class="carousel-slide active" data-slide="0">
+                                    <div class="carousel-illustration">
+                                        <div class="illustration-growth">
+                                            <div class="growth-chart">
+                                                <div class="chart-bar"></div>
+                                                <div class="chart-bar"></div>
+                                                <div class="chart-bar"></div>
+                                                <div class="chart-bar"></div>
+                                            </div>
+                                            <div class="growth-coin">📈</div>
+                                        </div>
+                                    </div>
+                                    <h2 class="carousel-headline">Invest Smarter,<br>Grow Faster</h2>
+                                    <p class="carousel-subtext">Build wealth with India's simplest investment app. Start with just ₹100.</p>
+                                </div>
+
+                                <!-- Slide 2: Auto-SIP -->
+                                <div class="carousel-slide" data-slide="1">
+                                    <div class="carousel-illustration">
+                                        <div class="illustration-sip">
+                                            <div class="sip-circle"></div>
+                                            <div class="sip-center">⚡</div>
+                                            <div class="sip-dot"></div>
+                                            <div class="sip-dot"></div>
+                                            <div class="sip-dot"></div>
+                                            <div class="sip-dot"></div>
+                                            <div class="sip-dot"></div>
+                                        </div>
+                                    </div>
+                                    <h2 class="carousel-headline">Auto-Invest.<br>Zero Hassle.</h2>
+                                    <p class="carousel-subtext">Set it and forget it. Your money grows on autopilot with smart SIPs.</p>
+                                </div>
+
+                                <!-- Slide 3: Security -->
+                                <div class="carousel-slide" data-slide="2">
+                                    <div class="carousel-illustration">
+                                        <div class="illustration-security">
+                                            <div class="security-ring"></div>
+                                            <div class="security-shield">🔒</div>
+                                        </div>
+                                    </div>
+                                    <h2 class="carousel-headline">100% Safe<br>& Secure</h2>
+                                    <p class="carousel-subtext">Bank-grade security. SEBI registered. Your investments are always protected.</p>
+                                </div>
+                            </div>
+
+                            <div class="carousel-dots" id="carouselDots">
+                                <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+                                <div class="carousel-dot" onclick="goToSlide(1)"></div>
+                                <div class="carousel-dot" onclick="goToSlide(2)"></div>
+                            </div>
+
+                            <button class="carousel-button" id="carouselButton" onclick="handleCarouselButton()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- State 2: Phone Entry -->
+                    <div class="auth-state" id="phoneState">
+                        <div class="phone-container">
+                            <h2 class="welcome-text">Welcome!</h2>
+                            <p class="subtitle-text">Enter your mobile number to get started</p>
+
+                            <div id="phoneError" class="error-message">
+                                <span>⚠️</span>
+                                <span id="phoneErrorText">Please enter a valid 10-digit mobile number</span>
+                            </div>
+
+                            <div class="input-group">
+                                <label class="input-label" for="mobileInput">Mobile Number</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix">+91</span>
+                                    <input
+                                        type="text"
+                                        id="mobileInput"
+                                        class="text-input"
+                                        placeholder="9876543210"
+                                        maxlength="10"
+                                        inputmode="numeric"
+                                        autocomplete="tel-national"
+                                        oninput="validateMobile()"
+                                        onkeypress="handleMobileKeyPress(event)"
+                                    >
+                                </div>
+                                <div class="trust-badges">
+                                    <div class="trust-badge">
+                                        <span>🔒</span>
+                                        <span>Secure</span>
+                                    </div>
+                                    <div class="trust-badge">
+                                        <span>🇮🇳</span>
+                                        <span>Made in India</span>
+                                    </div>
+                                    <div class="trust-badge">
+                                        <span>⚡</span>
+                                        <span>2 min signup</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn-primary" id="continueBtn" disabled onclick="sendOTP()">
+                                Continue
+                            </button>
+
+                            <div class="helper-text">
+                                By continuing, you agree to our<br>Terms of Service & Privacy Policy
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- State 3: OTP Verification -->
+                    <div class="auth-state" id="otpState">
+                        <div class="otp-container">
+                            <h2 class="welcome-text">Enter Verification Code</h2>
+                            <p class="subtitle-text">We've sent a 6-digit code to <strong id="displayMobile"></strong></p>
+
+                            <div id="otpError" class="error-message">
+                                <span>⚠️</span>
+                                <span id="otpErrorText">Invalid code. Please try again.</span>
+                            </div>
+
+                            <div class="input-group">
+                                <label class="input-label" for="otpInput">Verification Code</label>
+                                <input
+                                    type="text"
+                                    id="otpInput"
+                                    class="otp-input-single"
+                                    placeholder="••••••"
+                                    maxlength="6"
+                                    inputmode="numeric"
+                                    autocomplete="one-time-code"
+                                    oninput="handleOtpInput()"
+                                >
+                                <div id="autoReadIndicator" class="auto-read-indicator" style="display: none;">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span>
+                                    <span>Auto-read enabled</span>
+                                </div>
+                            </div>
+
+                            <div class="resend-section">
+                                <span>Didn't receive the code? </span>
+                                <span id="timerSection">
+                                    Resend in <span class="timer-text" id="timer">30</span>s
+                                </span>
+                                <button id="resendBtn" class="btn-text" style="display: none;" onclick="resendOTP()">
+                                    Resend Code
+                                </button>
+                            </div>
+
+                            <div class="change-number">
+                                <button class="btn-text" onclick="changeNumber()">
+                                    Change Mobile Number
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- State 4: Success -->
+                    <div class="auth-state" id="successState">
+                        <div class="success-container">
+                            <div class="success-checkmark">
+                                <span class="material-symbols-outlined">check</span>
+                            </div>
+                            <div class="success-text">Verification Successful!</div>
+                            <div class="success-subtext">Taking you to your account...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="iphone-home-indicator"></div>
+    </div>
+
+    <!-- iPhone Toggle JS -->
+    <script src="assets/js/iphone-toggle.js"></script>
+
+    <script>
+        // Constants
+        const CORRECT_OTP = '123456';
+        const MAX_ATTEMPTS = 3;
+        const RESEND_TIMER = 30;
+
+        // State variables
+        let currentState = 'carousel';
+        let currentSlide = 0;
+        let mobileNumber = '';
+        let otpAttempts = 0;
+        let timerInterval = null;
+        let timeRemaining = RESEND_TIMER;
+        let webOtpAbortController = null;
+
+        // ==================== CAROUSEL ====================
+
+        function goToSlide(index) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+
+            slides[currentSlide].classList.remove('active');
+            slides[currentSlide].classList.add('prev');
+            dots[currentSlide].classList.remove('active');
+
+            currentSlide = index;
+
+            slides[currentSlide].classList.remove('prev');
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+
+            updateCarouselButton();
+        }
+
+        function handleCarouselButton() {
+            if (currentSlide < 2) {
+                goToSlide(currentSlide + 1);
+            } else {
+                startAuth();
+            }
+        }
+
+        function updateCarouselButton() {
+            const button = document.getElementById('carouselButton');
+            button.textContent = currentSlide === 2 ? 'Get Started' : 'Next';
+        }
+
+        function skipCarousel() {
+            startAuth();
+        }
+
+        function startAuth() {
+            switchState('phone');
+        }
+
+        // ==================== PHONE ====================
+
+        function validateMobile() {
+            const input = document.getElementById('mobileInput');
+            const value = input.value.replace(/\D/g, '');
+            input.value = value;
+
+            const continueBtn = document.getElementById('continueBtn');
+            const errorMsg = document.getElementById('phoneError');
+
+            errorMsg.classList.remove('show');
+            input.classList.remove('error');
+
+            continueBtn.disabled = value.length !== 10;
+        }
+
+        function handleMobileKeyPress(event) {
+            if (event.key === 'Enter' && !document.getElementById('continueBtn').disabled) {
+                sendOTP();
+            }
+        }
+
+        function sendOTP() {
+            const input = document.getElementById('mobileInput');
+            mobileNumber = input.value;
+
+            if (mobileNumber.length !== 10) {
+                showError('phone', 'Please enter a valid 10-digit mobile number');
+                input.classList.add('error');
+                return;
+            }
+
+            localStorage.setItem('niveshpe_mobile', mobileNumber);
+
+            const maskedNumber = `+91 ${mobileNumber.slice(0, 2)}****${mobileNumber.slice(-4)}`;
+            document.getElementById('displayMobile').textContent = maskedNumber;
+
+            switchState('otp');
+            startResendTimer();
+            initWebOTP();
+
+            setTimeout(() => {
+                document.getElementById('otpInput').focus();
+            }, 100);
+
+            console.log('📱 Sending OTP to:', mobileNumber);
+        }
+
+        // ==================== OTP ====================
+
+        function handleOtpInput() {
+            const input = document.getElementById('otpInput');
+            const value = input.value.replace(/\D/g, '');
+            input.value = value;
+
+            hideError('otp');
+            input.classList.remove('error');
+
+            if (value.length === 6) {
+                setTimeout(() => verifyOTP(), 300);
+            }
+        }
+
+        function verifyOTP() {
+            const input = document.getElementById('otpInput');
+            const enteredOTP = input.value;
+
+            if (enteredOTP.length !== 6) return;
+
+            if (enteredOTP === CORRECT_OTP) {
+                clearInterval(timerInterval);
+                if (webOtpAbortController) {
+                    webOtpAbortController.abort();
+                }
+                checkUserAndRedirect();
+            } else {
+                otpAttempts++;
+
+                if (otpAttempts >= MAX_ATTEMPTS) {
+                    showError('otp', 'Maximum attempts reached. Please request a new code.');
+                    input.value = '';
+                    input.classList.add('error');
+                    otpAttempts = 0;
+                } else {
+                    const attemptsLeft = MAX_ATTEMPTS - otpAttempts;
+                    showError('otp', `Invalid code. ${attemptsLeft} attempt${attemptsLeft > 1 ? 's' : ''} remaining.`);
+                    input.value = '';
+                    input.classList.add('error');
+                    input.focus();
+                }
+            }
+        }
+
+        function resendOTP() {
+            otpAttempts = 0;
+
+            const input = document.getElementById('otpInput');
+            input.value = '';
+            input.classList.remove('error');
+            hideError('otp');
+
+            timeRemaining = RESEND_TIMER;
+            document.getElementById('timerSection').style.display = 'inline';
+            document.getElementById('resendBtn').style.display = 'none';
+            startResendTimer();
+
+            initWebOTP();
+            input.focus();
+
+            console.log('🔄 Resending OTP to:', mobileNumber);
+        }
+
+        function changeNumber() {
+            clearInterval(timerInterval);
+            if (webOtpAbortController) {
+                webOtpAbortController.abort();
+            }
+            otpAttempts = 0;
+            hideError('otp');
+            document.getElementById('otpInput').value = '';
+
+            switchState('phone');
+            document.getElementById('mobileInput').focus();
+        }
+
+        // ==================== TIMER ====================
+
+        function startResendTimer() {
+            clearInterval(timerInterval);
+            timeRemaining = RESEND_TIMER;
+
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('timer').textContent = timeRemaining;
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('timerSection').style.display = 'none';
+                    document.getElementById('resendBtn').style.display = 'inline-block';
+                }
+            }, 1000);
+        }
+
+        // ==================== WEBОTP ====================
+
+        async function initWebOTP() {
+            if ('OTPCredential' in window) {
+                try {
+                    webOtpAbortController = new AbortController();
+                    document.getElementById('autoReadIndicator').style.display = 'flex';
+
+                    const credential = await navigator.credentials.get({
+                        otp: { transport: ['sms'] },
+                        signal: webOtpAbortController.signal
+                    });
+
+                    if (credential && credential.code) {
+                        document.getElementById('otpInput').value = credential.code;
+                        setTimeout(() => verifyOTP(), 500);
+                    }
+                } catch (error) {
+                    console.log('WebOTP error:', error);
+                    document.getElementById('autoReadIndicator').style.display = 'none';
+                }
+            }
+        }
+
+        // ==================== USER DETECTION ====================
+
+        function checkUserAndRedirect() {
+            switchState('success');
+
+            setTimeout(() => {
+                const isNewUser = mobileNumber.charAt(0) === '8';
+
+                localStorage.setItem('niveshpe_logged_in', 'true');
+                localStorage.setItem('niveshpe_session_token', 'demo_token_' + Date.now());
+                localStorage.setItem('niveshpe_user_type', isNewUser ? 'new' : 'existing');
+
+                window.location.href = 'index.html';
+            }, 1500);
+        }
+
+        // ==================== STATE MANAGEMENT ====================
+
+        function switchState(state) {
+            document.querySelectorAll('.auth-state').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            const backButton = document.getElementById('backButton');
+            const skipButton = document.getElementById('skipButton');
+            const progressIndicator = document.getElementById('progressIndicator');
+            const progressDot1 = document.getElementById('progressDot1');
+            const progressDot2 = document.getElementById('progressDot2');
+
+            progressDot1.classList.remove('active');
+            progressDot2.classList.remove('active');
+
+            if (state === 'carousel') {
+                document.getElementById('carouselState').classList.add('active');
+                document.getElementById('headerTitle').textContent = 'Welcome';
+                backButton.classList.remove('visible');
+                skipButton.style.display = 'inline-block';
+                progressIndicator.classList.remove('show');
+                currentState = 'carousel';
+            } else if (state === 'phone') {
+                document.getElementById('phoneState').classList.add('active');
+                document.getElementById('headerTitle').textContent = 'Sign In';
+                backButton.classList.add('visible');
+                skipButton.style.display = 'none';
+                progressIndicator.classList.add('show');
+                progressDot1.classList.add('active');
+                currentState = 'phone';
+            } else if (state === 'otp') {
+                document.getElementById('otpState').classList.add('active');
+                document.getElementById('headerTitle').textContent = 'Verify Code';
+                backButton.classList.add('visible');
+                skipButton.style.display = 'none';
+                progressIndicator.classList.add('show');
+                progressDot2.classList.add('active');
+                currentState = 'otp';
+            } else if (state === 'success') {
+                document.getElementById('successState').classList.add('active');
+                document.getElementById('headerTitle').textContent = 'Success';
+                backButton.classList.remove('visible');
+                skipButton.style.display = 'none';
+                progressIndicator.classList.remove('show');
+                currentState = 'success';
+            }
+        }
+
+        function handleBack() {
+            if (currentState === 'phone') {
+                switchState('carousel');
+                goToSlide(2);
+            } else if (currentState === 'otp') {
+                changeNumber();
+            }
+        }
+
+        // ==================== ERROR HANDLING ====================
+
+        function showError(type, message) {
+            if (type === 'phone') {
+                const errorEl = document.getElementById('phoneError');
+                const errorText = document.getElementById('phoneErrorText');
+                errorText.textContent = message;
+                errorEl.classList.add('show');
+            } else if (type === 'otp') {
+                const errorEl = document.getElementById('otpError');
+                const errorText = document.getElementById('otpErrorText');
+                errorText.textContent = message;
+                errorEl.classList.add('show');
+            }
+        }
+
+        function hideError(type) {
+            if (type === 'phone') {
+                document.getElementById('phoneError').classList.remove('show');
+            } else if (type === 'otp') {
+                document.getElementById('otpError').classList.remove('show');
+            }
+        }
+
+        // ==================== CLEANUP ====================
+
+        window.addEventListener('beforeunload', () => {
+            clearInterval(timerInterval);
+            if (webOtpAbortController) {
+                webOtpAbortController.abort();
+            }
+        });
+
+        // ==================== INITIALIZATION ====================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('skipButton').style.display = 'inline-block';
+        });
+
+        // Touch swipe for carousel
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.querySelector('.carousel-slides')?.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.querySelector('.carousel-slides')?.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX && currentSlide < 2) {
+                goToSlide(currentSlide + 1);
+            }
+            if (touchEndX > touchStartX && currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            }
+        }
+    </script>
+</body>
+</html>
