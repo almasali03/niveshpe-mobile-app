@@ -128,6 +128,12 @@
             100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0; }
         }
 
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%, 0% 0%, 0% 0%; }
+            50% { background-position: 100% 50%, 0% 0%, 0% 0%; }
+            100% { background-position: 0% 50%, 0% 0%, 0% 0%; }
+        }
+
         /* ==================== STATUS BAR ==================== */
 
         .status-bar {
@@ -490,8 +496,50 @@
         .phone-container,
         .otp-container {
             padding: 32px 20px;
-            background: white;
+            background:
+                /* Layer 1: Primary gradient */
+                linear-gradient(135deg,
+                    rgba(37, 99, 235, 0.12) 0%,
+                    rgba(16, 185, 129, 0.10) 50%,
+                    rgba(245, 158, 11, 0.08) 100%),
+                /* Layer 2: Subtle wave pattern */
+                repeating-linear-gradient(90deg,
+                    transparent 0px,
+                    rgba(37, 99, 235, 0.04) 25px,
+                    transparent 50px),
+                /* Layer 3: Base color */
+                white;
+            background-size: 200% 200%, 100% 100%, 100% 100%;
+            animation: gradientFlow 15s ease-in-out infinite;
             min-height: 100%;
+            position: relative;
+        }
+
+        /* Corner radial gradient accents */
+        .phone-container::before,
+        .otp-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 0% 0%,
+                    rgba(37, 99, 235, 0.10) 0%,
+                    transparent 50%),
+                radial-gradient(circle at 100% 100%,
+                    rgba(16, 185, 129, 0.08) 0%,
+                    transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Ensure content stays above background */
+        .phone-container > *,
+        .otp-container > * {
+            position: relative;
+            z-index: 1;
         }
 
         .welcome-text {
@@ -709,8 +757,48 @@
         .success-container {
             padding: 80px 20px;
             text-align: center;
-            background: white;
+            background:
+                /* Layer 1: Primary gradient */
+                linear-gradient(135deg,
+                    rgba(37, 99, 235, 0.12) 0%,
+                    rgba(16, 185, 129, 0.10) 50%,
+                    rgba(245, 158, 11, 0.08) 100%),
+                /* Layer 2: Subtle wave pattern */
+                repeating-linear-gradient(90deg,
+                    transparent 0px,
+                    rgba(37, 99, 235, 0.04) 25px,
+                    transparent 50px),
+                /* Layer 3: Base color */
+                white;
+            background-size: 200% 200%, 100% 100%, 100% 100%;
+            animation: gradientFlow 15s ease-in-out infinite;
             min-height: 100%;
+            position: relative;
+        }
+
+        /* Corner radial gradient accents for success container */
+        .success-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 0% 0%,
+                    rgba(37, 99, 235, 0.10) 0%,
+                    transparent 50%),
+                radial-gradient(circle at 100% 100%,
+                    rgba(16, 185, 129, 0.08) 0%,
+                    transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Ensure success content stays above background */
+        .success-container > * {
+            position: relative;
+            z-index: 1;
         }
 
         .success-checkmark {
@@ -741,6 +829,18 @@
         .success-subtext {
             font-size: 14px;
             color: var(--color-text-secondary);
+        }
+
+        /* ==================== ACCESSIBILITY ==================== */
+
+        /* Disable animations for users who prefer reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .phone-container,
+            .otp-container,
+            .success-container {
+                animation: none;
+                background-size: 100% 100%, 100% 100%, 100% 100%;
+            }
         }
     </style>
 </head>
@@ -952,8 +1052,8 @@
             // Store that email was skipped
             localStorage.setItem('niveshpe_email_skipped', 'true');
 
-            // Redirect to next step (could be KYC or homepage)
-            window.location.href = 'index.html';
+            // Redirect to KYC verification
+            window.location.href = 'kyc.html';
         }
 
         // ==================== OTP ====================
