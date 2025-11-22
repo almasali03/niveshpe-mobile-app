@@ -175,7 +175,7 @@
 
         .progress-container {
             background: white;
-            padding: 16px 20px 20px;
+            padding: 10px 20px 12px;
             display: none;
         }
 
@@ -187,24 +187,24 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .progress-step-text {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--color-text-secondary);
         }
 
         .progress-percentage {
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 14px;
+            font-weight: 600;
             color: var(--color-blue);
         }
 
         .progress-bar-container {
             width: 100%;
-            height: 8px;
+            height: 4px;
             background: var(--color-border);
             border-radius: 4px;
             overflow: hidden;
@@ -213,7 +213,7 @@
 
         .progress-bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--color-blue), var(--color-blue-light));
+            background: linear-gradient(90deg, var(--color-green), var(--color-green-light));
             border-radius: 4px;
             transition: width 0.6s ease;
             width: 0;
@@ -222,35 +222,35 @@
         .step-indicators {
             display: flex;
             justify-content: space-between;
-            margin-top: 12px;
+            margin-top: 8px;
         }
 
         .step-indicator {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             flex: 1;
         }
 
         .step-number {
-            width: 32px;
-            height: 32px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: var(--color-border);
             color: var(--color-text-muted);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 11px;
+            font-weight: 600;
             transition: all 0.3s ease;
         }
 
         .step-indicator.active .step-number {
             background: var(--color-blue);
             color: white;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
         }
 
         .step-indicator.completed .step-number {
@@ -302,6 +302,28 @@
             min-height: 100%;
         }
 
+        .kyc-container-split {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+            background: white;
+        }
+
+        .kyc-fixed-section {
+            flex-shrink: 0;
+            background: white;
+            padding: 32px 20px 16px 20px;
+        }
+
+        .kyc-scrollable-section {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0 20px 20px 20px;
+            -webkit-overflow-scrolling: touch;
+        }
+
         /* ==================== OVERVIEW SCREEN ==================== */
 
         .overview-hero {
@@ -312,13 +334,13 @@
         .overview-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--color-blue), var(--color-purple));
+            background: linear-gradient(135deg, var(--color-green), var(--color-green-light));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
         }
 
         .overview-icon .material-symbols-outlined {
@@ -555,6 +577,26 @@
             cursor: not-allowed;
         }
 
+        .amount-input-wrapper {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .amount-input {
+            padding-left: 40px !important;
+        }
+
         .btn-primary {
             width: 100%;
             height: 52px;
@@ -723,6 +765,88 @@
             text-align: right;
         }
 
+        /* Failure State Styling */
+        .verified-card.failed-card {
+            background: rgba(239, 68, 68, 0.05);
+            border-color: #EF4444;
+        }
+
+        .failed-icon {
+            background: #EF4444;
+        }
+
+        .failed-title {
+            color: #EF4444;
+        }
+
+        /* Pending State Styling */
+        .verified-card.pending-card {
+            background: rgba(245, 158, 11, 0.05);
+            border-color: #F59E0B;
+        }
+
+        .pending-icon {
+            background: #F59E0B;
+        }
+
+        .pending-title {
+            color: #F59E0B;
+        }
+
+        /* State Toggle Buttons Container */
+        .state-toggle-container {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 10000;
+            background: white;
+            padding: 8px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .state-toggle-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .state-toggle-btn:hover {
+            background: var(--color-bg-primary);
+        }
+
+        .state-toggle-btn.active {
+            background: var(--color-blue);
+            border-color: var(--color-blue);
+            color: white;
+        }
+
+        .state-toggle-btn.success-btn.active {
+            background: var(--color-green);
+            border-color: var(--color-green);
+        }
+
+        .state-toggle-btn.pending-btn.active {
+            background: var(--color-orange);
+            border-color: var(--color-orange);
+        }
+
+        .state-toggle-btn.failure-btn.active {
+            background: var(--color-red);
+            border-color: var(--color-red);
+        }
+
         /* ==================== CHECKBOX ==================== */
 
         .checkbox-group {
@@ -883,6 +1007,20 @@
             font-weight: 500;
         }
 
+        .pan-card-father-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            min-height: 16px;
+        }
+
+        .pan-card-father-name.placeholder {
+            color: #9CA3AF;
+            font-weight: 500;
+        }
+
         .pan-card-dob {
             font-size: 11px;
             font-weight: 600;
@@ -958,6 +1096,347 @@
             font-size: 40px;
             color: #9CA3AF;
         }
+
+        /* Skip Confirmation Overlay */
+        .nudge-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
+            display: none;
+        }
+
+        .nudge-overlay.show {
+            display: block;
+        }
+
+        .nudge-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .nudge-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+            max-height: 80vh;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            z-index: 101;
+            animation: slideUp 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(0); }
+            to { transform: translateY(100%); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .drag-handle {
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .drag-bar {
+            width: 40px;
+            height: 4px;
+            background: var(--color-border);
+            border-radius: 999px;
+        }
+
+        .nudge-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .nudge-close-btn:active {
+            transform: scale(0.95);
+            background: var(--color-surface);
+        }
+
+        .modal-header {
+            padding: 24px 24px 16px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .nudge-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 24px 24px;
+        }
+
+        .continue-section {
+            padding: 16px 24px 32px;
+            background: white;
+            border-top: 1px solid var(--color-border);
+            flex-shrink: 0;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--color-border);
+            background: var(--color-card);
+            color: var(--color-text-primary);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.98);
+            background: var(--color-surface);
+        }
+
+        /* ==================== OTP OVERLAY STYLES ==================== */
+
+        .otp-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            display: none;
+        }
+
+        .otp-overlay-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .otp-overlay-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            max-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 101;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .otp-drag-handle {
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .otp-drag-bar {
+            width: 40px;
+            height: 4px;
+            background: var(--color-border);
+            border-radius: 999px;
+        }
+
+        .otp-modal-header {
+            padding: 0 24px 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .otp-modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .otp-modal-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .otp-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 24px;
+            scrollbar-width: none;
+        }
+
+        .otp-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .otp-input-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            padding: 32px 0;
+        }
+
+        .otp-input-container {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .otp-input {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            background: white;
+            transition: all 0.2s ease;
+        }
+
+        .otp-input:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .otp-input.filled {
+            border-color: var(--color-green);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .otp-timer {
+            text-align: center;
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        .otp-resend-link {
+            color: var(--color-blue);
+            font-weight: 600;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .otp-continue-section {
+            padding: 16px 24px 32px;
+            background: white;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .otp-continue-btn {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            border: none;
+            background: var(--color-blue);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .otp-continue-btn.enabled {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .otp-continue-btn.enabled:active {
+            transform: scale(0.96);
+            box-shadow: 0 3px 10px rgba(37, 99, 235, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(0); }
+            to { transform: translateY(100%); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -969,6 +1448,55 @@
         </svg>
         <span id="frameToggleText">Normal View</span>
     </button>
+
+    <!-- PAN State Toggle Buttons -->
+    <div class="state-toggle-container" id="panStateToggleContainer">
+        <button class="state-toggle-btn success-btn active" onclick="setPanState('success')">
+            Success
+        </button>
+        <button class="state-toggle-btn pending-btn" onclick="setPanState('pending')">
+            Pending
+        </button>
+        <button class="state-toggle-btn failure-btn" onclick="setPanState('failure')">
+            Failure
+        </button>
+    </div>
+
+    <!-- Aadhaar State Toggle Buttons -->
+    <div class="state-toggle-container" id="aadhaarStateToggleContainer">
+        <button class="state-toggle-btn success-btn active" onclick="setAadhaarState('success')">
+            Success
+        </button>
+        <button class="state-toggle-btn pending-btn" onclick="setAadhaarState('pending')">
+            Pending
+        </button>
+        <button class="state-toggle-btn failure-btn" onclick="setAadhaarState('failure')">
+            Failure
+        </button>
+    </div>
+
+    <!-- Bank State Toggle Buttons -->
+    <div class="state-toggle-container" id="bankStateToggleContainer">
+        <button class="state-toggle-btn success-btn active" onclick="setBankState('success')">
+            Success
+        </button>
+        <button class="state-toggle-btn pending-btn" onclick="setBankState('pending')">
+            Pending
+        </button>
+        <button class="state-toggle-btn failure-btn" onclick="setBankState('failure')">
+            Failure
+        </button>
+    </div>
+
+    <!-- Final KYC State Toggle Buttons (2 buttons only) -->
+    <div class="state-toggle-container" id="kycStateToggleContainer">
+        <button class="state-toggle-btn success-btn active" onclick="setKycState('success')">
+            Success
+        </button>
+        <button class="state-toggle-btn pending-btn" onclick="setKycState('pending')">
+            Pending
+        </button>
+    </div>
 
     <div class="iphone-frame">
         <div class="iphone-notch"></div>
@@ -1040,17 +1568,14 @@
                                 <div class="step-item">
                                     <div class="step-item-number">1</div>
                                     <div class="step-item-text">PAN Card details</div>
-                                    <div class="step-item-time">1 min</div>
                                 </div>
                                 <div class="step-item">
                                     <div class="step-item-number">2</div>
                                     <div class="step-item-text">Aadhaar (via DigiLocker)</div>
-                                    <div class="step-item-time">2 min</div>
                                 </div>
                                 <div class="step-item">
                                     <div class="step-item-number">3</div>
                                     <div class="step-item-text">Bank Account details</div>
-                                    <div class="step-item-time">1 min</div>
                                 </div>
                             </div>
 
@@ -1089,24 +1614,26 @@
                             </button>
 
                             <div class="helper-text">
-                                🔒 Your information is secure and never shared
+                                <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle;">lock</span> Your information is secure and never shared
                             </div>
                         </div>
                     </div>
 
                     <!-- Step 1: PAN Verification -->
                     <div class="kyc-state" id="panState">
-                        <div class="kyc-container">
-                            <h2 class="welcome-text">Verify Your PAN</h2>
-                            <p class="subtitle-text">Fill in your details as they appear on your PAN card</p>
+                        <div class="kyc-container-split">
+                            <!-- Fixed Section: Header + PAN Card Preview -->
+                            <div class="kyc-fixed-section">
+                                <h2 class="welcome-text">Verify Your PAN</h2>
+                                <p class="subtitle-text">Fill in your details as they appear on your PAN card</p>
 
-                            <div id="panError" class="error-message">
-                                <span>⚠️</span>
-                                <span id="panErrorText">Invalid PAN details. Please try again.</span>
-                            </div>
+                                <div id="panError" class="error-message">
+                                    <span class="material-symbols-outlined">warning</span>
+                                    <span id="panErrorText">Invalid PAN details. Please try again.</span>
+                                </div>
 
-                            <!-- PAN Card Preview -->
-                            <div class="pan-card-preview" id="panCardPreview">
+                                <!-- PAN Card Preview -->
+                                <div class="pan-card-preview" id="panCardPreview">
                                 <div class="pan-card-header">
                                     <div class="pan-card-left-header">
                                         <div class="pan-card-header-hindi">आयकर विभाग</div>
@@ -1123,6 +1650,7 @@
 
                                 <div class="pan-card-content">
                                     <div class="pan-card-name placeholder" id="panCardName">YOUR NAME HERE</div>
+                                    <div class="pan-card-father-name placeholder" id="panCardFatherName">FATHER'S NAME</div>
                                     <div class="pan-card-dob placeholder" id="panCardDob">DOB : 00/00/0000</div>
 
                                     <div class="pan-card-number-label">PERMANENT ACCOUNT NUMBER</div>
@@ -1134,11 +1662,15 @@
                                         भारत<br>सरकार
                                     </div>
                                     <div class="pan-card-photo">
-                                        <span class="material-symbols-outlined">person</span>
+                                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <!-- Fixed section ends -->
 
+                        <!-- Scrollable Section: Form + Verification Cards -->
+                        <div class="kyc-scrollable-section">
                             <div id="panInputForm">
                                 <div class="input-group">
                                     <label class="input-label" for="panInput">PAN Number</label>
@@ -1165,6 +1697,17 @@
                                 </div>
 
                                 <div class="input-group">
+                                    <label class="input-label" for="fatherNameInput">Father's Name</label>
+                                    <input
+                                        type="text"
+                                        id="fatherNameInput"
+                                        class="text-input"
+                                        placeholder="As per PAN Card"
+                                        oninput="updatePanCard(); validatePanForm();"
+                                    >
+                                </div>
+
+                                <div class="input-group">
                                     <label class="input-label" for="dobInput">Date of Birth</label>
                                     <input
                                         type="date"
@@ -1179,7 +1722,7 @@
                                 </button>
 
                                 <div class="helper-text">
-                                    🔒 Your data is encrypted and securely stored
+                                    <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle;">lock</span> Your data is encrypted and securely stored
                                 </div>
                             </div>
 
@@ -1196,38 +1739,74 @@
                                     </div>
                                     <div class="verified-title">PAN Verified Successfully</div>
                                 </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">PAN Number</span>
-                                    <span class="detail-value" id="verifiedPan">-</span>
+                                <div style="text-align: center; font-size: 18px; font-weight: 600; color: var(--color-text-primary); margin-top: 12px;" id="verifiedPan">-</div>
+                            </div>
+
+                            <div id="panFailedCard" class="verified-card failed-card">
+                                <div class="verified-header">
+                                    <div class="verified-icon failed-icon">
+                                        <span class="material-symbols-outlined">close</span>
+                                    </div>
+                                    <div class="verified-title failed-title">PAN Verification Failed</div>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">Name</span>
-                                    <span class="detail-value" id="verifiedName">-</span>
+                                    <span class="detail-label">Error</span>
+                                    <span class="detail-value">Invalid PAN details. Please check and try again.</span>
+                                </div>
+                            </div>
+
+                            <div id="panRetrySection" style="display: none;">
+                                <button class="btn-primary" onclick="retryPAN()">
+                                    Try Again
+                                </button>
+                            </div>
+
+                            <div id="panPendingCard" class="verified-card pending-card">
+                                <div class="verified-header">
+                                    <div class="verified-icon pending-icon">
+                                        <span class="material-symbols-outlined">schedule</span>
+                                    </div>
+                                    <div class="verified-title pending-title">PAN Verification Pending</div>
                                 </div>
                                 <div class="detail-row">
-                                    <span class="detail-label">Date of Birth</span>
-                                    <span class="detail-value" id="verifiedDob">-</span>
+                                    <span class="detail-label">Status</span>
+                                    <span class="detail-value">Verification in progress. This may take a few moments.</span>
                                 </div>
+                                <div style="margin-top: 16px; padding: 12px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; font-size: 13px; color: var(--color-text-secondary);">
+                                    <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">info</span> You can proceed to the next step while we verify your PAN in the background.
+                                </div>
+                            </div>
+
+                            <div id="panContinueSection" style="display: none;">
                                 <button class="btn-primary" onclick="continueToAadhaar()">
                                     Continue to Aadhaar Verification
                                 </button>
                             </div>
                         </div>
+                        <!-- Scrollable section ends -->
                     </div>
+                </div>
 
                     <!-- Step 2: Aadhaar DigiLocker Consent -->
                     <div class="kyc-state" id="aadhaarConsentState">
                         <div class="kyc-container">
-                            <h2 class="welcome-text">Verify Your Aadhaar</h2>
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                                <h2 class="welcome-text" style="margin-bottom: 0;">Verify Your Aadhaar</h2>
+                                <img src="assets/aadhaar.svg" alt="Aadhaar" style="height: 32px;">
+                            </div>
                             <p class="subtitle-text">We'll securely fetch your Aadhaar details via DigiLocker</p>
 
-                            <div class="info-box">
-                                <div class="info-box-title">
-                                    <span class="material-symbols-outlined">info</span>
-                                    <span>About DigiLocker</span>
+                            <div class="info-box" style="display: flex; gap: 16px; align-items: stretch;">
+                                <div style="display: flex; align-items: center;">
+                                    <img src="assets/digilocker.svg" alt="DigiLocker" style="width: 96px; height: auto; mix-blend-mode: multiply;">
                                 </div>
-                                <div class="info-box-text">
-                                    DigiLocker is a government service to securely access your Aadhaar. You'll be redirected to enter your Aadhaar number, verify with OTP, and provide consent.
+                                <div style="flex: 1;">
+                                    <div class="info-box-title" style="margin-bottom: 8px;">
+                                        <span>Redirect to DigiLocker</span>
+                                    </div>
+                                    <div class="info-box-text">
+                                        You'll be redirected to enter your Aadhaar number, verify with OTP, and provide consent.
+                                    </div>
                                 </div>
                             </div>
 
@@ -1251,7 +1830,7 @@
                             </button>
 
                             <div class="helper-text">
-                                🔒 Secured by UIDAI and Government of India
+                                <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle;">lock</span> Secured by UIDAI and Government of India
                             </div>
                         </div>
                     </div>
@@ -1262,12 +1841,16 @@
                             <h2 class="welcome-text">Aadhaar Verified</h2>
                             <p class="subtitle-text">Your Aadhaar has been successfully verified via DigiLocker</p>
 
-                            <div class="verified-card show">
+                            <div id="aadhaarVerifiedCard" class="verified-card">
                                 <div class="verified-header">
                                     <div class="verified-icon">
                                         <span class="material-symbols-outlined">check</span>
                                     </div>
                                     <div class="verified-title">Aadhaar Verified Successfully</div>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Aadhaar Number</span>
+                                    <span class="detail-value" id="aadhaarNumber">XXXX XXXX 5678</span>
                                 </div>
                                 <div class="detail-row">
                                     <span class="detail-label">Name</span>
@@ -1277,6 +1860,44 @@
                                     <span class="detail-label">Address</span>
                                     <span class="detail-value" id="aadhaarAddress" style="text-align: right; max-width: 200px;">-</span>
                                 </div>
+                            </div>
+
+                            <div id="aadhaarFailedCard" class="verified-card failed-card">
+                                <div class="verified-header">
+                                    <div class="verified-icon failed-icon">
+                                        <span class="material-symbols-outlined">close</span>
+                                    </div>
+                                    <div class="verified-title failed-title">Aadhaar Verification Failed</div>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Error</span>
+                                    <span class="detail-value">Unable to fetch details from DigiLocker. Please try again.</span>
+                                </div>
+                            </div>
+
+                            <div id="aadhaarRetrySection" style="display: none;">
+                                <button class="btn-primary" onclick="retryAadhaar()">
+                                    Try Again
+                                </button>
+                            </div>
+
+                            <div id="aadhaarPendingCard" class="verified-card pending-card">
+                                <div class="verified-header">
+                                    <div class="verified-icon pending-icon">
+                                        <span class="material-symbols-outlined">schedule</span>
+                                    </div>
+                                    <div class="verified-title pending-title">Aadhaar Verification Pending</div>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status</span>
+                                    <span class="detail-value">Verification in progress. Connecting to DigiLocker...</span>
+                                </div>
+                                <div style="margin-top: 16px; padding: 12px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; font-size: 13px; color: var(--color-text-secondary);">
+                                    <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">info</span> You can proceed to the next step while we verify your Aadhaar in the background.
+                                </div>
+                            </div>
+
+                            <div id="aadhaarContinueSection" style="display: none;">
                                 <button class="btn-primary" onclick="continueToBank()">
                                     Continue to Bank Verification
                                 </button>
@@ -1291,7 +1912,7 @@
                             <p class="subtitle-text">We'll verify your bank account to enable seamless investments</p>
 
                             <div id="bankError" class="error-message">
-                                <span>⚠️</span>
+                                <span class="material-symbols-outlined">warning</span>
                                 <span id="bankErrorText">Unable to verify bank details. Please check and try again.</span>
                             </div>
 
@@ -1327,7 +1948,7 @@
                                 </button>
 
                                 <div class="helper-text">
-                                    ℹ️ We'll verify using penny drop method - a small amount will be credited and debited instantly
+                                    <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle;">info</span> We'll verify using penny drop method - a small amount will be credited and debited instantly
                                 </div>
                             </div>
 
@@ -1368,6 +1989,44 @@
                                     <span class="detail-label">Account Type</span>
                                     <span class="detail-value" id="bankAccountType">-</span>
                                 </div>
+                            </div>
+
+                            <div id="bankFailedCard" class="verified-card failed-card">
+                                <div class="verified-header">
+                                    <div class="verified-icon failed-icon">
+                                        <span class="material-symbols-outlined">close</span>
+                                    </div>
+                                    <div class="verified-title failed-title">Bank Verification Failed</div>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Error</span>
+                                    <span class="detail-value">Unable to verify account details. Please check your account number and IFSC code.</span>
+                                </div>
+                            </div>
+
+                            <div id="bankRetrySection" style="display: none;">
+                                <button class="btn-primary" onclick="retryBank()">
+                                    Try Again
+                                </button>
+                            </div>
+
+                            <div id="bankPendingCard" class="verified-card pending-card">
+                                <div class="verified-header">
+                                    <div class="verified-icon pending-icon">
+                                        <span class="material-symbols-outlined">schedule</span>
+                                    </div>
+                                    <div class="verified-title pending-title">Bank Verification Pending</div>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status</span>
+                                    <span class="detail-value">Verification in progress. Connecting to your bank...</span>
+                                </div>
+                                <div style="margin-top: 16px; padding: 12px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; font-size: 13px; color: var(--color-text-secondary);">
+                                    <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">info</span> You can proceed to the next step while we verify your bank account in the background.
+                                </div>
+                            </div>
+
+                            <div id="bankContinueSection" style="display: none;">
                                 <button class="btn-primary" onclick="continueToFATCA()">
                                     Continue to FATCA Declaration
                                 </button>
@@ -1381,75 +2040,53 @@
                             <h2 class="welcome-text">FATCA Declaration</h2>
                             <p class="subtitle-text">Please answer these questions as per regulatory requirements</p>
 
-                            <div class="info-box">
-                                <div class="info-box-title">
-                                    <span class="material-symbols-outlined">info</span>
-                                    <span>About FATCA</span>
-                                </div>
-                                <div class="info-box-text">
-                                    FATCA (Foreign Account Tax Compliance Act) requires us to collect information about your tax residency status.
-                                </div>
-                            </div>
-
                             <div id="fatcaForm">
-                                <!-- Question 1 -->
+                                <!-- Question 1: Occupation -->
                                 <div class="input-group">
-                                    <label class="input-label">1. Are you a citizen of India?</label>
-                                    <div style="display: flex; gap: 12px;">
-                                        <label style="flex: 1; display: flex; align-items: center; gap: 8px; padding: 12px; border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer;">
-                                            <input type="radio" name="citizenship" value="yes" onchange="validateFATCA()" style="width: 18px; height: 18px;">
-                                            <span style="font-size: 14px;">Yes</span>
-                                        </label>
-                                        <label style="flex: 1; display: flex; align-items: center; gap: 8px; padding: 12px; border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer;">
-                                            <input type="radio" name="citizenship" value="no" onchange="validateFATCA()" style="width: 18px; height: 18px;">
-                                            <span style="font-size: 14px;">No</span>
-                                        </label>
+                                    <label class="input-label" for="occupation">1. What is your occupation?</label>
+                                    <select id="occupation" class="text-input" onchange="validateFATCA()">
+                                        <option value="" selected disabled>Select your occupation</option>
+                                        <option value="private-job">Private Job</option>
+                                        <option value="business">Business</option>
+                                        <option value="professional">Professional</option>
+                                        <option value="student">Student</option>
+                                        <option value="homemaker">Home-maker/Housewife</option>
+                                        <option value="retired">Retired</option>
+                                        <option value="govt-service">Govt Service</option>
+                                        <option value="psu">Public Sector Service</option>
+                                        <option value="agriculture">Agriculture</option>
+                                        <option value="others">Others</option>
+                                    </select>
+                                </div>
+
+                                <!-- Question 2: Monthly Income -->
+                                <div class="input-group">
+                                    <label class="input-label" for="monthlyIncome">2. What's your in-hand monthly income?</label>
+                                    <div class="amount-input-wrapper">
+                                        <span class="currency-symbol">₹</span>
+                                        <input
+                                            type="tel"
+                                            id="monthlyIncome"
+                                            class="text-input amount-input"
+                                            placeholder="50,000"
+                                            oninput="validateFATCA();"
+                                        >
                                     </div>
                                 </div>
 
-                                <!-- Question 2 -->
+                                <!-- Question 3: Source of Funds -->
                                 <div class="input-group">
-                                    <label class="input-label">2. Are you a tax resident of India?</label>
-                                    <div style="display: flex; gap: 12px;">
-                                        <label style="flex: 1; display: flex; align-items: center; gap: 8px; padding: 12px; border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer;">
-                                            <input type="radio" name="taxResident" value="yes" onchange="validateFATCA()" style="width: 18px; height: 18px;">
-                                            <span style="font-size: 14px;">Yes</span>
-                                        </label>
-                                        <label style="flex: 1; display: flex; align-items: center; gap: 8px; padding: 12px; border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer;">
-                                            <input type="radio" name="taxResident" value="no" onchange="validateFATCA()" style="width: 18px; height: 18px;">
-                                            <span style="font-size: 14px;">No</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- Question 3 -->
-                                <div class="input-group">
-                                    <label class="input-label">3. Do you hold any tax residency outside India?</label>
-                                    <div style="display: flex; gap: 12px;">
-                                        <label style="flex: 1; display: flex; align-items: center; gap: 8px; padding: 12px; border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer;">
-                                            <input type="radio" name="foreignTaxResident" value="yes" onchange="validateFATCA()" style="width: 18px; height: 18px;">
-                                            <span style="font-size: 14px;">Yes</span>
-                                        </label>
-                                        <label style="flex: 1; display: flex; align-items: center; gap: 8px; padding: 12px; border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer;">
-                                            <input type="radio" name="foreignTaxResident" value="no" onchange="validateFATCA()" style="width: 18px; height: 18px;">
-                                            <span style="font-size: 14px;">No</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- Question 4 -->
-                                <div class="input-group">
-                                    <label class="input-label">4. Are you a Politically Exposed Person (PEP)?</label>
-                                    <div style="display: flex; gap: 12px;">
-                                        <label style="flex: 1; display: flex; align-items: center; gap: 8px; padding: 12px; border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer;">
-                                            <input type="radio" name="pep" value="yes" onchange="validateFATCA()" style="width: 18px; height: 18px;">
-                                            <span style="font-size: 14px;">Yes</span>
-                                        </label>
-                                        <label style="flex: 1; display: flex; align-items: center; gap: 8px; padding: 12px; border: 2px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer;">
-                                            <input type="radio" name="pep" value="no" onchange="validateFATCA()" style="width: 18px; height: 18px;">
-                                            <span style="font-size: 14px;">No</span>
-                                        </label>
-                                    </div>
+                                    <label class="input-label" for="sourceOfFunds">3. What is your primary source of funds?</label>
+                                    <select id="sourceOfFunds" class="text-input" onchange="validateFATCA()">
+                                        <option value="" selected disabled>Select source of funds</option>
+                                        <option value="salary">Salary</option>
+                                        <option value="business-income">Business Income</option>
+                                        <option value="rent">Rent</option>
+                                        <option value="property">Property Sale</option>
+                                        <option value="gift">Gift</option>
+                                        <option value="royalty">Royalty</option>
+                                        <option value="others">Others</option>
+                                    </select>
                                 </div>
 
                                 <!-- Declaration Checkbox -->
@@ -1457,13 +2094,13 @@
                                     <div class="checkbox-wrapper">
                                         <input type="checkbox" id="fatcaDeclaration" class="checkbox-input" onchange="validateFATCA()">
                                         <label for="fatcaDeclaration" class="checkbox-label">
-                                            I hereby declare that the information provided is true and accurate to the best of my knowledge. I agree to inform NiveshPe of any changes to this information within 30 days.
+                                            I declare that I am not a Politically Exposed Person (PEP), nor am I a family member or known close associate of a PEP, as defined under the Prevention of Money Laundering Act, 2002 and applicable regulations.
                                         </label>
                                     </div>
                                 </div>
 
-                                <button class="btn-primary" id="submitFatcaBtn" disabled onclick="submitFATCA()">
-                                    Submit KYC
+                                <button class="btn-primary" id="submitFatcaBtn" disabled onclick="showOtpOverlay()">
+                                    Confirm with OTP
                                 </button>
                             </div>
 
@@ -1475,13 +2112,62 @@
                         </div>
                     </div>
 
+                    <!-- OTP Verification Overlay -->
+                    <div class="otp-overlay" id="otpOverlay">
+                        <!-- Backdrop -->
+                        <div class="otp-overlay-backdrop" onclick="closeOtpOverlay()"></div>
+
+                        <!-- Modal -->
+                        <div class="otp-overlay-modal">
+                            <!-- Drag Handle -->
+                            <div class="otp-drag-handle">
+                                <div class="otp-drag-bar"></div>
+                            </div>
+
+                            <!-- Modal Header -->
+                            <div class="otp-modal-header">
+                                <h2 class="otp-modal-title">Enter OTP</h2>
+                                <p class="otp-modal-subtitle">We've sent a 6-digit code to verify your KYC submission to your registered mobile number</p>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="otp-content">
+                                <div class="otp-input-section">
+                                    <div class="otp-input-container">
+                                        <input type="text" class="otp-input" maxlength="1" id="otp1">
+                                        <input type="text" class="otp-input" maxlength="1" id="otp2">
+                                        <input type="text" class="otp-input" maxlength="1" id="otp3">
+                                        <input type="text" class="otp-input" maxlength="1" id="otp4">
+                                        <input type="text" class="otp-input" maxlength="1" id="otp5">
+                                        <input type="text" class="otp-input" maxlength="1" id="otp6">
+                                    </div>
+
+                                    <div class="otp-timer">
+                                        Didn't receive code? <button class="otp-resend-link" onclick="resendOtp()">Resend OTP</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Continue Button -->
+                            <div class="otp-continue-section">
+                                <button class="otp-continue-btn" id="verifyOtpBtn">
+                                    <span>Verify & Complete KYC</span>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Success State -->
                     <div class="kyc-state" id="successState">
-                        <div class="success-container">
+                        <!-- KYC Success Card -->
+                        <div id="kycSuccessCard" class="success-container">
                             <div class="success-checkmark">
                                 <span class="material-symbols-outlined">check</span>
                             </div>
-                            <div class="success-text">KYC Completed! 🎉</div>
+                            <div class="success-text">KYC Completed! <span class="material-symbols-outlined" style="font-size: 32px; vertical-align: middle;">celebration</span></div>
                             <div class="success-subtext">Your account is now ready for investing</div>
 
                             <button class="btn-primary" onclick="goToHome()">
@@ -1492,7 +2178,61 @@
                                 You can now invest in mutual funds, stocks, and more!
                             </div>
                         </div>
+
+                        <!-- KYC Pending Card -->
+                        <div id="kycPendingCard" class="success-container" style="display: none;">
+                            <div class="success-checkmark" style="background: var(--color-orange); box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);">
+                                <span class="material-symbols-outlined">schedule</span>
+                            </div>
+                            <div class="success-text" style="color: var(--color-orange);">KYC Under Review</div>
+                            <div class="success-subtext">Your KYC is being verified. This usually takes few minutes.</div>
+
+                            <button class="btn-primary" onclick="goToHome()">
+                                Continue to Home
+                            </button>
+
+                            <div class="helper-text" style="margin-top: 32px;">
+                                We'll notify you once your KYC is approved. You can explore the app in the meantime!
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- KYC Skip Confirmation Overlay -->
+                    <div class="nudge-overlay" id="skipKycOverlay">
+                        <div class="nudge-backdrop" onclick="hideSkipConfirmation()"></div>
+
+                        <div class="nudge-modal">
+                            <!-- Drag Handle -->
+                            <div class="drag-handle">
+                                <div class="drag-bar"></div>
+                            </div>
+
+                            <!-- Close Button -->
+                            <button class="nudge-close-btn" onclick="hideSkipConfirmation()">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                                </svg>
+                            </button>
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h2 class="modal-title">Are you sure?</h2>
+                                <p class="modal-subtitle">It just takes 2-3 mins to complete KYC. Without KYC, you won't be able to invest in any funds.</p>
+                            </div>
+
+                            <!-- Fixed Action Buttons -->
+                            <div class="continue-section">
+                                <button class="btn-primary" onclick="continueKYC()">
+                                    <span>Complete KYC (2-3 mins)</span>
+                                </button>
+
+                                <button class="btn-secondary" onclick="confirmSkipKYC()">
+                                    <span>Skip Anyway</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -1583,6 +2323,41 @@
             // Update header and progress
             updateProgress(state);
             updateSkipButton(state);
+
+            // Show/hide PAN state toggle buttons (only after verification)
+            const panToggleContainer = document.getElementById('panStateToggleContainer');
+            if (panToggleContainer) {
+                // Only show toggle if on PAN state AND verified card is visible
+                const panVerified = document.getElementById('panVerifiedCard');
+                const shouldShowToggle = state === 'pan' && panVerified && panVerified.classList.contains('show');
+                panToggleContainer.style.display = shouldShowToggle ? 'flex' : 'none';
+            }
+
+            // Show/hide Aadhaar state toggle buttons (only after verification)
+            const aadhaarToggleContainer = document.getElementById('aadhaarStateToggleContainer');
+            if (aadhaarToggleContainer) {
+                // Only show toggle if on aadhaarVerified state AND verified card is visible
+                const aadhaarVerified = document.getElementById('aadhaarVerifiedCard');
+                const shouldShowToggle = state === 'aadhaarVerified' && aadhaarVerified && aadhaarVerified.classList.contains('show');
+                aadhaarToggleContainer.style.display = shouldShowToggle ? 'flex' : 'none';
+            }
+
+            // Show/hide Bank state toggle buttons (only after verification)
+            const bankToggleContainer = document.getElementById('bankStateToggleContainer');
+            if (bankToggleContainer) {
+                // Only show toggle if on bank state AND verified card is visible
+                const bankVerified = document.getElementById('bankVerifiedCard');
+                const shouldShowToggle = state === 'bank' && bankVerified && bankVerified.classList.contains('show');
+                bankToggleContainer.style.display = shouldShowToggle ? 'flex' : 'none';
+            }
+
+            // Show/hide Final KYC state toggle buttons (only on success page)
+            const kycToggleContainer = document.getElementById('kycStateToggleContainer');
+            if (kycToggleContainer) {
+                // Show toggle only on success state
+                const shouldShowToggle = state === 'success';
+                kycToggleContainer.style.display = shouldShowToggle ? 'flex' : 'none';
+            }
         }
 
         function updateProgress(state) {
@@ -1657,9 +2432,11 @@
         function updatePanCard() {
             const panInput = document.getElementById('panInput').value.trim();
             const nameInput = document.getElementById('panNameInput').value.trim();
+            const fatherNameInput = document.getElementById('fatherNameInput').value.trim();
             const dobInput = document.getElementById('dobInput').value;
 
             const panCardName = document.getElementById('panCardName');
+            const panCardFatherName = document.getElementById('panCardFatherName');
             const panCardDob = document.getElementById('panCardDob');
             const panCardNumber = document.getElementById('panCardNumber');
 
@@ -1670,6 +2447,15 @@
             } else {
                 panCardName.textContent = 'YOUR NAME HERE';
                 panCardName.classList.add('placeholder');
+            }
+
+            // Update father's name
+            if (fatherNameInput) {
+                panCardFatherName.textContent = fatherNameInput.toUpperCase();
+                panCardFatherName.classList.remove('placeholder');
+            } else {
+                panCardFatherName.textContent = "FATHER'S NAME";
+                panCardFatherName.classList.add('placeholder');
             }
 
             // Update DOB
@@ -1706,16 +2492,18 @@
         function validatePanForm() {
             const panInput = document.getElementById('panInput').value;
             const nameInput = document.getElementById('panNameInput').value.trim();
+            const fatherNameInput = document.getElementById('fatherNameInput').value.trim();
             const dobInput = document.getElementById('dobInput').value;
             const verifyBtn = document.getElementById('verifyPanBtn');
             const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
-            const isValid = panRegex.test(panInput) && nameInput.length >= 3 && dobInput;
+            const isValid = panRegex.test(panInput) && nameInput.length >= 3 && fatherNameInput.length >= 3 && dobInput;
             verifyBtn.disabled = !isValid;
         }
 
         function verifyPAN() {
             const panNumber = document.getElementById('panInput').value;
             const panName = document.getElementById('panNameInput').value.trim();
+            const fatherName = document.getElementById('fatherNameInput').value.trim();
             const dob = document.getElementById('dobInput').value;
 
             document.getElementById('panInputForm').style.display = 'none';
@@ -1723,13 +2511,22 @@
             document.getElementById('panError').classList.remove('show');
 
             setTimeout(() => {
-                kycData.pan = { number: panNumber, name: panName, dob: dob };
+                kycData.pan = { number: panNumber, name: panName, fatherName: fatherName, dob: dob };
 
                 document.getElementById('panLoadingState').classList.remove('show');
+
+                // Populate PAN number in verified card
                 document.getElementById('verifiedPan').textContent = panNumber;
-                document.getElementById('verifiedName').textContent = panName;
-                document.getElementById('verifiedDob').textContent = new Date(dob).toLocaleDateString('en-IN');
+
+                // Show success card by default
                 document.getElementById('panVerifiedCard').classList.add('show');
+                document.getElementById('panContinueSection').style.display = 'block';
+
+                // Show the toggle buttons for testing
+                const panToggleContainer = document.getElementById('panStateToggleContainer');
+                if (panToggleContainer) {
+                    panToggleContainer.style.display = 'flex';
+                }
 
                 completedSteps.push('pan');
             }, 2000);
@@ -1739,7 +2536,131 @@
             navigateTo('aadhaar');
         }
 
+        // PAN State Toggle for Testing
+        let panVerificationState = 'success';
+
+        function setPanState(state) {
+            const successCard = document.getElementById('panVerifiedCard');
+            const failedCard = document.getElementById('panFailedCard');
+            const pendingCard = document.getElementById('panPendingCard');
+            const continueSection = document.getElementById('panContinueSection');
+            const retrySection = document.getElementById('panRetrySection');
+
+            // Remove active class from all buttons in PAN container
+            document.querySelectorAll('#panStateToggleContainer .state-toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Hide all cards
+            successCard.classList.remove('show');
+            failedCard.classList.remove('show');
+            pendingCard.classList.remove('show');
+
+            // Show appropriate card and set active button
+            if (state === 'success') {
+                successCard.classList.add('show');
+                continueSection.style.display = 'block';
+                retrySection.style.display = 'none';
+                document.querySelector('#panStateToggleContainer .success-btn').classList.add('active');
+                panVerificationState = 'success';
+            } else if (state === 'pending') {
+                pendingCard.classList.add('show');
+                continueSection.style.display = 'block';
+                retrySection.style.display = 'none';
+                document.querySelector('#panStateToggleContainer .pending-btn').classList.add('active');
+                panVerificationState = 'pending';
+            } else if (state === 'failure') {
+                failedCard.classList.add('show');
+                continueSection.style.display = 'none';
+                retrySection.style.display = 'block';
+                document.querySelector('#panStateToggleContainer .failure-btn').classList.add('active');
+                panVerificationState = 'failure';
+            }
+        }
+
+        function retryPAN() {
+            // Reset to input form
+            document.getElementById('panFailedCard').classList.remove('show');
+            document.getElementById('panRetrySection').style.display = 'none';
+            document.getElementById('panInputForm').style.display = 'block';
+            // Reset toggle to default state
+            panVerificationState = 'success';
+            document.querySelector('#panStateToggleContainer .success-btn').classList.add('active');
+            document.querySelector('#panStateToggleContainer .pending-btn').classList.remove('active');
+            document.querySelector('#panStateToggleContainer .failure-btn').classList.remove('active');
+            // Hide toggle container
+            const panToggleContainer = document.getElementById('panStateToggleContainer');
+            if (panToggleContainer) {
+                panToggleContainer.style.display = 'none';
+            }
+        }
+
         // ==================== AADHAAR VERIFICATION ====================
+
+        let aadhaarVerificationState = 'success';
+
+        function setAadhaarState(state) {
+            const successCard = document.getElementById('aadhaarVerifiedCard');
+            const failedCard = document.getElementById('aadhaarFailedCard');
+            const pendingCard = document.getElementById('aadhaarPendingCard');
+            const continueSection = document.getElementById('aadhaarContinueSection');
+            const retrySection = document.getElementById('aadhaarRetrySection');
+
+            // Remove active class from all buttons in Aadhaar container
+            document.querySelectorAll('#aadhaarStateToggleContainer .state-toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Hide all cards
+            successCard.classList.remove('show');
+            failedCard.classList.remove('show');
+            pendingCard.classList.remove('show');
+
+            // Show appropriate card and set active button
+            if (state === 'success') {
+                successCard.classList.add('show');
+                continueSection.style.display = 'block';
+                retrySection.style.display = 'none';
+                document.querySelector('#aadhaarStateToggleContainer .success-btn').classList.add('active');
+                aadhaarVerificationState = 'success';
+            } else if (state === 'pending') {
+                pendingCard.classList.add('show');
+                continueSection.style.display = 'block';
+                retrySection.style.display = 'none';
+                document.querySelector('#aadhaarStateToggleContainer .pending-btn').classList.add('active');
+                aadhaarVerificationState = 'pending';
+            } else if (state === 'failure') {
+                failedCard.classList.add('show');
+                continueSection.style.display = 'none';
+                retrySection.style.display = 'block';
+                document.querySelector('#aadhaarStateToggleContainer .failure-btn').classList.add('active');
+                aadhaarVerificationState = 'failure';
+            }
+        }
+
+        function retryAadhaar() {
+            // Reset to consent page
+            document.getElementById('aadhaarFailedCard').classList.remove('show');
+            document.getElementById('aadhaarRetrySection').style.display = 'none';
+            // Reset toggle to default state
+            aadhaarVerificationState = 'success';
+            document.querySelector('#aadhaarStateToggleContainer .success-btn').classList.add('active');
+            document.querySelector('#aadhaarStateToggleContainer .pending-btn').classList.remove('active');
+            document.querySelector('#aadhaarStateToggleContainer .failure-btn').classList.remove('active');
+            // Hide toggle container
+            const aadhaarToggleContainer = document.getElementById('aadhaarStateToggleContainer');
+            if (aadhaarToggleContainer) {
+                aadhaarToggleContainer.style.display = 'none';
+            }
+            // Navigate back to consent page
+            navigateTo('aadhaar');
+        }
+
+        // Format Aadhaar number with masking (show only last 4 digits)
+        function formatAadhaarNumber(last4Digits) {
+            const digits = last4Digits || '5678';
+            return `XXXX XXXX ${digits}`;
+        }
 
         function redirectToDigiLocker() {
             console.log('Redirecting to DigiLocker...');
@@ -1747,11 +2668,23 @@
             setTimeout(() => {
                 kycData.aadhaar = {
                     name: kycData.pan.name,
-                    address: 'Mumbai, Maharashtra, 400001'
+                    address: 'Mumbai, Maharashtra, 400001',
+                    number: '5678'  // Last 4 digits
                 };
 
                 document.getElementById('aadhaarName').textContent = kycData.aadhaar.name;
                 document.getElementById('aadhaarAddress').textContent = kycData.aadhaar.address;
+                document.getElementById('aadhaarNumber').textContent = formatAadhaarNumber(kycData.aadhaar.number);
+
+                // Show success card by default
+                document.getElementById('aadhaarVerifiedCard').classList.add('show');
+                document.getElementById('aadhaarContinueSection').style.display = 'block';
+
+                // Show the toggle buttons for testing
+                const aadhaarToggleContainer = document.getElementById('aadhaarStateToggleContainer');
+                if (aadhaarToggleContainer) {
+                    aadhaarToggleContainer.style.display = 'flex';
+                }
 
                 completedSteps.push('aadhaar');
                 navigateTo('aadhaarVerified');
@@ -1805,6 +2738,13 @@
                 document.getElementById('bankBranch').textContent = kycData.bank.branch;
                 document.getElementById('bankAccountType').textContent = kycData.bank.accountType;
                 document.getElementById('bankVerifiedCard').classList.add('show');
+                document.getElementById('bankContinueSection').style.display = 'block';
+
+                // Show the toggle buttons for testing
+                const bankToggleContainer = document.getElementById('bankStateToggleContainer');
+                if (bankToggleContainer) {
+                    bankToggleContainer.style.display = 'flex';
+                }
 
                 completedSteps.push('bank');
             }, 2500);
@@ -1814,26 +2754,83 @@
             navigateTo('fatca');
         }
 
+        // Bank State Toggle for Testing
+        let bankVerificationState = 'success';
+
+        function setBankState(state) {
+            const successCard = document.getElementById('bankVerifiedCard');
+            const failedCard = document.getElementById('bankFailedCard');
+            const pendingCard = document.getElementById('bankPendingCard');
+            const continueSection = document.getElementById('bankContinueSection');
+            const retrySection = document.getElementById('bankRetrySection');
+
+            // Remove active class from all buttons in Bank container
+            document.querySelectorAll('#bankStateToggleContainer .state-toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Hide all cards
+            successCard.classList.remove('show');
+            failedCard.classList.remove('show');
+            pendingCard.classList.remove('show');
+
+            // Show appropriate card and set active button
+            if (state === 'success') {
+                successCard.classList.add('show');
+                continueSection.style.display = 'block';
+                retrySection.style.display = 'none';
+                document.querySelector('#bankStateToggleContainer .success-btn').classList.add('active');
+                bankVerificationState = 'success';
+            } else if (state === 'pending') {
+                pendingCard.classList.add('show');
+                continueSection.style.display = 'block';
+                retrySection.style.display = 'none';
+                document.querySelector('#bankStateToggleContainer .pending-btn').classList.add('active');
+                bankVerificationState = 'pending';
+            } else if (state === 'failure') {
+                failedCard.classList.add('show');
+                continueSection.style.display = 'none';
+                retrySection.style.display = 'block';
+                document.querySelector('#bankStateToggleContainer .failure-btn').classList.add('active');
+                bankVerificationState = 'failure';
+            }
+        }
+
+        function retryBank() {
+            // Reset to input form
+            document.getElementById('bankFailedCard').classList.remove('show');
+            document.getElementById('bankRetrySection').style.display = 'none';
+            document.getElementById('bankInputForm').style.display = 'block';
+            // Reset toggle to default state
+            bankVerificationState = 'success';
+            document.querySelector('#bankStateToggleContainer .success-btn').classList.add('active');
+            document.querySelector('#bankStateToggleContainer .pending-btn').classList.remove('active');
+            document.querySelector('#bankStateToggleContainer .failure-btn').classList.remove('active');
+            // Hide toggle container
+            const bankToggleContainer = document.getElementById('bankStateToggleContainer');
+            if (bankToggleContainer) {
+                bankToggleContainer.style.display = 'none';
+            }
+        }
+
         // ==================== FATCA DECLARATION ====================
 
         function validateFATCA() {
-            const citizenship = document.querySelector('input[name="citizenship"]:checked');
-            const taxResident = document.querySelector('input[name="taxResident"]:checked');
-            const foreignTaxResident = document.querySelector('input[name="foreignTaxResident"]:checked');
-            const pep = document.querySelector('input[name="pep"]:checked');
+            const occupation = document.getElementById('occupation').value;
+            const monthlyIncome = document.getElementById('monthlyIncome').value;
+            const sourceOfFunds = document.getElementById('sourceOfFunds').value;
             const declaration = document.getElementById('fatcaDeclaration').checked;
 
             const submitBtn = document.getElementById('submitFatcaBtn');
-            const isValid = citizenship && taxResident && foreignTaxResident && pep && declaration;
+            const isValid = occupation && monthlyIncome && sourceOfFunds && declaration;
             submitBtn.disabled = !isValid;
         }
 
         function submitFATCA() {
             kycData.fatca = {
-                citizenship: document.querySelector('input[name="citizenship"]:checked').value,
-                taxResident: document.querySelector('input[name="taxResident"]:checked').value,
-                foreignTaxResident: document.querySelector('input[name="foreignTaxResident"]:checked').value,
-                pep: document.querySelector('input[name="pep"]:checked').value,
+                occupation: document.getElementById('occupation').value,
+                monthlyIncome: document.getElementById('monthlyIncome').value.replace(/,/g, ''),
+                sourceOfFunds: document.getElementById('sourceOfFunds').value,
                 declared: true
             };
 
@@ -1841,9 +2838,45 @@
             document.getElementById('fatcaLoadingState').classList.add('show');
 
             setTimeout(() => {
+                // Show success card by default
+                document.getElementById('kycSuccessCard').style.display = 'block';
+                document.getElementById('kycPendingCard').style.display = 'none';
+
+                // Show the toggle buttons for testing
+                const kycToggleContainer = document.getElementById('kycStateToggleContainer');
+                if (kycToggleContainer) {
+                    kycToggleContainer.style.display = 'flex';
+                }
+
                 completedSteps.push('fatca');
                 navigateTo('success');
             }, 2000);
+        }
+
+        // Final KYC State Toggle for Testing
+        let kycFinalState = 'success';
+
+        function setKycState(state) {
+            const successCard = document.getElementById('kycSuccessCard');
+            const pendingCard = document.getElementById('kycPendingCard');
+
+            // Remove active class from all buttons in KYC container
+            document.querySelectorAll('#kycStateToggleContainer .state-toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show appropriate card and set active button
+            if (state === 'success') {
+                successCard.style.display = 'block';
+                pendingCard.style.display = 'none';
+                document.querySelector('#kycStateToggleContainer .success-btn').classList.add('active');
+                kycFinalState = 'success';
+            } else if (state === 'pending') {
+                successCard.style.display = 'none';
+                pendingCard.style.display = 'block';
+                document.querySelector('#kycStateToggleContainer .pending-btn').classList.add('active');
+                kycFinalState = 'pending';
+            }
         }
 
         // ==================== NAVIGATION ====================
@@ -1855,7 +2888,48 @@
         }
 
         function skipKYC() {
-            window.location.href = 'index.html';
+            showSkipConfirmation();
+        }
+
+        function showSkipConfirmation() {
+            const overlay = document.getElementById('skipKycOverlay');
+            overlay.style.display = 'block';
+            setTimeout(() => {
+                overlay.classList.add('show');
+            }, 10);
+
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        }
+
+        function hideSkipConfirmation() {
+            const overlay = document.getElementById('skipKycOverlay');
+            const modal = overlay.querySelector('.nudge-modal');
+            const backdrop = overlay.querySelector('.nudge-backdrop');
+
+            modal.style.animation = 'slideDown 0.3s ease-out';
+            backdrop.style.animation = 'fadeOut 0.3s ease-out';
+
+            setTimeout(() => {
+                overlay.classList.remove('show');
+                overlay.style.display = 'none';
+                modal.style.animation = '';
+                backdrop.style.animation = '';
+            }, 300);
+        }
+
+        function continueKYC() {
+            hideSkipConfirmation();
+            // User decided to continue with KYC - just close the overlay
+        }
+
+        function confirmSkipKYC() {
+            hideSkipConfirmation();
+            // User confirmed they want to skip
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 300);
         }
 
         function goToHome() {
@@ -1865,6 +2939,161 @@
         // ==================== INITIALIZATION ====================
 
         window.addEventListener('hashchange', handleHashChange);
+
+        // ==================== OTP VERIFICATION ====================
+
+        function showOtpOverlay() {
+            // Add haptic feedback
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+
+            // Show OTP overlay
+            document.getElementById('otpOverlay').style.display = 'flex';
+
+            // Focus first OTP input
+            setTimeout(() => {
+                document.getElementById('otp1').focus();
+            }, 300);
+        }
+
+        function closeOtpOverlay() {
+            const modal = document.querySelector('.otp-overlay-modal');
+            const backdrop = document.querySelector('.otp-overlay-backdrop');
+
+            modal.style.animation = 'slideDown 0.3s ease-out';
+            backdrop.style.animation = 'fadeOut 0.3s ease-out';
+
+            setTimeout(() => {
+                document.getElementById('otpOverlay').style.display = 'none';
+
+                // Clear all inputs
+                otpInputs.forEach(input => {
+                    input.value = '';
+                    input.classList.remove('filled');
+                });
+
+                // Reset verify button
+                const verifyBtn = document.getElementById('verifyOtpBtn');
+                verifyBtn.classList.remove('enabled');
+                verifyBtn.querySelector('span').textContent = 'Verify & Complete KYC';
+                verifyBtn.disabled = false;
+                verifyBtn.querySelector('svg').style.display = 'block';
+
+                // Reset animations
+                modal.style.animation = '';
+                backdrop.style.animation = '';
+            }, 300);
+        }
+
+        // OTP Input Handling
+        const otpInputs = document.querySelectorAll('.otp-input');
+
+        otpInputs.forEach((input, index) => {
+            // Input validation and auto-advance
+            input.addEventListener('input', function(e) {
+                const value = e.target.value;
+
+                if (value && /^[0-9]$/.test(value)) {
+                    this.classList.add('filled');
+
+                    // Move to next input
+                    if (index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+
+                    // Check if all inputs are filled
+                    checkOtpComplete();
+                } else {
+                    this.classList.remove('filled');
+                    this.value = '';
+                }
+            });
+
+            // Backspace handling
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && !this.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                    otpInputs[index - 1].classList.remove('filled');
+                    otpInputs[index - 1].value = '';
+                }
+            });
+
+            // Paste handling
+            input.addEventListener('paste', function(e) {
+                e.preventDefault();
+                const pastedData = e.clipboardData.getData('text').replace(/\D/g, '');
+
+                if (pastedData.length === 6) {
+                    otpInputs.forEach((inp, i) => {
+                        if (pastedData[i]) {
+                            inp.value = pastedData[i];
+                            inp.classList.add('filled');
+                        }
+                    });
+                    checkOtpComplete();
+                }
+            });
+        });
+
+        function checkOtpComplete() {
+            const filledInputs = document.querySelectorAll('.otp-input.filled');
+            const verifyBtn = document.getElementById('verifyOtpBtn');
+
+            if (filledInputs.length === 6) {
+                verifyBtn.classList.add('enabled');
+            } else {
+                verifyBtn.classList.remove('enabled');
+            }
+        }
+
+        function verifyOtp() {
+            const otpValue = Array.from(otpInputs).map(input => input.value).join('');
+
+            if (otpValue.length === 6) {
+                // Add loading state
+                const verifyBtn = document.getElementById('verifyOtpBtn');
+                const span = verifyBtn.querySelector('span');
+                const svg = verifyBtn.querySelector('svg');
+
+                span.textContent = 'Verifying...';
+                svg.style.display = 'none';
+                verifyBtn.disabled = true;
+
+                // Simulate verification delay, then proceed with existing submitFATCA logic
+                setTimeout(() => {
+                    closeOtpOverlay();
+                    submitFATCA(); // Call existing function
+                }, 1500);
+            }
+        }
+
+        function resendOtp() {
+            // Add haptic feedback
+            if (navigator.vibrate) {
+                navigator.vibrate(100);
+            }
+
+            // Clear all inputs
+            otpInputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+
+            // Focus first input
+            document.getElementById('otp1').focus();
+
+            // Disable verify button
+            document.getElementById('verifyOtpBtn').classList.remove('enabled');
+
+            // Show feedback (could be a toast notification)
+            console.log('OTP resent successfully!');
+        }
+
+        // Add click handler for verify button
+        document.getElementById('verifyOtpBtn').addEventListener('click', verifyOtp);
+
+        // ==================== END OTP VERIFICATION ====================
 
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize from hash or start at overview

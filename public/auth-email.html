@@ -542,21 +542,10 @@
             position: relative;
         }
 
-        .input-prefix {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--color-text-primary);
-            pointer-events: none;
-        }
-
         .text-input {
             width: 100%;
             height: 52px;
-            padding: 0 16px 0 60px;
+            padding: 0 16px;
             border: 2px solid var(--color-border);
             border-radius: var(--radius-md);
             font-size: 16px;
@@ -657,6 +646,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
+            margin-bottom: 12px;
         }
 
         .btn-primary:active:not(:disabled) {
@@ -691,6 +681,8 @@
             cursor: pointer;
             text-decoration: underline;
             padding: 8px;
+            width: 100%;
+            text-align: center;
         }
 
         .btn-text:disabled {
@@ -781,8 +773,7 @@
                     <button class="back-button" id="backButton" onclick="handleBack()">
                         <span class="material-symbols-outlined">arrow_back</span>
                     </button>
-                    <h1 class="header-title" id="headerTitle">Welcome</h1>
-                    <button class="skip-button" id="skipButton" onclick="skipCarousel()" style="display: none;">Skip</button>
+                    <h1 class="header-title" id="headerTitle">Sign Up</h1>
                 </div>
 
                 <!-- Progress Indicator -->
@@ -793,125 +784,49 @@
 
                 <!-- Main Content -->
                 <div class="main-content">
-                    <!-- State 1: Welcome Carousel -->
-                    <div class="auth-state active" id="carouselState">
-                        <div class="carousel-container">
-                            <div class="carousel-slides">
-                                <!-- Slide 1: Growth -->
-                                <div class="carousel-slide active" data-slide="0">
-                                    <div class="carousel-illustration">
-                                        <div class="illustration-growth">
-                                            <div class="growth-chart">
-                                                <div class="chart-bar"></div>
-                                                <div class="chart-bar"></div>
-                                                <div class="chart-bar"></div>
-                                                <div class="chart-bar"></div>
-                                            </div>
-                                            <div class="growth-coin">📈</div>
-                                        </div>
-                                    </div>
-                                    <h2 class="carousel-headline">Invest Smarter,<br>Grow Faster</h2>
-                                    <p class="carousel-subtext">Build wealth with India's simplest investment app. Start with just ₹100.</p>
-                                </div>
-
-                                <!-- Slide 2: Auto-SIP -->
-                                <div class="carousel-slide" data-slide="1">
-                                    <div class="carousel-illustration">
-                                        <div class="illustration-sip">
-                                            <div class="sip-circle"></div>
-                                            <div class="sip-center">⚡</div>
-                                            <div class="sip-dot"></div>
-                                            <div class="sip-dot"></div>
-                                            <div class="sip-dot"></div>
-                                            <div class="sip-dot"></div>
-                                            <div class="sip-dot"></div>
-                                        </div>
-                                    </div>
-                                    <h2 class="carousel-headline">Auto-Invest.<br>Zero Hassle.</h2>
-                                    <p class="carousel-subtext">Set it and forget it. Your money grows on autopilot with smart SIPs.</p>
-                                </div>
-
-                                <!-- Slide 3: Security -->
-                                <div class="carousel-slide" data-slide="2">
-                                    <div class="carousel-illustration">
-                                        <div class="illustration-security">
-                                            <div class="security-ring"></div>
-                                            <div class="security-shield"><span class="material-symbols-outlined">lock</span></div>
-                                        </div>
-                                    </div>
-                                    <h2 class="carousel-headline">100% Safe<br>& Secure</h2>
-                                    <p class="carousel-subtext">Bank-grade security. SEBI registered. Your investments are always protected.</p>
-                                </div>
-                            </div>
-
-                            <div class="carousel-dots" id="carouselDots">
-                                <div class="carousel-dot active" onclick="goToSlide(0)"></div>
-                                <div class="carousel-dot" onclick="goToSlide(1)"></div>
-                                <div class="carousel-dot" onclick="goToSlide(2)"></div>
-                            </div>
-
-                            <button class="carousel-button" id="carouselButton" onclick="handleCarouselButton()">Next</button>
-                        </div>
-                    </div>
-
-                    <!-- State 2: Phone Entry -->
-                    <div class="auth-state" id="phoneState">
+                    <!-- State 1: Email Entry -->
+                    <div class="auth-state active" id="emailState">
                         <div class="phone-container">
-                            <h2 class="welcome-text">Welcome!</h2>
-                            <p class="subtitle-text">Enter your mobile number to get started</p>
+                            <h2 class="welcome-text">Add your email</h2>
+                            <p class="subtitle-text">We'll use this to send you important updates and statements</p>
 
-                            <div id="phoneError" class="error-message">
+                            <div id="emailError" class="error-message">
                                 <span class="material-symbols-outlined">warning</span>
-                                <span id="phoneErrorText">Please enter a valid 10-digit mobile number</span>
+                                <span id="emailErrorText">Please enter a valid email address</span>
                             </div>
 
                             <div class="input-group">
-                                <label class="input-label" for="mobileInput">Mobile Number</label>
-                                <div class="input-wrapper">
-                                    <span class="input-prefix">+91</span>
-                                    <input
-                                        type="text"
-                                        id="mobileInput"
-                                        class="text-input"
-                                        placeholder="9876543210"
-                                        maxlength="10"
-                                        inputmode="numeric"
-                                        autocomplete="tel-national"
-                                        oninput="validateMobile()"
-                                        onkeypress="handleMobileKeyPress(event)"
-                                    >
-                                </div>
-                                <div class="trust-badges">
-                                    <div class="trust-badge">
-                                        <span class="material-symbols-outlined">lock</span>
-                                        <span>Secure</span>
-                                    </div>
-                                    <div class="trust-badge">
-                                        <span>🇮🇳</span>
-                                        <span>Made in India</span>
-                                    </div>
-                                    <div class="trust-badge">
-                                        <span>⚡</span>
-                                        <span>2 min signup</span>
-                                    </div>
-                                </div>
+                                <label class="input-label" for="emailInput">Email Address</label>
+                                <input
+                                    type="email"
+                                    id="emailInput"
+                                    class="text-input"
+                                    placeholder="you@example.com"
+                                    autocomplete="email"
+                                    oninput="validateEmail()"
+                                    onkeypress="handleEmailKeyPress(event)"
+                                >
                             </div>
 
                             <button class="btn-primary" id="continueBtn" disabled onclick="sendOTP()">
                                 Continue
                             </button>
 
+                            <button class="btn-text" onclick="skipEmail()">
+                                Skip for Now
+                            </button>
+
                             <div class="helper-text">
-                                By continuing, you agree to our<br>Terms of Service & Privacy Policy
+                                We'll never spam or share your email with anyone
                             </div>
                         </div>
                     </div>
 
-                    <!-- State 3: OTP Verification -->
+                    <!-- State 2: OTP Verification -->
                     <div class="auth-state" id="otpState">
                         <div class="otp-container">
                             <h2 class="welcome-text">Enter Verification Code</h2>
-                            <p class="subtitle-text">We've sent a 6-digit code to <strong id="displayMobile"></strong></p>
+                            <p class="subtitle-text">We've sent a 6-digit code to <strong id="displayEmail"></strong></p>
 
                             <div id="otpError" class="error-message">
                                 <span class="material-symbols-outlined">warning</span>
@@ -930,10 +845,6 @@
                                     autocomplete="one-time-code"
                                     oninput="handleOtpInput()"
                                 >
-                                <div id="autoReadIndicator" class="auto-read-indicator" style="display: none;">
-                                    <span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span>
-                                    <span>Auto-read enabled</span>
-                                </div>
                             </div>
 
                             <div class="resend-section">
@@ -947,8 +858,8 @@
                             </div>
 
                             <div class="change-number">
-                                <button class="btn-text" onclick="changeNumber()">
-                                    Change Mobile Number
+                                <button class="btn-text" onclick="changeEmail()">
+                                    Change Email Address
                                 </button>
                             </div>
                         </div>
@@ -980,90 +891,51 @@
         const RESEND_TIMER = 30;
 
         // State variables
-        let currentState = 'carousel';
-        let currentSlide = 0;
-        let mobileNumber = '';
+        let currentState = 'email';
+        let emailAddress = '';
         let otpAttempts = 0;
         let timerInterval = null;
         let timeRemaining = RESEND_TIMER;
         let webOtpAbortController = null;
 
-        // ==================== CAROUSEL ====================
+        // ==================== EMAIL ====================
 
-        function goToSlide(index) {
-            const slides = document.querySelectorAll('.carousel-slide');
-            const dots = document.querySelectorAll('.carousel-dot');
-
-            slides[currentSlide].classList.remove('active');
-            slides[currentSlide].classList.add('prev');
-            dots[currentSlide].classList.remove('active');
-
-            currentSlide = index;
-
-            slides[currentSlide].classList.remove('prev');
-            slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
-
-            updateCarouselButton();
-        }
-
-        function handleCarouselButton() {
-            if (currentSlide < 2) {
-                goToSlide(currentSlide + 1);
-            } else {
-                startAuth();
-            }
-        }
-
-        function updateCarouselButton() {
-            const button = document.getElementById('carouselButton');
-            button.textContent = currentSlide === 2 ? 'Get Started' : 'Next';
-        }
-
-        function skipCarousel() {
-            startAuth();
-        }
-
-        function startAuth() {
-            switchState('phone');
-        }
-
-        // ==================== PHONE ====================
-
-        function validateMobile() {
-            const input = document.getElementById('mobileInput');
-            const value = input.value.replace(/\D/g, '');
-            input.value = value;
+        function validateEmail() {
+            const input = document.getElementById('emailInput');
+            const value = input.value.trim();
 
             const continueBtn = document.getElementById('continueBtn');
-            const errorMsg = document.getElementById('phoneError');
+            const errorMsg = document.getElementById('emailError');
 
             errorMsg.classList.remove('show');
             input.classList.remove('error');
 
-            continueBtn.disabled = value.length !== 10;
+            // Basic email validation regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            continueBtn.disabled = !emailRegex.test(value);
         }
 
-        function handleMobileKeyPress(event) {
+        function handleEmailKeyPress(event) {
             if (event.key === 'Enter' && !document.getElementById('continueBtn').disabled) {
                 sendOTP();
             }
         }
 
         function sendOTP() {
-            const input = document.getElementById('mobileInput');
-            mobileNumber = input.value;
+            const input = document.getElementById('emailInput');
+            emailAddress = input.value.trim();
 
-            if (mobileNumber.length !== 10) {
-                showError('phone', 'Please enter a valid 10-digit mobile number');
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailAddress)) {
+                showError('email', 'Please enter a valid email address');
                 input.classList.add('error');
                 return;
             }
 
-            localStorage.setItem('niveshpe_mobile', mobileNumber);
+            localStorage.setItem('niveshpe_email', emailAddress);
 
-            const maskedNumber = `+91 ${mobileNumber.slice(0, 2)}****${mobileNumber.slice(-4)}`;
-            document.getElementById('displayMobile').textContent = maskedNumber;
+            document.getElementById('displayEmail').textContent = emailAddress;
 
             switchState('otp');
             startResendTimer();
@@ -1073,7 +945,15 @@
                 document.getElementById('otpInput').focus();
             }, 100);
 
-            console.log('📱 Sending OTP to:', mobileNumber);
+            console.log('📧 Sending OTP to:', emailAddress);
+        }
+
+        function skipEmail() {
+            // Store that email was skipped
+            localStorage.setItem('niveshpe_email_skipped', 'true');
+
+            // Redirect to next step (could be KYC or homepage)
+            window.location.href = 'index.html';
         }
 
         // ==================== OTP ====================
@@ -1137,10 +1017,10 @@
             initWebOTP();
             input.focus();
 
-            console.log('🔄 Resending OTP to:', mobileNumber);
+            console.log('🔄 Resending OTP to:', emailAddress);
         }
 
-        function changeNumber() {
+        function changeEmail() {
             clearInterval(timerInterval);
             if (webOtpAbortController) {
                 webOtpAbortController.abort();
@@ -1149,8 +1029,8 @@
             hideError('otp');
             document.getElementById('otpInput').value = '';
 
-            switchState('phone');
-            document.getElementById('mobileInput').focus();
+            switchState('email');
+            document.getElementById('emailInput').focus();
         }
 
         // ==================== TIMER ====================
@@ -1201,13 +1081,14 @@
             switchState('success');
 
             setTimeout(() => {
-                const isNewUser = mobileNumber.charAt(0) === '8';
+                // Check if user exists based on email domain (demo logic)
+                const isNewUser = emailAddress.includes('gmail.com');
 
                 localStorage.setItem('niveshpe_logged_in', 'true');
                 localStorage.setItem('niveshpe_session_token', 'demo_token_' + Date.now());
                 localStorage.setItem('niveshpe_user_type', isNewUser ? 'new' : 'existing');
 
-                window.location.href = 'auth-email.html';
+                window.location.href = 'kyc.html';
             }, 1500);
         }
 
@@ -1219,7 +1100,6 @@
             });
 
             const backButton = document.getElementById('backButton');
-            const skipButton = document.getElementById('skipButton');
             const progressIndicator = document.getElementById('progressIndicator');
             const progressDot1 = document.getElementById('progressDot1');
             const progressDot2 = document.getElementById('progressDot2');
@@ -1227,26 +1107,17 @@
             progressDot1.classList.remove('active');
             progressDot2.classList.remove('active');
 
-            if (state === 'carousel') {
-                document.getElementById('carouselState').classList.add('active');
-                document.getElementById('headerTitle').textContent = 'Welcome';
+            if (state === 'email') {
+                document.getElementById('emailState').classList.add('active');
+                document.getElementById('headerTitle').textContent = 'Sign Up';
                 backButton.classList.remove('visible');
-                skipButton.style.display = 'inline-block';
-                progressIndicator.classList.remove('show');
-                currentState = 'carousel';
-            } else if (state === 'phone') {
-                document.getElementById('phoneState').classList.add('active');
-                document.getElementById('headerTitle').textContent = 'Sign In';
-                backButton.classList.add('visible');
-                skipButton.style.display = 'none';
                 progressIndicator.classList.add('show');
                 progressDot1.classList.add('active');
-                currentState = 'phone';
+                currentState = 'email';
             } else if (state === 'otp') {
                 document.getElementById('otpState').classList.add('active');
                 document.getElementById('headerTitle').textContent = 'Verify Code';
                 backButton.classList.add('visible');
-                skipButton.style.display = 'none';
                 progressIndicator.classList.add('show');
                 progressDot2.classList.add('active');
                 currentState = 'otp';
@@ -1254,27 +1125,23 @@
                 document.getElementById('successState').classList.add('active');
                 document.getElementById('headerTitle').textContent = 'Success';
                 backButton.classList.remove('visible');
-                skipButton.style.display = 'none';
                 progressIndicator.classList.remove('show');
                 currentState = 'success';
             }
         }
 
         function handleBack() {
-            if (currentState === 'phone') {
-                switchState('carousel');
-                goToSlide(2);
-            } else if (currentState === 'otp') {
-                changeNumber();
+            if (currentState === 'otp') {
+                changeEmail();
             }
         }
 
         // ==================== ERROR HANDLING ====================
 
         function showError(type, message) {
-            if (type === 'phone') {
-                const errorEl = document.getElementById('phoneError');
-                const errorText = document.getElementById('phoneErrorText');
+            if (type === 'email') {
+                const errorEl = document.getElementById('emailError');
+                const errorText = document.getElementById('emailErrorText');
                 errorText.textContent = message;
                 errorEl.classList.add('show');
             } else if (type === 'otp') {
@@ -1286,8 +1153,8 @@
         }
 
         function hideError(type) {
-            if (type === 'phone') {
-                document.getElementById('phoneError').classList.remove('show');
+            if (type === 'email') {
+                document.getElementById('emailError').classList.remove('show');
             } else if (type === 'otp') {
                 document.getElementById('otpError').classList.remove('show');
             }
@@ -1305,7 +1172,8 @@
         // ==================== INITIALIZATION ====================
 
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('skipButton').style.display = 'inline-block';
+            // Initialize the email state with progress indicator visible
+            switchState('email');
         });
 
         // Touch swipe for carousel
