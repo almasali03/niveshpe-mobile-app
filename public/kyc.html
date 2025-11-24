@@ -462,6 +462,20 @@
             flex: 1;
         }
 
+        .step-item-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .step-item-subtext {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
         .step-item-time {
             font-size: 13px;
             color: var(--color-blue);
@@ -883,6 +897,327 @@
         .checkbox-label a {
             color: var(--color-blue);
             text-decoration: underline;
+        }
+
+        /* ==================== NOMINEE SECTION ==================== */
+
+        .nominee-section {
+            margin: 24px 0;
+        }
+
+        .nominee-radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .nominee-radio-option {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px;
+            background: var(--color-bg-primary);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nominee-radio-option.subtle-option {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            padding: 10px 14px;
+        }
+
+        .radio-input {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+            appearance: none;
+            position: relative;
+        }
+
+        .radio-input:checked {
+            border-color: var(--color-blue);
+        }
+
+        .radio-input:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: var(--color-blue);
+            border-radius: 50%;
+        }
+
+        .radio-label {
+            flex: 1;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .radio-label-text {
+            font-size: 14px;
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+        .radio-label-text.subtle-text {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        .nominee-cards-container {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nominee-card {
+            padding: 16px;
+            background: rgba(16, 185, 129, 0.05);
+            border: 2px solid var(--color-green);
+            border-radius: var(--radius-md);
+        }
+
+        .nominee-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nominee-card-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .nominee-initials {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .nominee-card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .nominee-card-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .nominee-card-relationship {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .nominee-card-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nominee-allocation-badge {
+            padding: 6px 12px;
+            background: white;
+            border: 1px solid var(--color-green);
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-green);
+        }
+
+        .nominee-card-edit-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: white;
+            color: var(--color-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nominee-card-edit-btn:hover {
+            background: var(--color-bg-primary);
+        }
+
+        .nominee-card-edit-btn .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        /* Nominee Overlay */
+
+        .nominee-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            display: none;
+        }
+
+        .nominee-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .nominee-modal {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .nominee-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-bg-primary);
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s;
+        }
+
+        .nominee-close-btn:hover {
+            background: var(--color-border);
+        }
+
+        .nominee-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 20px 20px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nominee-form-item {
+            padding: 20px;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+        }
+
+        .nominee-form-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .nominee-form-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .nominee-remove-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nominee-remove-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .nominee-remove-btn .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        .allocation-warning {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: rgba(251, 146, 60, 0.1);
+            border: 1px solid #fb923c;
+            border-radius: var(--radius-md);
+            color: #ea580c;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .allocation-warning .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        .btn-text-only {
+            width: 100%;
+            height: 52px;
+            border: none;
+            background: transparent;
+            color: var(--color-text-secondary);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-text-only:hover {
+            background: var(--color-bg-primary);
         }
 
         /* ==================== SUCCESS STATE ==================== */
@@ -1541,11 +1876,7 @@
                         </div>
                         <div class="step-indicator" id="stepIndicator3">
                             <div class="step-number">3</div>
-                            <div class="step-label">Bank</div>
-                        </div>
-                        <div class="step-indicator" id="stepIndicator4">
-                            <div class="step-number">4</div>
-                            <div class="step-label">FATCA</div>
+                            <div class="step-label">Other Details</div>
                         </div>
                     </div>
                 </div>
@@ -1566,16 +1897,22 @@
                             <div class="steps-overview">
                                 <div class="steps-title">What you'll need:</div>
                                 <div class="step-item">
-                                    <div class="step-item-number">1</div>
-                                    <div class="step-item-text">PAN Card details</div>
+                                    <div class="step-item-number">
+                                        <span class="material-symbols-outlined" style="font-size: 20px;">badge</span>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <div class="step-item-text">PAN Card</div>
+                                        <div class="step-item-subtext">Permanent Account Number for identity verification</div>
+                                    </div>
                                 </div>
                                 <div class="step-item">
-                                    <div class="step-item-number">2</div>
-                                    <div class="step-item-text">Aadhaar (via DigiLocker)</div>
-                                </div>
-                                <div class="step-item">
-                                    <div class="step-item-number">3</div>
-                                    <div class="step-item-text">Bank Account details</div>
+                                    <div class="step-item-number">
+                                        <span class="material-symbols-outlined" style="font-size: 20px;">fingerprint</span>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <div class="step-item-text">Aadhaar via DigiLocker</div>
+                                        <div class="step-item-subtext">Instant verification through government portal</div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -1898,147 +2235,18 @@
                             </div>
 
                             <div id="aadhaarContinueSection" style="display: none;">
-                                <button class="btn-primary" onclick="continueToBank()">
-                                    Continue to Bank Verification
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Bank Account Verification -->
-                    <div class="kyc-state" id="bankState">
-                        <div class="kyc-container">
-                            <h2 class="welcome-text">Link Your Bank Account</h2>
-                            <p class="subtitle-text">We'll verify your bank account to enable seamless investments</p>
-
-                            <div id="bankError" class="error-message">
-                                <span class="material-symbols-outlined">warning</span>
-                                <span id="bankErrorText">Unable to verify bank details. Please check and try again.</span>
-                            </div>
-
-                            <div id="bankInputForm">
-                                <div class="input-group">
-                                    <label class="input-label" for="accountNumberInput">Account Number</label>
-                                    <input
-                                        type="text"
-                                        id="accountNumberInput"
-                                        class="text-input"
-                                        placeholder="Enter your account number"
-                                        maxlength="18"
-                                        inputmode="numeric"
-                                        oninput="validateBankForm()"
-                                    >
-                                </div>
-
-                                <div class="input-group">
-                                    <label class="input-label" for="ifscInput">IFSC Code</label>
-                                    <input
-                                        type="text"
-                                        id="ifscInput"
-                                        class="text-input"
-                                        placeholder="e.g., SBIN0001234"
-                                        maxlength="11"
-                                        oninput="validateBankForm()"
-                                        style="text-transform: uppercase;"
-                                    >
-                                </div>
-
-                                <button class="btn-primary" id="verifyBankBtn" disabled onclick="verifyBank()">
-                                    Verify Bank Account
-                                </button>
-
-                                <div class="helper-text">
-                                    <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle;">info</span> We'll verify using penny drop method - a small amount will be credited and debited instantly
-                                </div>
-                            </div>
-
-                            <div id="bankLoadingState" class="loading-container">
-                                <div class="loading-spinner"></div>
-                                <div class="loading-text">Verifying Bank Account...</div>
-                                <div class="loading-subtext">Fetching account details from your bank</div>
-                            </div>
-
-                            <div id="bankVerifiedCard" class="verified-card">
-                                <div class="verified-header">
-                                    <div class="verified-icon">
-                                        <span class="material-symbols-outlined">check</span>
-                                    </div>
-                                    <div class="verified-title">Bank Account Verified</div>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Account Holder</span>
-                                    <span class="detail-value" id="bankHolderName">-</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Bank Name</span>
-                                    <span class="detail-value" id="bankName">-</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Account Number</span>
-                                    <span class="detail-value" id="bankAccountNumber">-</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">IFSC Code</span>
-                                    <span class="detail-value" id="bankIfsc">-</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Branch</span>
-                                    <span class="detail-value" id="bankBranch">-</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Account Type</span>
-                                    <span class="detail-value" id="bankAccountType">-</span>
-                                </div>
-                            </div>
-
-                            <div id="bankFailedCard" class="verified-card failed-card">
-                                <div class="verified-header">
-                                    <div class="verified-icon failed-icon">
-                                        <span class="material-symbols-outlined">close</span>
-                                    </div>
-                                    <div class="verified-title failed-title">Bank Verification Failed</div>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Error</span>
-                                    <span class="detail-value">Unable to verify account details. Please check your account number and IFSC code.</span>
-                                </div>
-                            </div>
-
-                            <div id="bankRetrySection" style="display: none;">
-                                <button class="btn-primary" onclick="retryBank()">
-                                    Try Again
-                                </button>
-                            </div>
-
-                            <div id="bankPendingCard" class="verified-card pending-card">
-                                <div class="verified-header">
-                                    <div class="verified-icon pending-icon">
-                                        <span class="material-symbols-outlined">schedule</span>
-                                    </div>
-                                    <div class="verified-title pending-title">Bank Verification Pending</div>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Status</span>
-                                    <span class="detail-value">Verification in progress. Connecting to your bank...</span>
-                                </div>
-                                <div style="margin-top: 16px; padding: 12px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; font-size: 13px; color: var(--color-text-secondary);">
-                                    <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">info</span> You can proceed to the next step while we verify your bank account in the background.
-                                </div>
-                            </div>
-
-                            <div id="bankContinueSection" style="display: none;">
                                 <button class="btn-primary" onclick="continueToFATCA()">
-                                    Continue to FATCA Declaration
+                                    Continue to Other Details
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Step 4: FATCA Declaration -->
+                    <!-- Step 3: Other Details -->
                     <div class="kyc-state" id="fatcaState">
                         <div class="kyc-container">
-                            <h2 class="welcome-text">FATCA Declaration</h2>
-                            <p class="subtitle-text">Please answer these questions as per regulatory requirements</p>
+                            <h2 class="welcome-text">Other Details</h2>
+                            <p class="subtitle-text">Help us understand your investment profile better</p>
 
                             <div id="fatcaForm">
                                 <!-- Question 1: Occupation -->
@@ -2089,7 +2297,34 @@
                                     </select>
                                 </div>
 
-                                <!-- Declaration Checkbox -->
+                                <!-- Nominee Selection Section -->
+                                <div class="nominee-section">
+                                    <label class="input-label">4. Nominee Details</label>
+
+                                    <!-- Radio Options -->
+                                    <div class="nominee-radio-group">
+                                        <div class="nominee-radio-option">
+                                            <input type="radio" id="nomineeLater" name="nomineeChoice" value="later" class="radio-input" checked onchange="handleNomineeChoice()">
+                                            <label for="nomineeLater" class="radio-label">
+                                                <span class="radio-label-text">I will add a nominee later</span>
+                                            </label>
+                                        </div>
+
+                                        <div class="nominee-radio-option subtle-option">
+                                            <input type="radio" id="nomineeNow" name="nomineeChoice" value="now" class="radio-input" onchange="handleNomineeChoice()">
+                                            <label for="nomineeNow" class="radio-label">
+                                                <span class="radio-label-text subtle-text">I want to add a nominee right now</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Nominee Cards Container (shown when nominees are added) -->
+                                    <div id="nomineeCardsContainer" class="nominee-cards-container" style="display: none;">
+                                        <!-- Nominees will be rendered here dynamically -->
+                                    </div>
+                                </div>
+
+                                <!-- PEP Declaration Checkbox -->
                                 <div class="checkbox-group">
                                     <div class="checkbox-wrapper">
                                         <input type="checkbox" id="fatcaDeclaration" class="checkbox-input" onchange="validateFATCA()">
@@ -2233,6 +2468,97 @@
                         </div>
                     </div>
 
+                    <!-- Nominee Details Overlay -->
+                    <div class="nominee-overlay" id="nomineeOverlay">
+                        <div class="nominee-backdrop" onclick="closeNomineeOverlay()"></div>
+
+                        <div class="nominee-modal">
+                            <!-- Drag Handle -->
+                            <div class="drag-handle">
+                                <div class="drag-bar"></div>
+                            </div>
+
+                            <!-- Close Button -->
+                            <button class="nominee-close-btn" onclick="closeNomineeOverlay()">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                                </svg>
+                            </button>
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h2 class="modal-title">Add Nominee Details</h2>
+                                <p class="modal-subtitle">Add one or more nominees who will receive your investments in case of unforeseen circumstances</p>
+                            </div>
+
+                            <!-- Scrollable Form Content -->
+                            <div class="nominee-content">
+                                <!-- Nominee Form (dynamic, will be repeated for multiple nominees) -->
+                                <div id="nomineeFormsContainer">
+                                    <!-- First nominee form -->
+                                    <div class="nominee-form-item" id="nomineeForm0">
+                                        <div class="nominee-form-header">
+                                            <h3 class="nominee-form-title">Nominee 1</h3>
+                                            <button class="nominee-remove-btn" onclick="removeNominee(0)" style="display: none;">
+                                                <span class="material-symbols-outlined">delete</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="input-group">
+                                            <label class="input-label">Full Name</label>
+                                            <input type="text" class="text-input" id="nomineeName0" placeholder="Enter nominee's full name">
+                                        </div>
+
+                                        <div class="input-group">
+                                            <label class="input-label">Relationship</label>
+                                            <select class="text-input" id="nomineeRelationship0">
+                                                <option value="" disabled selected>Select relationship</option>
+                                                <option value="parent">Parent</option>
+                                                <option value="spouse">Spouse</option>
+                                                <option value="sibling">Sibling</option>
+                                                <option value="child">Child</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="input-group">
+                                            <label class="input-label">PAN Number</label>
+                                            <input type="text" class="text-input" id="nomineePan0" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                                        </div>
+
+                                        <div class="input-group allocation-field" style="display: none;">
+                                            <label class="input-label">Allocation %</label>
+                                            <input type="number" class="text-input" id="nomineeAllocation0" placeholder="100" min="1" max="100" value="100">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Add Another Nominee Button -->
+                                <button class="btn-secondary" id="addAnotherNomineeBtn" onclick="addAnotherNomineeForm()" style="margin-top: 16px;">
+                                    <span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+                                    <span>Add Another Nominee</span>
+                                </button>
+
+                                <!-- Allocation Warning -->
+                                <div id="allocationWarning" class="allocation-warning" style="display: none;">
+                                    <span class="material-symbols-outlined">info</span>
+                                    <span>Total allocation must equal 100%</span>
+                                </div>
+                            </div>
+
+                            <!-- Fixed Action Buttons -->
+                            <div class="continue-section">
+                                <button class="btn-primary" id="saveNomineesBtn" onclick="saveNominees()">
+                                    <span>Save Nominees</span>
+                                </button>
+
+                                <button class="btn-text-only" onclick="closeNomineeOverlay()">
+                                    <span>Cancel</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -2249,18 +2575,20 @@
         let kycData = {
             pan: null,
             aadhaar: null,
-            bank: null,
-            fatca: null
+            fatca: null,
+            nominees: []
         };
+
+        // Nominee management
+        let nomineeCount = 1;
 
         // Progress tracking
         const stepInfo = {
             overview: { step: 0, percentage: 0, title: 'Complete KYC' },
-            pan: { step: 1, percentage: 25, title: 'Verify PAN' },
-            aadhaar: { step: 2, percentage: 50, title: 'Verify Aadhaar' },
-            bank: { step: 3, percentage: 75, title: 'Link Bank' },
-            fatca: { step: 4, percentage: 100, title: 'FATCA Declaration' },
-            success: { step: 5, percentage: 100, title: 'Success' }
+            pan: { step: 1, percentage: 33, title: 'Verify PAN' },
+            aadhaar: { step: 2, percentage: 66, title: 'Verify Aadhaar' },
+            fatca: { step: 3, percentage: 100, title: 'Other Details' },
+            success: { step: 4, percentage: 100, title: 'Success' }
         };
 
         // ==================== URL HASH NAVIGATION ====================
@@ -2308,7 +2636,6 @@
                 pan: 'panState',
                 aadhaar: 'aadhaarConsentState',
                 aadhaarVerified: 'aadhaarVerifiedState',
-                bank: 'bankState',
                 fatca: 'fatcaState',
                 success: 'successState'
             };
@@ -2395,19 +2722,20 @@
             const indicators = [
                 document.getElementById('stepIndicator1'),
                 document.getElementById('stepIndicator2'),
-                document.getElementById('stepIndicator3'),
-                document.getElementById('stepIndicator4')
+                document.getElementById('stepIndicator3')
             ];
 
             const currentStepNum = state === 'aadhaarVerified' ? 2 : (stepInfo[state]?.step || 0);
 
             indicators.forEach((indicator, index) => {
-                indicator.classList.remove('active', 'completed');
+                if (indicator) {
+                    indicator.classList.remove('active', 'completed');
 
-                if (index + 1 < currentStepNum) {
-                    indicator.classList.add('completed');
-                } else if (index + 1 === currentStepNum) {
-                    indicator.classList.add('active');
+                    if (index + 1 < currentStepNum) {
+                        indicator.classList.add('completed');
+                    } else if (index + 1 === currentStepNum) {
+                        indicator.classList.add('active');
+                    }
                 }
             });
         }
@@ -2691,126 +3019,8 @@
             }, 1500);
         }
 
-        function continueToBank() {
-            navigateTo('bank');
-        }
-
-        // ==================== BANK VERIFICATION ====================
-
-        function validateBankForm() {
-            const accountNumber = document.getElementById('accountNumberInput').value.trim();
-            const ifsc = document.getElementById('ifscInput').value.trim().toUpperCase();
-            const verifyBtn = document.getElementById('verifyBankBtn');
-
-            document.getElementById('ifscInput').value = ifsc;
-
-            const ifscRegex = /^[A-Z]{4}0[A-Z0-9]{6}$/;
-            const isValid = accountNumber.length >= 9 && accountNumber.length <= 18 && ifscRegex.test(ifsc);
-            verifyBtn.disabled = !isValid;
-        }
-
-        function verifyBank() {
-            const accountNumber = document.getElementById('accountNumberInput').value.trim();
-            const ifsc = document.getElementById('ifscInput').value.trim().toUpperCase();
-
-            document.getElementById('bankInputForm').style.display = 'none';
-            document.getElementById('bankLoadingState').classList.add('show');
-            document.getElementById('bankError').classList.remove('show');
-
-            setTimeout(() => {
-                kycData.bank = {
-                    accountNumber: accountNumber,
-                    ifsc: ifsc,
-                    holderName: kycData.pan.name,
-                    bankName: 'State Bank of India',
-                    branch: 'Andheri East, Mumbai',
-                    accountType: 'Savings'
-                };
-
-                document.getElementById('bankLoadingState').classList.remove('show');
-                document.getElementById('bankHolderName').textContent = kycData.bank.holderName;
-                document.getElementById('bankName').textContent = kycData.bank.bankName;
-
-                const maskedAccount = 'XXXX' + accountNumber.slice(-4);
-                document.getElementById('bankAccountNumber').textContent = maskedAccount;
-
-                document.getElementById('bankIfsc').textContent = ifsc;
-                document.getElementById('bankBranch').textContent = kycData.bank.branch;
-                document.getElementById('bankAccountType').textContent = kycData.bank.accountType;
-                document.getElementById('bankVerifiedCard').classList.add('show');
-                document.getElementById('bankContinueSection').style.display = 'block';
-
-                // Show the toggle buttons for testing
-                const bankToggleContainer = document.getElementById('bankStateToggleContainer');
-                if (bankToggleContainer) {
-                    bankToggleContainer.style.display = 'flex';
-                }
-
-                completedSteps.push('bank');
-            }, 2500);
-        }
-
         function continueToFATCA() {
             navigateTo('fatca');
-        }
-
-        // Bank State Toggle for Testing
-        let bankVerificationState = 'success';
-
-        function setBankState(state) {
-            const successCard = document.getElementById('bankVerifiedCard');
-            const failedCard = document.getElementById('bankFailedCard');
-            const pendingCard = document.getElementById('bankPendingCard');
-            const continueSection = document.getElementById('bankContinueSection');
-            const retrySection = document.getElementById('bankRetrySection');
-
-            // Remove active class from all buttons in Bank container
-            document.querySelectorAll('#bankStateToggleContainer .state-toggle-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            // Hide all cards
-            successCard.classList.remove('show');
-            failedCard.classList.remove('show');
-            pendingCard.classList.remove('show');
-
-            // Show appropriate card and set active button
-            if (state === 'success') {
-                successCard.classList.add('show');
-                continueSection.style.display = 'block';
-                retrySection.style.display = 'none';
-                document.querySelector('#bankStateToggleContainer .success-btn').classList.add('active');
-                bankVerificationState = 'success';
-            } else if (state === 'pending') {
-                pendingCard.classList.add('show');
-                continueSection.style.display = 'block';
-                retrySection.style.display = 'none';
-                document.querySelector('#bankStateToggleContainer .pending-btn').classList.add('active');
-                bankVerificationState = 'pending';
-            } else if (state === 'failure') {
-                failedCard.classList.add('show');
-                continueSection.style.display = 'none';
-                retrySection.style.display = 'block';
-                document.querySelector('#bankStateToggleContainer .failure-btn').classList.add('active');
-                bankVerificationState = 'failure';
-            }
-        }
-
-        function retryBank() {
-            // Reset to input form
-            document.getElementById('bankFailedCard').classList.remove('show');
-            document.getElementById('bankRetrySection').style.display = 'none';
-            document.getElementById('bankInputForm').style.display = 'block';
-            // Reset toggle to default state
-            bankVerificationState = 'success';
-            document.querySelector('#bankStateToggleContainer .success-btn').classList.add('active');
-            document.querySelector('#bankStateToggleContainer .pending-btn').classList.remove('active');
-            document.querySelector('#bankStateToggleContainer .failure-btn').classList.remove('active');
-            // Hide toggle container
-            const bankToggleContainer = document.getElementById('bankStateToggleContainer');
-            if (bankToggleContainer) {
-                bankToggleContainer.style.display = 'none';
-            }
         }
 
         // ==================== FATCA DECLARATION ====================
@@ -2934,6 +3144,348 @@
 
         function goToHome() {
             window.location.href = 'index.html';
+        }
+
+        // ==================== NOMINEE MANAGEMENT ====================
+
+        function handleNomineeChoice() {
+            const nomineeNowChecked = document.getElementById('nomineeNow').checked;
+
+            if (nomineeNowChecked) {
+                openNomineeOverlay();
+            }
+        }
+
+        function openNomineeOverlay() {
+            document.getElementById('nomineeOverlay').style.display = 'flex';
+            // Add animation
+            setTimeout(() => {
+                document.querySelector('.nominee-modal').style.animation = 'slideUp 0.3s ease-out';
+                document.querySelector('.nominee-backdrop').style.animation = 'fadeIn 0.3s ease-out';
+            }, 10);
+        }
+
+        function closeNomineeOverlay() {
+            document.getElementById('nomineeOverlay').style.display = 'none';
+
+            // Reset radio selection if no nominees were saved
+            if (kycData.nominees.length === 0) {
+                document.getElementById('nomineeLater').checked = true;
+            }
+        }
+
+        function addAnotherNomineeForm() {
+            nomineeCount++;
+            const container = document.getElementById('nomineeFormsContainer');
+
+            const newForm = document.createElement('div');
+            newForm.className = 'nominee-form-item';
+            newForm.id = `nomineeForm${nomineeCount - 1}`;
+            newForm.innerHTML = `
+                <div class="nominee-form-header">
+                    <h3 class="nominee-form-title">Nominee ${nomineeCount}</h3>
+                    <button class="nominee-remove-btn" onclick="removeNomineeForm(${nomineeCount - 1})">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Full Name</label>
+                    <input type="text" class="text-input" id="nomineeName${nomineeCount - 1}" placeholder="Enter nominee's full name">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Relationship</label>
+                    <select class="text-input" id="nomineeRelationship${nomineeCount - 1}">
+                        <option value="" disabled selected>Select relationship</option>
+                        <option value="parent">Parent</option>
+                        <option value="spouse">Spouse</option>
+                        <option value="sibling">Sibling</option>
+                        <option value="child">Child</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">PAN Number</label>
+                    <input type="text" class="text-input" id="nomineePan${nomineeCount - 1}" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                </div>
+
+                <div class="input-group allocation-field">
+                    <label class="input-label">Allocation %</label>
+                    <input type="number" class="text-input" id="nomineeAllocation${nomineeCount - 1}" placeholder="0" min="1" max="100">
+                </div>
+            `;
+
+            container.appendChild(newForm);
+
+            // Show delete button for first nominee if more than one
+            if (nomineeCount > 1) {
+                document.querySelector('#nomineeForm0 .nominee-remove-btn').style.display = 'flex';
+            }
+
+            // Show all allocation fields when multiple nominees
+            toggleAllocationFields();
+
+            // Recalculate allocations
+            redistributeAllocations();
+        }
+
+        function removeNomineeForm(index) {
+            const form = document.getElementById(`nomineeForm${index}`);
+            if (form) {
+                form.remove();
+                nomineeCount--;
+
+                // Hide delete button if only one nominee left
+                if (nomineeCount === 1) {
+                    const firstDeleteBtn = document.querySelector('#nomineeForm0 .nominee-remove-btn');
+                    if (firstDeleteBtn) {
+                        firstDeleteBtn.style.display = 'none';
+                    }
+                }
+
+                // Renumber remaining forms
+                const forms = document.querySelectorAll('.nominee-form-item');
+                forms.forEach((form, idx) => {
+                    const title = form.querySelector('.nominee-form-title');
+                    if (title) {
+                        title.textContent = `Nominee ${idx + 1}`;
+                    }
+                });
+
+                // Toggle allocation fields visibility
+                toggleAllocationFields();
+
+                // Recalculate allocations
+                redistributeAllocations();
+            }
+        }
+
+        function toggleAllocationFields() {
+            const forms = document.querySelectorAll('.nominee-form-item');
+            const allocationFields = document.querySelectorAll('.allocation-field');
+
+            if (forms.length === 1) {
+                // Hide all allocation fields for single nominee
+                allocationFields.forEach(field => {
+                    field.style.display = 'none';
+                });
+            } else {
+                // Show all allocation fields for multiple nominees
+                allocationFields.forEach(field => {
+                    field.style.display = 'block';
+                });
+            }
+        }
+
+        function redistributeAllocations() {
+            const forms = document.querySelectorAll('.nominee-form-item');
+            const count = forms.length;
+            const equalShare = Math.floor(100 / count);
+            const remainder = 100 % count;
+
+            forms.forEach((form, idx) => {
+                const allocationInput = form.querySelector(`input[id^="nomineeAllocation"]`);
+                if (allocationInput) {
+                    // Give remainder to first nominee
+                    allocationInput.value = idx === 0 ? equalShare + remainder : equalShare;
+                }
+            });
+        }
+
+        function validateNominees() {
+            const forms = document.querySelectorAll('.nominee-form-item');
+            let totalAllocation = 0;
+            let isValid = true;
+
+            const nominees = [];
+
+            forms.forEach((form, idx) => {
+                const name = document.getElementById(`nomineeName${idx}`)?.value.trim();
+                const relationship = document.getElementById(`nomineeRelationship${idx}`)?.value;
+                const pan = document.getElementById(`nomineePan${idx}`)?.value.trim().toUpperCase();
+
+                // For single nominee, allocation is always 100%
+                let allocation;
+                if (forms.length === 1) {
+                    allocation = 100;
+                } else {
+                    allocation = parseInt(document.getElementById(`nomineeAllocation${idx}`)?.value) || 0;
+                    if (allocation <= 0) {
+                        isValid = false;
+                        return;
+                    }
+                }
+
+                if (!name || !relationship || !pan) {
+                    isValid = false;
+                    return;
+                }
+
+                // Basic PAN validation
+                const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+                if (!panRegex.test(pan)) {
+                    isValid = false;
+                    return;
+                }
+
+                totalAllocation += allocation;
+
+                nominees.push({
+                    name,
+                    relationship,
+                    pan,
+                    allocation
+                });
+            });
+
+            // Check if total allocation is 100% (only for multiple nominees)
+            if (forms.length > 1 && totalAllocation !== 100) {
+                document.getElementById('allocationWarning').style.display = 'flex';
+                return false;
+            } else {
+                document.getElementById('allocationWarning').style.display = 'none';
+            }
+
+            if (!isValid) {
+                return false;
+            }
+
+            return nominees;
+        }
+
+        function saveNominees() {
+            const nominees = validateNominees();
+
+            if (!nominees) {
+                alert('Please fill all nominee details correctly and ensure allocation totals 100%');
+                return;
+            }
+
+            kycData.nominees = nominees;
+            renderNomineeCards();
+            closeNomineeOverlay();
+        }
+
+        function renderNomineeCards() {
+            const container = document.getElementById('nomineeCardsContainer');
+
+            if (kycData.nominees.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'block';
+            container.innerHTML = '';
+
+            kycData.nominees.forEach((nominee, idx) => {
+                const card = document.createElement('div');
+                card.className = 'nominee-card';
+                card.innerHTML = `
+                    <div class="nominee-card-header">
+                        <div class="nominee-card-left">
+                            <div class="nominee-initials">${getInitials(nominee.name)}</div>
+                            <div class="nominee-card-info">
+                                <div class="nominee-card-name">${nominee.name}</div>
+                                <div class="nominee-card-relationship">${formatRelationship(nominee.relationship)}</div>
+                            </div>
+                        </div>
+                        <div class="nominee-card-right">
+                            <div class="nominee-allocation-badge">${nominee.allocation}%</div>
+                            <button class="nominee-card-edit-btn" onclick="editNominee(${idx})">
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function editNominee(index) {
+            // Open overlay with existing data
+            openNomineeOverlay();
+
+            // Clear existing forms
+            const container = document.getElementById('nomineeFormsContainer');
+            container.innerHTML = '';
+            nomineeCount = 0;
+
+            // Recreate forms with existing data
+            kycData.nominees.forEach((nominee, idx) => {
+                if (idx === 0) {
+                    // First form already exists, just populate
+                    recreateNomineeForm(nominee, idx);
+                } else {
+                    addAnotherNomineeForm();
+                    populateNomineeForm(nominee, idx);
+                }
+            });
+        }
+
+        function recreateNomineeForm(nominee, index) {
+            nomineeCount++;
+            const container = document.getElementById('nomineeFormsContainer');
+
+            const form = document.createElement('div');
+            form.className = 'nominee-form-item';
+            form.id = `nomineeForm${index}`;
+            form.innerHTML = `
+                <div class="nominee-form-header">
+                    <h3 class="nominee-form-title">Nominee ${index + 1}</h3>
+                    <button class="nominee-remove-btn" onclick="removeNomineeForm(${index})" style="display: ${kycData.nominees.length > 1 ? 'flex' : 'none'};">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Full Name</label>
+                    <input type="text" class="text-input" id="nomineeName${index}" placeholder="Enter nominee's full name" value="${nominee.name}">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Relationship</label>
+                    <select class="text-input" id="nomineeRelationship${index}">
+                        <option value="" disabled>Select relationship</option>
+                        <option value="parent" ${nominee.relationship === 'parent' ? 'selected' : ''}>Parent</option>
+                        <option value="spouse" ${nominee.relationship === 'spouse' ? 'selected' : ''}>Spouse</option>
+                        <option value="sibling" ${nominee.relationship === 'sibling' ? 'selected' : ''}>Sibling</option>
+                        <option value="child" ${nominee.relationship === 'child' ? 'selected' : ''}>Child</option>
+                        <option value="other" ${nominee.relationship === 'other' ? 'selected' : ''}>Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">PAN Number</label>
+                    <input type="text" class="text-input" id="nomineePan${index}" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;" value="${nominee.pan}">
+                </div>
+
+                <div class="input-group allocation-field" style="display: ${kycData.nominees.length > 1 ? 'block' : 'none'};">
+                    <label class="input-label">Allocation %</label>
+                    <input type="number" class="text-input" id="nomineeAllocation${index}" placeholder="100" min="1" max="100" value="${nominee.allocation}">
+                </div>
+            `;
+
+            container.appendChild(form);
+
+            // Toggle allocation fields based on count
+            toggleAllocationFields();
+        }
+
+        function populateNomineeForm(nominee, index) {
+            document.getElementById(`nomineeName${index}`).value = nominee.name;
+            document.getElementById(`nomineeRelationship${index}`).value = nominee.relationship;
+            document.getElementById(`nomineePan${index}`).value = nominee.pan;
+            document.getElementById(`nomineeAllocation${index}`).value = nominee.allocation;
+        }
+
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        }
+
+        function formatRelationship(relationship) {
+            return relationship.charAt(0).toUpperCase() + relationship.slice(1);
         }
 
         // ==================== INITIALIZATION ====================
