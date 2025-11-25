@@ -339,109 +339,6 @@
             color: var(--color-text-primary);
         }
 
-        /* Custom Goal Form */
-        .custom-goal-form {
-            margin-top: 24px;
-            padding: 20px;
-            background: white;
-            border: 2px solid var(--color-blue);
-            border-radius: var(--radius-lg);
-            animation: slideDown 0.3s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .custom-form-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .custom-form-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--color-text-primary);
-        }
-
-        .custom-form-close {
-            width: 32px;
-            height: 32px;
-            border: none;
-            background: var(--color-bg-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--color-text-secondary);
-            transition: all 0.2s;
-        }
-
-        .custom-form-close:hover {
-            background: var(--color-border);
-        }
-
-        .icon-picker-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
-
-        .icon-picker-item {
-            aspect-ratio: 1;
-            border: 2px solid var(--color-border);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: white;
-        }
-
-        .icon-picker-item:hover {
-            border-color: var(--color-blue);
-            background: rgba(37, 99, 235, 0.05);
-        }
-
-        .icon-picker-item.selected {
-            border-color: var(--color-blue);
-            background: rgba(37, 99, 235, 0.1);
-        }
-
-        .icon-picker-item .material-symbols-outlined {
-            font-size: 32px;
-            color: var(--color-text-primary);
-        }
-
-        .btn-secondary {
-            width: 100%;
-            height: 48px;
-            background: var(--color-blue);
-            color: white;
-            border: none;
-            border-radius: var(--radius-md);
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 16px;
-            transition: all 0.2s;
-        }
-
-        .btn-secondary:hover {
-            background: var(--color-blue-dark);
-        }
-
         /* Duration Input - Sentence Format */
         .duration-sentence {
             display: flex;
@@ -614,9 +511,39 @@
 
                         <!-- Content -->
                         <div class="goal-content">
-                            <!-- Goal Selection (Combined Name + Category) -->
+                            <!-- Goal Name -->
                             <div class="input-group">
-                                <label class="input-label">Choose Your Goal</label>
+                                <label class="input-label">Goal Name</label>
+                                <input type="text"
+                                       id="goalName"
+                                       class="text-input"
+                                       placeholder="e.g., Dream Vacation, New Home"
+                                       maxlength="50"
+                                       oninput="validateForm()">
+                            </div>
+
+                            <!-- Goal Tenure -->
+                            <div class="input-group">
+                                <div class="duration-sentence">
+                                    <span>I want to achieve this goal in</span>
+                                    <input type="number" id="durationInput" class="duration-input" value="5" min="1" max="20">
+                                    <span id="durationUnit">years.</span>
+                                </div>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="tenureSlider" class="tenure-slider" min="1" max="20" value="5" step="1">
+                                </div>
+                                <div class="slider-markers">
+                                    <span class="slider-marker">1Y</span>
+                                    <span class="slider-marker">5Y</span>
+                                    <span class="slider-marker">10Y</span>
+                                    <span class="slider-marker">15Y</span>
+                                    <span class="slider-marker">20Y+</span>
+                                </div>
+                            </div>
+
+                            <!-- Category Templates (Optional) -->
+                            <div class="input-group">
+                                <label class="input-label">Choose a Template (Optional)</label>
                                 <div class="category-grid">
                                     <div class="category-item" data-category="vacation" onclick="selectCategory('vacation')">
                                         <div class="category-icon-wrapper">
@@ -654,87 +581,6 @@
                                         </div>
                                         <div class="category-name">Emergency Fund</div>
                                     </div>
-                                    <div class="category-item" data-category="custom" onclick="selectCategory('custom')">
-                                        <div class="category-icon-wrapper">
-                                            <span class="material-symbols-outlined category-icon">flag</span>
-                                        </div>
-                                        <div class="category-name">Custom Goal</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Custom Goal Form -->
-                            <div class="custom-goal-form" id="customGoalForm" style="display: none;">
-                                <div class="custom-form-header">
-                                    <h3 class="custom-form-title">Create Custom Goal</h3>
-                                    <button class="custom-form-close" onclick="closeCustomForm()">
-                                        <span class="material-symbols-outlined">close</span>
-                                    </button>
-                                </div>
-
-                                <div class="input-group">
-                                    <label class="input-label">Goal Name</label>
-                                    <input type="text"
-                                           id="customGoalName"
-                                           class="text-input"
-                                           placeholder="e.g., Save for a gadget"
-                                           maxlength="30">
-                                </div>
-
-                                <div class="input-group">
-                                    <label class="input-label">Choose an Icon (Optional)</label>
-                                    <div class="icon-picker-grid">
-                                        <div class="icon-picker-item" data-icon="savings" onclick="selectCustomIcon('savings')">
-                                            <span class="material-symbols-outlined">savings</span>
-                                        </div>
-                                        <div class="icon-picker-item" data-icon="cake" onclick="selectCustomIcon('cake')">
-                                            <span class="material-symbols-outlined">cake</span>
-                                        </div>
-                                        <div class="icon-picker-item" data-icon="sports" onclick="selectCustomIcon('sports_soccer')">
-                                            <span class="material-symbols-outlined">sports_soccer</span>
-                                        </div>
-                                        <div class="icon-picker-item" data-icon="music" onclick="selectCustomIcon('music_note')">
-                                            <span class="material-symbols-outlined">music_note</span>
-                                        </div>
-                                        <div class="icon-picker-item" data-icon="camera" onclick="selectCustomIcon('photo_camera')">
-                                            <span class="material-symbols-outlined">photo_camera</span>
-                                        </div>
-                                        <div class="icon-picker-item" data-icon="book" onclick="selectCustomIcon('menu_book')">
-                                            <span class="material-symbols-outlined">menu_book</span>
-                                        </div>
-                                        <div class="icon-picker-item" data-icon="fitness" onclick="selectCustomIcon('fitness_center')">
-                                            <span class="material-symbols-outlined">fitness_center</span>
-                                        </div>
-                                        <div class="icon-picker-item" data-icon="star" onclick="selectCustomIcon('star')">
-                                            <span class="material-symbols-outlined">star</span>
-                                        </div>
-                                        <div class="icon-picker-item selected" data-icon="flag" onclick="selectCustomIcon('flag')">
-                                            <span class="material-symbols-outlined">flag</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <button class="btn-secondary" onclick="confirmCustomGoal()">
-                                    Continue with Duration
-                                </button>
-                            </div>
-
-                            <!-- Goal Tenure -->
-                            <div class="input-group">
-                                <div class="duration-sentence">
-                                    <span>I want to achieve this goal in</span>
-                                    <input type="number" id="durationInput" class="duration-input" value="5" min="1" max="20">
-                                    <span id="durationUnit">years.</span>
-                                </div>
-                                <div class="slider-wrapper">
-                                    <input type="range" id="tenureSlider" class="tenure-slider" min="1" max="20" value="5" step="1">
-                                </div>
-                                <div class="slider-markers">
-                                    <span class="slider-marker">1Y</span>
-                                    <span class="slider-marker">5Y</span>
-                                    <span class="slider-marker">10Y</span>
-                                    <span class="slider-marker">15Y</span>
-                                    <span class="slider-marker">20Y+</span>
                                 </div>
                             </div>
                         </div>
@@ -754,20 +600,17 @@
 
     <script>
         let selectedCategory = null;
+        let selectedIcon = null;
         let selectedTenure = 5; // Default to 5 years
-        let isCustomGoal = false;
-        let customGoalName = '';
-        let customGoalIcon = 'flag'; // default icon
 
-        // Category name mapping
-        const categoryNames = {
-            'vacation': 'Vacation',
-            'home': 'Home',
-            'education': "Child's Education",
-            'retirement': 'Retirement',
-            'car': 'Car',
-            'emergency': 'Emergency Fund',
-            'custom': 'Custom Goal'
+        // Category templates with names and icons
+        const categoryTemplates = {
+            'vacation': { name: 'Vacation', icon: 'flight_takeoff' },
+            'home': { name: 'Home', icon: 'home' },
+            'education': { name: "Child's Education", icon: 'school' },
+            'retirement': { name: 'Retirement', icon: 'beach_access' },
+            'car': { name: 'Car', icon: 'directions_car' },
+            'emergency': { name: 'Emergency Fund', icon: 'health_and_safety' }
         };
 
         // Auto-open overlay on page load
@@ -782,86 +625,21 @@
         }
 
         function selectCategory(category) {
-            if (category === 'custom') {
-                // Show custom goal form
-                document.getElementById('customGoalForm').style.display = 'block';
-                document.querySelector('.category-grid').style.opacity = '0.5';
-                document.querySelector('.category-grid').style.pointerEvents = 'none';
+            selectedCategory = category;
+            const template = categoryTemplates[category];
 
-                // Scroll to form
-                setTimeout(() => {
-                    document.getElementById('customGoalForm').scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'nearest'
-                    });
-                }, 100);
-            } else {
-                // Regular category selection
-                selectedCategory = category;
-                isCustomGoal = false;
+            // Auto-fill goal name
+            document.getElementById('goalName').value = template.name;
 
-                document.querySelectorAll('.category-item').forEach(item => {
-                    item.classList.remove('selected');
-                });
-                event.currentTarget.classList.add('selected');
-                validateForm();
-            }
-        }
+            // Set icon
+            selectedIcon = template.icon;
 
-        function closeCustomForm() {
-            document.getElementById('customGoalForm').style.display = 'none';
-            document.querySelector('.category-grid').style.opacity = '1';
-            document.querySelector('.category-grid').style.pointerEvents = 'auto';
-
-            // Clear custom goal card selection
+            // Update selection UI
             document.querySelectorAll('.category-item').forEach(item => {
                 item.classList.remove('selected');
             });
-
-            // Reset form
-            document.getElementById('customGoalName').value = '';
-            customGoalName = '';
-            customGoalIcon = 'flag';
-            validateForm();
-        }
-
-        function selectCustomIcon(icon) {
-            customGoalIcon = icon;
-
-            // Update selected state
-            document.querySelectorAll('.icon-picker-item').forEach(item => {
-                item.classList.remove('selected');
-            });
             event.currentTarget.classList.add('selected');
-        }
 
-        function confirmCustomGoal() {
-            const nameInput = document.getElementById('customGoalName');
-            customGoalName = nameInput.value.trim();
-
-            if (!customGoalName) {
-                // Show error
-                nameInput.style.borderColor = 'red';
-                nameInput.focus();
-                return;
-            }
-
-            // Reset border color
-            nameInput.style.borderColor = '';
-
-            // Set as custom category
-            selectedCategory = 'custom';
-            isCustomGoal = true;
-
-            // Hide custom form, show category as normal
-            document.getElementById('customGoalForm').style.display = 'none';
-            document.querySelector('.category-grid').style.opacity = '1';
-            document.querySelector('.category-grid').style.pointerEvents = 'auto';
-
-            // Mark Custom Goal card as selected
-            document.querySelector('[data-category="custom"]').classList.add('selected');
-
-            // Validate form to enable Create Goal button
             validateForm();
         }
 
@@ -916,27 +694,32 @@
         }
 
         function validateForm() {
-            // Only need category selection now
-            const isValid = selectedCategory && selectedTenure;
+            const goalName = document.getElementById('goalName').value.trim();
+            const isValid = goalName && selectedTenure;
+
+            // If no icon selected yet, use default
+            if (!selectedIcon) {
+                selectedIcon = 'flag';
+            }
+
             document.getElementById('createGoalBtn').disabled = !isValid;
         }
 
         function createGoal() {
-            let goalName;
+            const goalName = document.getElementById('goalName').value.trim();
 
-            if (isCustomGoal) {
-                goalName = customGoalName;
-            } else {
-                goalName = categoryNames[selectedCategory];
+            // If no icon selected, use default
+            if (!selectedIcon) {
+                selectedIcon = 'flag';
             }
 
             // Store goal data
             const goalData = {
                 name: goalName,
-                category: selectedCategory,
-                icon: isCustomGoal ? customGoalIcon : null,
+                category: selectedCategory || 'custom', // custom if no template selected
+                icon: selectedIcon,
                 tenure: selectedTenure,
-                isCustom: isCustomGoal,
+                isCustom: !selectedCategory, // true if no template was used
                 createdAt: new Date().toISOString()
             };
 
