@@ -339,18 +339,17 @@
             color: var(--color-text-primary);
         }
 
-        /* Duration Input - Inline with Label */
-        .duration-header {
+        /* Duration Input - Sentence Format */
+        .duration-sentence {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin-bottom: 12px;
-        }
-
-        .duration-input-wrapper {
-            display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             gap: 8px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.6;
         }
 
         .duration-input {
@@ -361,7 +360,7 @@
             background: white;
             text-align: center;
             width: 60px;
-            height: 48px;
+            height: 40px;
             border-radius: var(--radius-md);
             outline: none;
             transition: all 0.2s;
@@ -380,12 +379,6 @@
         .duration-input:focus {
             border-color: var(--color-blue);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .duration-unit {
-            font-size: 14px;
-            color: var(--color-text-secondary);
-            font-weight: 500;
         }
 
         .slider-wrapper {
@@ -569,12 +562,10 @@
 
                             <!-- Goal Tenure -->
                             <div class="input-group">
-                                <div class="duration-header">
-                                    <label class="input-label">How many years?</label>
-                                    <div class="duration-input-wrapper">
-                                        <input type="number" id="durationInput" class="duration-input" value="5" min="1" max="20">
-                                        <span class="duration-unit" id="durationUnit">years</span>
-                                    </div>
+                                <div class="duration-sentence">
+                                    <span>I want to achieve this goal in</span>
+                                    <input type="number" id="durationInput" class="duration-input" value="5" min="1" max="20">
+                                    <span id="durationUnit">years.</span>
                                 </div>
                                 <div class="slider-wrapper">
                                     <input type="range" id="tenureSlider" class="tenure-slider" min="1" max="20" value="5" step="1">
@@ -683,7 +674,7 @@
             });
 
             function updateLabel() {
-                unitLabel.textContent = selectedTenure === 1 ? 'year' : 'years';
+                unitLabel.textContent = selectedTenure === 1 ? 'year.' : 'years.';
             }
 
             // Initialize display
