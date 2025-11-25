@@ -347,10 +347,33 @@
             margin-bottom: 20px;
         }
 
-        .slider-value {
+        .duration-input {
             font-size: 32px;
             font-weight: 700;
             color: var(--color-blue);
+            border: none;
+            background: transparent;
+            text-align: center;
+            width: 80px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .duration-input::-webkit-inner-spin-button,
+        .duration-input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .duration-input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .duration-input:focus {
+            color: var(--color-blue-dark);
+            background: rgba(37, 99, 235, 0.03);
+            border-radius: 8px;
+            padding: 4px 8px;
         }
 
         .slider-label {
@@ -547,20 +570,18 @@
                                 <label class="input-label">Investment Duration</label>
                                 <div class="slider-container">
                                     <div class="slider-value-display">
-                                        <div class="slider-value" id="sliderValue">5</div>
+                                        <input type="number" id="durationInput" class="duration-input" value="5" min="1" max="20">
                                         <div class="slider-label" id="sliderLabel">Years</div>
                                     </div>
                                     <div class="slider-wrapper">
-                                        <input type="range" id="tenureSlider" class="tenure-slider" min="1" max="30" value="5" step="1">
+                                        <input type="range" id="tenureSlider" class="tenure-slider" min="1" max="20" value="5" step="1">
                                     </div>
                                     <div class="slider-markers">
                                         <span class="slider-marker">1Y</span>
                                         <span class="slider-marker">5Y</span>
                                         <span class="slider-marker">10Y</span>
                                         <span class="slider-marker">15Y</span>
-                                        <span class="slider-marker">20Y</span>
-                                        <span class="slider-marker">25Y</span>
-                                        <span class="slider-marker">30Y</span>
+                                        <span class="slider-marker">20Y+</span>
                                     </div>
                                 </div>
                             </div>
@@ -619,16 +640,49 @@
 
         function initSlider() {
             const slider = document.getElementById('tenureSlider');
-            const valueDisplay = document.getElementById('sliderValue');
+            const durationInput = document.getElementById('durationInput');
             const labelDisplay = document.getElementById('sliderLabel');
 
-            // Update display on slider change
+            // Slider changes number input
             slider.addEventListener('input', function() {
                 selectedTenure = parseInt(this.value);
-                valueDisplay.textContent = selectedTenure;
-                labelDisplay.textContent = selectedTenure === 1 ? 'Year' : 'Years';
+                durationInput.value = selectedTenure;
+                updateLabel();
                 validateForm();
             });
+
+            // Number input changes slider
+            durationInput.addEventListener('input', function() {
+                let value = parseInt(this.value);
+
+                // Validate and clamp to range
+                if (isNaN(value) || value < 1) {
+                    value = 1;
+                } else if (value > 20) {
+                    value = 20;
+                }
+
+                selectedTenure = value;
+                this.value = value; // Update input to clamped value
+                slider.value = value;
+                updateLabel();
+                validateForm();
+            });
+
+            // Handle blur to ensure valid value
+            durationInput.addEventListener('blur', function() {
+                if (!this.value || parseInt(this.value) < 1) {
+                    this.value = 1;
+                    slider.value = 1;
+                    selectedTenure = 1;
+                    updateLabel();
+                    validateForm();
+                }
+            });
+
+            function updateLabel() {
+                labelDisplay.textContent = selectedTenure === 1 ? 'Year' : 'Years';
+            }
 
             // Initialize display
             validateForm();
