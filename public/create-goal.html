@@ -493,15 +493,9 @@
 
                         <!-- Content -->
                         <div class="goal-content">
-                            <!-- Goal Name -->
+                            <!-- Goal Selection (Combined Name + Category) -->
                             <div class="input-group">
-                                <label class="input-label">Goal Name</label>
-                                <input type="text" class="text-input" id="goalName" placeholder="e.g., Buy a Car, Dream Vacation" oninput="validateForm()">
-                            </div>
-
-                            <!-- Goal Category -->
-                            <div class="input-group">
-                                <label class="input-label">Category</label>
+                                <label class="input-label">Choose Your Goal</label>
                                 <div class="category-grid">
                                     <div class="category-item" data-category="vacation" onclick="selectCategory('vacation')">
                                         <div class="category-icon-wrapper">
@@ -590,6 +584,17 @@
         let selectedTenure = 5; // Default to 5 years
         let isCustomGoal = false;
 
+        // Category name mapping
+        const categoryNames = {
+            'vacation': 'Vacation',
+            'home': 'Home',
+            'education': "Child's Education",
+            'retirement': 'Retirement',
+            'car': 'Car',
+            'emergency': 'Emergency Fund',
+            'custom': 'Custom Goal'
+        };
+
         // Auto-open overlay on page load
         window.addEventListener('DOMContentLoaded', function() {
             document.getElementById('goalOverlay').classList.add('active');
@@ -630,14 +635,14 @@
         }
 
         function validateForm() {
-            const goalName = document.getElementById('goalName').value.trim();
-            const isValid = goalName && selectedCategory && selectedTenure;
-
+            // Only need category selection now
+            const isValid = selectedCategory && selectedTenure;
             document.getElementById('createGoalBtn').disabled = !isValid;
         }
 
         function createGoal() {
-            const goalName = document.getElementById('goalName').value.trim();
+            // Use category name as goal name
+            const goalName = categoryNames[selectedCategory];
 
             // Store goal data
             const goalData = {
