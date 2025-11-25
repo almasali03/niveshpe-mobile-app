@@ -337,24 +337,30 @@
             color: var(--color-text-primary);
         }
 
-        /* Slider for Duration Selection */
-        .slider-container {
-            padding: 24px 0;
+        /* Duration Input - Inline with Label */
+        .duration-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
         }
 
-        .slider-value-display {
-            text-align: center;
-            margin-bottom: 20px;
+        .duration-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .duration-input {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--color-blue);
-            border: none;
-            background: transparent;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            border: 2px solid var(--color-border);
+            background: white;
             text-align: center;
-            width: 80px;
+            width: 60px;
+            height: 48px;
+            border-radius: var(--radius-md);
             outline: none;
             transition: all 0.2s;
         }
@@ -370,16 +376,14 @@
         }
 
         .duration-input:focus {
-            color: var(--color-blue-dark);
-            background: rgba(37, 99, 235, 0.03);
-            border-radius: 8px;
-            padding: 4px 8px;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
-        .slider-label {
+        .duration-unit {
             font-size: 14px;
             color: var(--color-text-secondary);
-            margin-top: 4px;
+            font-weight: 500;
         }
 
         .slider-wrapper {
@@ -391,65 +395,61 @@
             -webkit-appearance: none;
             appearance: none;
             width: 100%;
-            height: 6px;
-            border-radius: 3px;
-            background: var(--color-border);
+            height: 4px;
+            border-radius: 2px;
+            background: #F0F0F0;
             outline: none;
             cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .tenure-slider:hover {
+            opacity: 1;
         }
 
         .tenure-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             background: var(--color-blue);
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
             transition: all 0.2s;
         }
 
         .tenure-slider::-webkit-slider-thumb:hover {
             transform: scale(1.1);
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
-        }
-
-        .tenure-slider::-webkit-slider-thumb:active {
-            transform: scale(1.15);
         }
 
         .tenure-slider::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
+            width: 16px;
+            height: 16px;
             border: none;
             border-radius: 50%;
             background: var(--color-blue);
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
             transition: all 0.2s;
         }
 
         .tenure-slider::-moz-range-thumb:hover {
             transform: scale(1.1);
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
-        }
-
-        .tenure-slider::-moz-range-thumb:active {
-            transform: scale(1.15);
         }
 
         .slider-markers {
             display: flex;
             justify-content: space-between;
-            margin-top: 8px;
+            margin-top: 4px;
             padding: 0 4px;
         }
 
         .slider-marker {
-            font-size: 12px;
-            color: var(--color-text-secondary);
-            font-weight: 500;
+            font-size: 11px;
+            color: #999;
+            font-weight: 400;
         }
 
         .goal-actions {
@@ -567,22 +567,22 @@
 
                             <!-- Goal Tenure -->
                             <div class="input-group">
-                                <label class="input-label">Investment Duration</label>
-                                <div class="slider-container">
-                                    <div class="slider-value-display">
+                                <div class="duration-header">
+                                    <label class="input-label">How many years?</label>
+                                    <div class="duration-input-wrapper">
                                         <input type="number" id="durationInput" class="duration-input" value="5" min="1" max="20">
-                                        <div class="slider-label" id="sliderLabel">Years</div>
+                                        <span class="duration-unit" id="durationUnit">years</span>
                                     </div>
-                                    <div class="slider-wrapper">
-                                        <input type="range" id="tenureSlider" class="tenure-slider" min="1" max="20" value="5" step="1">
-                                    </div>
-                                    <div class="slider-markers">
-                                        <span class="slider-marker">1Y</span>
-                                        <span class="slider-marker">5Y</span>
-                                        <span class="slider-marker">10Y</span>
-                                        <span class="slider-marker">15Y</span>
-                                        <span class="slider-marker">20Y+</span>
-                                    </div>
+                                </div>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="tenureSlider" class="tenure-slider" min="1" max="20" value="5" step="1">
+                                </div>
+                                <div class="slider-markers">
+                                    <span class="slider-marker">1Y</span>
+                                    <span class="slider-marker">5Y</span>
+                                    <span class="slider-marker">10Y</span>
+                                    <span class="slider-marker">15Y</span>
+                                    <span class="slider-marker">20Y+</span>
                                 </div>
                             </div>
                         </div>
@@ -641,7 +641,7 @@
         function initSlider() {
             const slider = document.getElementById('tenureSlider');
             const durationInput = document.getElementById('durationInput');
-            const labelDisplay = document.getElementById('sliderLabel');
+            const unitLabel = document.getElementById('durationUnit');
 
             // Slider changes number input
             slider.addEventListener('input', function() {
@@ -681,7 +681,7 @@
             });
 
             function updateLabel() {
-                labelDisplay.textContent = selectedTenure === 1 ? 'Year' : 'Years';
+                unitLabel.textContent = selectedTenure === 1 ? 'year' : 'years';
             }
 
             // Initialize display
