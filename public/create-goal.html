@@ -219,7 +219,7 @@
 
         .category-item {
             padding: 32px 20px;
-            border: 2px solid var(--color-border);
+            border: 2px solid transparent;
             border-radius: var(--radius-lg);
             text-align: center;
             cursor: pointer;
@@ -232,20 +232,19 @@
         }
 
         .category-item:hover {
-            border-color: var(--color-blue);
-            background: rgba(37, 99, 235, 0.02);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .category-item.selected {
-            border-color: var(--color-blue);
-            background: rgba(37, 99, 235, 0.05);
+            border-color: currentColor;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
         .category-icon-wrapper {
             width: 72px;
             height: 72px;
             border-radius: 50%;
-            background: rgba(37, 99, 235, 0.08);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -253,7 +252,83 @@
 
         .category-icon {
             font-size: 36px;
-            color: var(--color-blue);
+        }
+
+        /* Vacation - Light Blue */
+        .category-item[data-category="vacation"] {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+        }
+        .category-item[data-category="vacation"] .category-icon-wrapper {
+            background: rgba(33, 150, 243, 0.15);
+        }
+        .category-item[data-category="vacation"] .category-icon {
+            color: #1976D2;
+        }
+
+        /* Home - Light Green */
+        .category-item[data-category="home"] {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+        }
+        .category-item[data-category="home"] .category-icon-wrapper {
+            background: rgba(76, 175, 80, 0.15);
+        }
+        .category-item[data-category="home"] .category-icon {
+            color: #388E3C;
+        }
+
+        /* Education - Light Purple */
+        .category-item[data-category="education"] {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+        }
+        .category-item[data-category="education"] .category-icon-wrapper {
+            background: rgba(156, 39, 176, 0.15);
+        }
+        .category-item[data-category="education"] .category-icon {
+            color: #7B1FA2;
+        }
+
+        /* Retirement - Light Orange */
+        .category-item[data-category="retirement"] {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+        }
+        .category-item[data-category="retirement"] .category-icon-wrapper {
+            background: rgba(255, 152, 0, 0.15);
+        }
+        .category-item[data-category="retirement"] .category-icon {
+            color: #F57C00;
+        }
+
+        /* Car - Light Teal */
+        .category-item[data-category="car"] {
+            background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
+        }
+        .category-item[data-category="car"] .category-icon-wrapper {
+            background: rgba(0, 150, 136, 0.15);
+        }
+        .category-item[data-category="car"] .category-icon {
+            color: #00796B;
+        }
+
+        /* Emergency - Light Red */
+        .category-item[data-category="emergency"] {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+        }
+        .category-item[data-category="emergency"] .category-icon-wrapper {
+            background: rgba(244, 67, 54, 0.15);
+        }
+        .category-item[data-category="emergency"] .category-icon {
+            color: #D32F2F;
+        }
+
+        /* Custom - Light Indigo */
+        .category-item[data-category="custom"] {
+            background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+        }
+        .category-item[data-category="custom"] .category-icon-wrapper {
+            background: rgba(63, 81, 181, 0.15);
+        }
+        .category-item[data-category="custom"] .category-icon {
+            color: #303F9F;
         }
 
         .category-name {
@@ -428,43 +503,43 @@
                             <div class="input-group">
                                 <label class="input-label">Category</label>
                                 <div class="category-grid">
-                                    <div class="category-item" onclick="selectCategory('vacation')">
+                                    <div class="category-item" data-category="vacation" onclick="selectCategory('vacation')">
                                         <div class="category-icon-wrapper">
                                             <span class="material-symbols-outlined category-icon">flight_takeoff</span>
                                         </div>
                                         <div class="category-name">Vacation</div>
                                     </div>
-                                    <div class="category-item" onclick="selectCategory('home')">
+                                    <div class="category-item" data-category="home" onclick="selectCategory('home')">
                                         <div class="category-icon-wrapper">
                                             <span class="material-symbols-outlined category-icon">home</span>
                                         </div>
                                         <div class="category-name">Home</div>
                                     </div>
-                                    <div class="category-item" onclick="selectCategory('education')">
+                                    <div class="category-item" data-category="education" onclick="selectCategory('education')">
                                         <div class="category-icon-wrapper">
                                             <span class="material-symbols-outlined category-icon">school</span>
                                         </div>
                                         <div class="category-name">Child's Education</div>
                                     </div>
-                                    <div class="category-item" onclick="selectCategory('retirement')">
+                                    <div class="category-item" data-category="retirement" onclick="selectCategory('retirement')">
                                         <div class="category-icon-wrapper">
                                             <span class="material-symbols-outlined category-icon">beach_access</span>
                                         </div>
                                         <div class="category-name">Retirement</div>
                                     </div>
-                                    <div class="category-item" onclick="selectCategory('car')">
+                                    <div class="category-item" data-category="car" onclick="selectCategory('car')">
                                         <div class="category-icon-wrapper">
                                             <span class="material-symbols-outlined category-icon">directions_car</span>
                                         </div>
                                         <div class="category-name">Car</div>
                                     </div>
-                                    <div class="category-item" onclick="selectCategory('emergency')">
+                                    <div class="category-item" data-category="emergency" onclick="selectCategory('emergency')">
                                         <div class="category-icon-wrapper">
                                             <span class="material-symbols-outlined category-icon">health_and_safety</span>
                                         </div>
                                         <div class="category-name">Emergency Fund</div>
                                     </div>
-                                    <div class="category-item" onclick="selectCategory('custom')">
+                                    <div class="category-item" data-category="custom" onclick="selectCategory('custom')">
                                         <div class="category-icon-wrapper">
                                             <span class="material-symbols-outlined category-icon">flag</span>
                                         </div>
