@@ -1199,6 +1199,22 @@
             font-size: 20px;
         }
 
+        /* Guardian Section */
+        .guardian-section {
+            margin-top: 16px;
+            padding: 16px;
+            background: rgba(245, 158, 11, 0.05);
+            border: 2px dashed var(--color-orange);
+            border-radius: var(--radius-md);
+        }
+
+        .guardian-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
         .btn-text-only {
             width: 100%;
             height: 52px;
@@ -1876,7 +1892,11 @@
                         </div>
                         <div class="step-indicator" id="stepIndicator3">
                             <div class="step-number">3</div>
-                            <div class="step-label">Other Details</div>
+                            <div class="step-label">Bank</div>
+                        </div>
+                        <div class="step-indicator" id="stepIndicator4">
+                            <div class="step-number">4</div>
+                            <div class="step-label">Details</div>
                         </div>
                     </div>
                 </div>
@@ -1912,6 +1932,15 @@
                                     <div class="step-item-content">
                                         <div class="step-item-text">Aadhaar via DigiLocker</div>
                                         <div class="step-item-subtext">Instant verification through government portal</div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-number">
+                                        <span class="material-symbols-outlined" style="font-size: 20px;">account_balance</span>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <div class="step-item-text">Bank Account</div>
+                                        <div class="step-item-subtext">Link your bank account for seamless investments</div>
                                     </div>
                                 </div>
                             </div>
@@ -2235,6 +2264,135 @@
                             </div>
 
                             <div id="aadhaarContinueSection" style="display: none;">
+                                <button class="btn-primary" onclick="continueToBank()">
+                                    Continue to Bank Verification
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Bank Verification -->
+                    <div class="kyc-state" id="bankState">
+                        <div class="kyc-container">
+                            <h2 class="welcome-text">Link Your Bank Account</h2>
+                            <p class="subtitle-text">We'll verify your bank account to enable seamless investments</p>
+
+                            <div id="bankError" class="error-message">
+                                <span class="material-symbols-outlined">warning</span>
+                                <span id="bankErrorText">Unable to verify bank details. Please check and try again.</span>
+                            </div>
+
+                            <div id="bankInputForm">
+                                <div class="input-group">
+                                    <label class="input-label" for="accountNumberInput">Account Number</label>
+                                    <input
+                                        type="text"
+                                        id="accountNumberInput"
+                                        class="text-input"
+                                        placeholder="Enter your account number"
+                                        maxlength="18"
+                                        inputmode="numeric"
+                                        oninput="validateBankForm()"
+                                    >
+                                </div>
+
+                                <div class="input-group">
+                                    <label class="input-label" for="ifscInput">IFSC Code</label>
+                                    <input
+                                        type="text"
+                                        id="ifscInput"
+                                        class="text-input"
+                                        placeholder="e.g., SBIN0001234"
+                                        maxlength="11"
+                                        oninput="validateBankForm()"
+                                        style="text-transform: uppercase;"
+                                    >
+                                </div>
+
+                                <button class="btn-primary" id="verifyBankBtn" disabled onclick="verifyBank()">
+                                    Verify Bank Account
+                                </button>
+
+                                <div class="helper-text">
+                                    <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle;">info</span> We'll verify using penny drop method - a small amount will be credited and debited instantly
+                                </div>
+                            </div>
+
+                            <div id="bankLoadingState" class="loading-container">
+                                <div class="loading-spinner"></div>
+                                <div class="loading-text">Verifying Bank Account...</div>
+                                <div class="loading-subtext">Fetching account details from your bank</div>
+                            </div>
+
+                            <div id="bankVerifiedCard" class="verified-card">
+                                <div class="verified-header">
+                                    <div class="verified-icon">
+                                        <span class="material-symbols-outlined">check</span>
+                                    </div>
+                                    <div class="verified-title">Bank Account Verified</div>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Account Holder</span>
+                                    <span class="detail-value" id="bankHolderName">-</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Bank Name</span>
+                                    <span class="detail-value" id="bankName">-</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Account Number</span>
+                                    <span class="detail-value" id="bankAccountNumber">-</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">IFSC Code</span>
+                                    <span class="detail-value" id="bankIfsc">-</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Branch</span>
+                                    <span class="detail-value" id="bankBranch">-</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Account Type</span>
+                                    <span class="detail-value" id="bankAccountType">-</span>
+                                </div>
+                            </div>
+
+                            <div id="bankFailedCard" class="verified-card failed-card">
+                                <div class="verified-header">
+                                    <div class="verified-icon failed-icon">
+                                        <span class="material-symbols-outlined">close</span>
+                                    </div>
+                                    <div class="verified-title failed-title">Bank Verification Failed</div>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Error</span>
+                                    <span class="detail-value">Unable to verify account details. Please check your account number and IFSC code.</span>
+                                </div>
+                            </div>
+
+                            <div id="bankRetrySection" style="display: none;">
+                                <button class="btn-primary" onclick="retryBank()">
+                                    Try Again
+                                </button>
+                            </div>
+
+                            <div id="bankPendingCard" class="verified-card pending-card">
+                                <div class="verified-header">
+                                    <div class="verified-icon pending-icon">
+                                        <span class="material-symbols-outlined">schedule</span>
+                                    </div>
+                                    <div class="verified-title pending-title">Bank Verification Pending</div>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Status</span>
+                                    <span class="detail-value">Verification in progress. Connecting to your bank...</span>
+                                </div>
+                                <div style="margin-top: 16px; padding: 12px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; font-size: 13px; color: var(--color-text-secondary);">
+                                    <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">info</span> You can proceed to continue while we verify your bank account in the background.
+                                </div>
+                            </div>
+
+                            <div id="bankContinueSection" style="display: none;">
                                 <button class="btn-primary" onclick="continueToFATCA()">
                                     Continue to Other Details
                                 </button>
@@ -2242,7 +2400,7 @@
                         </div>
                     </div>
 
-                    <!-- Step 3: Other Details -->
+                    <!-- Step 4: Other Details -->
                     <div class="kyc-state" id="fatcaState">
                         <div class="kyc-container">
                             <h2 class="welcome-text">Other Details</h2>
@@ -2499,7 +2657,7 @@
                                     <div class="nominee-form-item" id="nomineeForm0">
                                         <div class="nominee-form-header">
                                             <h3 class="nominee-form-title">Nominee 1</h3>
-                                            <button class="nominee-remove-btn" onclick="removeNominee(0)" style="display: none;">
+                                            <button class="nominee-remove-btn" onclick="removeNomineeForm(0)" style="display: none;">
                                                 <span class="material-symbols-outlined">delete</span>
                                             </button>
                                         </div>
@@ -2522,8 +2680,36 @@
                                         </div>
 
                                         <div class="input-group">
+                                            <label class="input-label">Date of Birth</label>
+                                            <input type="date" class="text-input" id="nomineeDob0">
+                                        </div>
+
+                                        <div class="input-group">
                                             <label class="input-label">PAN Number</label>
                                             <input type="text" class="text-input" id="nomineePan0" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                                        </div>
+
+                                        <!-- Guardian Details (shown only if nominee is minor) -->
+                                        <div class="guardian-section" id="guardianSection0" style="display: none;">
+                                            <div class="guardian-header">
+                                                <span class="material-symbols-outlined" style="color: var(--color-orange); font-size: 20px;">info</span>
+                                                <span style="color: var(--color-orange); font-weight: 600; font-size: 14px;">Guardian details required (Nominee is minor)</span>
+                                            </div>
+
+                                            <div class="input-group">
+                                                <label class="input-label">Guardian Name</label>
+                                                <input type="text" class="text-input" id="guardianName0" placeholder="Enter guardian's full name">
+                                            </div>
+
+                                            <div class="input-group">
+                                                <label class="input-label">Guardian Date of Birth</label>
+                                                <input type="date" class="text-input" id="guardianDob0">
+                                            </div>
+
+                                            <div class="input-group">
+                                                <label class="input-label">Guardian PAN Number</label>
+                                                <input type="text" class="text-input" id="guardianPan0" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                                            </div>
                                         </div>
 
                                         <div class="input-group allocation-field" style="display: none;">
@@ -2585,10 +2771,12 @@
         // Progress tracking
         const stepInfo = {
             overview: { step: 0, percentage: 0, title: 'Complete KYC' },
-            pan: { step: 1, percentage: 33, title: 'Verify PAN' },
-            aadhaar: { step: 2, percentage: 66, title: 'Verify Aadhaar' },
-            fatca: { step: 3, percentage: 100, title: 'Other Details' },
-            success: { step: 4, percentage: 100, title: 'Success' }
+            pan: { step: 1, percentage: 25, title: 'Verify PAN' },
+            aadhaar: { step: 2, percentage: 50, title: 'Verify Aadhaar' },
+            aadhaarVerified: { step: 2, percentage: 50, title: 'Verify Aadhaar' },
+            bank: { step: 3, percentage: 75, title: 'Bank Account' },
+            fatca: { step: 4, percentage: 100, title: 'Other Details' },
+            success: { step: 5, percentage: 100, title: 'Success' }
         };
 
         // ==================== URL HASH NAVIGATION ====================
@@ -2636,6 +2824,7 @@
                 pan: 'panState',
                 aadhaar: 'aadhaarConsentState',
                 aadhaarVerified: 'aadhaarVerifiedState',
+                bank: 'bankState',
                 fatca: 'fatcaState',
                 success: 'successState'
             };
@@ -2722,7 +2911,8 @@
             const indicators = [
                 document.getElementById('stepIndicator1'),
                 document.getElementById('stepIndicator2'),
-                document.getElementById('stepIndicator3')
+                document.getElementById('stepIndicator3'),
+                document.getElementById('stepIndicator4')
             ];
 
             const currentStepNum = state === 'aadhaarVerified' ? 2 : (stepInfo[state]?.step || 0);
@@ -3019,6 +3209,107 @@
             }, 1500);
         }
 
+        function continueToBank() {
+            navigateTo('bank');
+        }
+
+        // ==================== BANK VERIFICATION ====================
+
+        function validateBankForm() {
+            const accountNumber = document.getElementById('accountNumberInput').value.trim();
+            const ifsc = document.getElementById('ifscInput').value.trim().toUpperCase();
+            const verifyBtn = document.getElementById('verifyBankBtn');
+
+            document.getElementById('ifscInput').value = ifsc;
+
+            const ifscRegex = /^[A-Z]{4}0[A-Z0-9]{6}$/;
+            const isValid = accountNumber.length >= 9 && accountNumber.length <= 18 && ifscRegex.test(ifsc);
+            verifyBtn.disabled = !isValid;
+        }
+
+        function verifyBank() {
+            const accountNumber = document.getElementById('accountNumberInput').value.trim();
+            const ifsc = document.getElementById('ifscInput').value.trim().toUpperCase();
+
+            document.getElementById('bankInputForm').style.display = 'none';
+            document.getElementById('bankLoadingState').classList.add('show');
+            document.getElementById('bankError').classList.remove('show');
+
+            setTimeout(() => {
+                // Simulate fetching account holder name (in real app, this would come from API)
+                const holderName = 'RAHUL SHARMA';
+
+                kycData.bank = {
+                    accountNumber: accountNumber,
+                    ifsc: ifsc,
+                    holderName: holderName,
+                    bankName: 'State Bank of India',
+                    branch: 'Andheri East, Mumbai',
+                    accountType: 'Savings'
+                };
+
+                document.getElementById('bankLoadingState').classList.remove('show');
+                document.getElementById('bankHolderName').textContent = kycData.bank.holderName;
+                document.getElementById('bankName').textContent = kycData.bank.bankName;
+
+                const maskedAccount = 'XXXX' + accountNumber.slice(-4);
+                document.getElementById('bankAccountNumber').textContent = maskedAccount;
+
+                document.getElementById('bankIfsc').textContent = ifsc;
+                document.getElementById('bankBranch').textContent = kycData.bank.branch;
+                document.getElementById('bankAccountType').textContent = kycData.bank.accountType;
+                document.getElementById('bankVerifiedCard').classList.add('show');
+                document.getElementById('bankContinueSection').style.display = 'block';
+            }, 2500);
+        }
+
+        function setBankState(state) {
+            const successCard = document.getElementById('bankVerifiedCard');
+            const failedCard = document.getElementById('bankFailedCard');
+            const pendingCard = document.getElementById('bankPendingCard');
+            const continueSection = document.getElementById('bankContinueSection');
+            const retrySection = document.getElementById('bankRetrySection');
+
+            // Remove active class from all buttons in Bank container
+            document.querySelectorAll('#bankStateToggleContainer .state-toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Hide all cards
+            successCard.classList.remove('show');
+            failedCard.classList.remove('show');
+            pendingCard.classList.remove('show');
+
+            // Show appropriate card and set active button
+            if (state === 'success') {
+                successCard.classList.add('show');
+                continueSection.style.display = 'block';
+                retrySection.style.display = 'none';
+                document.querySelector('#bankStateToggleContainer .success-btn').classList.add('active');
+            } else if (state === 'pending') {
+                pendingCard.classList.add('show');
+                continueSection.style.display = 'block';
+                retrySection.style.display = 'none';
+                document.querySelector('#bankStateToggleContainer .pending-btn').classList.add('active');
+            } else if (state === 'failure') {
+                failedCard.classList.add('show');
+                continueSection.style.display = 'none';
+                retrySection.style.display = 'block';
+                document.querySelector('#bankStateToggleContainer .failure-btn').classList.add('active');
+            }
+        }
+
+        function retryBank() {
+            // Reset to input form
+            document.getElementById('bankFailedCard').classList.remove('show');
+            document.getElementById('bankRetrySection').style.display = 'none';
+            document.getElementById('bankInputForm').style.display = 'block';
+            // Reset toggle to default state
+            document.querySelector('#bankStateToggleContainer .success-btn').classList.add('active');
+            document.querySelector('#bankStateToggleContainer .pending-btn').classList.remove('active');
+            document.querySelector('#bankStateToggleContainer .failure-btn').classList.remove('active');
+        }
+
         function continueToFATCA() {
             navigateTo('fatca');
         }
@@ -3174,6 +3465,45 @@
             }
         }
 
+        // ==================== GUARDIAN LOGIC ====================
+
+        function calculateAge(dob) {
+            if (!dob) return null;
+            const today = new Date();
+            const birthDate = new Date(dob);
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        function toggleGuardianSection(nomineeIndex) {
+            const dobInput = document.getElementById(`nomineeDob${nomineeIndex}`);
+            const guardianSection = document.getElementById(`guardianSection${nomineeIndex}`);
+
+            if (!dobInput || !guardianSection) return;
+
+            const dob = dobInput.value;
+            const age = calculateAge(dob);
+
+            if (age !== null && age < 18) {
+                guardianSection.style.display = 'block';
+            } else {
+                guardianSection.style.display = 'none';
+                // Clear guardian fields if nominee is not minor
+                const guardianName = document.getElementById(`guardianName${nomineeIndex}`);
+                const guardianDob = document.getElementById(`guardianDob${nomineeIndex}`);
+                const guardianPan = document.getElementById(`guardianPan${nomineeIndex}`);
+                if (guardianName) guardianName.value = '';
+                if (guardianDob) guardianDob.value = '';
+                if (guardianPan) guardianPan.value = '';
+            }
+        }
+
+        // ==================== NOMINEE FORMS ====================
+
         function addAnotherNomineeForm() {
             nomineeCount++;
             const container = document.getElementById('nomineeFormsContainer');
@@ -3207,8 +3537,36 @@
                 </div>
 
                 <div class="input-group">
+                    <label class="input-label">Date of Birth</label>
+                    <input type="date" class="text-input" id="nomineeDob${nomineeCount - 1}">
+                </div>
+
+                <div class="input-group">
                     <label class="input-label">PAN Number</label>
                     <input type="text" class="text-input" id="nomineePan${nomineeCount - 1}" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                </div>
+
+                <!-- Guardian Details (shown only if nominee is minor) -->
+                <div class="guardian-section" id="guardianSection${nomineeCount - 1}" style="display: none;">
+                    <div class="guardian-header">
+                        <span class="material-symbols-outlined" style="color: var(--color-orange); font-size: 20px;">info</span>
+                        <span style="color: var(--color-orange); font-weight: 600; font-size: 14px;">Guardian details required (Nominee is minor)</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Guardian Name</label>
+                        <input type="text" class="text-input" id="guardianName${nomineeCount - 1}" placeholder="Enter guardian's full name">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Guardian Date of Birth</label>
+                        <input type="date" class="text-input" id="guardianDob${nomineeCount - 1}">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Guardian PAN Number</label>
+                        <input type="text" class="text-input" id="guardianPan${nomineeCount - 1}" placeholder="ABCDE1234F" maxlength="10" style="text-transform: uppercase;">
+                    </div>
                 </div>
 
                 <div class="input-group allocation-field">
@@ -3218,6 +3576,14 @@
             `;
 
             container.appendChild(newForm);
+
+            // Add event listener to DOB field for newly created form
+            const newDobInput = document.getElementById(`nomineeDob${nomineeCount - 1}`);
+            if (newDobInput) {
+                newDobInput.addEventListener('change', function() {
+                    toggleGuardianSection(nomineeCount - 1);
+                });
+            }
 
             // Show delete button for first nominee if more than one
             if (nomineeCount > 1) {
@@ -3304,6 +3670,7 @@
             forms.forEach((form, idx) => {
                 const name = document.getElementById(`nomineeName${idx}`)?.value.trim();
                 const relationship = document.getElementById(`nomineeRelationship${idx}`)?.value;
+                const dob = document.getElementById(`nomineeDob${idx}`)?.value;
                 const pan = document.getElementById(`nomineePan${idx}`)?.value.trim().toUpperCase();
 
                 // For single nominee, allocation is always 100%
@@ -3318,7 +3685,7 @@
                     }
                 }
 
-                if (!name || !relationship || !pan) {
+                if (!name || !relationship || !dob || !pan) {
                     isValid = false;
                     return;
                 }
@@ -3330,13 +3697,44 @@
                     return;
                 }
 
+                // Check if nominee is minor and validate guardian details
+                const age = calculateAge(dob);
+                let guardian = null;
+
+                if (age !== null && age < 18) {
+                    const guardianName = document.getElementById(`guardianName${idx}`)?.value.trim();
+                    const guardianDob = document.getElementById(`guardianDob${idx}`)?.value;
+                    const guardianPan = document.getElementById(`guardianPan${idx}`)?.value.trim().toUpperCase();
+
+                    // All guardian fields are required for minor nominees
+                    if (!guardianName || !guardianDob || !guardianPan) {
+                        isValid = false;
+                        return;
+                    }
+
+                    // Validate guardian PAN
+                    if (!panRegex.test(guardianPan)) {
+                        isValid = false;
+                        return;
+                    }
+
+                    guardian = {
+                        name: guardianName,
+                        dob: guardianDob,
+                        pan: guardianPan
+                    };
+                }
+
                 totalAllocation += allocation;
 
                 nominees.push({
                     name,
                     relationship,
+                    dob,
                     pan,
-                    allocation
+                    allocation,
+                    isMinor: age < 18,
+                    guardian
                 });
             });
 
@@ -3653,6 +4051,14 @@
 
             // Push initial state to prevent back button from leaving page
             history.pushState(null, null, window.location.href);
+
+            // Add event listener to first nominee DOB field
+            const nomineeDob0 = document.getElementById('nomineeDob0');
+            if (nomineeDob0) {
+                nomineeDob0.addEventListener('change', function() {
+                    toggleGuardianSection(0);
+                });
+            }
         });
     </script>
 </body>
